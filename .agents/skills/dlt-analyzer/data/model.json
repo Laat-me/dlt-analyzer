@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "weights": { "frequency": 0.25, "gap": 0.30, "recentTrend": 0.25, "interval": 0.10, "oddEven": 0.10 },
+  "performance": {
+    "totalPredictions": 0,
+    "frontHits": { "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 },
+    "backHits": { "0": 0, "1": 0, "2": 0 },
+    "avgFrontHitRate": 0, "avgBackHitRate": 0
+  },
+  "history": []
+}

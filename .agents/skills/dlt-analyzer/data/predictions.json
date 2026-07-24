@@ -1,0 +1,14 @@
+{
+  "updatedAt": "2026-07-23",
+  "records": [{
+    "id": 1,
+    "predictedAt": "2026-07-23",
+    "targetDrawNum": "26083",
+    "method": "balanced",
+    "predictedFront": [8, 9, 17, 18, 31],
+    "predictedBack": [3, 8],
+    "actualFront": null, "actualBack": null,
+    "frontHits": null, "backHits": null,
+    "verified": false
+  }]
+}
