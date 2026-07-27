@@ -1,14 +1,52 @@
 {
-  "updatedAt": "2026-07-23",
-  "records": [{
-    "id": 1,
-    "predictedAt": "2026-07-23",
-    "targetDrawNum": "26083",
-    "method": "balanced",
-    "predictedFront": [8, 9, 17, 18, 31],
-    "predictedBack": [3, 8],
-    "actualFront": null, "actualBack": null,
-    "frontHits": null, "backHits": null,
-    "verified": false
-  }]
+  "updatedAt": "2026-07-25",
+  "records": [
+    {
+      "id": 1,
+      "predictedAt": "2026-07-23",
+      "targetDrawNum": "26083",
+      "method": "balanced",
+      "predictedFront": [8, 9, 17, 18, 31],
+      "predictedBack": [3, 8],
+      "actualFront": [14, 15, 16, 23, 26],
+      "actualBack": [7, 9],
+      "frontHits": 0, "backHits": 0,
+      "verified": true
+    },
+    {
+      "id": 2,
+      "predictedAt": "2026-07-23",
+      "targetDrawNum": "26083",
+      "method": "hot",
+      "predictedFront": [9, 12, 17, 22, 31],
+      "predictedBack": [8, 2],
+      "actualFront": [14, 15, 16, 23, 26],
+      "actualBack": [7, 9],
+      "frontHits": 0, "backHits": 0,
+      "verified": true
+    },
+    {
+      "id": 3,
+      "predictedAt": "2026-07-23",
+      "targetDrawNum": "26083",
+      "method": "cold",
+      "predictedFront": [9, 12, 17, 22, 33],
+      "predictedBack": [3, 1],
+      "actualFront": [14, 15, 16, 23, 26],
+      "actualBack": [7, 9],
+      "frontHits": 0, "backHits": 0,
+      "verified": true
+    },
+    {
+      "id": 4,
+      "predictedAt": "2026-07-25",
+      "targetDrawNum": "26084",
+      "method": "balanced",
+      "predictedFront": [2, 9, 17, 18, 31],
+      "predictedBack": [3, 8],
+      "actualFront": null, "actualBack": null,
+      "frontHits": null, "backHits": null,
+      "verified": false
+    }
+  ]
 }

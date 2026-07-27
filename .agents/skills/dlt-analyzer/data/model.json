@@ -1,11 +1,14 @@
 {
-  "version": 1,
+  "version": 2,
   "weights": { "frequency": 0.25, "gap": 0.30, "recentTrend": 0.25, "interval": 0.10, "oddEven": 0.10 },
   "performance": {
-    "totalPredictions": 0,
-    "frontHits": { "0": 0, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 },
-    "backHits": { "0": 0, "1": 0, "2": 0 },
-    "avgFrontHitRate": 0, "avgBackHitRate": 0
+    "totalPredictions": 3,
+    "frontHits": { "0": 3, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 },
+    "backHits": { "0": 3, "1": 0, "2": 0 },
+    "avgFrontHitRate": 0,
+    "avgBackHitRate": 0
   },
-  "history": []
+  "history": [
+    { "version": 1, "note": "首次预测 26083: 全部0命中。26083开出三连号14-15-16，统计模型难捕捉。保持默认权重继续观察。" }
+  ]
 }
