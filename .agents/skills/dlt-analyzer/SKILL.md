@@ -5,7 +5,7 @@ description: >
   当用户提到大乐透、DLT、体彩选号、彩票预测、大乐透分析、
   历史开奖统计、号码推荐、对比开奖结果、模型优化等关键词时触发。
   自动管理本地数据文件，首次拉取全量历史，后续增量追加。
-  每次执行自动 Git 同步数据文件。
+  每次执行自动 Git 同步数据文件。双模型（v1追冷/v2追热）对比预测。
 ---
 
 # 大乐透持续分析与预测系统
@@ -17,101 +17,137 @@ description: >
 
 ---
 
-## 执行流程（每次运行必须遵守）
+## 双模型架构
+
+系统同时运行两套独立模型，互为对照：
+
+| 模型 | 核心策略 | 适用场景 |
+|------|---------|---------|
+| **v1 追冷** | gap×0.5 + cold30×2.5 + freq×0.3 | 冷号集中回补时 |
+| **v2 追热** | f5×3 + f10×1.5 + neighbor×4 + streak×4 | 热号扎堆连出时 |
+
+每次预测输出两个模型的对比，并追踪各自的命中率。
+
+---
+
+## 执行流程
 
 ### 步骤 0：Git 同步拉取（开始前）
-
-**必须**在每次分析开始前，先拉取远程最新数据，避免不同设备间的数据冲突：
 
 ```bash
 cd <项目根目录> && git pull origin main --rebase 2>/dev/null || echo "pull skipped"
 ```
 
-如果仓库还不是 git 仓库，跳过此步。
-
 ### 步骤 1：读取本地数据
 
-检查 `data/` 目录下的文件：
-- `draws.json` 存在 → 增量更新模式
-- `draws.json` 不存在 → 首次初始化模式
+检查 `data/` 目录。`draws.json` 不存在 → 首次初始化模式。
 
-### 步骤 2：数据获取与更新
+### 步骤 2：数据获取
 
-#### 首次初始化
-1. 导航到 `https://www.lottery.gov.cn/kj/kjlb.html?dlt`
-2. 通过 `evaluate_script` 调用 API 拉取最多 1000 期
-3. 写入 `data/draws.json`
+API: `https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry?gameNo=85&provinceId=0&pageSize=100&termNum={lastNum}&isSpecial=0`
 
-API 端点：
-```
-https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry
-  ?gameNo=85&provinceId=0&pageSize=100&termNum={lastNum}&isSpecial=0
-```
+必须在 lottery.gov.cn 域名下通过 `evaluate_script` 调用。每批 100 条，间隔 400-500ms。
 
-每批 100 条，批间间隔 500ms。必须在 lottery.gov.cn 域名下调用。
+发现有新期号时自动触发步骤 4 对比。
 
-#### 增量更新
-1. 读 `draws.json` 获取最新期号
-2. 拉最新 30 期，筛选数据库中不存在的新期号
-3. 追加到 draws.json
-4. 如有新开奖，自动触发步骤 4（对比）
+### 步骤 3：双模型预测
 
-### 步骤 3：统计分析与预测
-
-基于 draws.json 计算：
-- 频次分布（全期 + 近30期 + 近50期）
-- 遗漏值（每个号码距上次出现的期数）
+#### 共同统计
+- 频次分布（全期 / 近5期 / 近10期 / 近30期）
+- 遗漏值
 - 奇偶比分布（近50期）
-- 和值分布（近100期，均值±标准差）
+- 和值分布（近100期，均值 ± 标准差）
 - 区间分布（低1-12 / 中13-24 / 高25-35）
-- 尾号分布
 
-评分公式：
+#### v1 评分（追冷）
 ```
 前区 score = gap×0.5 + (5-freq30)×2.5 + (N/7-freq)×0.3
 后区 score = gap×0.6 + (3-freq30)×2
 ```
+高分 = 遗漏久 + 近期冷 + 全期偏冷。选号约束：奇偶2:3或3:2、区间1-2:1-2:1-2、和值±1σ、全距≥15、热号≥2+冷号≥1。
 
-选号约束：
-- 奇偶比 2:3 或 3:2
-- 区间 1-2低 : 1-2中 : 1-2高
-- 和值在均值±1个标准差内
-- 全距 ≥ 15
-- 至少 2 个全期热号 + 至少 1 个近期冷号
+#### v2 评分（追热）
+```
+前区 score = freq5×3 + freq10×1.5 + neighborBonus×4 + streakBonus×4
+后区 score = freq5×3 + freq10×1.5
+```
+- `freq5` = 近5期出现次数
+- `freq10` = 近10期出现次数
+- `neighborBonus` = 号码处于近5期热号的 ±1 邻域内 → +4
+- `streakBonus` = 近5期出现 ≥2 次 → +4
 
-输出三组：主推（均衡）、偏热、偏冷。
+高分 = 近期频繁出现 + 处于热区附近 + 连续出现。
 
-### 步骤 4：结果对比（仅在增量更新发现新开奖时）
+v2 选号约束与 v1 相同（奇偶比、区间、和值等）。
 
-1. 读 `predictions.json` 找到最近未验证的预测
-2. 从 draws.json 获取对应期号的实际开奖
-3. 计算前区命中数（预测∩实际）和后区命中数
-4. 回填 `predictions.json`，更新 `model.json` 的性能统计
-5. 按学习率 0.05 微调各维度权重：
+#### 输出格式
+```
+## 🎯 26085 期预测
+
+| | v1 追冷 | v2 追热 |
+|--|--------|--------|
+| 前区 | XX XX XX XX XX | XX XX XX XX XX |
+| 后区 | XX XX | XX XX |
+| 策略 | 追遗漏 | 追热区 |
+
+### v1 选号理由
+[每个号码的依据]
+
+### v2 选号理由
+[每个号码的依据]
+```
+
+### 步骤 4：结果对比
+
+新开奖出现时：
+1. 找到预测记录中未验证的条目
+2. 分别计算 v1 和 v2 的命中数
+3. 更新 `model.json` 中各模型独立的 `performance` 统计
+4. 输出对比表格：
 
 ```
-newWeight = oldWeight + 0.05 × (dimensionHitRate - baselineRate)
-调整后归一化使总和为 1
+## 📈 上期对比
+
+| 模型 | 预测 | 前区命中 | 后区命中 |
+|------|------|---------|---------|
+| v1 | XX XX XX XX XX + XX XX | N/5 | N/2 |
+| v2 | XX XX XX XX XX + XX XX | N/5 | N/2 |
 ```
 
-6. 输出对比表格：预测 vs 实际 + 命中数 + 权重变化
+5. 按学习率 0.05 独立调整各模型权重
 
 ### 步骤 5：保存预测记录
 
-将本次预测追加到 `data/predictions.json` 的 `records` 数组。
+追加到 `predictions.json`，每条记录增加 `model` 字段区分 v1/v2。
 
-### 步骤 6：Git 提交并推送（结束后）
-
-**必须**在每次分析结束后，将更新的数据文件提交并推送到远程仓库：
+### 步骤 6：Git 提交并推送
 
 ```bash
 cd <项目根目录>
 git add data/
-git commit -m "update: $(date +%Y-%m-%d) 预测记录与数据更新"
+git commit -m "update: $(date +%Y-%m-%d) v1+v2双模型预测"
 git push origin main
 ```
 
-如果推送失败（无网络等），打印提示但不中断流程。
+---
+
+## model.json 结构
+
+```json
+{
+  "version": 2,
+  "models": {
+    "v1": {
+      "weights": {"gap": 0.30, "frequency": 0.25, "recentTrend": 0.25, "interval": 0.10, "oddEven": 0.10},
+      "performance": {"totalPredictions": 0, "frontHits": {...}, "backHits": {...}}
+    },
+    "v2": {
+      "weights": {"freq5": 0.40, "freq10": 0.25, "neighbor": 0.20, "streak": 0.15},
+      "performance": {"totalPredictions": 0, "frontHits": {...}, "backHits": {...}}
+    }
+  }
+}
+```
 
 ---
 
@@ -119,9 +155,9 @@ git push origin main
 
 | 用户说 | 执行 |
 |--------|------|
-| 分析大乐透 / 推荐号码 | 步骤0→1→2→3→5→6（全流程） |
-| 对比上次结果 | 仅步骤4 |
-| 初始化数据 | 仅步骤2 首次模式 |
-| 更新数据 | 步骤0→1→2→4→6 |
-| 偏冷门推荐 | 步骤3 中 gap 权重 +50% |
-| 近100期分析 | stats 范围改为 100 期 |
+| 分析大乐透 / 推荐号码 | 全流程 0→1→2→3→5→6 |
+| 对比上次结果 | 仅步骤 4 |
+| v1/v2 哪个准 | 输出两模型累计命中率对比 |
+| 只用 v1 / 只用 v2 | 跳过另一模型 |
+| 偏冷门推荐 | v1 的 gap 权重 +50% |
+| 偏热门推荐 | v2 的 freq5 权重 +50% |

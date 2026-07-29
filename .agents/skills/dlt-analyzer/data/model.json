@@ -1,14 +1,19 @@
 {
   "version": 2,
-  "weights": { "frequency": 0.25, "gap": 0.30, "recentTrend": 0.25, "interval": 0.10, "oddEven": 0.10 },
-  "performance": {
-    "totalPredictions": 3,
-    "frontHits": { "0": 3, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 },
-    "backHits": { "0": 3, "1": 0, "2": 0 },
-    "avgFrontHitRate": 0,
-    "avgBackHitRate": 0
+  "models": {
+    "v1": {
+      "strategy": "追冷号 - 遗漏值驱动",
+      "weights": { "gap": 0.30, "frequency": 0.25, "recentTrend": 0.25, "interval": 0.10, "oddEven": 0.10 },
+      "performance": { "totalPredictions": 2, "frontHits": { "0":2,"1":0,"2":0,"3":0,"4":0,"5":0 }, "backHits": { "0":1,"1":1,"2":0 }, "avgFrontHitRate": 0, "avgBackHitRate": 0.25 }
+    },
+    "v2": {
+      "strategy": "追热号 - 近期频次+邻域驱动",
+      "weights": { "freq5": 0.40, "freq10": 0.25, "neighbor": 0.20, "streak": 0.15 },
+      "performance": { "totalPredictions": 0, "frontHits": { "0":0,"1":0,"2":0,"3":0,"4":0,"5":0 }, "backHits": { "0":0,"1":0,"2":0 }, "avgFrontHitRate": 0, "avgBackHitRate": 0 }
+    }
   },
   "history": [
-    { "version": 1, "note": "首次预测 26083: 全部0命中。26083开出三连号14-15-16，统计模型难捕捉。保持默认权重继续观察。" }
+    { "version": 1, "note": "26083: v1全0命中(三连号14-15-16)" },
+    { "version": 1, "note": "26084: v1前0后1(05命中), 冷号09/17/31持续不出" }
   ]
 }
