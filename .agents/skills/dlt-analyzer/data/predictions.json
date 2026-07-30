@@ -1,52 +1,41 @@
 {
-  "updatedAt": "2026-07-25",
+  "updatedAt": "2026-07-30",
   "records": [
     {
-      "id": 1,
-      "predictedAt": "2026-07-23",
-      "targetDrawNum": "26083",
-      "method": "balanced",
-      "predictedFront": [8, 9, 17, 18, 31],
-      "predictedBack": [3, 8],
-      "actualFront": [14, 15, 16, 23, 26],
-      "actualBack": [7, 9],
-      "frontHits": 0, "backHits": 0,
-      "verified": true
+      "id": 1, "predictedAt": "2026-07-23", "targetDrawNum": "26083", "model": "v1",
+      "predictedFront": [8,9,17,18,31], "predictedBack": [3,8],
+      "actualFront": [14,15,16,23,26], "actualBack": [7,9],
+      "frontHits": 0, "backHits": 0, "verified": true
     },
     {
-      "id": 2,
-      "predictedAt": "2026-07-23",
-      "targetDrawNum": "26083",
-      "method": "hot",
-      "predictedFront": [9, 12, 17, 22, 31],
-      "predictedBack": [8, 2],
-      "actualFront": [14, 15, 16, 23, 26],
-      "actualBack": [7, 9],
-      "frontHits": 0, "backHits": 0,
-      "verified": true
+      "id": 2, "predictedAt": "2026-07-25", "targetDrawNum": "26084", "model": "v1",
+      "predictedFront": [2,9,17,26,31], "predictedBack": [3,5],
+      "actualFront": [13,25,30,32,33], "actualBack": [4,5],
+      "frontHits": 0, "backHits": 1, "verified": true
     },
     {
-      "id": 3,
-      "predictedAt": "2026-07-23",
-      "targetDrawNum": "26083",
-      "method": "cold",
-      "predictedFront": [9, 12, 17, 22, 33],
-      "predictedBack": [3, 1],
-      "actualFront": [14, 15, 16, 23, 26],
-      "actualBack": [7, 9],
-      "frontHits": 0, "backHits": 0,
-      "verified": true
+      "id": 3, "predictedAt": "2026-07-25", "targetDrawNum": "26085", "model": "v2",
+      "predictedFront": [15,16,22,26,34], "predictedBack": [7,8],
+      "actualFront": [3,4,14,28,31], "actualBack": [5,7],
+      "frontHits": 0, "backHits": 1, "verified": true
     },
     {
-      "id": 4,
-      "predictedAt": "2026-07-25",
-      "targetDrawNum": "26084",
-      "method": "balanced",
-      "predictedFront": [2, 9, 17, 18, 31],
-      "predictedBack": [3, 8],
+      "id": 4, "predictedAt": "2026-07-25", "targetDrawNum": "26085", "model": "v1",
+      "predictedFront": [2,9,17,26,31], "predictedBack": [3,5],
+      "actualFront": [3,4,14,28,31], "actualBack": [5,7],
+      "frontHits": 1, "backHits": 1, "verified": true
+    },
+    {
+      "id": 5, "predictedAt": "2026-07-30", "targetDrawNum": "26086", "model": "v1",
+      "predictedFront": [7,9,17,23,26], "predictedBack": [3,5],
       "actualFront": null, "actualBack": null,
-      "frontHits": null, "backHits": null,
-      "verified": false
+      "frontHits": null, "backHits": null, "verified": false
+    },
+    {
+      "id": 6, "predictedAt": "2026-07-30", "targetDrawNum": "26086", "model": "v2",
+      "predictedFront": [5,9,14,16,26], "predictedBack": [5,7],
+      "actualFront": null, "actualBack": null,
+      "frontHits": null, "backHits": null, "verified": false
     }
   ]
 }
