@@ -40,13 +40,15 @@ cd <项目根目录> && git pull origin main --rebase 2>/dev/null || echo "pull 
 
 ### 步骤 1：读取本地数据
 
-检查 `data/` 目录。`draws.json` 不存在 → 首次初始化模式。
+检查 `data/` 目录。`draws.json` 不存在 -> 首次初始化模式。
 
 ### 步骤 2：数据获取
 
 API: `https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry?gameNo=85&provinceId=0&pageSize=100&termNum={lastNum}&isSpecial=0`
 
-必须在 lottery.gov.cn 域名下通过 `evaluate_script` 调用。每批 100 条，间隔 400-500ms。
+必须在 `lottery.gov.cn` 域名下通过页面上下文调用。每批 100 条，间隔 400-500ms。
+
+若官方接口临时限流或分页被拦截，优先保留本地 `draws.json` 历史库，只追加最新开奖，避免因为全量拉取失败导致本次分析中断。
 
 发现有新期号时自动触发步骤 4 对比。
 
@@ -64,7 +66,11 @@ API: `https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry?gameN
 前区 score = gap×0.5 + (5-freq30)×2.5 + (N/7-freq)×0.3
 后区 score = gap×0.6 + (3-freq30)×2
 ```
-高分 = 遗漏久 + 近期冷 + 全期偏冷。选号约束：奇偶2:3或3:2、区间1-2:1-2:1-2、和值±1σ、全距≥15、热号≥2+冷号≥1。
+高分 = 遗漏久 + 近期冷 + 全期偏冷。选号约束：奇偶2:3或3:2、区间1-2:1-2:1-2、和值±1σ、全距≥15、热号≥2 + 冷号≥1。
+
+#### v1 实现注意
+`gap` 计算必须显式判断 `=== undefined`，不能写成 `if (!gap[i])`。
+否则刚开出的号码会因为 `0` 被当成 falsy 而误判成最大遗漏值，直接污染 v1 排序结果。
 
 #### v2 评分（追热）
 ```
@@ -73,8 +79,8 @@ API: `https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry?gameN
 ```
 - `freq5` = 近5期出现次数
 - `freq10` = 近10期出现次数
-- `neighborBonus` = 号码处于近5期热号的 ±1 邻域内 → +4
-- `streakBonus` = 近5期出现 ≥2 次 → +4
+- `neighborBonus` = 号码处于近5期热号的 ±1 邻域内 -> +4
+- `streakBonus` = 近5期出现 >= 2 次 -> +4
 
 高分 = 近期频繁出现 + 处于热区附近 + 连续出现。
 
@@ -82,7 +88,7 @@ v2 选号约束与 v1 相同（奇偶比、区间、和值等）。
 
 #### 输出格式
 ```
-## 🎯 26085 期预测
+## 26085 期预测
 
 | | v1 追冷 | v2 追热 |
 |--|--------|--------|
@@ -106,7 +112,7 @@ v2 选号约束与 v1 相同（奇偶比、区间、和值等）。
 4. 输出对比表格：
 
 ```
-## 📈 上期对比
+## 上期对比
 
 | 模型 | 预测 | 前区命中 | 后区命中 |
 |------|------|---------|---------|
@@ -124,7 +130,7 @@ v2 选号约束与 v1 相同（奇偶比、区间、和值等）。
 
 ```bash
 cd <项目根目录>
-git add data/
+git add .agents/skills/dlt-analyzer/data/
 git commit -m "update: $(date +%Y-%m-%d) v1+v2双模型预测"
 git push origin main
 ```
@@ -155,7 +161,7 @@ git push origin main
 
 | 用户说 | 执行 |
 |--------|------|
-| 分析大乐透 / 推荐号码 | 全流程 0→1→2→3→5→6 |
+| 分析大乐透 / 推荐号码 | 全流程 0->1->2->3->5->6 |
 | 对比上次结果 | 仅步骤 4 |
 | v1/v2 哪个准 | 输出两模型累计命中率对比 |
 | 只用 v1 / 只用 v2 | 跳过另一模型 |

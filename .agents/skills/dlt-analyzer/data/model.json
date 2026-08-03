@@ -3,19 +3,65 @@
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
-      "weights": { "gap": 0.30, "frequency": 0.25, "recentTrend": 0.25, "interval": 0.10, "oddEven": 0.10 },
-      "performance": { "totalPredictions": 3, "frontHits": { "0":2,"1":1,"2":0,"3":0,"4":0,"5":0 }, "backHits": { "0":1,"1":2,"2":0 }, "avgFrontHitRate": 0.067, "avgBackHitRate": 0.22 }
+      "weights": {
+        "gap": 0.30,
+        "frequency": 0.25,
+        "recentTrend": 0.25,
+        "interval": 0.10,
+        "oddEven": 0.10
+      },
+      "performance": {
+        "totalPredictions": 4,
+        "frontHits": { "0": 3, "1": 1, "2": 0, "3": 0, "4": 0, "5": 0 },
+        "backHits": { "0": 2, "1": 2, "2": 0 },
+        "avgFrontHitRate": 0.05,
+        "avgBackHitRate": 0.25
+      }
     },
     "v2": {
       "strategy": "追热号 - 近期频次+邻域驱动",
-      "weights": { "freq5": 0.40, "freq10": 0.25, "neighbor": 0.20, "streak": 0.15 },
-      "performance": { "totalPredictions": 2, "frontHits": { "0":2,"1":0,"2":0,"3":0,"4":0,"5":0 }, "backHits": { "0":0,"1":2,"2":0 }, "avgFrontHitRate": 0, "avgBackHitRate": 0.25 }
+      "weights": {
+        "freq5": 0.40,
+        "freq10": 0.25,
+        "neighbor": 0.20,
+        "streak": 0.15
+      },
+      "performance": {
+        "totalPredictions": 2,
+        "frontHits": { "0": 2, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 },
+        "backHits": { "0": 1, "1": 1, "2": 0 },
+        "avgFrontHitRate": 0,
+        "avgBackHitRate": 0.25
+      }
     }
   },
-  "knownBugs": ["gap计算: JS !0为true导致刚出号码gap=N，影响v1池"],
+  "knownBugs": [
+    "historical: gap计算曾因 JS !0 为 true 误判刚出号码；现已要求使用 === undefined 判断"
+  ],
   "history": [
-    {"draw":"26083","v1":{"front":0,"back":0},"v2":null,"note":"三连号14-15-16"},
-    {"draw":"26084","v1":{"front":0,"back":1},"v2":null,"note":"05后区命中"},
-    {"draw":"26085","v1":{"front":1,"back":1},"v2":{"front":0,"back":1},"note":"31终于出了! v1首次前区命中"}
+    {
+      "draw": "26083",
+      "v1": { "front": 0, "back": 0 },
+      "v2": null,
+      "note": "三连号14-15-16"
+    },
+    {
+      "draw": "26084",
+      "v1": { "front": 0, "back": 1 },
+      "v2": null,
+      "note": "05后区命中"
+    },
+    {
+      "draw": "26085",
+      "v1": { "front": 1, "back": 1 },
+      "v2": { "front": 0, "back": 1 },
+      "note": "31终于出了! v1首次前区命中"
+    },
+    {
+      "draw": "26086",
+      "v1": { "front": 0, "back": 0 },
+      "v2": { "front": 0, "back": 0 },
+      "note": "双模型全空，上一期热区没有延续"
+    }
   ]
 }
