@@ -38,6 +38,8 @@ description: >
 cd <项目根目录> && git pull origin main --rebase 2>/dev/null || echo "pull skipped"
 ```
 
+远端仓库的正式写操作统一走已配置好的 GitHub MCP（使用用户自己的 key），不要再默认依赖本地 `git push`。本地 `git commit` 只可作为临时备份，正式提交与推送以 MCP 结果为准。
+
 ### 步骤 1：读取本地数据
 
 检查 `data/` 目录。`draws.json` 不存在 -> 首次初始化模式，必须建立最近 1000 期的本地全量历史库。
@@ -130,6 +132,16 @@ v2 选号约束与 v1 相同（奇偶比、区间、和值等）。
 若 `draws.json` 已存在，则本次同步后必须更新 `updatedAt`、`latest` 和 `draws` 列表，保证本地历史库可直接复用。
 
 ### 步骤 6：Git 提交并推送
+
+默认使用已配置好的 GitHub MCP 直接提交到远端仓库，不再把本地 `git push` 作为常规路径。
+
+推荐顺序：
+1. 用本地文件操作完成 `data/` 内更新
+2. 校验 `model.json`、`predictions.json`、`draws.json` 的一致性
+3. 通过 GitHub MCP 将变更直接写入 `main`
+4. 本地仓库如需保留同步历史，再单独做 `pull --rebase`
+
+若必须保留本地命令示例，仅作为兜底，不作为默认流程：
 
 ```bash
 cd <项目根目录>
