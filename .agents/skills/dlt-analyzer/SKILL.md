@@ -125,6 +125,7 @@ v2 选号约束与 v1 相同（奇偶比、区间、和值等）。
 ### 步骤 5：保存预测记录
 
 追加到 `predictions.json`，每条记录增加 `model` 字段区分 v1/v2。
+若 `draws.json` 已存在，则本次同步后必须更新 `updatedAt`、`latest` 和 `draws` 列表，保证本地历史库可直接复用。
 
 ### 步骤 6：Git 提交并推送
 
@@ -134,6 +135,8 @@ git add .agents/skills/dlt-analyzer/data/
 git commit -m "update: $(date +%Y-%m-%d) v1+v2双模型预测"
 git push origin main
 ```
+
+注意：`draws.json` 属于技能的持久化历史库，不是临时缓存。只要被初始化出来，就必须和 `model.json`、`predictions.json` 一起提交到仓库。
 
 ---
 
