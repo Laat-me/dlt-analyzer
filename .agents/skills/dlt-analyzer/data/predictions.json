@@ -1,15 +1,33 @@
 {
-  "updatedAt": "2026-08-03",
+  "updatedAt": "2026-08-04",
   "records": [
     {
       "id": 1,
       "predictedAt": "2026-07-23",
       "targetDrawNum": "26083",
       "model": "v1",
-      "predictedFront": [8, 9, 17, 18, 31],
-      "predictedBack": [3, 8],
-      "actualFront": [14, 15, 16, 23, 26],
-      "actualBack": [7, 9],
+      "predictedFront": [
+        8,
+        9,
+        17,
+        18,
+        31
+      ],
+      "predictedBack": [
+        3,
+        8
+      ],
+      "actualFront": [
+        14,
+        15,
+        16,
+        23,
+        26
+      ],
+      "actualBack": [
+        7,
+        9
+      ],
       "frontHits": 0,
       "backHits": 0,
       "verified": true
@@ -19,10 +37,28 @@
       "predictedAt": "2026-07-25",
       "targetDrawNum": "26084",
       "model": "v1",
-      "predictedFront": [2, 9, 17, 26, 31],
-      "predictedBack": [3, 5],
-      "actualFront": [13, 25, 30, 32, 33],
-      "actualBack": [4, 5],
+      "predictedFront": [
+        2,
+        9,
+        17,
+        26,
+        31
+      ],
+      "predictedBack": [
+        3,
+        5
+      ],
+      "actualFront": [
+        13,
+        25,
+        30,
+        32,
+        33
+      ],
+      "actualBack": [
+        4,
+        5
+      ],
       "frontHits": 0,
       "backHits": 1,
       "verified": true
@@ -32,10 +68,28 @@
       "predictedAt": "2026-07-25",
       "targetDrawNum": "26085",
       "model": "v2",
-      "predictedFront": [15, 16, 22, 26, 34],
-      "predictedBack": [7, 8],
-      "actualFront": [3, 4, 14, 28, 31],
-      "actualBack": [5, 7],
+      "predictedFront": [
+        15,
+        16,
+        22,
+        26,
+        34
+      ],
+      "predictedBack": [
+        7,
+        8
+      ],
+      "actualFront": [
+        3,
+        4,
+        14,
+        28,
+        31
+      ],
+      "actualBack": [
+        5,
+        7
+      ],
       "frontHits": 0,
       "backHits": 1,
       "verified": true
@@ -45,10 +99,28 @@
       "predictedAt": "2026-07-25",
       "targetDrawNum": "26085",
       "model": "v1",
-      "predictedFront": [2, 9, 17, 26, 31],
-      "predictedBack": [3, 5],
-      "actualFront": [3, 4, 14, 28, 31],
-      "actualBack": [5, 7],
+      "predictedFront": [
+        2,
+        9,
+        17,
+        26,
+        31
+      ],
+      "predictedBack": [
+        3,
+        5
+      ],
+      "actualFront": [
+        3,
+        4,
+        14,
+        28,
+        31
+      ],
+      "actualBack": [
+        5,
+        7
+      ],
       "frontHits": 1,
       "backHits": 1,
       "verified": true
@@ -58,10 +130,28 @@
       "predictedAt": "2026-07-30",
       "targetDrawNum": "26086",
       "model": "v1",
-      "predictedFront": [7, 9, 17, 23, 26],
-      "predictedBack": [3, 5],
-      "actualFront": [10, 11, 18, 22, 35],
-      "actualBack": [6, 12],
+      "predictedFront": [
+        7,
+        9,
+        17,
+        23,
+        26
+      ],
+      "predictedBack": [
+        3,
+        5
+      ],
+      "actualFront": [
+        10,
+        11,
+        18,
+        22,
+        35
+      ],
+      "actualBack": [
+        6,
+        12
+      ],
       "frontHits": 0,
       "backHits": 0,
       "verified": true
@@ -71,10 +161,28 @@
       "predictedAt": "2026-07-30",
       "targetDrawNum": "26086",
       "model": "v2",
-      "predictedFront": [5, 9, 14, 16, 26],
-      "predictedBack": [5, 7],
-      "actualFront": [10, 11, 18, 22, 35],
-      "actualBack": [6, 12],
+      "predictedFront": [
+        5,
+        9,
+        14,
+        16,
+        26
+      ],
+      "predictedBack": [
+        5,
+        7
+      ],
+      "actualFront": [
+        10,
+        11,
+        18,
+        22,
+        35
+      ],
+      "actualBack": [
+        6,
+        12
+      ],
       "frontHits": 0,
       "backHits": 0,
       "verified": true
@@ -84,26 +192,62 @@
       "predictedAt": "2026-08-03",
       "targetDrawNum": "26087",
       "model": "v1",
-      "predictedFront": [7, 9, 17, 24, 32],
-      "predictedBack": [1, 3],
-      "actualFront": null,
-      "actualBack": null,
-      "frontHits": null,
-      "backHits": null,
-      "verified": false
+      "predictedFront": [
+        7,
+        9,
+        17,
+        24,
+        32
+      ],
+      "predictedBack": [
+        1,
+        3
+      ],
+      "actualFront": [
+        5,
+        10,
+        16,
+        24,
+        27
+      ],
+      "actualBack": [
+        4,
+        10
+      ],
+      "frontHits": 1,
+      "backHits": 0,
+      "verified": true
     },
     {
       "id": 8,
       "predictedAt": "2026-08-03",
       "targetDrawNum": "26087",
       "model": "v2",
-      "predictedFront": [4, 14, 16, 25, 27],
-      "predictedBack": [5, 7],
-      "actualFront": null,
-      "actualBack": null,
-      "frontHits": null,
-      "backHits": null,
-      "verified": false
+      "predictedFront": [
+        4,
+        14,
+        16,
+        25,
+        27
+      ],
+      "predictedBack": [
+        5,
+        7
+      ],
+      "actualFront": [
+        5,
+        10,
+        16,
+        24,
+        27
+      ],
+      "actualBack": [
+        4,
+        10
+      ],
+      "frontHits": 2,
+      "backHits": 0,
+      "verified": true
     }
   ]
 }

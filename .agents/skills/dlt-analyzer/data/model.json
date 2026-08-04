@@ -4,34 +4,56 @@
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
       "weights": {
-        "gap": 0.30,
+        "gap": 0.3,
         "frequency": 0.25,
         "recentTrend": 0.25,
-        "interval": 0.10,
-        "oddEven": 0.10
+        "interval": 0.1,
+        "oddEven": 0.1
       },
       "performance": {
-        "totalPredictions": 4,
-        "frontHits": { "0": 3, "1": 1, "2": 0, "3": 0, "4": 0, "5": 0 },
-        "backHits": { "0": 2, "1": 2, "2": 0 },
-        "avgFrontHitRate": 0.05,
-        "avgBackHitRate": 0.25
+        "totalPredictions": 5,
+        "frontHits": {
+          "0": 3,
+          "1": 2,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 0
+        },
+        "backHits": {
+          "0": 3,
+          "1": 2,
+          "2": 0
+        },
+        "avgFrontHitRate": 0.08,
+        "avgBackHitRate": 0.2
       }
     },
     "v2": {
       "strategy": "追热号 - 近期频次+邻域驱动",
       "weights": {
-        "freq5": 0.40,
+        "freq5": 0.4,
         "freq10": 0.25,
-        "neighbor": 0.20,
+        "neighbor": 0.2,
         "streak": 0.15
       },
       "performance": {
-        "totalPredictions": 2,
-        "frontHits": { "0": 2, "1": 0, "2": 0, "3": 0, "4": 0, "5": 0 },
-        "backHits": { "0": 1, "1": 1, "2": 0 },
-        "avgFrontHitRate": 0,
-        "avgBackHitRate": 0.25
+        "totalPredictions": 3,
+        "frontHits": {
+          "0": 2,
+          "1": 0,
+          "2": 1,
+          "3": 0,
+          "4": 0,
+          "5": 0
+        },
+        "backHits": {
+          "0": 2,
+          "1": 1,
+          "2": 0
+        },
+        "avgFrontHitRate": 0.13,
+        "avgBackHitRate": 0.17
       }
     }
   },
@@ -41,27 +63,57 @@
   "history": [
     {
       "draw": "26083",
-      "v1": { "front": 0, "back": 0 },
+      "v1": {
+        "front": 0,
+        "back": 0
+      },
       "v2": null,
       "note": "三连号14-15-16"
     },
     {
       "draw": "26084",
-      "v1": { "front": 0, "back": 1 },
+      "v1": {
+        "front": 0,
+        "back": 1
+      },
       "v2": null,
       "note": "05后区命中"
     },
     {
       "draw": "26085",
-      "v1": { "front": 1, "back": 1 },
-      "v2": { "front": 0, "back": 1 },
+      "v1": {
+        "front": 1,
+        "back": 1
+      },
+      "v2": {
+        "front": 0,
+        "back": 1
+      },
       "note": "31终于出了! v1首次前区命中"
     },
     {
       "draw": "26086",
-      "v1": { "front": 0, "back": 0 },
-      "v2": { "front": 0, "back": 0 },
+      "v1": {
+        "front": 0,
+        "back": 0
+      },
+      "v2": {
+        "front": 0,
+        "back": 0
+      },
       "note": "双模型全空，上一期热区没有延续"
+    },
+    {
+      "draw": "26087",
+      "v1": {
+        "front": 1,
+        "back": 0
+      },
+      "v2": {
+        "front": 2,
+        "back": 0
+      },
+      "note": "v2前区2中优于v1，后区双模型落空"
     }
   ]
 }

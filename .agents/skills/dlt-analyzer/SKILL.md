@@ -42,7 +42,7 @@ cd <项目根目录> && git pull origin main --rebase 2>/dev/null || echo "pull 
 
 ### 步骤 1：读取本地数据
 
-检查 `data/` 目录。`draws.json` 不存在 -> 首次初始化模式，必须建立最近 1000 期的本地全量历史库。
+检查 `data/` 目录。`draws.json` 不存在 -> 首次初始化模式，必须至少建立最近 1000 期的本地全量历史库；初始化完成后后续只做累计追加，不删除旧记录。
 
 ### 步骤 2：数据获取
 
@@ -51,6 +51,8 @@ API: `https://webapi.sporttery.cn/gateway/lottery/getHistoryPageListV1.qry?gameN
 必须在 `lottery.gov.cn` 域名下通过页面上下文调用。每批 100 条，间隔 400-500ms。
 
 若 `draws.json` 不存在，首次初始化必须优先补齐最近 1000 期；可直接使用官方历史开奖页分页抓取，按表格中的完整开奖行过滤，剔除“派奖”等附加说明行后落库。
+
+若 `draws.json` 已存在，后续同步一律采用累计追加模式：只补新期号，不因样本上限裁剪或删除旧期号。
 
 若官方接口临时限流或分页被拦截，优先保留本地 `draws.json` 历史库，只追加最新开奖，避免因为全量拉取失败导致本次分析中断。
 
@@ -129,7 +131,7 @@ v2 选号约束与 v1 相同（奇偶比、区间、和值等）。
 ### 步骤 5：保存预测记录
 
 追加到 `predictions.json`，每条记录增加 `model` 字段区分 v1/v2。
-若 `draws.json` 已存在，则本次同步后必须更新 `updatedAt`、`latest` 和 `draws` 列表，保证本地历史库可直接复用。
+若 `draws.json` 已存在，则本次同步后必须更新 `updatedAt`、`latest` 和 `draws` 列表，保证本地历史库可直接复用；已有 `draws` 只能追加新数据，不得滚动删除旧记录。
 
 ### 步骤 6：Git 提交并推送
 
