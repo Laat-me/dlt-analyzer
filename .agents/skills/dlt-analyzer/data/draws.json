@@ -1,23 +1,23 @@
 {
-  "updatedAt": "2026-08-04",
+  "updatedAt": "2026-08-07",
   "source": "official lottery history page via browser pagination",
-  "sampleSize": 1001,
-  "totalDraws": 1001,
-  "dataRange": "19123 - 26087",
-  "dateRange": "2019-10-28 ~ 2026-08-03",
+  "sampleSize": 1002,
+  "totalDraws": 1002,
+  "dataRange": "19123 - 26088",
+  "dateRange": "2019-10-28 ~ 2026-08-05",
   "latest": {
-    "num": "26087",
-    "date": "2026-08-03",
+    "num": "26088",
+    "date": "2026-08-05",
     "front": [
-      5,
-      10,
-      16,
+      3,
+      9,
+      11,
       24,
       27
     ],
     "back": [
-      4,
-      10
+      5,
+      11
     ]
   },
   "stats": {
@@ -32,7 +32,7 @@
       },
       {
         "number": 11,
-        "count": 160
+        "count": 161
       },
       {
         "number": 20,
@@ -52,25 +52,25 @@
       },
       {
         "number": 3,
-        "count": 153
+        "count": 154
       },
       {
         "number": 4,
         "count": 150
       },
       {
-        "number": 1,
+        "number": 8,
         "count": 149
       }
     ],
-    "backFrequencyTop6": [
+    "backFrequencyTop5": [
       {
         "number": 7,
         "count": 197
       },
       {
         "number": 5,
-        "count": 180
+        "count": 181
       },
       {
         "number": 10,
@@ -83,30 +83,8 @@
       {
         "number": 2,
         "count": 167
-      },
-      {
-        "number": 12,
-        "count": 166
       }
-    ],
-    "frontOddEvenDistribution": {
-      "3:2": 364,
-      "2:3": 310,
-      "4:1": 150,
-      "1:4": 132,
-      "5:0": 24,
-      "0:5": 21
-    },
-    "frontSum": {
-      "avg": 88.5,
-      "min": 27,
-      "max": 155
-    },
-    "zoneTotals": {
-      "1-12": 1807,
-      "13-24": 1639,
-      "25-35": 1559
-    }
+    ]
   },
   "draws": [
     {
@@ -15122,6 +15100,21 @@
       "back": [
         4,
         10
+      ]
+    },
+    {
+      "num": "26088",
+      "date": "2026-08-05",
+      "front": [
+        3,
+        9,
+        11,
+        24,
+        27
+      ],
+      "back": [
+        5,
+        11
       ]
     }
   ]

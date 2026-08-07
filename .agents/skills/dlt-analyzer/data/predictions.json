@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-04",
+  "updatedAt": "2026-08-07",
   "records": [
     {
       "id": 1,
@@ -248,6 +248,42 @@
       "frontHits": 2,
       "backHits": 0,
       "verified": true
+    },
+    {
+      "id": 9,
+      "predictedAt": "2026-08-07",
+      "targetDrawNum": "26089",
+      "model": "v1",
+      "predictedFront": [
+        17,
+        7,
+        12,
+        14,
+        31
+      ],
+      "predictedBack": [
+        3,
+        1
+      ],
+      "verified": false
+    },
+    {
+      "id": 10,
+      "predictedAt": "2026-08-07",
+      "targetDrawNum": "26089",
+      "model": "v2",
+      "predictedFront": [
+        27,
+        10,
+        24,
+        14,
+        9
+      ],
+      "predictedBack": [
+        5,
+        4
+      ],
+      "verified": false
     }
   ]
 }
