@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-08-07",
+  "updatedAt": "2026-08-10",
   "source": "official lottery history page via browser pagination",
-  "sampleSize": 1002,
-  "totalDraws": 1002,
-  "dataRange": "19123 - 26088",
-  "dateRange": "2019-10-28 ~ 2026-08-05",
+  "sampleSize": 1003,
+  "totalDraws": 1003,
+  "dataRange": "19123 - 26089",
+  "dateRange": "2019-10-28 ~ 2026-08-08",
   "latest": {
-    "num": "26088",
-    "date": "2026-08-05",
+    "num": "26089",
+    "date": "2026-08-08",
     "front": [
       3,
-      9,
-      11,
-      24,
-      27
+      7,
+      12,
+      14,
+      26
     ],
     "back": [
       5,
@@ -28,7 +28,7 @@
       },
       {
         "number": 26,
-        "count": 162
+        "count": 163
       },
       {
         "number": 11,
@@ -39,20 +39,20 @@
         "count": 157
       },
       {
+        "number": 7,
+        "count": 156
+      },
+      {
         "number": 5,
         "count": 156
       },
       {
-        "number": 7,
+        "number": 3,
         "count": 155
       },
       {
         "number": 22,
         "count": 155
-      },
-      {
-        "number": 3,
-        "count": 154
       },
       {
         "number": 4,
@@ -70,7 +70,7 @@
       },
       {
         "number": 5,
-        "count": 181
+        "count": 182
       },
       {
         "number": 10,
@@ -15111,6 +15111,21 @@
         11,
         24,
         27
+      ],
+      "back": [
+        5,
+        11
+      ]
+    },
+    {
+      "num": "26089",
+      "date": "2026-08-08",
+      "front": [
+        3,
+        7,
+        12,
+        14,
+        26
       ],
       "back": [
         5,

@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-07",
+  "updatedAt": "2026-08-10",
   "records": [
     {
       "id": 1,
@@ -265,7 +265,20 @@
         3,
         1
       ],
-      "verified": false
+      "verified": true,
+      "actualFront": [
+        3,
+        7,
+        12,
+        14,
+        26
+      ],
+      "actualBack": [
+        5,
+        11
+      ],
+      "frontHits": 3,
+      "backHits": 0
     },
     {
       "id": 10,
@@ -282,6 +295,55 @@
       "predictedBack": [
         5,
         4
+      ],
+      "verified": true,
+      "actualFront": [
+        3,
+        7,
+        12,
+        14,
+        26
+      ],
+      "actualBack": [
+        5,
+        11
+      ],
+      "frontHits": 1,
+      "backHits": 1
+    },
+    {
+      "id": 11,
+      "predictedAt": "2026-08-10",
+      "targetDrawNum": "26090",
+      "model": "v1",
+      "predictedFront": [
+        17,
+        33,
+        31,
+        6,
+        18
+      ],
+      "predictedBack": [
+        3,
+        1
+      ],
+      "verified": false
+    },
+    {
+      "id": 12,
+      "predictedAt": "2026-08-10",
+      "targetDrawNum": "26090",
+      "model": "v2",
+      "predictedFront": [
+        3,
+        27,
+        14,
+        24,
+        9
+      ],
+      "predictedBack": [
+        5,
+        11
       ],
       "verified": false
     }
