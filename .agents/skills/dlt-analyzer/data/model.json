@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
@@ -54,6 +54,18 @@
         },
         "avgFrontHitRate": 0.15,
         "avgBackHitRate": 0.25
+      }
+    },
+    "v3": {
+      "strategy": "冷热组合 - 前区2冷+3热 后区1冷+1热",
+      "weights": {
+        "coldRatio": 0.4,
+        "hotRatio": 0.6
+      },
+      "performance": {
+        "totalPredictions": 0,
+        "frontHits": {},
+        "backHits": {}
       }
     }
   },

@@ -346,6 +346,24 @@
         11
       ],
       "verified": false
+    },
+    {
+      "id": 13,
+      "predictedAt": "2026-08-10",
+      "targetDrawNum": "26090",
+      "model": "v3",
+      "predictedFront": [
+        17,
+        33,
+        3,
+        10,
+        14
+      ],
+      "predictedBack": [
+        3,
+        5
+      ],
+      "verified": false
     }
   ]
 }
