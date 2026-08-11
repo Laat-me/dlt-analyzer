@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "models": {
+    "m1": {
+      "strategy": "冷热折中 - 每位独立评分",
+      "weights": {
+        "gap": 0.5,
+        "freq5": 1.5,
+        "freq10": 0.8,
+        "freqAll": 0.3
+      },
+      "performance": {
+        "totalPredictions": 0,
+        "hits": {
+          "0": 0,
+          "1": 0,
+          "2": 0,
+          "3": 0,
+          "4": 0,
+          "5": 0
+        },
+        "avgHitRate": 0.0
+      }
+    }
+  },
+  "history": [],
+  "knownBugs": [
+    "historical: draws 排序需升序(旧->新), 否则 latest/近N期窗口/遗漏全部指向旧期"
+  ]
+}
