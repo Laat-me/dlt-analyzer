@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-10",
+  "updatedAt": "2026-08-11",
   "records": [
     {
       "id": 1,
@@ -327,7 +327,20 @@
         3,
         1
       ],
-      "verified": false
+      "verified": true,
+      "actualFront": [
+        9,
+        14,
+        17,
+        19,
+        24
+      ],
+      "actualBack": [
+        2,
+        9
+      ],
+      "frontHits": 1,
+      "backHits": 0
     },
     {
       "id": 12,
@@ -345,7 +358,20 @@
         5,
         11
       ],
-      "verified": false
+      "verified": true,
+      "actualFront": [
+        9,
+        14,
+        17,
+        19,
+        24
+      ],
+      "actualBack": [
+        2,
+        9
+      ],
+      "frontHits": 3,
+      "backHits": 0
     },
     {
       "id": 13,
@@ -358,6 +384,73 @@
         3,
         10,
         14
+      ],
+      "predictedBack": [
+        3,
+        5
+      ],
+      "verified": true,
+      "actualFront": [
+        9,
+        14,
+        17,
+        19,
+        24
+      ],
+      "actualBack": [
+        2,
+        9
+      ],
+      "frontHits": 2,
+      "backHits": 0
+    },
+    {
+      "id": 14,
+      "predictedAt": "2026-08-11",
+      "targetDrawNum": "26091",
+      "model": "v1",
+      "predictedFront": [
+        31,
+        29,
+        6,
+        1,
+        18
+      ],
+      "predictedBack": [
+        3,
+        1
+      ],
+      "verified": false
+    },
+    {
+      "id": 15,
+      "predictedAt": "2026-08-11",
+      "targetDrawNum": "26091",
+      "model": "v2",
+      "predictedFront": [
+        24,
+        27,
+        9,
+        10,
+        14
+      ],
+      "predictedBack": [
+        5,
+        11
+      ],
+      "verified": false
+    },
+    {
+      "id": 16,
+      "predictedAt": "2026-08-11",
+      "targetDrawNum": "26091",
+      "model": "v3",
+      "predictedFront": [
+        31,
+        33,
+        24,
+        9,
+        10
       ],
       "predictedBack": [
         3,
