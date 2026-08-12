@@ -1,30 +1,30 @@
 {
   "updatedAt": "2026-08-11",
   "source": "official sporttery api gameNo=350133",
-  "sampleSize": 200,
-  "totalDraws": 200,
-  "dataRange": "26013 - 26212",
-  "dateRange": "2026-01-13 ~ 2026-08-10",
+  "sampleSize": 201,
+  "totalDraws": 201,
+  "dataRange": "26013 - 26213",
+  "dateRange": "2026-01-13 ~ 2026-08-11",
   "latest": {
-    "num": "26212",
-    "date": "2026-08-10",
+    "num": "26213",
+    "date": "2026-08-11",
     "digits": [
-      8,
-      3,
-      9,
+      7,
       4,
-      3
+      0,
+      7,
+      1
     ]
   },
   "stats": {
     "positionFrequency": [
       [
         {
-          "digit": 0,
-          "count": 24
+          "digit": 7,
+          "count": 25
         },
         {
-          "digit": 7,
+          "digit": 0,
           "count": 24
         },
         {
@@ -71,7 +71,7 @@
         },
         {
           "digit": 4,
-          "count": 23
+          "count": 24
         },
         {
           "digit": 5,
@@ -133,7 +133,7 @@
         },
         {
           "digit": 0,
-          "count": 18
+          "count": 19
         },
         {
           "digit": 2,
@@ -147,7 +147,7 @@
       [
         {
           "digit": 7,
-          "count": 27
+          "count": 28
         },
         {
           "digit": 4,
@@ -201,7 +201,7 @@
         },
         {
           "digit": 1,
-          "count": 21
+          "count": 22
         },
         {
           "digit": 0,
@@ -249,7 +249,7 @@
         },
         {
           "digit": 4,
-          "count": 1
+          "count": 0
         },
         {
           "digit": 5,
@@ -261,7 +261,7 @@
         },
         {
           "digit": 7,
-          "count": 0
+          "count": 1
         },
         {
           "digit": 8,
@@ -291,7 +291,7 @@
         },
         {
           "digit": 4,
-          "count": 0
+          "count": 1
         },
         {
           "digit": 5,
@@ -303,7 +303,7 @@
         },
         {
           "digit": 7,
-          "count": 1
+          "count": 0
         },
         {
           "digit": 8,
@@ -317,11 +317,11 @@
       [
         {
           "digit": 0,
-          "count": 0
+          "count": 1
         },
         {
           "digit": 1,
-          "count": 1
+          "count": 0
         },
         {
           "digit": 2,
@@ -387,11 +387,11 @@
         },
         {
           "digit": 7,
-          "count": 1
+          "count": 2
         },
         {
           "digit": 8,
-          "count": 1
+          "count": 0
         },
         {
           "digit": 9,
@@ -405,7 +405,7 @@
         },
         {
           "digit": 1,
-          "count": 1
+          "count": 2
         },
         {
           "digit": 2,
@@ -425,7 +425,7 @@
         },
         {
           "digit": 6,
-          "count": 1
+          "count": 0
         },
         {
           "digit": 7,
@@ -449,7 +449,7 @@
         },
         {
           "digit": 1,
-          "count": 1
+          "count": 0
         },
         {
           "digit": 2,
@@ -473,7 +473,7 @@
         },
         {
           "digit": 7,
-          "count": 1
+          "count": 2
         },
         {
           "digit": 8,
@@ -499,11 +499,11 @@
         },
         {
           "digit": 3,
-          "count": 2
+          "count": 1
         },
         {
           "digit": 4,
-          "count": 0
+          "count": 1
         },
         {
           "digit": 5,
@@ -529,7 +529,7 @@
       [
         {
           "digit": 0,
-          "count": 0
+          "count": 1
         },
         {
           "digit": 1,
@@ -549,7 +549,7 @@
         },
         {
           "digit": 5,
-          "count": 2
+          "count": 1
         },
         {
           "digit": 6,
@@ -595,11 +595,11 @@
         },
         {
           "digit": 6,
-          "count": 2
+          "count": 1
         },
         {
           "digit": 7,
-          "count": 1
+          "count": 2
         },
         {
           "digit": 8,
@@ -617,7 +617,7 @@
         },
         {
           "digit": 1,
-          "count": 1
+          "count": 2
         },
         {
           "digit": 2,
@@ -645,7 +645,7 @@
         },
         {
           "digit": 8,
-          "count": 2
+          "count": 1
         },
         {
           "digit": 9,
@@ -669,7 +669,7 @@
         },
         {
           "digit": 3,
-          "count": 3
+          "count": 2
         },
         {
           "digit": 4,
@@ -685,7 +685,7 @@
         },
         {
           "digit": 7,
-          "count": 5
+          "count": 6
         },
         {
           "digit": 8,
@@ -715,11 +715,11 @@
         },
         {
           "digit": 4,
-          "count": 1
+          "count": 2
         },
         {
           "digit": 5,
-          "count": 3
+          "count": 2
         },
         {
           "digit": 6,
@@ -741,7 +741,7 @@
       [
         {
           "digit": 0,
-          "count": 2
+          "count": 3
         },
         {
           "digit": 1,
@@ -749,7 +749,7 @@
         },
         {
           "digit": 2,
-          "count": 4
+          "count": 3
         },
         {
           "digit": 3,
@@ -807,11 +807,11 @@
         },
         {
           "digit": 6,
-          "count": 5
+          "count": 4
         },
         {
           "digit": 7,
-          "count": 6
+          "count": 7
         },
         {
           "digit": 8,
@@ -829,11 +829,11 @@
         },
         {
           "digit": 1,
-          "count": 4
+          "count": 5
         },
         {
           "digit": 2,
-          "count": 2
+          "count": 1
         },
         {
           "digit": 3,
@@ -867,64 +867,64 @@
     ],
     "gaps": [
       [
+        3,
+        10,
+        40,
+        14,
+        5,
         2,
         9,
-        39,
-        13,
-        4,
-        1,
-        8,
-        6,
         0,
+        1,
+        4
+      ],
+      [
+        7,
+        2,
+        17,
+        1,
+        0,
+        23,
+        6,
+        5,
+        4,
         3
       ],
       [
-        6,
-        1,
-        16,
         0,
-        28,
-        22,
         5,
         4,
+        16,
         3,
-        2
-      ],
-      [
-        19,
-        4,
-        3,
-        15,
         2,
-        1,
-        5,
-        12,
-        37,
-        0
+        6,
+        13,
+        38,
+        1
       ],
       [
-        7,
+        8,
+        18,
+        13,
         17,
-        12,
-        16,
-        0,
-        2,
-        6,
-        3,
-        4,
-        34
-      ],
-      [
-        10,
-        2,
-        16,
-        0,
-        5,
-        6,
-        4,
+        1,
         3,
         7,
-        21
+        0,
+        5,
+        35
+      ],
+      [
+        11,
+        0,
+        17,
+        1,
+        6,
+        7,
+        5,
+        4,
+        8,
+        22
       ]
     ]
   },
@@ -3127,6 +3127,17 @@
         9,
         4,
         3
+      ]
+    },
+    {
+      "num": "26213",
+      "date": "2026-08-11",
+      "digits": [
+        7,
+        4,
+        0,
+        7,
+        1
       ]
     }
   ]

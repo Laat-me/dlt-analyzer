@@ -13,6 +13,28 @@
         9,
         9
       ],
+      "verified": true,
+      "actualDigits": [
+        7,
+        4,
+        0,
+        7,
+        1
+      ],
+      "positionHits": 1
+    },
+    {
+      "id": 2,
+      "predictedAt": "2026-08-11",
+      "targetDrawNum": "26214",
+      "model": "m1",
+      "predictedDigits": [
+        2,
+        5,
+        8,
+        9,
+        9
+      ],
       "verified": false
     }
   ]

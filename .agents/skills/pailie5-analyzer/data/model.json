@@ -10,20 +10,40 @@
         "freqAll": 0.3
       },
       "performance": {
-        "totalPredictions": 0,
+        "totalPredictions": 1,
         "hits": {
           "0": 0,
-          "1": 0,
+          "1": 1,
           "2": 0,
           "3": 0,
           "4": 0,
           "5": 0
         },
-        "avgHitRate": 0.0
+        "avgHitRate": 0.2
       }
     }
   },
-  "history": [],
+  "history": [
+    {
+      "draw": "26213",
+      "predicted": [
+        2,
+        4,
+        8,
+        9,
+        9
+      ],
+      "actual": [
+        7,
+        4,
+        0,
+        7,
+        1
+      ],
+      "hits": 1,
+      "note": "第2位4命中(追遗漏28期+全期热), 其余4位未中; 样本1期不足调整门槛, 维持权重"
+    }
+  ],
   "knownBugs": [
     "historical: draws 排序需升序(旧->新), 否则 latest/近N期窗口/遗漏全部指向旧期"
   ]
