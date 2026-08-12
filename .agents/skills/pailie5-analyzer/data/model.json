@@ -45,6 +45,8 @@
     }
   ],
   "knownBugs": [
-    "historical: draws 排序需升序(旧->新), 否则 latest/近N期窗口/遗漏全部指向旧期"
+    "historical: draws 排序需升序(旧->新), 否则 latest/近N期窗口/遗漏全部指向旧期",
+    "data: 2026-08-12 历史库从200期扩展至1000期, 评分基准由(20-freqAll)改为(100-freqAll)",
+    "api: termNum参数在排列五接口不生效, 必须用pageNo翻页"
   ]
 }
