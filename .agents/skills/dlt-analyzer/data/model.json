@@ -1,5 +1,5 @@
 {
-  "version": 17,
+  "version": 18,
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
@@ -210,7 +210,10 @@
     "14轮共54个算法, 7% ge4持续确认; 等待26092期(08-14)开奖复盘",
     "第15轮(2026-08-13): 后区策略专项(覆盖/重号热/反重号/冷热配), AI_U_wide保持7%且后区命中2个比例最高(8%)",
     "结论: AI_U_wide原本的后区策略(重号0.15+邻域)已是最优, 反重号反而降至2%",
-    "15轮共58个算法, 7% ge4持续确认; 等待26092期(08-14)开奖复盘"
+    "15轮共58个算法, 7% ge4持续确认; 等待26092期(08-14)开奖复盘",
+    "第16轮(2026-08-13): 更大候选池top28/前后区联合条件/区间均衡, AI_U_wide与BS_zone_balance并列7%",
+    "BS_zone_balance(区间每段<=2)出现1期命中5个号码(ge5=1%), 与AO/AR的投票路线同样证明高命中潜力存在",
+    "16轮共62个算法; 等待26092期(08-14)开奖复盘"
   ],
   "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
   "activeAlgorithm": "AI_U_wide",
@@ -1247,6 +1250,80 @@
         "4": 1
       },
       "holdoutBackHit2Rate": 0.0,
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BS_zone_balance",
+      "family": "zone_balance",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.07,
+      "holdoutAvgHitCount": 1.52,
+      "holdoutHitGe5Rate": 0.01,
+      "holdoutHitLevelDist": {
+        "0": 19,
+        "1": 38,
+        "2": 23,
+        "3": 13,
+        "4": 6,
+        "5": 1
+      },
+      "selected": false,
+      "over50": false,
+      "note": "区间均衡(每段<=2)保持7%且出现1期命中5个号码(ge5=1%)"
+    },
+    {
+      "name": "BP_U_top28",
+      "family": "repeat_neighbor_top28",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.06,
+      "holdoutAvgHitCount": 1.5,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 19,
+        "1": 38,
+        "2": 23,
+        "3": 14,
+        "4": 6
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BQ_joint_conditional",
+      "family": "front_back_joint_conditional",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.03,
+      "holdoutHitGe4Rate": 0.04,
+      "holdoutAvgHitCount": 1.47,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 19,
+        "1": 38,
+        "2": 24,
+        "3": 15,
+        "4": 4
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BR_top28_joint",
+      "family": "top28_joint_conditional",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.03,
+      "holdoutHitGe4Rate": 0.04,
+      "holdoutAvgHitCount": 1.45,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 20,
+        "1": 37,
+        "2": 25,
+        "3": 14,
+        "4": 4
+      },
       "selected": false,
       "over50": false
     }
