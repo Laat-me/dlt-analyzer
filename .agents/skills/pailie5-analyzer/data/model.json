@@ -1,32 +1,41 @@
 {
-  "version": 2,
+  "version": 3,
   "activeAlgorithm": "K_prob_ensemble",
   "models": {
     "m1": {
-      "strategy": "候选算法搜索 - Top-2 覆盖率评估",
+      "strategy": "概率建模 + 5注组合",
       "weights": {
-        "freq30": 2.0,
-        "freq10": 0.8
+        "alpha": 1.0,
+        "gamma": 0.995,
+        "markovWeight": 0.35
       },
       "performance": {
         "totalPredictions": 1,
         "hits": {
-          "0": 0,
-          "1": 1,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-          "5": 0
+          "0": 1,
+          "1": 0
         },
-        "avgHitRate": 0.2
+        "avgAnyExactHitRate": 0.0
       }
     }
   },
   "history": [
     {
       "draw": "26213",
-      "predicted": [2, 4, 8, 9, 9],
-      "actual": [7, 4, 0, 7, 1],
+      "predicted": [
+        2,
+        4,
+        8,
+        9,
+        9
+      ],
+      "actual": [
+        7,
+        4,
+        0,
+        7,
+        1
+      ],
       "hits": 1,
       "note": "第2位4命中(追遗漏28期+全期热), 其余4位未中; 样本1期不足调整门槛, 维持权重"
     }
@@ -39,12 +48,10 @@
     "model: gap(遗漏)信号在排列五上是负贡献, 当前m1公式的gap*0.5方向可能错误"
   ],
   "reviewNotes": [
-    "900/100 Top-2覆盖率回测: 新概率集成 K_prob_ensemble 与 A_freq30 并列留出集第一(22.0%), 训练段上 K_prob_ensemble 略优, 因此作为当前主算法",
-    "已测试候选算法: K_prob_ensemble, A_freq30, H_dirichlet_positional, I_recency_eb, G_freq30_only_all, J_markov_mixed, D_current_m1, B_freq30+10, C_freq30+10+all, F_freq5, E_freq10",
-    "超过50%的方法: 无",
-    "当前数据下没有任何算法接近80%; 系统保留最优算法并继续记录, 不伪造达标结果",
-    "30期窗口仅用于训练段早停切换; 留出集100期只做最终验证, 不参与调参",
-    "低拥挤度方向作为第二层筛选: 采用简单 crowd penalty 规则, 不改变 Top-2 覆盖率主指标"
+    "900/100 五注全中回测: P1~P4 在留出集上都是 0 次全中, 系统按辅助指标而非伪造命中率选默认组合算法",
+    "在无任何 exact hit 的情况下, 以主票位置命中率和低拥挤度约束打破平手, 当前默认组选算法为 P4_low_crowd_portfolio",
+    "位置概率模型仍采用 K_prob_ensemble; 组合层才切换为 5 注全中导向",
+    "低拥挤度方向只影响选票共享风险, 不改变开奖概率本身"
   ],
   "algorithmBenchmarks": [
     {
@@ -56,7 +63,11 @@
         "gamma": 0.995,
         "lambda": 1,
         "markovWeight": 0.35,
-        "ensembleWeights": [0.333, 0.333, 0.333]
+        "ensembleWeights": [
+          0.333,
+          0.333,
+          0.333
+        ]
       },
       "trainCoverage": 0.188,
       "trainHit": 188,
@@ -78,9 +89,94 @@
         "penalize obvious date-like low-digit structures"
       ],
       "ticketSelection": {
-        "pureProbabilityTicket": [1, 7, 5, 4, 3],
-        "lowCrowdTicket": [1, 7, 5, 4, 3],
-        "crowdPenaltyScore": 0
+        "pureProbabilityTicket": [
+          1,
+          7,
+          5,
+          4,
+          3
+        ],
+        "lowCrowdTicket": [
+          1,
+          7,
+          5,
+          4,
+          3
+        ],
+        "probabilityPortfolio": [
+          [
+            1,
+            7,
+            5,
+            4,
+            3
+          ],
+          [
+            1,
+            7,
+            5,
+            4,
+            2
+          ],
+          [
+            1,
+            7,
+            5,
+            5,
+            3
+          ],
+          [
+            1,
+            7,
+            8,
+            4,
+            3
+          ],
+          [
+            1,
+            7,
+            5,
+            3,
+            3
+          ]
+        ],
+        "lowCrowdPortfolio": [
+          [
+            1,
+            7,
+            5,
+            4,
+            3
+          ],
+          [
+            1,
+            7,
+            5,
+            4,
+            2
+          ],
+          [
+            2,
+            7,
+            5,
+            4,
+            3
+          ],
+          [
+            1,
+            7,
+            5,
+            3,
+            2
+          ],
+          [
+            1,
+            7,
+            4,
+            5,
+            3
+          ]
+        ]
       }
     },
     {
@@ -179,6 +275,58 @@
       "description": "每位按近10期频次排序",
       "trainCoverage": 0.185,
       "holdoutCoverage": 0.168,
+      "over50": false,
+      "over80": false
+    }
+  ],
+  "optimizationTarget": "5-ticket exact-hit",
+  "activePortfolioAlgorithm": "P4_low_crowd_portfolio",
+  "portfolioBenchmarks": [
+    {
+      "name": "P4_low_crowd_portfolio",
+      "trainAnyExactHitRate": 0.0,
+      "holdoutAnyExactHitRate": 0.0,
+      "trainExactHitSets": 0,
+      "holdoutExactHitSets": 0,
+      "trainTicketExactRate": 0.0,
+      "holdoutTicketExactRate": 0.0,
+      "selected": true,
+      "over50": false,
+      "over80": false
+    },
+    {
+      "name": "P3_ensemble_portfolio",
+      "trainAnyExactHitRate": 0.0,
+      "holdoutAnyExactHitRate": 0.0,
+      "trainExactHitSets": 0,
+      "holdoutExactHitSets": 0,
+      "trainTicketExactRate": 0.0,
+      "holdoutTicketExactRate": 0.0,
+      "selected": false,
+      "over50": false,
+      "over80": false
+    },
+    {
+      "name": "P1_prob_top5",
+      "trainAnyExactHitRate": 0.0,
+      "holdoutAnyExactHitRate": 0.0,
+      "trainExactHitSets": 0,
+      "holdoutExactHitSets": 0,
+      "trainTicketExactRate": 0.0,
+      "holdoutTicketExactRate": 0.0,
+      "selected": false,
+      "over50": false,
+      "over80": false
+    },
+    {
+      "name": "P2_diverse_prob5",
+      "trainAnyExactHitRate": 0.0,
+      "holdoutAnyExactHitRate": 0.0,
+      "trainExactHitSets": 0,
+      "holdoutExactHitSets": 0,
+      "trainTicketExactRate": 0.0,
+      "holdoutTicketExactRate": 0.0,
+      "selected": false,
       "over50": false,
       "over80": false
     }
