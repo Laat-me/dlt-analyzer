@@ -33,30 +33,38 @@ description: >
 
 ## 候选算法池与 900/100 回测
 
-系统除 v1/v2/v3 外，还维护一组统计/概率算法，统一按 **900 期训练 / 100 期留出** 回测，主评估口径为 **单注前后区合计命中 ≥4 个号码**（命中越多得分越高）。
+系统维护一组统计/概率算法，统一按 **900 期训练 / 100 期留出** 回测，主评估口径为 **6+3 复式前后区合计命中 ≥4 个号码**（命中越多得分越高）。
 
-### 命中口径
-- `hitCount = |predictedFront ∩ actualFront| + |predictedBack ∩ actualBack|`（范围 0–7）
+### 6+3 复式模式
+- 每期输出 **前区 6 个号码 + 后区 3 个号码**（复式覆盖，不排除热门）
+- 命中口径：`hitCount = |predictedFront(6) ∩ actualFront(5)| + |predictedBack(3) ∩ actualBack(2)|`（范围 0–7）
 - **达标**：`hitCount >= 4`
 - **主指标**：`hitGe4Rate = 命中≥4 的期数 / 100`
 - **辅助**：`hitGe5Rate` / `hitGe6Rate` / `hitAllRate`（7 全中）、`hitLevelDist`（0–7 各级别次数）、`avgHitCount`
 
-### 候选算法
+### 数学基线（6+3）
+- **随机 6+3 复式命中≥4 约 2.04%**（单注 0.66% 的 3.1 倍）
+- 100 期至少一期命中≥4（随机）：约 87%
+- 模型目标：尽量超过随机基线 2.04%，hitGe4 越高越好
+
+### 候选算法（11 个不同公式）
 | 算法 | 核心策略 |
 |------|---------|
-| v1_cold | 追冷（gap×0.5 + cold30×2.5 + freq×0.3） |
+| v1_cold | 追冷（gap×0.5 + cold30×2.5 + freq×0.3）→ 当前最优，留出集 hitGe4=5% |
 | v2_hot | 追热（freq5×3 + freq10×1.5 + neighbor×4 + streak×4） |
-| v3_combo | 冷热组合 |
 | H_dirichlet | 号码 Dirichlet 平滑频率 |
 | I_recency_eb | 递减加权经验贝叶斯（gamma=0.995） |
 | J_repeat_markov | 上期号码延续与频率基线混合 |
-| K_prob_ensemble | H/I/J 等权集成（当前默认主算法） |
+| K_prob_ensemble | H/I/J 等权集成（avg 命中数最高） |
+| M_tail | 尾号分布加权 |
+| P_prime | 质数偏好 |
+| O_span | 跨度 + 邻域平滑 |
+| E_entropy | 熵/均匀性（接近期望频率者加分） |
+| S_sumreg | 和值回归约束 |
 
 ### 诚实边界（必须遵守）
-- **数学基线**：大乐透单注随机命中 ≥4 个号码概率约 **0.66%**
-- 因此"单注命中≥4 的期数占比达到 50%"在统计上不可达
-- 回测必须如实记录真实 hitGe4Rate 与各级别次数，**不允许**为了达成 50% 反复改留出集或伪造结果
-- 低拥挤度方向仅作第二层选票参考（避开 8/6/9 高频、连号、生日结构等大众模式），不改变主评估口径
+- 回测必须如实记录真实 hitGe4Rate 与各级别次数，**不允许**为了达成目标反复改留出集或伪造结果
+- 低拥挤度方向仅作第二层选票参考，不改变主评估口径（当前用户要求**不排除热门**）
 
 ### 900/100 回测流程
 1. 用前 900 期训练，后 100 期固定留出
@@ -149,42 +157,40 @@ v2 选号约束与 v1 相同（奇偶比、区间、和值等）。
 
 v3 同时押冷热两端，降低单边踏空风险，选号理由需分别注明每个号的冷/热依据。
 
-#### 输出格式
+#### 6+3 复式输出（默认模式）
+- 按 `model.json.activeAlgorithm`（当前为 v1_cold）输出 **前区 6 个 + 后区 3 个**
+- 6+3 前区约束放宽：奇偶 2:4~4:2、区间各 1-3、和值 70-130、全距 ≥15
+- 后区取评分 top 3
+- 同时输出 avg 命中数最高的 K_prob_ensemble 作为参考组
+
+#### 输出格式（6+3）
 ```
-## 26085 期预测
+## 26092 期预测（6+3 复式）
 
-| | v1 追冷 | v2 追热 | v3 冷热组合 |
-|--|--------|--------|--------|
-| 前区 | XX XX XX XX XX | XX XX XX XX XX | XX XX XX XX XX |
-| 后区 | XX XX | XX XX | XX XX |
-| 策略 | 追遗漏 | 追热区 | 冷热均衡 |
+| | v1_cold（主） | K_prob_ensemble（参考） |
+|--|--------------|------------------------|
+| 前区6 | XX XX XX XX XX XX | XX XX XX XX XX XX |
+| 后区3 | XX XX XX | XX XX XX |
 
-### v1 选号理由
+### 选号理由
 [每个号码的依据]
-
-### v2 选号理由
-[每个号码的依据]
-
-### v3 选号理由
-[每个号码的依据，标注冷/热来源]
 ```
 
 ### 步骤 4：结果对比
 
 新开奖出现时：
 1. 找到预测记录中未验证的条目
-2. 分别计算 v1、v2、v3 的命中数
-3. 更新 `model.json` 中各模型独立的 `performance` 统计
+2. 分别计算各算法的命中数（6+3 口径：前后区合计）
+3. 更新 `model.json` 中各算法的 `performance` 统计
 4. 输出对比表格：
 
 ```
 ## 上期对比
 
-| 模型 | 预测 | 前区命中 | 后区命中 |
-|------|------|---------|---------|
-| v1 | XX XX XX XX XX + XX XX | N/5 | N/2 |
-| v2 | XX XX XX XX XX + XX XX | N/5 | N/2 |
-| v3 | XX XX XX XX XX + XX XX | N/5 | N/2 |
+| 算法 | 前区6 | 后区3 | 命中数 | 是否≥4 |
+|------|-------|-------|--------|--------|
+| v1_cold | XX XX XX XX XX XX | XX XX XX | N/7 | 是/否 |
+| K_prob_ensemble | XX XX XX XX XX XX | XX XX XX | N/7 | 是/否 |
 ```
 
 5. 按学习率 0.05 独立调整各模型权重，遵循下面的**复盘调整规则**
@@ -230,9 +236,10 @@ git push origin main
 
 ```json
 {
-  "version": 4,
-  "optimizationTarget": "hit>=4 single-ticket (front+back total)",
-  "activeAlgorithm": "K_prob_ensemble",
+  "version": 5,
+  "predictionMode": "6+3 combination (front 6 + back 3)",
+  "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
+  "activeAlgorithm": "v1_cold",
   "models": {
     "v1": {
       "weights": {"gap": 0.30, "frequency": 0.25, "recentTrend": 0.25, "interval": 0.10, "oddEven": 0.10},
@@ -249,11 +256,12 @@ git push origin main
   },
   "algorithmBenchmarks": [
     {
-      "name": "K_prob_ensemble",
-      "family": "probability_ensemble",
-      "trainHitGe4Rate": 0.0,
-      "holdoutHitGe4Rate": 0.0,
-      "holdoutHitLevelDist": {"0": 0, "1": 0, "2": 0, "3": 0, "4": 0},
+      "name": "v1_cold",
+      "family": "gap_frequency",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.05,
+      "holdoutHitLevelDist": {"0": 23, "1": 43, "2": 23, "3": 6, "4": 5},
       "selected": true,
       "over50": false
     }
@@ -263,7 +271,7 @@ git push origin main
 
 v3 权重说明：`coldRatio`/`hotRatio` 表示前区冷号与热号的数量配比（默认 2:3），可按表现微调（如偏冷 3:2、偏热 1:4）。
 
-`algorithmBenchmarks` 记录每个候选算法的 900/100 回测结果：
+`algorithmBenchmarks` 记录每个候选算法的 900/100 回测结果（6+3 模式）：
 - `hitGe4Rate`：命中 ≥4 个号码的期数占比（主指标）
 - `hitGe5Rate` / `hitGe6Rate` / `hitAllRate`：更高命中级别占比
 - `hitLevelDist`：0–7 各级别命中次数分布
@@ -275,9 +283,9 @@ v3 权重说明：`coldRatio`/`hotRatio` 表示前区冷号与热号的数量配
 
 | 用户说 | 执行 |
 |--------|------|
-| 分析大乐透 / 推荐号码 | 全流程 0->1->2->3->5->6 |
+| 分析大乐透 / 推荐号码 | 全流程 0->1->2->3->5->6（默认 6+3 复式） |
 | 对比上次结果 | 仅步骤 4 |
-| v1/v2/v3 哪个准 | 输出各模型累计命中率对比 |
+| 6+3 复式推荐 | v1_cold 主推 + K_prob_ensemble 参考 |
 | 只用 v1 / 只用 v2 / 只用 v3 | 跳过其他模型 |
 | 偏冷门推荐 | v1 的 gap 权重 +50% |
 | 偏热门推荐 | v2 的 freq5 权重 +50% |

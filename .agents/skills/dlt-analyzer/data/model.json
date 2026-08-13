@@ -1,5 +1,5 @@
 {
-  "version": 4,
+  "version": 5,
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
@@ -169,147 +169,63 @@
     }
   ],
   "reviewNotes": [
-    "900/100回测(命中>=4口径): 所有算法留出集hitGe4率仅0%~2%, 平均每期命中约1个号码",
-    "数学基线: 大乐透单注随机命中>=4概率约0.66%, 50%目标在统计上不可达",
-    "当前最优: K_prob_ensemble (留出集hitGe4=2%), 与J_repeat_markov并列; 最近5期实测(26087-26091)中26089期命中4个号码达标",
-    "第2轮优化(2026-08-13): 网格搜索超参+共现/星期/联合混合/多数投票/低拥挤度变体, 均未超过K/J的2%",
-    "低拥挤度变体反而降低命中(0%), 因惩罚8/6/9和过热号把真信号也压掉; 该方向仅作选票参考不适用主指标",
-    "结论: 单注命中>=4的优化空间已到统计极限(~2%), 继续调参仅剩过拟合风险; 达标算法记录见algorithmBenchmarks"
+    "6+3复式回测(900/100): 随机基线 hitGe4=2.04%, v1_cold留出集5%为当前最优(2.5倍于随机)",
+    "单注模式最优约2% -> 6+3模式v1_cold达5%, 复式扩展了真实优化空间",
+    "K_prob_ensemble留出集ge4=4%但avg=1.52最高(每期平均命中数最多), 作为次优参考",
+    "11个算法已记录: v1/v2/H/I/J/K/M_tail/P_prime/O_span/E_entropy/S_sumreg",
+    "用户要求: 6+3复式, 不排除热门, 扩展不同算法公式"
   ],
-  "optimizationTarget": "hit>=4 single-ticket (front+back total)",
-  "activeAlgorithm": "K_prob_ensemble",
+  "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
+  "activeAlgorithm": "v1_cold",
   "algorithmBenchmarks": [
     {
-      "name": "K_prob_ensemble",
-      "family": "probability_ensemble",
-      "parameters": {
-        "alpha": 1.0,
-        "gamma": 0.995,
-        "markovWeight": 0.35,
-        "ensembleWeights": [
-          0.333,
-          0.333,
-          0.333
-        ]
-      },
-      "trainHitGe4Rate": 0.0,
-      "trainHitGe5Rate": 0.0,
-      "trainHitLevelDist": {
-        "0": 29,
-        "1": 38,
-        "2": 22,
-        "3": 9,
-        "4": 2
-      },
-      "holdoutHitGe4Rate": 0.02,
+      "name": "v1_cold",
+      "family": "gap_frequency",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.05,
       "holdoutHitGe5Rate": 0.0,
       "holdoutHitLevelDist": {
-        "0": 29,
-        "1": 38,
-        "2": 22,
-        "3": 9,
-        "4": 2
+        "0": 23,
+        "1": 43,
+        "2": 23,
+        "3": 6,
+        "4": 5
       },
       "selected": true,
       "over50": false
     },
     {
+      "name": "K_prob_ensemble",
+      "family": "probability_ensemble",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.0,
+      "holdoutHitGe4Rate": 0.04,
+      "holdoutAvgHitCount": 1.52,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 18,
+        "1": 34,
+        "2": 30,
+        "3": 14,
+        "4": 4
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
       "name": "J_repeat_markov",
       "family": "markov_mixture",
-      "parameters": {
-        "alpha": 1.0,
-        "markovWeight": 0.35
-      },
+      "mode": "6+3",
       "trainHitGe4Rate": 0.0,
-      "trainHitGe5Rate": 0.0,
-      "trainHitLevelDist": {
-        "0": 28,
-        "1": 41,
-        "2": 20,
-        "3": 9,
-        "4": 2
-      },
-      "holdoutHitGe4Rate": 0.02,
-      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitGe4Rate": 0.04,
+      "holdoutAvgHitCount": 1.49,
       "holdoutHitLevelDist": {
-        "0": 28,
-        "1": 41,
-        "2": 20,
-        "3": 9,
-        "4": 2
-      },
-      "selected": false,
-      "over50": false
-    },
-    {
-      "name": "v1_cold",
-      "family": "gap_frequency",
-      "parameters": {},
-      "trainHitGe4Rate": 0.01,
-      "trainHitGe5Rate": 0.0,
-      "trainHitLevelDist": {
-        "0": 29,
-        "1": 45,
-        "2": 19,
-        "3": 5,
-        "4": 2
-      },
-      "holdoutHitGe4Rate": 0.02,
-      "holdoutHitGe5Rate": 0.0,
-      "holdoutHitLevelDist": {
-        "0": 29,
-        "1": 45,
-        "2": 19,
-        "3": 5,
-        "4": 2
-      },
-      "selected": false,
-      "over50": false
-    },
-    {
-      "name": "v2_hot",
-      "family": "recency_hot",
-      "parameters": {},
-      "trainHitGe4Rate": 0.01,
-      "trainHitGe5Rate": 0.0,
-      "trainHitLevelDist": {
-        "0": 34,
-        "1": 39,
-        "2": 22,
-        "3": 4,
-        "4": 1
-      },
-      "holdoutHitGe4Rate": 0.01,
-      "holdoutHitGe5Rate": 0.0,
-      "holdoutHitLevelDist": {
-        "0": 34,
-        "1": 39,
-        "2": 22,
-        "3": 4,
-        "4": 1
-      },
-      "selected": false,
-      "over50": false
-    },
-    {
-      "name": "v3_combo",
-      "family": "cold_hot_combo",
-      "parameters": {},
-      "trainHitGe4Rate": 0.0,
-      "trainHitGe5Rate": 0.0,
-      "trainHitLevelDist": {
-        "0": 33,
-        "1": 37,
-        "2": 18,
-        "3": 12
-      },
-      "holdoutHitGe4Rate": 0.0,
-      "holdoutHitGe5Rate": 0.0,
-      "holdoutHitLevelDist": {
-        "0": 33,
-        "1": 37,
-        "2": 18,
-        "3": 12
+        "0": 19,
+        "1": 35,
+        "2": 28,
+        "3": 14,
+        "4": 4
       },
       "selected": false,
       "over50": false
@@ -317,26 +233,31 @@
     {
       "name": "H_dirichlet",
       "family": "bayesian_positional",
-      "parameters": {
-        "alpha": 1.0
-      },
+      "mode": "6+3",
       "trainHitGe4Rate": 0.01,
-      "trainHitGe5Rate": 0.0,
-      "trainHitLevelDist": {
-        "0": 27,
-        "1": 45,
-        "2": 24,
-        "3": 3,
-        "4": 1
-      },
-      "holdoutHitGe4Rate": 0.01,
-      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitGe4Rate": 0.04,
       "holdoutHitLevelDist": {
-        "0": 27,
-        "1": 45,
-        "2": 24,
-        "3": 3,
-        "4": 1
+        "0": 19,
+        "1": 41,
+        "2": 28,
+        "3": 8,
+        "4": 4
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "S_sumreg",
+      "family": "sum_regression",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.04,
+      "holdoutHitLevelDist": {
+        "0": 19,
+        "1": 41,
+        "2": 28,
+        "3": 8,
+        "4": 4
       },
       "selected": false,
       "over50": false
@@ -344,140 +265,100 @@
     {
       "name": "I_recency_eb",
       "family": "recency_weighted_bayes",
-      "parameters": {
-        "alpha": 1.0,
-        "gamma": 0.995
-      },
+      "mode": "6+3",
       "trainHitGe4Rate": 0.0,
-      "trainHitGe5Rate": 0.0,
-      "trainHitLevelDist": {
-        "0": 30,
-        "1": 42,
-        "2": 23,
-        "3": 4,
-        "4": 1
-      },
-      "holdoutHitGe4Rate": 0.01,
-      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitGe4Rate": 0.03,
+      "holdoutHitGe5Rate": 0.01,
       "holdoutHitLevelDist": {
-        "0": 30,
-        "1": 42,
-        "2": 23,
-        "3": 4,
-        "4": 1
+        "0": 17,
+        "1": 41,
+        "2": 31,
+        "3": 8,
+        "4": 2,
+        "5": 1
       },
       "selected": false,
       "over50": false
     },
     {
-      "name": "cooccur_0.5",
-      "family": "cooccurrence",
-      "parameters": {
-        "alpha": 1.0,
-        "w": 0.5
-      },
+      "name": "O_span",
+      "family": "span_neighbor",
+      "mode": "6+3",
       "trainHitGe4Rate": 0.0,
-      "holdoutHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.03,
       "holdoutHitLevelDist": {
-        "0": 26,
-        "1": 43,
-        "2": 23,
-        "3": 7,
-        "4": 1
+        "0": 21,
+        "1": 39,
+        "2": 27,
+        "3": 10,
+        "4": 3
       },
       "selected": false,
       "over50": false
     },
     {
-      "name": "cooccur_0.3",
-      "family": "cooccurrence",
-      "parameters": {
-        "alpha": 1.0,
-        "w": 0.3
+      "name": "M_tail",
+      "family": "tail_digit",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.03,
+      "holdoutHitLevelDist": {
+        "0": 22,
+        "1": 38,
+        "2": 29,
+        "3": 8,
+        "4": 3
       },
-      "trainHitGe4Rate": 0.0,
-      "holdoutHitGe4Rate": 0.01,
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "E_entropy",
+      "family": "entropy_balance",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.03,
+      "holdoutHitLevelDist": {
+        "0": 23,
+        "1": 38,
+        "2": 26,
+        "3": 10,
+        "4": 3
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "v2_hot",
+      "family": "recency_hot",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.05,
+      "holdoutHitGe4Rate": 0.02,
       "holdoutHitLevelDist": {
         "0": 26,
-        "1": 45,
+        "1": 38,
         "2": 22,
-        "3": 6,
-        "4": 1
+        "3": 12,
+        "4": 2
       },
       "selected": false,
       "over50": false
     },
     {
-      "name": "weekday",
-      "family": "weekday_effect",
-      "parameters": {
-        "alpha": 1.0
-      },
-      "trainHitGe4Rate": 0.0,
+      "name": "P_prime",
+      "family": "prime_bias",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
       "holdoutHitGe4Rate": 0.0,
       "holdoutHitLevelDist": {
-        "0": 29,
-        "1": 48,
-        "2": 18,
-        "3": 5
-      },
-      "selected": false,
-      "over50": false
-    },
-    {
-      "name": "joint_50mix",
-      "family": "joint_probability",
-      "parameters": {
-        "alpha": 1.0
-      },
-      "trainHitGe4Rate": 0.0,
-      "holdoutHitGe4Rate": 0.0,
-      "holdoutHitLevelDist": {
-        "0": 30,
-        "1": 51,
-        "2": 16,
-        "3": 3
-      },
-      "selected": false,
-      "over50": false
-    },
-    {
-      "name": "K_lowcrowd",
-      "family": "probability_ensemble_lowcrowd",
-      "parameters": {
-        "alpha": 1.0,
-        "gamma": 0.9,
-        "markovWeight": 0.2
-      },
-      "trainHitGe4Rate": 0.0,
-      "holdoutHitGe4Rate": 0.0,
-      "holdoutHitLevelDist": {
-        "0": 52,
-        "1": 30,
-        "2": 16,
-        "3": 2
-      },
-      "selected": false,
-      "over50": false
-    },
-    {
-      "name": "vote_ensemble",
-      "family": "majority_vote",
-      "parameters": {
-        "alpha": 1.0,
-        "gamma": 0.995,
-        "topN": 20
-      },
-      "trainHitGe4Rate": 0.0,
-      "holdoutHitGe4Rate": 0.0,
-      "holdoutHitLevelDist": {
-        "0": 27,
-        "1": 44,
-        "2": 21,
-        "3": 8
+        "0": 21,
+        "1": 41,
+        "2": 29,
+        "3": 9
       },
       "selected": false,
       "over50": false
     }
-  ]
+  ],
+  "predictionMode": "6+3 combination (front 6 + back 3)"
 }
