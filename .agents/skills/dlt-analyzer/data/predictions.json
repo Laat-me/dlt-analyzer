@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-11",
+  "updatedAt": "2026-08-12",
   "records": [
     {
       "id": 1,
@@ -457,6 +457,26 @@
         5
       ],
       "verified": false
+    },
+    {
+      "id": 17,
+      "predictedAt": "2026-08-12",
+      "targetDrawNum": "26092",
+      "model": "K_prob_ensemble",
+      "predictedFront": [
+        3,
+        7,
+        32,
+        26,
+        22
+      ],
+      "predictedBack": [
+        2,
+        1
+      ],
+      "verified": false,
+      "algorithm": "K_prob_ensemble",
+      "hitGe4": null
     }
   ]
 }

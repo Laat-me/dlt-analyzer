@@ -31,6 +31,42 @@ description: >
 
 ---
 
+## 候选算法池与 900/100 回测
+
+系统除 v1/v2/v3 外，还维护一组统计/概率算法，统一按 **900 期训练 / 100 期留出** 回测，主评估口径为 **单注前后区合计命中 ≥4 个号码**（命中越多得分越高）。
+
+### 命中口径
+- `hitCount = |predictedFront ∩ actualFront| + |predictedBack ∩ actualBack|`（范围 0–7）
+- **达标**：`hitCount >= 4`
+- **主指标**：`hitGe4Rate = 命中≥4 的期数 / 100`
+- **辅助**：`hitGe5Rate` / `hitGe6Rate` / `hitAllRate`（7 全中）、`hitLevelDist`（0–7 各级别次数）、`avgHitCount`
+
+### 候选算法
+| 算法 | 核心策略 |
+|------|---------|
+| v1_cold | 追冷（gap×0.5 + cold30×2.5 + freq×0.3） |
+| v2_hot | 追热（freq5×3 + freq10×1.5 + neighbor×4 + streak×4） |
+| v3_combo | 冷热组合 |
+| H_dirichlet | 号码 Dirichlet 平滑频率 |
+| I_recency_eb | 递减加权经验贝叶斯（gamma=0.995） |
+| J_repeat_markov | 上期号码延续与频率基线混合 |
+| K_prob_ensemble | H/I/J 等权集成（当前默认主算法） |
+
+### 诚实边界（必须遵守）
+- **数学基线**：大乐透单注随机命中 ≥4 个号码概率约 **0.66%**
+- 因此"单注命中≥4 的期数占比达到 50%"在统计上不可达
+- 回测必须如实记录真实 hitGe4Rate 与各级别次数，**不允许**为了达成 50% 反复改留出集或伪造结果
+- 低拥挤度方向仅作第二层选票参考（避开 8/6/9 高频、连号、生日结构等大众模式），不改变主评估口径
+
+### 900/100 回测流程
+1. 用前 900 期训练，后 100 期固定留出
+2. 每个算法在训练段做前向回测（30 期窗口观察稳定性）
+3. 后 100 期只做一次最终验证，不参与调参
+4. 主算法选择：留出集 `hitGe4Rate` 优先；并列时看训练段 `avgHitCount`
+5. 结果写入 `model.json.algorithmBenchmarks`
+
+---
+
 ## 执行流程
 
 ### 步骤 0：Git 同步拉取（开始前）
@@ -194,7 +230,9 @@ git push origin main
 
 ```json
 {
-  "version": 2,
+  "version": 4,
+  "optimizationTarget": "hit>=4 single-ticket (front+back total)",
+  "activeAlgorithm": "K_prob_ensemble",
   "models": {
     "v1": {
       "weights": {"gap": 0.30, "frequency": 0.25, "recentTrend": 0.25, "interval": 0.10, "oddEven": 0.10},
@@ -208,11 +246,28 @@ git push origin main
       "weights": {"coldRatio": 0.40, "hotRatio": 0.60},
       "performance": {"totalPredictions": 0, "frontHits": {...}, "backHits": {...}}
     }
-  }
+  },
+  "algorithmBenchmarks": [
+    {
+      "name": "K_prob_ensemble",
+      "family": "probability_ensemble",
+      "trainHitGe4Rate": 0.0,
+      "holdoutHitGe4Rate": 0.0,
+      "holdoutHitLevelDist": {"0": 0, "1": 0, "2": 0, "3": 0, "4": 0},
+      "selected": true,
+      "over50": false
+    }
+  ]
 }
 ```
 
 v3 权重说明：`coldRatio`/`hotRatio` 表示前区冷号与热号的数量配比（默认 2:3），可按表现微调（如偏冷 3:2、偏热 1:4）。
+
+`algorithmBenchmarks` 记录每个候选算法的 900/100 回测结果：
+- `hitGe4Rate`：命中 ≥4 个号码的期数占比（主指标）
+- `hitGe5Rate` / `hitGe6Rate` / `hitAllRate`：更高命中级别占比
+- `hitLevelDist`：0–7 各级别命中次数分布
+- `over50`：是否达到 50% 正确率（当前预期均为 false，诚实记录）
 
 ---
 
@@ -228,3 +283,5 @@ v3 权重说明：`coldRatio`/`hotRatio` 表示前区冷号与热号的数量配
 | 偏热门推荐 | v2 的 freq5 权重 +50% |
 | 冷热组合推荐 | v3 冷热均衡（默认前区 2冷+3热） |
 | 冷热组合偏冷/偏热 | v3 配比调为 3:2 / 1:4 |
+| 900/100回测 / 哪个算法准 | 跑算法池回测，输出 hitGe4Rate 排行榜 |
+| 命中≥4 正确率 | 输出各算法 hitGe4Rate 与级别分布 |
