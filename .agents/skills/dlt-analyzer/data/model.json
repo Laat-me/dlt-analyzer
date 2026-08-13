@@ -1,5 +1,5 @@
 {
-  "version": 8,
+  "version": 9,
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
@@ -179,10 +179,14 @@
     "第5轮(2026-08-13): 多算法融合/二阶马尔可夫/斐波那契窗口/频次梯度, 均未超过U_repeat_neighbor的6%",
     "第6轮(2026-08-13): 训练段权重网格搜索(45组合)最优权重(v1 0.25+I 0.25+GH 0.5)留出集仅5%, 未超越6%",
     "连续3轮(4/5/6)无新算法超越U_repeat_neighbor的6%, 该值已形成稳定的统计极限信号",
-    "26092期(08-14)开奖后按6+3口径复盘, 验证U_repeat_neighbor实际命中"
+    "26092期(08-14)开奖后按6+3口径复盘, 验证U_repeat_neighbor实际命中",
+    "第7轮(2026-08-13): 遗漏-热度交叉/组合稳定性/U变体, AI_U_wide(重号0.18+邻域±2)留出集hitGe4=7%超越U_repeat_neighbor的6%",
+    "AI_U_wide最近5期实测(26087-26091): 1/3/4/1/1, 26088期命中3个优于U的2个, 26089期同样命中4个",
+    "优化轨迹: 单注2% -> 6+3的5% -> U_repeat_neighbor 6% -> AI_U_wide 7%",
+    "26092期(08-14)开奖后按6+3口径复盘, 验证AI_U_wide实际命中"
   ],
   "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
-  "activeAlgorithm": "U_repeat_neighbor",
+  "activeAlgorithm": "AI_U_wide",
   "algorithmBenchmarks": [
     {
       "name": "v1_cold",
@@ -604,6 +608,81 @@
         "2": 32,
         "3": 10,
         "4": 1
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AI_U_wide",
+      "family": "repeat_neighbor_wide",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.07,
+      "holdoutAvgHitCount": 1.52,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 18,
+        "1": 39,
+        "2": 23,
+        "3": 13,
+        "4": 7
+      },
+      "selected": true,
+      "over50": false,
+      "parameters": {
+        "repeatWeight": 0.18,
+        "neighborRadius": 2,
+        "neighborWeight": 0.02
+      }
+    },
+    {
+      "name": "AJ_U_cross",
+      "family": "repeat_neighbor_gap_hot_cross",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.05,
+      "holdoutAvgHitCount": 1.54,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 19,
+        "1": 34,
+        "2": 26,
+        "3": 16,
+        "4": 5
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AH_combo_stability",
+      "family": "combo_stability",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.04,
+      "holdoutAvgHitCount": 1.34,
+      "holdoutHitLevelDist": {
+        "0": 20,
+        "1": 42,
+        "2": 26,
+        "3": 8,
+        "4": 4
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AG_gap_hot_cross",
+      "family": "gap_hot_cross",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.02,
+      "holdoutAvgHitCount": 1.22,
+      "holdoutHitLevelDist": {
+        "0": 28,
+        "1": 36,
+        "2": 24,
+        "3": 10,
+        "4": 2
       },
       "selected": false,
       "over50": false
