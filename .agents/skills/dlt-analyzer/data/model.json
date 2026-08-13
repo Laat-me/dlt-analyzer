@@ -1,5 +1,5 @@
 {
-  "version": 18,
+  "version": 19,
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
@@ -213,7 +213,10 @@
     "15轮共58个算法, 7% ge4持续确认; 等待26092期(08-14)开奖复盘",
     "第16轮(2026-08-13): 更大候选池top28/前后区联合条件/区间均衡, AI_U_wide与BS_zone_balance并列7%",
     "BS_zone_balance(区间每段<=2)出现1期命中5个号码(ge5=1%), 与AO/AR的投票路线同样证明高命中潜力存在",
-    "16轮共62个算法; 等待26092期(08-14)开奖复盘"
+    "16轮共62个算法; 等待26092期(08-14)开奖复盘",
+    "第17轮(2026-08-13): 纳入真实投注热度数据(500期一等奖注数), 发现少人买组合特征: 前区和值~95(+9.4 vs 多人买)、低区号少(-0.48)、高区号多(+0.35)",
+    "BU_low_crowd_strong(和值>92+高区多+低区少)达7%且ge5=2%, 是17轮唯一直接符合'避开买的人多'意图的方向",
+    "17轮共66个算法; 等待26092期(08-14)开奖复盘"
   ],
   "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
   "activeAlgorithm": "AI_U_wide",
@@ -1323,6 +1326,83 @@
         "2": 25,
         "3": 14,
         "4": 4
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BU_low_crowd_strong",
+      "family": "real_betting_heat_low_crowd",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.07,
+      "holdoutAvgHitCount": 1.52,
+      "holdoutHitGe5Rate": 0.02,
+      "holdoutHitLevelDist": {
+        "0": 17,
+        "1": 42,
+        "2": 22,
+        "3": 12,
+        "4": 5,
+        "5": 2
+      },
+      "selected": false,
+      "over50": false,
+      "note": "基于500期真实一等奖注数分析: 少人买组合特征=和值>92+高区多+低区少; ge5=2%并列最高"
+    },
+    {
+      "name": "BW_low_crowd_balance",
+      "family": "real_betting_heat_balance",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.07,
+      "holdoutAvgHitCount": 1.52,
+      "holdoutHitGe5Rate": 0.01,
+      "holdoutHitLevelDist": {
+        "0": 19,
+        "1": 38,
+        "2": 23,
+        "3": 13,
+        "4": 6,
+        "5": 1
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BT_low_crowd_real",
+      "family": "real_betting_heat",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.06,
+      "holdoutAvgHitCount": 1.5,
+      "holdoutHitGe5Rate": 0.02,
+      "holdoutHitLevelDist": {
+        "0": 18,
+        "1": 41,
+        "2": 22,
+        "3": 13,
+        "4": 4,
+        "5": 2
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BV_low_crowd_weak",
+      "family": "real_betting_heat_weak",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.06,
+      "holdoutAvgHitCount": 1.5,
+      "holdoutHitGe5Rate": 0.02,
+      "holdoutHitLevelDist": {
+        "0": 18,
+        "1": 41,
+        "2": 22,
+        "3": 13,
+        "4": 4,
+        "5": 2
       },
       "selected": false,
       "over50": false
