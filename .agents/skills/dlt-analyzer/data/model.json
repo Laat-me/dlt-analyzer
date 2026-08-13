@@ -1,5 +1,5 @@
 {
-  "version": 10,
+  "version": 11,
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
@@ -187,6 +187,9 @@
     "第8轮(2026-08-13): AI_U_wide家族超参搜索(45配置)+双邻域+后区重号强化, 全部锁定在hitGe4=7%",
     "AK/AM/AN与AI_U_wide命中分布完全一致(0:18,1:39,2:23,3:13,4:7), 确认7%是该特征空间稳定极值",
     "双邻域(最近2期)降到3%, 说明第2期重号信号弱于第1期, 不应叠加",
+    "26092期(08-14)开奖后按6+3口径复盘AI_U_wide实际命中",
+    "第9轮(2026-08-13): 多算法堆叠投票/区间-遗漏联合约束/投票+重号混合, AI_U_wide保持7%最优",
+    "AO_stacked_vote出现2期命中5个号码(ge5=2%), 证明多算法投票有更高命中级别潜力, 但ge4稳定性(5%)低于AI_U_wide",
     "26092期(08-14)开奖后按6+3口径复盘AI_U_wide实际命中"
   ],
   "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
@@ -747,6 +750,62 @@
         "2": 23,
         "3": 13,
         "4": 7
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AO_stacked_vote",
+      "family": "stacked_vote",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.05,
+      "holdoutHitGe5Rate": 0.02,
+      "holdoutAvgHitCount": 1.52,
+      "holdoutHitLevelDist": {
+        "0": 16,
+        "1": 37,
+        "2": 33,
+        "3": 9,
+        "4": 3,
+        "5": 2
+      },
+      "selected": false,
+      "over50": false,
+      "note": "出现2次命中5个号码的期数(ge5=2%), 高命中级别潜力但稳定性略逊"
+    },
+    {
+      "name": "AP_zone_gap",
+      "family": "zone_gap_joint",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.05,
+      "holdoutAvgHitCount": 1.31,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 25,
+        "1": 37,
+        "2": 25,
+        "3": 8,
+        "4": 5
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AQ_vote_repeat",
+      "family": "vote_repeat_mix",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.03,
+      "holdoutAvgHitCount": 1.43,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 21,
+        "1": 31,
+        "2": 35,
+        "3": 10,
+        "4": 3
       },
       "selected": false,
       "over50": false
