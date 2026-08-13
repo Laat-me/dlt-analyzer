@@ -462,23 +462,25 @@
       "id": 17,
       "predictedAt": "2026-08-13",
       "targetDrawNum": "26092",
-      "model": "v1_cold",
+      "model": "U_repeat_neighbor",
       "mode": "6+3",
       "predictedFront": [
-        1,
-        6,
-        17,
-        31,
-        33,
-        34
+        3,
+        4,
+        7,
+        13,
+        32,
+        33
       ],
       "predictedBack": [
-        3,
-        6,
-        8
+        1,
+        2,
+        7
       ],
       "verified": false,
-      "hitGe4": null
+      "hitGe4": null,
+      "algorithm": "U_repeat_neighbor",
+      "note": "6+3主推: U_repeat_neighbor(上期重号+邻号, 留出集hitGe4=6%)"
     },
     {
       "id": 18,

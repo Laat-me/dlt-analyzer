@@ -1,5 +1,5 @@
 {
-  "version": 5,
+  "version": 6,
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
@@ -169,14 +169,13 @@
     }
   ],
   "reviewNotes": [
-    "6+3复式回测(900/100): 随机基线 hitGe4=2.04%, v1_cold留出集5%为当前最优(2.5倍于随机)",
-    "单注模式最优约2% -> 6+3模式v1_cold达5%, 复式扩展了真实优化空间",
-    "K_prob_ensemble留出集ge4=4%但avg=1.52最高(每期平均命中数最多), 作为次优参考",
-    "11个算法已记录: v1/v2/H/I/J/K/M_tail/P_prime/O_span/E_entropy/S_sumreg",
-    "用户要求: 6+3复式, 不排除热门, 扩展不同算法公式"
+    "6+3复式回测(900/100)第3轮: U_repeat_neighbor(上期重号+邻号)留出集hitGe4=6%, avg=1.53, 超越v1_cold的5%成为当前最优",
+    "第3轮新增公式: Q_joint_prob(联合概率+共现)/R_span_sum(跨度+和值约束)/T_multi_window(30+50多窗口)/U_repeat_neighbor/V_tail_balance(尾数联合)",
+    "随机6+3基线2.04%, U_repeat_neighbor达3倍; 50%目标仍统计不可达, 但每轮都有真实提升",
+    "26092期(08-14)开奖后按6+3口径复盘验证"
   ],
   "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
-  "activeAlgorithm": "v1_cold",
+  "activeAlgorithm": "U_repeat_neighbor",
   "algorithmBenchmarks": [
     {
       "name": "v1_cold",
@@ -355,6 +354,92 @@
         "1": 41,
         "2": 29,
         "3": 9
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "U_repeat_neighbor",
+      "family": "repeat_neighbor",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.06,
+      "holdoutAvgHitCount": 1.53,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 21,
+        "1": 32,
+        "2": 26,
+        "3": 15,
+        "4": 6
+      },
+      "selected": true,
+      "over50": false
+    },
+    {
+      "name": "Q_joint_prob",
+      "family": "joint_probability_cooccurrence",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.03,
+      "holdoutHitGe4Rate": 0.04,
+      "holdoutAvgHitCount": 1.4,
+      "holdoutHitLevelDist": {
+        "0": 15,
+        "1": 43,
+        "2": 33,
+        "3": 5,
+        "4": 4
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "R_span_sum",
+      "family": "span_sum_constraint",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.04,
+      "holdoutAvgHitCount": 1.38,
+      "holdoutHitLevelDist": {
+        "0": 19,
+        "1": 40,
+        "2": 29,
+        "3": 8,
+        "4": 4
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "T_multi_window",
+      "family": "multi_window_mix",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.03,
+      "holdoutHitGe4Rate": 0.01,
+      "holdoutAvgHitCount": 1.37,
+      "holdoutHitLevelDist": {
+        "0": 17,
+        "1": 42,
+        "2": 29,
+        "3": 11,
+        "4": 1
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "V_tail_balance",
+      "family": "tail_balance",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.03,
+      "holdoutAvgHitCount": 1.29,
+      "holdoutHitLevelDist": {
+        "0": 21,
+        "1": 42,
+        "2": 27,
+        "3": 7,
+        "4": 3
       },
       "selected": false,
       "over50": false
