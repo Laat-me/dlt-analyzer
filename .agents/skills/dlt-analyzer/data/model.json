@@ -1,5 +1,5 @@
 {
-  "version": 14,
+  "version": 15,
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
@@ -201,7 +201,10 @@
     "第12轮(2026-08-13): 周期x窗口x权重搜索(60配置), 训练段最优(21/500/0.5)留出集仅4%, 确认周期参数搜索过拟合",
     "AZ_period7(默认参数)最稳: ge4=7% avg=1.59全场最高; BD_period5_300 avg 1.55次优",
     "教训: 训练段网格搜索选出的复杂配置在留出集反而差, 简单默认参数更稳健",
-    "26092期(08-14)开奖后按6+3口径复盘AI_U_wide实际命中"
+    "26092期(08-14)开奖后按6+3口径复盘AI_U_wide实际命中",
+    "第13轮(2026-08-13): 稳健融合变体(门控/滚动500/多重周期), 均5%未超越; AZ_period7与AI_U_wide并列7%",
+    "AZ_period7 avg 1.59保持全场最高, 为avg最优候选; AI_U_wide保持主算法(ge4相同更简单)",
+    "13轮共53个算法, 7% ge4被反复确认为统计极值; 等待26092期(08-14)开奖复盘"
   ],
   "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
   "activeAlgorithm": "AI_U_wide",
@@ -1034,6 +1037,60 @@
         "1": 37,
         "2": 21,
         "3": 18,
+        "4": 5
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BE_period_gated",
+      "family": "period_gated",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.05,
+      "holdoutAvgHitCount": 1.53,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 21,
+        "1": 34,
+        "2": 21,
+        "3": 19,
+        "4": 5
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BF_roll500_p7",
+      "family": "rolling500_period7",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.03,
+      "holdoutHitGe4Rate": 0.05,
+      "holdoutAvgHitCount": 1.52,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 20,
+        "1": 35,
+        "2": 23,
+        "3": 17,
+        "4": 5
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BG_multi_period",
+      "family": "multi_period_7_14",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.05,
+      "holdoutAvgHitCount": 1.51,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 19,
+        "1": 36,
+        "2": 25,
+        "3": 15,
         "4": 5
       },
       "selected": false,
