@@ -172,8 +172,9 @@
     "900/100回测(命中>=4口径): 所有算法留出集hitGe4率仅0%~2%, 平均每期命中约1个号码",
     "数学基线: 大乐透单注随机命中>=4概率约0.66%, 50%目标在统计上不可达",
     "当前最优: K_prob_ensemble (留出集hitGe4=2%), 与J_repeat_markov并列; 最近5期实测(26087-26091)中26089期命中4个号码达标",
-    "命中级别分布: 留出集100期里, 大部分期命中0-2个, 命中3个约9期, 命中4个约2期, 未出现5+",
-    "低拥挤度方向仅作第二层参考, 不改变主评估口径"
+    "第2轮优化(2026-08-13): 网格搜索超参+共现/星期/联合混合/多数投票/低拥挤度变体, 均未超过K/J的2%",
+    "低拥挤度变体反而降低命中(0%), 因惩罚8/6/9和过热号把真信号也压掉; 该方向仅作选票参考不适用主指标",
+    "结论: 单注命中>=4的优化空间已到统计极限(~2%), 继续调参仅剩过拟合风险; 达标算法记录见algorithmBenchmarks"
   ],
   "optimizationTarget": "hit>=4 single-ticket (front+back total)",
   "activeAlgorithm": "K_prob_ensemble",
@@ -364,6 +365,116 @@
         "2": 23,
         "3": 4,
         "4": 1
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "cooccur_0.5",
+      "family": "cooccurrence",
+      "parameters": {
+        "alpha": 1.0,
+        "w": 0.5
+      },
+      "trainHitGe4Rate": 0.0,
+      "holdoutHitGe4Rate": 0.01,
+      "holdoutHitLevelDist": {
+        "0": 26,
+        "1": 43,
+        "2": 23,
+        "3": 7,
+        "4": 1
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "cooccur_0.3",
+      "family": "cooccurrence",
+      "parameters": {
+        "alpha": 1.0,
+        "w": 0.3
+      },
+      "trainHitGe4Rate": 0.0,
+      "holdoutHitGe4Rate": 0.01,
+      "holdoutHitLevelDist": {
+        "0": 26,
+        "1": 45,
+        "2": 22,
+        "3": 6,
+        "4": 1
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "weekday",
+      "family": "weekday_effect",
+      "parameters": {
+        "alpha": 1.0
+      },
+      "trainHitGe4Rate": 0.0,
+      "holdoutHitGe4Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 29,
+        "1": 48,
+        "2": 18,
+        "3": 5
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "joint_50mix",
+      "family": "joint_probability",
+      "parameters": {
+        "alpha": 1.0
+      },
+      "trainHitGe4Rate": 0.0,
+      "holdoutHitGe4Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 30,
+        "1": 51,
+        "2": 16,
+        "3": 3
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "K_lowcrowd",
+      "family": "probability_ensemble_lowcrowd",
+      "parameters": {
+        "alpha": 1.0,
+        "gamma": 0.9,
+        "markovWeight": 0.2
+      },
+      "trainHitGe4Rate": 0.0,
+      "holdoutHitGe4Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 52,
+        "1": 30,
+        "2": 16,
+        "3": 2
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "vote_ensemble",
+      "family": "majority_vote",
+      "parameters": {
+        "alpha": 1.0,
+        "gamma": 0.995,
+        "topN": 20
+      },
+      "trainHitGe4Rate": 0.0,
+      "holdoutHitGe4Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 27,
+        "1": 44,
+        "2": 21,
+        "3": 8
       },
       "selected": false,
       "over50": false
