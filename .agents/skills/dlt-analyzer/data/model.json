@@ -1,5 +1,5 @@
 {
-  "version": 11,
+  "version": 12,
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
@@ -190,6 +190,9 @@
     "26092期(08-14)开奖后按6+3口径复盘AI_U_wide实际命中",
     "第9轮(2026-08-13): 多算法堆叠投票/区间-遗漏联合约束/投票+重号混合, AI_U_wide保持7%最优",
     "AO_stacked_vote出现2期命中5个号码(ge5=2%), 证明多算法投票有更高命中级别潜力, 但ge4稳定性(5%)低于AI_U_wide",
+    "26092期(08-14)开奖后按6+3口径复盘AI_U_wide实际命中",
+    "第10轮(2026-08-13): 堆叠投票+重号融合4变体(AR/AS/AT/AU), AI_U_wide保持7%最优, 均未超越",
+    "AR_vote_repeat出现1期命中5个号码(ge5=1%), 投票融合方向持续有高命中潜力但稳定性不足",
     "26092期(08-14)开奖后按6+3口径复盘AI_U_wide实际命中"
   ],
   "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
@@ -806,6 +809,79 @@
         "2": 35,
         "3": 10,
         "4": 3
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AR_vote_repeat",
+      "family": "stacked_vote_repeat",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.03,
+      "holdoutHitGe4Rate": 0.04,
+      "holdoutHitGe5Rate": 0.01,
+      "holdoutAvgHitCount": 1.5,
+      "holdoutHitLevelDist": {
+        "0": 16,
+        "1": 40,
+        "2": 27,
+        "3": 13,
+        "4": 3,
+        "5": 1
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AS_vote_nonlinear",
+      "family": "stacked_vote_nonlinear",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.04,
+      "holdoutAvgHitCount": 1.43,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 14,
+        "1": 45,
+        "2": 29,
+        "3": 8,
+        "4": 4
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AT_vote_repeat_back",
+      "family": "stacked_vote_repeat_back",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.02,
+      "holdoutAvgHitCount": 1.5,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 15,
+        "1": 38,
+        "2": 31,
+        "3": 14,
+        "4": 2
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AU_consensus_repeat",
+      "family": "consensus_repeat",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.0,
+      "holdoutHitGe4Rate": 0.05,
+      "holdoutAvgHitCount": 1.52,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 17,
+        "1": 38,
+        "2": 26,
+        "3": 14,
+        "4": 5
       },
       "selected": false,
       "over50": false
