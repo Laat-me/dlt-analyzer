@@ -1,5 +1,5 @@
 {
-  "version": 12,
+  "version": 13,
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
@@ -193,7 +193,11 @@
     "26092期(08-14)开奖后按6+3口径复盘AI_U_wide实际命中",
     "第10轮(2026-08-13): 堆叠投票+重号融合4变体(AR/AS/AT/AU), AI_U_wide保持7%最优, 均未超越",
     "AR_vote_repeat出现1期命中5个号码(ge5=1%), 投票融合方向持续有高命中潜力但稳定性不足",
-    "26092期(08-14)开奖后按6+3口径复盘AI_U_wide实际命中"
+    "26092期(08-14)开奖后按6+3口径复盘AI_U_wide实际命中",
+    "第11轮(2026-08-13): 滚动窗口300/500/开奖日/距离结构/7期周期, ge4均达7%与AI_U_wide持平",
+    "AZ_period7(7期周期回归) avg 1.59全场最高, 命中3个号码的期数从13提升到16, 每期命中分布更优",
+    "AW_rolling500 avg 1.53次优, 滚动窗口训练未显著改变ge4",
+    "26092期(08-14)开奖后按6+3口径复盘, 主算法维持AI_U_wide"
   ],
   "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
   "activeAlgorithm": "AI_U_wide",
@@ -881,6 +885,97 @@
         "1": 38,
         "2": 26,
         "3": 14,
+        "4": 5
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AZ_period7",
+      "family": "period7_regression",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.07,
+      "holdoutAvgHitCount": 1.59,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 17,
+        "1": 37,
+        "2": 23,
+        "3": 16,
+        "4": 7
+      },
+      "selected": false,
+      "over50": false,
+      "note": "avg 1.59全场最高, 7期周期回归提升每期命中分布(命中3个的期数13->16)"
+    },
+    {
+      "name": "AW_rolling500",
+      "family": "rolling_window500_repeat",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.07,
+      "holdoutAvgHitCount": 1.53,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 20,
+        "1": 32,
+        "2": 30,
+        "3": 11,
+        "4": 7
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AV_rolling300",
+      "family": "rolling_window300_repeat",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.07,
+      "holdoutAvgHitCount": 1.52,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 18,
+        "1": 37,
+        "2": 27,
+        "3": 11,
+        "4": 7
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AX_weekday",
+      "family": "weekday_effect",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.06,
+      "holdoutAvgHitCount": 1.52,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 23,
+        "1": 29,
+        "2": 27,
+        "3": 15,
+        "4": 6
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AY_distance",
+      "family": "distance_structure",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.05,
+      "holdoutAvgHitCount": 1.51,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 20,
+        "1": 35,
+        "2": 24,
+        "3": 16,
         "4": 5
       },
       "selected": false,
