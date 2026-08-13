@@ -1,5 +1,5 @@
 {
-  "version": 15,
+  "version": 16,
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
@@ -204,7 +204,10 @@
     "26092期(08-14)开奖后按6+3口径复盘AI_U_wide实际命中",
     "第13轮(2026-08-13): 稳健融合变体(门控/滚动500/多重周期), 均5%未超越; AZ_period7与AI_U_wide并列7%",
     "AZ_period7 avg 1.59保持全场最高, 为avg最优候选; AI_U_wide保持主算法(ge4相同更简单)",
-    "13轮共53个算法, 7% ge4被反复确认为统计极值; 等待26092期(08-14)开奖复盘"
+    "13轮共53个算法, 7% ge4被反复确认为统计极值; 等待26092期(08-14)开奖复盘",
+    "第14轮(2026-08-13): 冷热序列/段位连续/z-score趋势/成对平衡, AI_U_wide保持7%最优(avg 1.52)",
+    "BH_sequence与BI_zone_streak也达7%但avg 1.48略低; BJ_zscore仅3%, BK_pair_balance 5%",
+    "14轮共54个算法, 7% ge4持续确认; 等待26092期(08-14)开奖复盘"
   ],
   "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
   "activeAlgorithm": "AI_U_wide",
@@ -1089,6 +1092,78 @@
       "holdoutHitLevelDist": {
         "0": 19,
         "1": 36,
+        "2": 25,
+        "3": 15,
+        "4": 5
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BH_sequence",
+      "family": "cold_hot_sequence",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.03,
+      "holdoutHitGe4Rate": 0.07,
+      "holdoutAvgHitCount": 1.48,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 19,
+        "1": 37,
+        "2": 28,
+        "3": 9,
+        "4": 7
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BI_zone_streak",
+      "family": "zone_streak",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.03,
+      "holdoutHitGe4Rate": 0.07,
+      "holdoutAvgHitCount": 1.48,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 21,
+        "1": 36,
+        "2": 24,
+        "3": 12,
+        "4": 7
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BJ_zscore",
+      "family": "zscore_trend",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.03,
+      "holdoutHitGe4Rate": 0.03,
+      "holdoutAvgHitCount": 1.44,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 18,
+        "1": 39,
+        "2": 27,
+        "3": 13,
+        "4": 3
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BK_pair_balance",
+      "family": "pair_balance",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.05,
+      "holdoutAvgHitCount": 1.5,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 20,
+        "1": 35,
         "2": 25,
         "3": 15,
         "4": 5
