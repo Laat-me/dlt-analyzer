@@ -1,5 +1,5 @@
 {
-  "version": 7,
+  "version": 8,
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
@@ -175,6 +175,10 @@
     "26092期(08-14)开奖后按6+3口径复盘验证",
     "第4轮优化(2026-08-13): 二阶共现/遗漏分段加权/后区条件依赖/多窗口组合, U_repeat_neighbor保持6%最优, 无新算法超越",
     "新增AA_combo_advanced(5%, avg 1.45)与X_gap_segment(4%, avg 1.43)作为候选; 算法池共21个",
+    "26092期(08-14)开奖后按6+3口径复盘, 验证U_repeat_neighbor实际命中",
+    "第5轮(2026-08-13): 多算法融合/二阶马尔可夫/斐波那契窗口/频次梯度, 均未超过U_repeat_neighbor的6%",
+    "第6轮(2026-08-13): 训练段权重网格搜索(45组合)最优权重(v1 0.25+I 0.25+GH 0.5)留出集仅5%, 未超越6%",
+    "连续3轮(4/5/6)无新算法超越U_repeat_neighbor的6%, 该值已形成稳定的统计极限信号",
     "26092期(08-14)开奖后按6+3口径复盘, 验证U_repeat_neighbor实际命中"
   ],
   "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
@@ -531,6 +535,74 @@
         "1": 41,
         "2": 24,
         "3": 13,
+        "4": 1
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AB_fusion",
+      "family": "weighted_fusion",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.04,
+      "holdoutAvgHitCount": 1.26,
+      "holdoutHitLevelDist": {
+        "0": 23,
+        "1": 43,
+        "2": 23,
+        "3": 7,
+        "4": 4
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AD_markov2",
+      "family": "second_order_markov",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.01,
+      "holdoutHitGe4Rate": 0.04,
+      "holdoutAvgHitCount": 1.36,
+      "holdoutHitLevelDist": {
+        "0": 20,
+        "1": 40,
+        "2": 28,
+        "3": 8,
+        "4": 4
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AE_fib_window",
+      "family": "fibonacci_window",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.03,
+      "holdoutHitGe4Rate": 0.02,
+      "holdoutAvgHitCount": 1.29,
+      "holdoutHitLevelDist": {
+        "0": 23,
+        "1": 39,
+        "2": 26,
+        "3": 10,
+        "4": 2
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AF_gradient",
+      "family": "frequency_gradient",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.04,
+      "holdoutHitGe4Rate": 0.01,
+      "holdoutAvgHitCount": 1.33,
+      "holdoutHitLevelDist": {
+        "0": 22,
+        "1": 35,
+        "2": 32,
+        "3": 10,
         "4": 1
       },
       "selected": false,
