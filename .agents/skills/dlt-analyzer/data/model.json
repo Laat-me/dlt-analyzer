@@ -1,5 +1,5 @@
 {
-  "version": 9,
+  "version": 10,
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
@@ -183,7 +183,11 @@
     "第7轮(2026-08-13): 遗漏-热度交叉/组合稳定性/U变体, AI_U_wide(重号0.18+邻域±2)留出集hitGe4=7%超越U_repeat_neighbor的6%",
     "AI_U_wide最近5期实测(26087-26091): 1/3/4/1/1, 26088期命中3个优于U的2个, 26089期同样命中4个",
     "优化轨迹: 单注2% -> 6+3的5% -> U_repeat_neighbor 6% -> AI_U_wide 7%",
-    "26092期(08-14)开奖后按6+3口径复盘, 验证AI_U_wide实际命中"
+    "26092期(08-14)开奖后按6+3口径复盘, 验证AI_U_wide实际命中",
+    "第8轮(2026-08-13): AI_U_wide家族超参搜索(45配置)+双邻域+后区重号强化, 全部锁定在hitGe4=7%",
+    "AK/AM/AN与AI_U_wide命中分布完全一致(0:18,1:39,2:23,3:13,4:7), 确认7%是该特征空间稳定极值",
+    "双邻域(最近2期)降到3%, 说明第2期重号信号弱于第1期, 不应叠加",
+    "26092期(08-14)开奖后按6+3口径复盘AI_U_wide实际命中"
   ],
   "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
   "activeAlgorithm": "AI_U_wide",
@@ -683,6 +687,66 @@
         "2": 24,
         "3": 10,
         "4": 2
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AK_U_tuned",
+      "family": "repeat_neighbor_wide",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.07,
+      "holdoutAvgHitCount": 1.52,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 18,
+        "1": 39,
+        "2": 23,
+        "3": 13,
+        "4": 7
+      },
+      "selected": false,
+      "over50": false,
+      "parameters": {
+        "repeatWeight": 0.12,
+        "neighborRadius": 2,
+        "neighborWeight": 0.02,
+        "backRepeatWeight": 0.12
+      }
+    },
+    {
+      "name": "AL_double_repeat",
+      "family": "double_repeat_neighbor",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.0,
+      "holdoutHitGe4Rate": 0.03,
+      "holdoutAvgHitCount": 1.48,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 20,
+        "1": 34,
+        "2": 27,
+        "3": 16,
+        "4": 3
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "AM_back_strong",
+      "family": "repeat_neighbor_back_strong",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.0,
+      "holdoutHitGe4Rate": 0.07,
+      "holdoutAvgHitCount": 1.52,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 18,
+        "1": 39,
+        "2": 23,
+        "3": 13,
+        "4": 7
       },
       "selected": false,
       "over50": false
