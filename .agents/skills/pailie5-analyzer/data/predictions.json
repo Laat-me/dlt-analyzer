@@ -6,311 +6,36 @@
       "predictedAt": "2026-08-11",
       "targetDrawNum": "26213",
       "model": "m1",
-      "predictedDigits": [
-        2,
-        4,
-        8,
-        9,
-        9
-      ],
+      "predictedDigits": [2, 4, 8, 9, 9],
       "verified": true,
-      "actualDigits": [
-        7,
-        4,
-        0,
-        7,
-        1
-      ],
-      "positionHits": 1
+      "actualDigits": [7, 4, 0, 7, 1],
+      "positionHits": 1,
+      "exactHit": false,
+      "top2": [[2, 3], [4, 5], [8, 7], [9, 1], [9, 2]]
     },
     {
       "id": 2,
       "predictedAt": "2026-08-11",
       "targetDrawNum": "26214",
-      "model": "portfolio",
+      "model": "K_prob_ensemble",
       "algorithm": "K_prob_ensemble",
-      "predictedDigits": [
-        1,
-        7,
-        5,
-        4,
-        3
-      ],
+      "predictedDigits": [1, 7, 5, 4, 3],
       "verified": false,
-      "note": "5注整串全中导向: 概率模型 K_prob_ensemble + 组选算法 P4_low_crowd_portfolio",
-      "top2": [
-        [
-          1,
-          2
-        ],
-        [
-          7,
-          1
-        ],
-        [
-          5,
-          8
-        ],
-        [
-          4,
-          5
-        ],
-        [
-          3,
-          2
-        ]
-      ],
+      "note": "单注推荐; 继续使用 22% 留出集准确率的 K_prob_ensemble",
+      "top2": [[1, 2], [7, 1], [5, 8], [4, 5], [3, 2]],
       "referenceGroup": {
-        "A_freq30": [
-          7,
-          0,
-          5,
-          0,
-          1
-        ]
+        "A_freq30": [7, 0, 5, 0, 1]
       },
       "positionProbabilities": [
-        [
-          [
-            1,
-            0.11602
-          ],
-          [
-            2,
-            0.111419
-          ],
-          [
-            6,
-            0.102474
-          ],
-          [
-            5,
-            0.102446
-          ]
-        ],
-        [
-          [
-            7,
-            0.12032
-          ],
-          [
-            1,
-            0.107
-          ],
-          [
-            9,
-            0.106547
-          ],
-          [
-            4,
-            0.105269
-          ]
-        ],
-        [
-          [
-            5,
-            0.111418
-          ],
-          [
-            8,
-            0.10818
-          ],
-          [
-            4,
-            0.106598
-          ],
-          [
-            3,
-            0.10397
-          ]
-        ],
-        [
-          [
-            4,
-            0.110544
-          ],
-          [
-            5,
-            0.108012
-          ],
-          [
-            3,
-            0.106647
-          ],
-          [
-            9,
-            0.106503
-          ]
-        ],
-        [
-          [
-            3,
-            0.121297
-          ],
-          [
-            2,
-            0.118862
-          ],
-          [
-            4,
-            0.101123
-          ],
-          [
-            9,
-            0.100537
-          ]
-        ]
+        [[1, 0.11602], [2, 0.111419], [6, 0.102474], [5, 0.102446]],
+        [[7, 0.12032], [1, 0.107], [9, 0.106547], [4, 0.105269]],
+        [[5, 0.111418], [8, 0.10818], [4, 0.106598], [3, 0.10397]],
+        [[4, 0.110544], [5, 0.108012], [3, 0.106647], [9, 0.106503]],
+        [[3, 0.121297], [2, 0.118862], [4, 0.101123], [9, 0.100537]]
       ],
-      "altPureProbTicket": [
-        1,
-        7,
-        5,
-        4,
-        3
-      ],
-      "altLowCrowdTicket": [
-        1,
-        7,
-        5,
-        4,
-        3
-      ],
+      "altLowCrowdTicket": [1, 7, 5, 4, 3],
       "crowdPenaltyScore": 0,
-      "portfolioAlgorithm": "P4_low_crowd_portfolio",
-      "probabilityPortfolio": [
-        [
-          1,
-          7,
-          5,
-          4,
-          3
-        ],
-        [
-          1,
-          7,
-          5,
-          4,
-          2
-        ],
-        [
-          1,
-          7,
-          5,
-          5,
-          3
-        ],
-        [
-          1,
-          7,
-          8,
-          4,
-          3
-        ],
-        [
-          1,
-          7,
-          5,
-          3,
-          3
-        ]
-      ],
-      "lowCrowdPortfolio": [
-        [
-          1,
-          7,
-          5,
-          4,
-          3
-        ],
-        [
-          1,
-          7,
-          5,
-          4,
-          2
-        ],
-        [
-          2,
-          7,
-          5,
-          4,
-          3
-        ],
-        [
-          1,
-          7,
-          5,
-          3,
-          2
-        ],
-        [
-          1,
-          7,
-          4,
-          5,
-          3
-        ]
-      ],
-      "tickets": [
-        {
-          "index": 1,
-          "digits": [
-            1,
-            7,
-            5,
-            4,
-            3
-          ],
-          "source": "P4_low_crowd_portfolio"
-        },
-        {
-          "index": 2,
-          "digits": [
-            1,
-            7,
-            5,
-            4,
-            2
-          ],
-          "source": "P4_low_crowd_portfolio"
-        },
-        {
-          "index": 3,
-          "digits": [
-            2,
-            7,
-            5,
-            4,
-            3
-          ],
-          "source": "P4_low_crowd_portfolio"
-        },
-        {
-          "index": 4,
-          "digits": [
-            1,
-            7,
-            5,
-            3,
-            2
-          ],
-          "source": "P4_low_crowd_portfolio"
-        },
-        {
-          "index": 5,
-          "digits": [
-            1,
-            7,
-            4,
-            5,
-            3
-          ],
-          "source": "P4_low_crowd_portfolio"
-        }
-      ],
-      "matchedTicketIndexes": [],
-      "exactHitCount": 0,
-      "anyExactHit": false
+      "exactHit": false
     }
   ]
 }
