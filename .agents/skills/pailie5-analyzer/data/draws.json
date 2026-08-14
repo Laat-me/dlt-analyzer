@@ -1,21 +1,11 @@
 {
-  "updatedAt": "2026-08-12",
+  "updatedAt": "2026-08-14",
   "source": "official sporttery api gameNo=350133",
   "sampleSize": 1000,
   "totalDraws": 1000,
   "dataRange": "23268 - 26213",
   "dateRange": "2023-10-09 ~ 2026-08-11",
-  "latest": {
-    "num": "26213",
-    "date": "2026-08-11",
-    "digits": [
-      7,
-      4,
-      0,
-      7,
-      1
-    ]
-  },
+  "latest": "26215",
   "stats": {
     "positionFrequency": [
       [
@@ -11927,6 +11917,28 @@
         0,
         7,
         1
+      ]
+    },
+    {
+      "num": "26214",
+      "date": "2026-08-12",
+      "digits": [
+        0,
+        1,
+        4,
+        9,
+        0
+      ]
+    },
+    {
+      "num": "26215",
+      "date": "2026-08-13",
+      "digits": [
+        9,
+        2,
+        7,
+        3,
+        8
       ]
     }
   ]

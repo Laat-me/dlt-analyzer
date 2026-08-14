@@ -27,8 +27,20 @@
   "history": [
     {
       "draw": "26213",
-      "predicted": [2, 4, 8, 9, 9],
-      "actual": [7, 4, 0, 7, 1],
+      "predicted": [
+        2,
+        4,
+        8,
+        9,
+        9
+      ],
+      "actual": [
+        7,
+        4,
+        0,
+        7,
+        1
+      ],
       "hits": 1,
       "note": "第2位4命中(追遗漏28期+全期热), 其余4位未中; 样本1期不足调整门槛, 维持权重"
     }
@@ -45,7 +57,9 @@
     "已测试候选算法: K_prob_ensemble, A_freq30, H_dirichlet_positional, I_recency_eb, G_freq30_only_all, J_markov_mixed, D_current_m1, B_freq30+10, C_freq30+10+all, F_freq5, E_freq10",
     "超过50%的方法: 无",
     "当前数据下没有任何算法接近80%; 系统保留最优算法并继续记录, 不伪造达标结果",
-    "低拥挤度方向作为第二层参考: 只影响推荐票型, 不改变主评估指标"
+    "低拥挤度方向作为第二层参考: 只影响推荐票型, 不改变主评估指标",
+    "2026-08-14: 26214复盘(主推0/5, top2 1/5) + 16算法回测 + 100/300/500三窗口验证: K_prob_ensemble主推率三窗口均第一(13.0%/10.7%/11.0%), top2覆盖率各窗口第一不同(纯噪声), 投票验证无增益 -> 无算法变更, 保持K",
+    "2026-08-14: 0/5全灭为期望内波动(主推13%/位, 全灭概率~50%); 优化转为输出策略: 主推+冷号参考票(26216起)"
   ],
   "algorithmBenchmarks": [
     {
@@ -57,7 +71,11 @@
         "gamma": 0.995,
         "lambda": 1,
         "markovWeight": 0.35,
-        "ensembleWeights": [0.333, 0.333, 0.333]
+        "ensembleWeights": [
+          0.333,
+          0.333,
+          0.333
+        ]
       },
       "trainCoverage": 0.188,
       "trainHit": 188,
@@ -69,8 +87,20 @@
       "over80": false,
       "selected": true,
       "ticketSelection": {
-        "pureProbabilityTicket": [1, 7, 5, 4, 3],
-        "lowCrowdTicket": [1, 7, 5, 4, 3]
+        "pureProbabilityTicket": [
+          1,
+          7,
+          5,
+          4,
+          3
+        ],
+        "lowCrowdTicket": [
+          1,
+          7,
+          5,
+          4,
+          3
+        ]
       }
     },
     {
