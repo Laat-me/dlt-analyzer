@@ -91,9 +91,10 @@ description: >
 ### 算法库固化（第 25 轮，已入库）
 
 - **`algorithms.md`**：88 个算法全量记录（家族/参数/900-100 结果/1900-1000 结果/note），含"重建验证对照表"——ORIGINAL 公式算法重建值接近记录，REBUILT 算法原公式未保留偏差大
-- **`algorithms.py`**：21 个已实现算法（v1/v2/v3 原版公式、AI_U_wide 家族、H/I/J/K 概率家族、AZ/AV/AW 等），统一回测框架 `backtest(name, draws, holdout_start)`
+- **`algorithms.py`**：31 个已实现算法（v1/v2/v3 原版公式、AI_U_wide 还原版、ge5 家族、H/I/J/K 概率家族、AZ/AV/AW 等），统一回测框架 `backtest(name, draws, holdout_start)`
 - 实现注意（历史教训）：频次统计必须用 **0-based 索引**（`bincount(arr-1)`），号码 n 的频率在 `F[n-1]`；用 `bincount(arr)` 直接索引会整体错位一位，污染所有 base 分
-- AI_U_wide 正确实现口径：`norm(freq_all) + 0.18×重号 + 0.02×邻域(r2, 不含中心)` + 6+3 约束枚举；900/100 窗口重建 5%（记录 7%），1000 期段约 2.4-2.8%
+- **AI_U_wide 还原版（round-25）**：`norm(freq_all) + 0.5×重号 + 0.2×邻域(r3) + topk8 6+3约束枚举` → 900/100 窗口 ge4=**8%**（记录 7%，指纹每级差 ≤1），avg 1.54；**1000 期段 ge4=3.5%、ge5=3 期**（原参数版 2.8%）；记录参数 `{0.18/0.02/r2}` 无法复现 7%，疑为简化记录，还原版为窗口指纹拟合（`AI_U_wide_orig` 保留对照）
+- ge5 家族已重建（多算法投票/固定重号/区间均衡/少人买特征）：BS_zone_balance 6-8%、BU_low_crowd_strong 7% 复现记录
 
 ---
 
