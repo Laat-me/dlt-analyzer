@@ -173,6 +173,13 @@ git push origin main
 
 注意：`draws.json` 属于技能的持久化历史库，不是临时缓存。只要被初始化出来，就必须和 `model.json`、`predictions.json` 一起提交到仓库。
 
+### 算法变更记录与恢复规则（用户要求，必须遵守）
+
+- **任何算法/公式/权重/选号流程/数据口径的修改，必须先写变更记录再实施**：在 `data/model.json` 的 `reviewNotes` 追加一条，或在技能目录维护 `CHANGELOG.md`（参考 dlt-analyzer 的模板与历史）
+- 每次变更必须包含：变更内容、原因、**变更前后指标对比**、恢复方法（git commit 号或旧参数保留）
+- **保留旧版**：被替换的算法/参数保留为 `*_orig` 变体或依赖 git 历史，不直接删除
+- 频次统计必须用 0-based 索引（`bincount(arr-1)`），避免 base 错位（dlt-analyzer 已踩过的坑）
+
 ---
 
 ## model.json 结构
