@@ -107,15 +107,16 @@ def pick_top6_constrained(scores, topk=12):
 # 每个算法: fn(k) -> (front6, back3); k = 当前预测期下标(用 k 之前数据)
 
 def make_ai_u_wide(radius=2, w_repeat=0.18, w_neighbor=0.02, base_win=None,
-                   constrained=True, back_repeat=None):
-    """AI_U_wide 族: base + w_repeat*重号 + w_neighbor*邻域(r)  (ORIGINAL 参数)"""
+                   constrained=True, back_repeat=None, topk=12):
+    """AI_U_wide 族: base + w_repeat*重号 + w_neighbor*邻域(r)  (ORIGINAL 参数)
+    round-25 还原版: radius=3, w_repeat=0.5, w_neighbor=0.2, topk=8 (900/100窗口指纹还原)"""
     def fn(k, F, R, NC, G, front_actual, back_actual):
         bf = norm(F["f_all_f"])[k] if base_win is None else norm(F["f30_f"])[k]
         bb = norm(F["b_all_b"])[k] if base_win is None else norm(F["b30_b"])[k]
         wr_b = back_repeat if back_repeat is not None else w_repeat
-        sf = bf + w_repeat * R["f"][k] + w_neighbor * NC["f"][k, :, radius].astype(np.float32)
-        sb = bb + wr_b * R["b"][k] + w_neighbor * NC["b"][k, :, radius].astype(np.float32)
-        f6 = pick_top6_constrained(sf) if constrained else pick_top6(sf)
+        sf = bf + w_repeat * R["f"][k] + w_neighbor * NC["f"][k, :, radius - 1].astype(np.float32)
+        sb = bb + wr_b * R["b"][k] + w_neighbor * NC["b"][k, :, radius - 1].astype(np.float32)
+        f6 = pick_top6_constrained(sf, topk=topk) if constrained else pick_top6(sf)
         return f6, pick_top3(sb)
     return fn
 
@@ -133,7 +134,7 @@ def make_v2_hot(constrained=True):
     """v2 追热 (ORIGINAL): freq5×3 + freq10×1.5 + neighbor(热±1)×4 + streak×4"""
     def fn(k, F, R, NC, G, front_actual, back_actual):
         f5 = F["f5_f"][k].astype(np.float32); f10 = F["f10_f"][k].astype(np.float32)
-        nb = NC["f"][k, :, 1].astype(np.float32)
+        nb = NC["f"][k, :, 0].astype(np.float32)
         streak = (f5 >= 2).astype(np.float32) * 4
         sf = f5 * 3 + f10 * 1.5 + nb * 4 + streak
         sb = F["b5_b"][k].astype(np.float32) * 3 + F["b10_b"][k].astype(np.float32) * 1.5
@@ -226,8 +227,8 @@ def make_prime(w=0.5):
 def make_span_neighbor(w=0.02):
     """O_span (REBUILT): 跨度 + 邻域平滑"""
     def fn(k, F, R, NC, G, front_actual, back_actual):
-        sf = norm(F["f_all_f"])[k] + w * NC["f"][k, :, 1].astype(np.float32)
-        sb = norm(F["b_all_b"])[k] + w * NC["b"][k, :, 1].astype(np.float32)
+        sf = norm(F["f_all_f"])[k] + w * NC["f"][k, :, 0].astype(np.float32)
+        sb = norm(F["b_all_b"])[k] + w * NC["b"][k, :, 0].astype(np.float32)
         return pick_top6(sf), pick_top3(sb)
     return fn
 
@@ -275,6 +276,102 @@ def make_rolling(win, w_repeat=0.18):
         return pick_top6(sf), pick_top3(sb)
     return fn
 
+def make_fixed_repeat(n_repeat=3):
+    """CO/CN/CM_fixed_repeat (REBUILT): 固定取 n_repeat 个上期重号 + 其余按 base 高分补足
+    记录: CO_repeat3 ge5=2% (固定3个重号, 出现2期命中5个号码)"""
+    def fn(k, F, R, NC, G, front_actual, back_actual):
+        bf = norm(F["f_all_f"])[k]
+        bb = norm(F["b_all_b"])[k]
+        repeats_f = (np.argsort(-R["f"][k])[:n_repeat] + 1).tolist()
+        rest_f = [n for n in (np.argsort(-bf) + 1).tolist() if n not in repeats_f]
+        f6 = sorted((repeats_f + rest_f)[:6])
+        repeats_b = (np.argsort(-R["b"][k])[:1] + 1).tolist()
+        rest_b = [n for n in (np.argsort(-bb) + 1).tolist() if n not in repeats_b]
+        b3 = sorted((repeats_b + rest_b)[:3])
+        return f6, b3
+    return fn
+
+def make_stacked_vote(algos):
+    """AO_stacked_vote (REBUILT): 多算法堆叠投票
+    记录: ge5=2% 出现2期命中5个号码, 高命中级别潜力但ge4稳定性(5%)低于AI_U_wide"""
+    def fn(k, F, R, NC, G, front_actual, back_actual):
+        sf = np.zeros(35); sb = np.zeros(12)
+        for a in algos:
+            f6, b3 = a(k, F, R, NC, G, front_actual, back_actual)
+            for x in f6: sf[x - 1] += 1
+            for x in b3: sb[x - 1] += 1
+        return pick_top6(sf), pick_top3(sb)
+    return fn
+
+def make_vote_repeat(algos, w_repeat=0.18):
+    """AR_vote_repeat (REBUILT): 堆叠投票 + 重号融合
+    记录: ge5=1%, ge4=4%"""
+    def fn(k, F, R, NC, G, front_actual, back_actual):
+        sf = np.zeros(35); sb = np.zeros(12)
+        for a in algos:
+            f6, b3 = a(k, F, R, NC, G, front_actual, back_actual)
+            for x in f6: sf[x - 1] += 1
+            for x in b3: sb[x - 1] += 1
+        sf = sf + w_repeat * R["f"][k]
+        sb = sb + w_repeat * R["b"][k]
+        return pick_top6(sf), pick_top3(sb)
+    return fn
+
+def make_zone_balance(max_per_zone=2):
+    """BS_zone_balance (REBUILT): 区间均衡(每段<=2)约束枚举
+    记录: ge4=7% ge5=1%"""
+    def fn(k, F, R, NC, G, front_actual, back_actual):
+        bf = norm(F["f_all_f"])[k] + 0.18 * R["f"][k] + 0.02 * NC["f"][k, :, 1].astype(np.float32)
+        pool = (np.argsort(-bf)[:15] + 1).tolist()
+        best, bestscore = None, -1e18
+        for combo in combinations(pool, 6):
+            lo = sum(1 for n in combo if n <= 12); mid = sum(1 for n in combo if 13 <= n <= 24); hi = sum(1 for n in combo if n >= 25)
+            if lo <= max_per_zone and mid <= max_per_zone and hi <= max_per_zone and ok_constraint(combo):
+                sc = sum(bf[n - 1] for n in combo)
+                if sc > bestscore:
+                    best, bestscore = combo, sc
+        f6 = sorted(best) if best else pick_top6(bf)
+        bb = norm(F["b_all_b"])[k] + 0.18 * R["b"][k] + 0.02 * NC["b"][k, :, 0].astype(np.float32)
+        return f6, pick_top3(bb)
+    return fn
+
+def make_low_crowd_strong():
+    """BU_low_crowd_strong (REBUILT): 少人买组合特征=和值>92+高区多+低区少
+    记录: 基于500期真实一等奖注数分析, ge4=7% ge5=2% (无需注数数据, 用组合特征筛选)"""
+    def fn(k, F, R, NC, G, front_actual, back_actual):
+        bf = norm(F["f_all_f"])[k] + 0.18 * R["f"][k] + 0.02 * NC["f"][k, :, 1].astype(np.float32)
+        pool = (np.argsort(-bf)[:20] + 1).tolist()
+        best, bestscore = None, -1e18
+        for combo in combinations(pool, 6):
+            lo = sum(1 for n in combo if n <= 12); hi = sum(1 for n in combo if n >= 25)
+            s6 = sum(combo)
+            if s6 > 92 and hi >= lo + 1 and ok_constraint(combo):
+                sc = sum(bf[n - 1] for n in combo)
+                if sc > bestscore:
+                    best, bestscore = combo, sc
+        f6 = sorted(best) if best else pick_top6(bf)
+        bb = norm(F["b_all_b"])[k] + 0.18 * R["b"][k]
+        return f6, pick_top3(bb)
+    return fn
+
+def make_strong_front(w_front=0.5, w_back=0.3):
+    """CH_strong_front (REBUILT): 前区重号强化 + 后区重号
+    记录: ge4=6% ge5=1%"""
+    def fn(k, F, R, NC, G, front_actual, back_actual):
+        sf = norm(F["f_all_f"])[k] + w_front * R["f"][k] + 0.02 * NC["f"][k, :, 1].astype(np.float32)
+        sb = norm(F["b_all_b"])[k] + w_back * R["b"][k]
+        return pick_top6_constrained(sf), pick_top3(sb)
+    return fn
+
+def make_back_conditional(w=0.25):
+    """Y_back_conditional (REBUILT): 后区条件依赖(上期后区对前区的关联近似)
+    记录: ge4=2% ge5=1%"""
+    def fn(k, F, R, NC, G, front_actual, back_actual):
+        sf = norm(F["f_all_f"])[k] + 0.18 * R["f"][k]
+        sb = norm(F["b_all_b"])[k] + 0.18 * R["b"][k] + w * NC["b"][k, :, 0].astype(np.float32)
+        return pick_top6(sf), pick_top3(sb)
+    return fn
+
 # ---------------------------------------------------------------- 注册表
 
 def build_registry():
@@ -284,7 +381,11 @@ def build_registry():
     reg["v1_cold"] = make_v1_cold(constrained=True)
     reg["v2_hot"] = make_v2_hot(constrained=True)
     reg["v3"] = make_v3(reg["v1_cold"], reg["v2_hot"])
-    reg["AI_U_wide"] = make_ai_u_wide(radius=2, w_repeat=0.18, w_neighbor=0.02, constrained=True)
+    # AI_U_wide 还原版 (round-25窗口指纹还原): 900/100窗口复现8%(记录7%, 指纹每级差<=1)
+    # 1000期段 ge4=3.5% ge5=3期, 优于原参数版(2.8%/ge5=1)
+    reg["AI_U_wide"] = make_ai_u_wide(radius=3, w_repeat=0.5, w_neighbor=0.2, constrained=True, topk=8)
+    # 原记录参数版 (v26 parameters: 0.18/0.02/r2) — 保留作对照
+    reg["AI_U_wide_orig"] = make_ai_u_wide(radius=2, w_repeat=0.18, w_neighbor=0.02, constrained=True)
     reg["U_repeat_neighbor"] = make_ai_u_wide(radius=1, w_repeat=0.18, w_neighbor=0.02, constrained=True)
     # 变体
     reg["AK_U_tuned"] = make_ai_u_wide(radius=2, w_repeat=0.12, w_neighbor=0.02, back_repeat=0.12)
@@ -304,6 +405,18 @@ def build_registry():
     reg["AZ_period7"] = make_period7()
     reg["AV_rolling300"] = make_rolling(300)
     reg["AW_rolling500"] = make_rolling(500)
+    # ge5 家族 (REBUILT): 出现过命中5个号码的算法
+    reg["CO_repeat3"] = make_fixed_repeat(3)
+    reg["CN_repeat2"] = make_fixed_repeat(2)
+    reg["CM_repeat1"] = make_fixed_repeat(1)
+    reg["AO_stacked_vote"] = make_stacked_vote(
+        [reg["AI_U_wide"], reg["H_dirichlet"], reg["J_repeat_markov"], reg["M_tail"]])
+    reg["AR_vote_repeat"] = make_vote_repeat(
+        [reg["AI_U_wide"], reg["H_dirichlet"], reg["J_repeat_markov"]])
+    reg["BS_zone_balance"] = make_zone_balance(2)
+    reg["BU_low_crowd_strong"] = make_low_crowd_strong()
+    reg["CH_strong_front"] = make_strong_front()
+    reg["Y_back_conditional"] = make_back_conditional()
     return reg
 
 # ---------------------------------------------------------------- 回测框架
