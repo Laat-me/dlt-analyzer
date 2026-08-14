@@ -1,5 +1,5 @@
 {
-  "version": 19,
+  "version": 20,
   "models": {
     "v1": {
       "strategy": "追冷号 - 遗漏值驱动",
@@ -216,7 +216,10 @@
     "16轮共62个算法; 等待26092期(08-14)开奖复盘",
     "第17轮(2026-08-13): 纳入真实投注热度数据(500期一等奖注数), 发现少人买组合特征: 前区和值~95(+9.4 vs 多人买)、低区号少(-0.48)、高区号多(+0.35)",
     "BU_low_crowd_strong(和值>92+高区多+低区少)达7%且ge5=2%, 是17轮唯一直接符合'避开买的人多'意图的方向",
-    "17轮共66个算法; 等待26092期(08-14)开奖复盘"
+    "17轮共66个算法; 等待26092期(08-14)开奖复盘",
+    "第18轮(2026-08-13): 一等奖注数加权频率(少人买期权重2.0/多人买0.5), AI_U_wide保持7%最优",
+    "BX_prize_weighted avg 1.56为全场最高之一, BY加权+少人买特征ge5=2%保持高命中潜力",
+    "18轮共69个算法; 等待26092期(08-14)开奖复盘"
   ],
   "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
   "activeAlgorithm": "AI_U_wide",
@@ -1403,6 +1406,62 @@
         "3": 13,
         "4": 4,
         "5": 2
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BX_prize_weighted",
+      "family": "prize_count_weighted",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.06,
+      "holdoutAvgHitCount": 1.56,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 18,
+        "1": 35,
+        "2": 26,
+        "3": 15,
+        "4": 6
+      },
+      "selected": false,
+      "over50": false,
+      "note": "一等奖注数加权频率(少人买期权重2.0/多人买0.5), avg 1.56为全场最高之一"
+    },
+    {
+      "name": "BY_prize_weighted_lc",
+      "family": "prize_weighted_low_crowd",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.04,
+      "holdoutHitGe4Rate": 0.06,
+      "holdoutAvgHitCount": 1.51,
+      "holdoutHitGe5Rate": 0.02,
+      "holdoutHitLevelDist": {
+        "0": 21,
+        "1": 35,
+        "2": 24,
+        "3": 14,
+        "4": 4,
+        "5": 2
+      },
+      "selected": false,
+      "over50": false
+    },
+    {
+      "name": "BZ_prize_weighted_30",
+      "family": "prize_weighted_30",
+      "mode": "6+3",
+      "trainHitGe4Rate": 0.02,
+      "holdoutHitGe4Rate": 0.04,
+      "holdoutAvgHitCount": 1.4,
+      "holdoutHitGe5Rate": 0.0,
+      "holdoutHitLevelDist": {
+        "0": 24,
+        "1": 36,
+        "2": 20,
+        "3": 16,
+        "4": 4
       },
       "selected": false,
       "over50": false
