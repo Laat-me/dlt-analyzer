@@ -655,6 +655,26 @@
    "hitGe4": null,
    "algorithm": "K_prob_ensemble",
    "note": "6+3参考组: H+I+J 等权集成"
+  },
+  {
+   "id": 22,
+   "predictedAt": "2026-08-16",
+   "targetDrawNum": "26093",
+   "model": "六爻占卜",
+   "mode": "5+2",
+   "predictedFront": [
+    5,
+    7,
+    16,
+    20,
+    32
+   ],
+   "predictedBack": [
+    5,
+    9
+   ],
+   "verified": false,
+   "note": "六爻起卦: 坤为地变雷风恒 seed=106880974（玄学娱乐）"
   }
  ]
 }
