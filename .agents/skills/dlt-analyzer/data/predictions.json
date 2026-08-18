@@ -1,737 +1,883 @@
 {
-  "updatedAt": "2026-08-16",
-  "records": [
-    {
-      "id": 1,
-      "predictedAt": "2026-07-23",
-      "targetDrawNum": "26083",
-      "model": "v1",
-      "predictedFront": [
-        8,
-        9,
-        17,
-        18,
-        31
-      ],
-      "predictedBack": [
-        3,
-        8
-      ],
-      "actualFront": [
-        14,
-        15,
-        16,
-        23,
-        26
-      ],
-      "actualBack": [
-        7,
-        9
-      ],
-      "frontHits": 0,
-      "backHits": 0,
-      "verified": true
-    },
-    {
-      "id": 2,
-      "predictedAt": "2026-07-25",
-      "targetDrawNum": "26084",
-      "model": "v1",
-      "predictedFront": [
-        2,
-        9,
-        17,
-        26,
-        31
-      ],
-      "predictedBack": [
-        3,
-        5
-      ],
-      "actualFront": [
-        13,
-        25,
-        30,
-        32,
-        33
-      ],
-      "actualBack": [
-        4,
-        5
-      ],
-      "frontHits": 0,
-      "backHits": 1,
-      "verified": true
-    },
-    {
-      "id": 3,
-      "predictedAt": "2026-07-25",
-      "targetDrawNum": "26085",
-      "model": "v2",
-      "predictedFront": [
-        15,
-        16,
-        22,
-        26,
-        34
-      ],
-      "predictedBack": [
-        7,
-        8
-      ],
-      "actualFront": [
-        3,
-        4,
-        14,
-        28,
-        31
-      ],
-      "actualBack": [
-        5,
-        7
-      ],
-      "frontHits": 0,
-      "backHits": 1,
-      "verified": true
-    },
-    {
-      "id": 4,
-      "predictedAt": "2026-07-25",
-      "targetDrawNum": "26085",
-      "model": "v1",
-      "predictedFront": [
-        2,
-        9,
-        17,
-        26,
-        31
-      ],
-      "predictedBack": [
-        3,
-        5
-      ],
-      "actualFront": [
-        3,
-        4,
-        14,
-        28,
-        31
-      ],
-      "actualBack": [
-        5,
-        7
-      ],
-      "frontHits": 1,
-      "backHits": 1,
-      "verified": true
-    },
-    {
-      "id": 5,
-      "predictedAt": "2026-07-30",
-      "targetDrawNum": "26086",
-      "model": "v1",
-      "predictedFront": [
-        7,
-        9,
-        17,
-        23,
-        26
-      ],
-      "predictedBack": [
-        3,
-        5
-      ],
-      "actualFront": [
-        10,
-        11,
-        18,
-        22,
-        35
-      ],
-      "actualBack": [
-        6,
-        12
-      ],
-      "frontHits": 0,
-      "backHits": 0,
-      "verified": true
-    },
-    {
-      "id": 6,
-      "predictedAt": "2026-07-30",
-      "targetDrawNum": "26086",
-      "model": "v2",
-      "predictedFront": [
-        5,
-        9,
-        14,
-        16,
-        26
-      ],
-      "predictedBack": [
-        5,
-        7
-      ],
-      "actualFront": [
-        10,
-        11,
-        18,
-        22,
-        35
-      ],
-      "actualBack": [
-        6,
-        12
-      ],
-      "frontHits": 0,
-      "backHits": 0,
-      "verified": true
-    },
-    {
-      "id": 7,
-      "predictedAt": "2026-08-03",
-      "targetDrawNum": "26087",
-      "model": "v1",
-      "predictedFront": [
-        7,
-        9,
-        17,
-        24,
-        32
-      ],
-      "predictedBack": [
-        1,
-        3
-      ],
-      "actualFront": [
-        5,
-        10,
-        16,
-        24,
-        27
-      ],
-      "actualBack": [
-        4,
-        10
-      ],
-      "frontHits": 1,
-      "backHits": 0,
-      "verified": true
-    },
-    {
-      "id": 8,
-      "predictedAt": "2026-08-03",
-      "targetDrawNum": "26087",
-      "model": "v2",
-      "predictedFront": [
-        4,
-        14,
-        16,
-        25,
-        27
-      ],
-      "predictedBack": [
-        5,
-        7
-      ],
-      "actualFront": [
-        5,
-        10,
-        16,
-        24,
-        27
-      ],
-      "actualBack": [
-        4,
-        10
-      ],
-      "frontHits": 2,
-      "backHits": 0,
-      "verified": true
-    },
-    {
-      "id": 9,
-      "predictedAt": "2026-08-07",
-      "targetDrawNum": "26089",
-      "model": "v1",
-      "predictedFront": [
-        17,
-        7,
-        12,
-        14,
-        31
-      ],
-      "predictedBack": [
-        3,
-        1
-      ],
-      "verified": true,
-      "actualFront": [
-        3,
-        7,
-        12,
-        14,
-        26
-      ],
-      "actualBack": [
-        5,
-        11
-      ],
-      "frontHits": 3,
-      "backHits": 0
-    },
-    {
-      "id": 10,
-      "predictedAt": "2026-08-07",
-      "targetDrawNum": "26089",
-      "model": "v2",
-      "predictedFront": [
-        27,
-        10,
-        24,
-        14,
-        9
-      ],
-      "predictedBack": [
-        5,
-        4
-      ],
-      "verified": true,
-      "actualFront": [
-        3,
-        7,
-        12,
-        14,
-        26
-      ],
-      "actualBack": [
-        5,
-        11
-      ],
-      "frontHits": 1,
-      "backHits": 1
-    },
-    {
-      "id": 11,
-      "predictedAt": "2026-08-10",
-      "targetDrawNum": "26090",
-      "model": "v1",
-      "predictedFront": [
-        17,
-        33,
-        31,
-        6,
-        18
-      ],
-      "predictedBack": [
-        3,
-        1
-      ],
-      "verified": true,
-      "actualFront": [
-        9,
-        14,
-        17,
-        19,
-        24
-      ],
-      "actualBack": [
-        2,
-        9
-      ],
-      "frontHits": 1,
-      "backHits": 0
-    },
-    {
-      "id": 12,
-      "predictedAt": "2026-08-10",
-      "targetDrawNum": "26090",
-      "model": "v2",
-      "predictedFront": [
-        3,
-        27,
-        14,
-        24,
-        9
-      ],
-      "predictedBack": [
-        5,
-        11
-      ],
-      "verified": true,
-      "actualFront": [
-        9,
-        14,
-        17,
-        19,
-        24
-      ],
-      "actualBack": [
-        2,
-        9
-      ],
-      "frontHits": 3,
-      "backHits": 0
-    },
-    {
-      "id": 13,
-      "predictedAt": "2026-08-10",
-      "targetDrawNum": "26090",
-      "model": "v3",
-      "predictedFront": [
-        17,
-        33,
-        3,
-        10,
-        14
-      ],
-      "predictedBack": [
-        3,
-        5
-      ],
-      "verified": true,
-      "actualFront": [
-        9,
-        14,
-        17,
-        19,
-        24
-      ],
-      "actualBack": [
-        2,
-        9
-      ],
-      "frontHits": 2,
-      "backHits": 0
-    },
-    {
-      "id": 14,
-      "predictedAt": "2026-08-11",
-      "targetDrawNum": "26091",
-      "model": "v1",
-      "predictedFront": [
-        31,
-        29,
-        6,
-        1,
-        18
-      ],
-      "predictedBack": [
-        3,
-        1
-      ],
-      "verified": true,
-      "actualFront": [
-        3,
-        4,
-        7,
-        12,
-        32
-      ],
-      "actualBack": [
-        1,
-        2
-      ],
-      "frontHits": 0,
-      "backHits": 1
-    },
-    {
-      "id": 15,
-      "predictedAt": "2026-08-11",
-      "targetDrawNum": "26091",
-      "model": "v2",
-      "predictedFront": [
-        24,
-        27,
-        9,
-        10,
-        14
-      ],
-      "predictedBack": [
-        5,
-        11
-      ],
-      "verified": true,
-      "actualFront": [
-        3,
-        4,
-        7,
-        12,
-        32
-      ],
-      "actualBack": [
-        1,
-        2
-      ],
-      "frontHits": 0,
-      "backHits": 0
-    },
-    {
-      "id": 16,
-      "predictedAt": "2026-08-11",
-      "targetDrawNum": "26091",
-      "model": "v3",
-      "predictedFront": [
-        31,
-        33,
-        24,
-        9,
-        10
-      ],
-      "predictedBack": [
-        3,
-        5
-      ],
-      "verified": true,
-      "actualFront": [
-        3,
-        4,
-        7,
-        12,
-        32
-      ],
-      "actualBack": [
-        1,
-        2
-      ],
-      "frontHits": 0,
-      "backHits": 0
-    },
-    {
-      "id": 17,
-      "predictedAt": "2026-08-13",
-      "targetDrawNum": "26092",
-      "model": "AI_U_wide",
-      "mode": "6+3",
-      "predictedFront": [
-        3,
-        4,
-        7,
-        20,
-        30,
-        32
-      ],
-      "predictedBack": [
-        1,
-        2,
-        7
-      ],
-      "verified": true,
-      "hitGe4": false,
-      "algorithm": "AI_U_wide",
-      "note": "6+3主推: AI_U_wide(重号+宽邻域, 留出集hitGe4=7%)",
-      "actualFront": [
-        12,
-        16,
-        19,
-        29,
-        33
-      ],
-      "actualBack": [
-        7,
-        9
-      ],
-      "frontHits": 0,
-      "backHits": 1
-    },
-    {
-      "id": 18,
-      "predictedAt": "2026-08-13",
-      "targetDrawNum": "26092",
-      "model": "K_prob_ensemble",
-      "mode": "6+3",
-      "predictedFront": [
-        3,
-        4,
-        7,
-        22,
-        26,
-        32
-      ],
-      "predictedBack": [
-        1,
-        2,
-        7
-      ],
-      "verified": true,
-      "hitGe4": false,
-      "actualFront": [
-        12,
-        16,
-        19,
-        29,
-        33
-      ],
-      "actualBack": [
-        7,
-        9
-      ],
-      "frontHits": 0,
-      "backHits": 1
-    },
-    {
-      "targetDrawNum": "26092",
-      "predictedAt": "2026-08-14",
-      "algorithm": "AI_U_wide",
-      "policy": "900/100最优算法(用户2026-08-14确认切换)",
-      "front6": [
-        4,
-        5,
-        11,
-        12,
-        16,
-        27
-      ],
-      "back3": [
-        3,
-        6,
-        8
-      ],
-      "frontHits": 2,
-      "backHits": 0,
-      "verified": true,
-      "id": 19,
-      "model": "AI_U_wide",
-      "mode": "6+3",
-      "dataScope": "draws.json 1000期库(19123-26091), 用户2026-08-14确认",
-      "note": "AI_U_wide按1000期库口径选号",
-      "actualFront": [
-        12,
-        16,
-        19,
-        29,
-        33
-      ],
-      "actualBack": [
-        7,
-        9
-      ],
-      "hitGe4": false
-    },
-    {
-      "id": 20,
-      "predictedAt": "2026-08-16",
-      "targetDrawNum": "26093",
-      "model": "AI_U_wide",
-      "mode": "6+3",
-      "predictedFront": [
-        12,
-        15,
-        16,
-        19,
-        29,
-        33
-      ],
-      "predictedBack": [
-        7,
-        9,
-        10
-      ],
-      "verified": false,
-      "hitGe4": null,
-      "algorithm": "AI_U_wide",
-      "note": "6+3主推: AI_U_wide(重号+宽邻域, 还原版), 数据口径 draws.json 1006期(19123-26092)"
-    },
-    {
-      "id": 21,
-      "predictedAt": "2026-08-16",
-      "targetDrawNum": "26093",
-      "model": "K_prob_ensemble",
-      "mode": "6+3",
-      "predictedFront": [
-        2,
-        7,
-        10,
-        11,
-        12,
-        26
-      ],
-      "predictedBack": [
-        2,
-        5,
-        7
-      ],
-      "verified": false,
-      "hitGe4": null,
-      "algorithm": "K_prob_ensemble",
-      "note": "6+3参考组: H+I+J 等权集成"
-    },
-    {
-      "id": 22,
-      "predictedAt": "2026-08-16",
-      "targetDrawNum": "26093",
-      "model": "六爻占卜",
-      "mode": "5+2",
-      "predictedFront": [
-        15,
-        18,
-        22,
-        26,
-        35
-      ],
-      "predictedBack": [
-        8,
-        12
-      ],
-      "verified": false,
-      "note": "六爻起卦: 起始卦火山旅 + 本卦坤为地变雷风恒 seed=186538492148（玄学娱乐）"
-    },
-    {
-      "id": 23,
-      "predictedAt": "2026-08-17",
-      "targetDrawNum": "26093",
-      "model": "v1",
-      "predictedFront": [
-        1,
-        6,
-        17,
-        31,
-        34
-      ],
-      "predictedBack": [
-        3,
-        8
-      ],
-      "verified": false,
-      "note": "单注5+2, 数据口径 draws.json 1006期(19123-26092)"
-    },
-    {
-      "id": 24,
-      "predictedAt": "2026-08-17",
-      "targetDrawNum": "26093",
-      "model": "v2",
-      "predictedFront": [
-        3,
-        9,
-        14,
-        24,
-        32
-      ],
-      "predictedBack": [
-        2,
-        5
-      ],
-      "verified": false,
-      "note": "单注5+2, 数据口径 draws.json 1006期(19123-26092)"
-    },
-    {
-      "id": 25,
-      "predictedAt": "2026-08-17",
-      "targetDrawNum": "26093",
-      "model": "v3",
-      "predictedFront": [
-        3,
-        14,
-        24,
-        31,
-        34
-      ],
-      "predictedBack": [
-        2,
-        3
-      ],
-      "verified": false,
-      "note": "单注5+2, 数据口径 draws.json 1006期(19123-26092)"
-    }
-  ]
+ "updatedAt": "2026-08-18",
+ "records": [
+  {
+   "id": 1,
+   "predictedAt": "2026-07-23",
+   "targetDrawNum": "26083",
+   "model": "v1",
+   "predictedFront": [
+    8,
+    9,
+    17,
+    18,
+    31
+   ],
+   "predictedBack": [
+    3,
+    8
+   ],
+   "actualFront": [
+    14,
+    15,
+    16,
+    23,
+    26
+   ],
+   "actualBack": [
+    7,
+    9
+   ],
+   "frontHits": 0,
+   "backHits": 0,
+   "verified": true
+  },
+  {
+   "id": 2,
+   "predictedAt": "2026-07-25",
+   "targetDrawNum": "26084",
+   "model": "v1",
+   "predictedFront": [
+    2,
+    9,
+    17,
+    26,
+    31
+   ],
+   "predictedBack": [
+    3,
+    5
+   ],
+   "actualFront": [
+    13,
+    25,
+    30,
+    32,
+    33
+   ],
+   "actualBack": [
+    4,
+    5
+   ],
+   "frontHits": 0,
+   "backHits": 1,
+   "verified": true
+  },
+  {
+   "id": 3,
+   "predictedAt": "2026-07-25",
+   "targetDrawNum": "26085",
+   "model": "v2",
+   "predictedFront": [
+    15,
+    16,
+    22,
+    26,
+    34
+   ],
+   "predictedBack": [
+    7,
+    8
+   ],
+   "actualFront": [
+    3,
+    4,
+    14,
+    28,
+    31
+   ],
+   "actualBack": [
+    5,
+    7
+   ],
+   "frontHits": 0,
+   "backHits": 1,
+   "verified": true
+  },
+  {
+   "id": 4,
+   "predictedAt": "2026-07-25",
+   "targetDrawNum": "26085",
+   "model": "v1",
+   "predictedFront": [
+    2,
+    9,
+    17,
+    26,
+    31
+   ],
+   "predictedBack": [
+    3,
+    5
+   ],
+   "actualFront": [
+    3,
+    4,
+    14,
+    28,
+    31
+   ],
+   "actualBack": [
+    5,
+    7
+   ],
+   "frontHits": 1,
+   "backHits": 1,
+   "verified": true
+  },
+  {
+   "id": 5,
+   "predictedAt": "2026-07-30",
+   "targetDrawNum": "26086",
+   "model": "v1",
+   "predictedFront": [
+    7,
+    9,
+    17,
+    23,
+    26
+   ],
+   "predictedBack": [
+    3,
+    5
+   ],
+   "actualFront": [
+    10,
+    11,
+    18,
+    22,
+    35
+   ],
+   "actualBack": [
+    6,
+    12
+   ],
+   "frontHits": 0,
+   "backHits": 0,
+   "verified": true
+  },
+  {
+   "id": 6,
+   "predictedAt": "2026-07-30",
+   "targetDrawNum": "26086",
+   "model": "v2",
+   "predictedFront": [
+    5,
+    9,
+    14,
+    16,
+    26
+   ],
+   "predictedBack": [
+    5,
+    7
+   ],
+   "actualFront": [
+    10,
+    11,
+    18,
+    22,
+    35
+   ],
+   "actualBack": [
+    6,
+    12
+   ],
+   "frontHits": 0,
+   "backHits": 0,
+   "verified": true
+  },
+  {
+   "id": 7,
+   "predictedAt": "2026-08-03",
+   "targetDrawNum": "26087",
+   "model": "v1",
+   "predictedFront": [
+    7,
+    9,
+    17,
+    24,
+    32
+   ],
+   "predictedBack": [
+    1,
+    3
+   ],
+   "actualFront": [
+    5,
+    10,
+    16,
+    24,
+    27
+   ],
+   "actualBack": [
+    4,
+    10
+   ],
+   "frontHits": 1,
+   "backHits": 0,
+   "verified": true
+  },
+  {
+   "id": 8,
+   "predictedAt": "2026-08-03",
+   "targetDrawNum": "26087",
+   "model": "v2",
+   "predictedFront": [
+    4,
+    14,
+    16,
+    25,
+    27
+   ],
+   "predictedBack": [
+    5,
+    7
+   ],
+   "actualFront": [
+    5,
+    10,
+    16,
+    24,
+    27
+   ],
+   "actualBack": [
+    4,
+    10
+   ],
+   "frontHits": 2,
+   "backHits": 0,
+   "verified": true
+  },
+  {
+   "id": 9,
+   "predictedAt": "2026-08-07",
+   "targetDrawNum": "26089",
+   "model": "v1",
+   "predictedFront": [
+    17,
+    7,
+    12,
+    14,
+    31
+   ],
+   "predictedBack": [
+    3,
+    1
+   ],
+   "verified": true,
+   "actualFront": [
+    3,
+    7,
+    12,
+    14,
+    26
+   ],
+   "actualBack": [
+    5,
+    11
+   ],
+   "frontHits": 3,
+   "backHits": 0
+  },
+  {
+   "id": 10,
+   "predictedAt": "2026-08-07",
+   "targetDrawNum": "26089",
+   "model": "v2",
+   "predictedFront": [
+    27,
+    10,
+    24,
+    14,
+    9
+   ],
+   "predictedBack": [
+    5,
+    4
+   ],
+   "verified": true,
+   "actualFront": [
+    3,
+    7,
+    12,
+    14,
+    26
+   ],
+   "actualBack": [
+    5,
+    11
+   ],
+   "frontHits": 1,
+   "backHits": 1
+  },
+  {
+   "id": 11,
+   "predictedAt": "2026-08-10",
+   "targetDrawNum": "26090",
+   "model": "v1",
+   "predictedFront": [
+    17,
+    33,
+    31,
+    6,
+    18
+   ],
+   "predictedBack": [
+    3,
+    1
+   ],
+   "verified": true,
+   "actualFront": [
+    9,
+    14,
+    17,
+    19,
+    24
+   ],
+   "actualBack": [
+    2,
+    9
+   ],
+   "frontHits": 1,
+   "backHits": 0
+  },
+  {
+   "id": 12,
+   "predictedAt": "2026-08-10",
+   "targetDrawNum": "26090",
+   "model": "v2",
+   "predictedFront": [
+    3,
+    27,
+    14,
+    24,
+    9
+   ],
+   "predictedBack": [
+    5,
+    11
+   ],
+   "verified": true,
+   "actualFront": [
+    9,
+    14,
+    17,
+    19,
+    24
+   ],
+   "actualBack": [
+    2,
+    9
+   ],
+   "frontHits": 3,
+   "backHits": 0
+  },
+  {
+   "id": 13,
+   "predictedAt": "2026-08-10",
+   "targetDrawNum": "26090",
+   "model": "v3",
+   "predictedFront": [
+    17,
+    33,
+    3,
+    10,
+    14
+   ],
+   "predictedBack": [
+    3,
+    5
+   ],
+   "verified": true,
+   "actualFront": [
+    9,
+    14,
+    17,
+    19,
+    24
+   ],
+   "actualBack": [
+    2,
+    9
+   ],
+   "frontHits": 2,
+   "backHits": 0
+  },
+  {
+   "id": 14,
+   "predictedAt": "2026-08-11",
+   "targetDrawNum": "26091",
+   "model": "v1",
+   "predictedFront": [
+    31,
+    29,
+    6,
+    1,
+    18
+   ],
+   "predictedBack": [
+    3,
+    1
+   ],
+   "verified": true,
+   "actualFront": [
+    3,
+    4,
+    7,
+    12,
+    32
+   ],
+   "actualBack": [
+    1,
+    2
+   ],
+   "frontHits": 0,
+   "backHits": 1
+  },
+  {
+   "id": 15,
+   "predictedAt": "2026-08-11",
+   "targetDrawNum": "26091",
+   "model": "v2",
+   "predictedFront": [
+    24,
+    27,
+    9,
+    10,
+    14
+   ],
+   "predictedBack": [
+    5,
+    11
+   ],
+   "verified": true,
+   "actualFront": [
+    3,
+    4,
+    7,
+    12,
+    32
+   ],
+   "actualBack": [
+    1,
+    2
+   ],
+   "frontHits": 0,
+   "backHits": 0
+  },
+  {
+   "id": 16,
+   "predictedAt": "2026-08-11",
+   "targetDrawNum": "26091",
+   "model": "v3",
+   "predictedFront": [
+    31,
+    33,
+    24,
+    9,
+    10
+   ],
+   "predictedBack": [
+    3,
+    5
+   ],
+   "verified": true,
+   "actualFront": [
+    3,
+    4,
+    7,
+    12,
+    32
+   ],
+   "actualBack": [
+    1,
+    2
+   ],
+   "frontHits": 0,
+   "backHits": 0
+  },
+  {
+   "id": 17,
+   "predictedAt": "2026-08-13",
+   "targetDrawNum": "26092",
+   "model": "AI_U_wide",
+   "mode": "6+3",
+   "predictedFront": [
+    3,
+    4,
+    7,
+    20,
+    30,
+    32
+   ],
+   "predictedBack": [
+    1,
+    2,
+    7
+   ],
+   "verified": true,
+   "hitGe4": false,
+   "algorithm": "AI_U_wide",
+   "note": "6+3主推: AI_U_wide(重号+宽邻域, 留出集hitGe4=7%)",
+   "actualFront": [
+    12,
+    16,
+    19,
+    29,
+    33
+   ],
+   "actualBack": [
+    7,
+    9
+   ],
+   "frontHits": 0,
+   "backHits": 1
+  },
+  {
+   "id": 18,
+   "predictedAt": "2026-08-13",
+   "targetDrawNum": "26092",
+   "model": "K_prob_ensemble",
+   "mode": "6+3",
+   "predictedFront": [
+    3,
+    4,
+    7,
+    22,
+    26,
+    32
+   ],
+   "predictedBack": [
+    1,
+    2,
+    7
+   ],
+   "verified": true,
+   "hitGe4": false,
+   "actualFront": [
+    12,
+    16,
+    19,
+    29,
+    33
+   ],
+   "actualBack": [
+    7,
+    9
+   ],
+   "frontHits": 0,
+   "backHits": 1
+  },
+  {
+   "targetDrawNum": "26092",
+   "predictedAt": "2026-08-14",
+   "algorithm": "AI_U_wide",
+   "policy": "900/100最优算法(用户2026-08-14确认切换)",
+   "front6": [
+    4,
+    5,
+    11,
+    12,
+    16,
+    27
+   ],
+   "back3": [
+    3,
+    6,
+    8
+   ],
+   "frontHits": 2,
+   "backHits": 0,
+   "verified": true,
+   "id": 19,
+   "model": "AI_U_wide",
+   "mode": "6+3",
+   "dataScope": "draws.json 1000期库(19123-26091), 用户2026-08-14确认",
+   "note": "AI_U_wide按1000期库口径选号",
+   "actualFront": [
+    12,
+    16,
+    19,
+    29,
+    33
+   ],
+   "actualBack": [
+    7,
+    9
+   ],
+   "hitGe4": false
+  },
+  {
+   "id": 20,
+   "predictedAt": "2026-08-16",
+   "targetDrawNum": "26093",
+   "model": "AI_U_wide",
+   "mode": "6+3",
+   "predictedFront": [
+    12,
+    15,
+    16,
+    19,
+    29,
+    33
+   ],
+   "predictedBack": [
+    7,
+    9,
+    10
+   ],
+   "verified": true,
+   "hitGe4": false,
+   "algorithm": "AI_U_wide",
+   "note": "6+3主推: AI_U_wide(重号+宽邻域, 还原版), 数据口径 draws.json 1006期(19123-26092)",
+   "actualFront": [
+    8,
+    10,
+    22,
+    26,
+    29
+   ],
+   "actualBack": [
+    3,
+    10
+   ],
+   "frontHits": 1,
+   "backHits": 1
+  },
+  {
+   "id": 21,
+   "predictedAt": "2026-08-16",
+   "targetDrawNum": "26093",
+   "model": "K_prob_ensemble",
+   "mode": "6+3",
+   "predictedFront": [
+    2,
+    7,
+    10,
+    11,
+    12,
+    26
+   ],
+   "predictedBack": [
+    2,
+    5,
+    7
+   ],
+   "verified": true,
+   "hitGe4": false,
+   "algorithm": "K_prob_ensemble",
+   "note": "6+3参考组: H+I+J 等权集成",
+   "actualFront": [
+    8,
+    10,
+    22,
+    26,
+    29
+   ],
+   "actualBack": [
+    3,
+    10
+   ],
+   "frontHits": 2,
+   "backHits": 0
+  },
+  {
+   "id": 22,
+   "predictedAt": "2026-08-16",
+   "targetDrawNum": "26093",
+   "model": "六爻占卜",
+   "mode": "5+2",
+   "predictedFront": [
+    15,
+    18,
+    22,
+    26,
+    35
+   ],
+   "predictedBack": [
+    8,
+    12
+   ],
+   "verified": true,
+   "note": "六爻起卦: 起始卦火山旅 + 本卦坤为地变雷风恒 seed=186538492148（玄学娱乐）",
+   "actualFront": [
+    8,
+    10,
+    22,
+    26,
+    29
+   ],
+   "actualBack": [
+    3,
+    10
+   ],
+   "frontHits": 2,
+   "backHits": 0
+  },
+  {
+   "id": 23,
+   "predictedAt": "2026-08-17",
+   "targetDrawNum": "26093",
+   "model": "v1",
+   "predictedFront": [
+    1,
+    6,
+    17,
+    31,
+    34
+   ],
+   "predictedBack": [
+    3,
+    8
+   ],
+   "verified": true,
+   "note": "单注5+2, 数据口径 draws.json 1006期(19123-26092)",
+   "actualFront": [
+    8,
+    10,
+    22,
+    26,
+    29
+   ],
+   "actualBack": [
+    3,
+    10
+   ],
+   "frontHits": 0,
+   "backHits": 1
+  },
+  {
+   "id": 24,
+   "predictedAt": "2026-08-17",
+   "targetDrawNum": "26093",
+   "model": "v2",
+   "predictedFront": [
+    3,
+    9,
+    14,
+    24,
+    32
+   ],
+   "predictedBack": [
+    2,
+    5
+   ],
+   "verified": true,
+   "note": "单注5+2, 数据口径 draws.json 1006期(19123-26092)",
+   "actualFront": [
+    8,
+    10,
+    22,
+    26,
+    29
+   ],
+   "actualBack": [
+    3,
+    10
+   ],
+   "frontHits": 0,
+   "backHits": 0
+  },
+  {
+   "id": 25,
+   "predictedAt": "2026-08-17",
+   "targetDrawNum": "26093",
+   "model": "v3",
+   "predictedFront": [
+    3,
+    14,
+    24,
+    31,
+    34
+   ],
+   "predictedBack": [
+    2,
+    3
+   ],
+   "verified": true,
+   "note": "单注5+2, 数据口径 draws.json 1006期(19123-26092)",
+   "actualFront": [
+    8,
+    10,
+    22,
+    26,
+    29
+   ],
+   "actualBack": [
+    3,
+    10
+   ],
+   "frontHits": 0,
+   "backHits": 1
+  },
+  {
+   "id": 26,
+   "predictedAt": "2026-08-18",
+   "targetDrawNum": "26094",
+   "model": "AI_U_wide",
+   "mode": "6+3",
+   "predictedFront": [
+    8,
+    10,
+    11,
+    22,
+    26,
+    29
+   ],
+   "predictedBack": [
+    3,
+    7,
+    10
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "algorithm": "AI_U_wide",
+   "note": "6+3主推: AI_U_wide(还原版)"
+  },
+  {
+   "id": 27,
+   "predictedAt": "2026-08-18",
+   "targetDrawNum": "26094",
+   "model": "K_prob_ensemble",
+   "mode": "6+3",
+   "predictedFront": [
+    2,
+    10,
+    12,
+    13,
+    22,
+    26
+   ],
+   "predictedBack": [
+    5,
+    7,
+    10
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "algorithm": "K_prob_ensemble",
+   "note": "6+3参考组: H+I+J集成"
+  },
+  {
+   "id": 28,
+   "predictedAt": "2026-08-18",
+   "targetDrawNum": "26094",
+   "model": "六爻占卜",
+   "mode": "5+2",
+   "predictedFront": [
+    5,
+    11,
+    20,
+    22,
+    34
+   ],
+   "predictedBack": [
+    4,
+    5
+   ],
+   "verified": false,
+   "note": "六爻起卦: 起始卦风天小畜 + 本卦坤为地变地天泰 seed=186539507982（玄学娱乐）"
+  }
+ ]
 }
