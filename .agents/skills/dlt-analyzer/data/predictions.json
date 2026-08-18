@@ -860,7 +860,70 @@
    "note": "6+3参考组: H+I+J集成"
   },
   {
-   "id": 28,
+   "id": 29,
+   "predictedAt": "2026-08-18",
+   "targetDrawNum": "26094",
+   "model": "v1_cold",
+   "mode": "5+2",
+   "predictedFront": [
+    1,
+    6,
+    17,
+    31,
+    34
+   ],
+   "predictedBack": [
+    8,
+    1
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "note": "单式5+2: 追冷 gap×0.5+冷30×2.5+全期偏冷×0.3"
+  },
+  {
+   "id": 30,
+   "predictedAt": "2026-08-18",
+   "targetDrawNum": "26094",
+   "model": "v2_hot",
+   "mode": "5+2",
+   "predictedFront": [
+    7,
+    12,
+    14,
+    19,
+    27
+   ],
+   "predictedBack": [
+    2,
+    5
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "note": "单式5+2: 追热 近5×3+近10×1.5+邻域×4+连出×4"
+  },
+  {
+   "id": 31,
+   "predictedAt": "2026-08-18",
+   "targetDrawNum": "26094",
+   "model": "v3",
+   "mode": "5+2",
+   "predictedFront": [
+    6,
+    7,
+    12,
+    31,
+    34
+   ],
+   "predictedBack": [
+    2,
+    5
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "note": "单式5+2: 冷号3+热号2 组合"
+  },
+  {
+   "id": 32,
    "predictedAt": "2026-08-18",
    "targetDrawNum": "26094",
    "model": "六爻占卜",
