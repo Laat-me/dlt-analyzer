@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "activeAlgorithm": "poisson_mixed",
+  "algorithms": {
+    "poisson": "基础泊松: λ=联赛场均×进攻强度×防守系数",
+    "poisson_mixed": "泊松 + 战意/伤病/主客场人工加权修正 (推荐)",
+    "negative_binomial": "负二项回归 (需 statsmodels, 可选)",
+    "ml_xgboost": "XGBoost 分类 (需≥2赛季大样本, 可选)"
+  },
+  "dataScope": "近2个完整赛季 + 近期10场; 久远数据剔除",
+  "evaluation": {
+    "resultBaseline": "随机33%",
+    "exactScoreBaseline": "随机1-2%",
+    "overUnderBaseline": "随机50%"
+  },
+  "reviewNotes": [
+    "2026-08-17: skill初始化, 待导入真实比赛数据后首次回测; 诚实边界: 模型只输出概率分布, 不输出确定比分"
+  ]
+}
