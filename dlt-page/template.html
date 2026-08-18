@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大乐透数据可视化与统计分析</title>
+<style>
+  :root{
+    --bg:#0e1422; --card:#161e31; --card2:#1b2440; --line:#26325a;
+    --txt:#dbe4f8; --sub:#8fa0c4; --front:#ff9f43; --front2:#e07b1f;
+    --blue:#4da3ff; --gold:#ffcf5d; --green:#4ade80;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--txt);font-family:"Microsoft YaHei","PingFang SC",system-ui,sans-serif;font-size:14px;line-height:1.6}
+  .wrap{max-width:1280px;margin:0 auto;padding:24px 20px 60px}
+  header h1{font-size:26px;letter-spacing:1px}
+  header .sub{color:var(--sub);margin-top:6px;font-size:13px}
+  .banner{margin:18px 0;padding:12px 16px;border-radius:10px;background:linear-gradient(90deg,rgba(255,207,93,.12),rgba(255,159,67,.10));border:1px solid rgba(255,207,93,.35);color:var(--gold);font-size:13px}
+  .banner b{color:#ffe9a8}
+  .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:16px;margin:16px 0}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px}
+  .hero .latest .lbl{color:var(--sub);font-size:12px;margin-bottom:10px}
+  .balls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .ball{width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:700;color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.4), inset 0 -3px 6px rgba(0,0,0,.25)}
+  .ball.f{background:radial-gradient(circle at 32% 28%,#ffc37a,var(--front2))}
+  .ball.b{background:radial-gradient(circle at 32% 28%,#7cbcff,#2f7fe0)}
+  .ball.sm{width:30px;height:30px;font-size:13px}
+  .hero .next{display:flex;flex-direction:column;justify-content:center;gap:8px}
+  .hero .next .n1{font-size:22px;font-weight:700;color:#fff}
+  .hero .next .n2{color:var(--sub);font-size:13px}
+  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:16px 0}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .stat .k{color:var(--sub);font-size:12px}
+  .stat .v{font-size:20px;font-weight:700;margin-top:4px}
+  .stat .v small{font-size:12px;color:var(--sub);font-weight:400}
+  h2{font-size:17px;margin:30px 0 12px;padding-left:10px;border-left:4px solid var(--front)}
+  h2 span{font-size:12px;color:var(--sub);font-weight:400;margin-left:8px}
+  .chart{width:100%;height:380px}
+  .chart.tall{height:430px}
+  .chart.short{height:330px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  @media(max-width:960px){.grid2,.grid3,.hero{grid-template-columns:1fr}}
+  .note{color:var(--sub);font-size:12px;margin-top:8px}
+  table.recent{width:100%;border-collapse:collapse;font-size:13px}
+  table.recent th{color:var(--sub);font-weight:600;text-align:left;padding:6px 10px;border-bottom:1px solid var(--line);font-size:12px}
+  table.recent td{padding:7px 10px;border-bottom:1px solid rgba(38,50,90,.5)}
+  .chip{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 3px;border-radius:12px;font-size:12px;font-weight:700;color:#fff;margin-right:4px}
+  .chip.f{background:var(--front2)} .chip.b{background:#2f7fe0}
+  .chip.hit{background:linear-gradient(135deg,#4ade80,#16a34a);box-shadow:0 0 9px rgba(74,222,128,.75);outline:2px solid #bbf7d0;position:relative}
+  .chip.hit::after{content:'✓';position:absolute;top:-7px;right:-4px;font-size:10px;color:#22c55e;font-weight:900;text-shadow:0 0 3px #000}
+  .chisq{background:var(--card2);border-radius:10px;padding:12px 16px;margin-top:10px;font-size:13px;color:var(--sub)}
+  .chisq b{color:var(--txt)}
+  .pred-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+  .method{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-top:14px;font-size:13px;color:var(--sub)}
+  .method b{color:var(--txt)}
+  .method ol{margin:6px 0 0 20px}
+  .method li{margin:4px 0}
+  .ticket{text-align:center}
+  .ticket .t-desc{color:var(--sub);font-size:12px;margin:6px 0 14px;min-height:36px}
+  .sep{width:100%;height:1px;background:var(--line);margin:12px 0}
+  footer{margin-top:40px;color:#5b6a92;font-size:12px;text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>大乐透 · 数据可视化与统计分析</h1>
+    <div class="sub" id="rangeSub">数据加载中…</div>
+  </header>
+
+  <div class="banner">
+    ⚠️ <b>重要声明：</b>大乐透每期开奖均为<b>独立随机事件</b>（前区 35 选 5 + 后区 12 选 2），历史数据不包含任何可用于预测未来的信息。本页的“规律”是对历史的统计描述，“预测”仅为娱乐演示——任何一注中一等奖概率都相同（<b>1 / 21,425,712</b>）。请理性购彩，量力而行。
+  </div>
+
+  <div class="hero">
+    <div class="card latest">
+      <div class="lbl" id="latestLbl">最新一期</div>
+      <div class="balls" id="latestBalls"></div>
+    </div>
+    <div class="card next">
+      <div class="n1" id="nextIssue">—</div>
+      <div class="n2" id="nextDate">—</div>
+      <div class="n2">开奖时间：每周一 / 三 / 六 21:25</div>
+    </div>
+  </div>
+
+  <div class="stats-grid" id="statsGrid"></div>
+
+  <h2>最近 20 期开奖一览</h2>
+  <div class="card"><table class="recent" id="recentTable"></table></div>
+
+  <h2>前区和值走势 <span>五枚前区之和（理论均值 90），叠加 10 期移动平均</span></h2>
+  <div class="card"><div id="cSum" class="chart tall"></div>
+    <div class="note">拖动下方滑块或滚轮缩放可查看任意区间。和值在均值附近随机波动，不存在周期性趋势。</div></div>
+
+  <div class="grid2">
+    <div>
+      <h2>后区走势 <span>后一 / 后二（1–12）</span></h2>
+      <div class="card"><div id="cBack" class="chart short"></div></div>
+    </div>
+    <div>
+      <h2>前区跨度走势 <span>最大号 − 最小号</span></h2>
+      <div class="card"><div id="cSpan" class="chart short"></div></div>
+    </div>
+  </div>
+
+  <h2>位置走势 <span>x = 升序位置（前区第 1–5 位 + 后区第 6–7 位），y = 号码 · 数据量：最近 100 期 · 橙色带为 10%–90% 分位区间</span></h2>
+  <div class="card"><div id="cPos" class="chart"></div>
+    <div class="note">浅色细线为最近 100 期各期位置曲线，橙色粗线为最新一期（第 6、7 点为后区，蓝色标记），绿色虚线为理论期望（前区第 k 位 = 6k，后区两位置 = 4.33 / 8.67）。</div></div>
+
+  <h2>前区出现频次 <span>1–35 号，含理论期望与 ±2σ 参考线</span></h2>
+  <div class="card"><div id="cFreqF" class="chart"></div>
+    <div class="chisq" id="chiF"></div></div>
+
+  <h2>后区出现频次 <span>1–12 号，含理论期望与 ±2σ 参考线</span></h2>
+  <div class="card"><div id="cFreqB" class="chart short"></div>
+    <div class="chisq" id="chiB"></div></div>
+
+  <div class="grid2">
+    <div>
+      <h2>前区遗漏分析 <span>当前遗漏 vs 平均出现间隔（理论 ≈ 7 期）</span></h2>
+      <div class="card"><div id="cMissF" class="chart"></div>
+        <div class="note">当前遗漏：距该号上次开出已过去的期数。“该出了”是赌徒谬误——每期每个号被摇出的概率不变。</div></div>
+    </div>
+    <div>
+      <h2>后区遗漏分析 <span>当前遗漏 vs 平均出现间隔（理论 ≈ 6 期）</span></h2>
+      <div class="card"><div id="cMissB" class="chart"></div></div>
+    </div>
+  </div>
+
+  <div class="grid3">
+    <div>
+      <h2>奇偶比分布</h2>
+      <div class="card"><div id="cOdd" class="chart short"></div></div>
+    </div>
+    <div>
+      <h2>大小比分布 <span>大：≥19</span></h2>
+      <div class="card"><div id="cBig" class="chart short"></div></div>
+    </div>
+    <div>
+      <h2>AC 值分布 <span>算术复杂度</span></h2>
+      <div class="card"><div id="cAC" class="chart short"></div></div>
+    </div>
+  </div>
+
+  <div class="grid2">
+    <div>
+      <h2>近 30 期前区热号 TOP12</h2>
+      <div class="card"><div id="cHot30" class="chart short"></div></div>
+    </div>
+    <div>
+      <h2>近 100 期前区热号 TOP12</h2>
+      <div class="card"><div id="cHot100" class="chart short"></div></div>
+    </div>
+  </div>
+
+  <h2>后区近期冷热 <span>近30期 / 近100期出现次数</span></h2>
+  <div class="card"><div id="cHotBk" class="chart short"></div></div>
+
+  <h2>算法池回测 <span>dlt-analyzer 31 个算法 · 900/100 留出 + 长窗口双口径 · 6+3 复式 · 达标 = 命中≥4</span></h2>
+  <div class="card"><div id="cAlgo" class="chart"></div></div>
+  <div class="card" style="margin-top:16px"><table class="recent" id="algoTable"></table></div>
+  <div class="chisq" id="algoConclusion" style="margin-top:10px"></div>
+  <div class="method">
+    <b>关于本节（来源与诚实口径）：</b>
+    <ol>
+      <li>算法与回测框架来自本机 <b>dlt-analyzer</b> 项目（algorithms.py，31 个已实现算法），本页由 Python 预计算、结果内嵌。</li>
+      <li>评估口径：6+3 复式（前区 6 + 后区 3），hitCount = 前区命中 + 后区命中，达标 ≥4；随机理论基线 2.04%（本页实算）。</li>
+      <li>项目 round-25 长窗口结论：<b>1000 期留出上全部算法回落至随机基线，训练段调参不迁移</b>。下表“长窗口”列即该口径的持续验证。</li>
+    </ol>
+  </div>
+
+  <h2>下一期参考选号 <span>第 <b id="nextIssue2">—</b> 期 · 6+3 复式 · 纯娱乐演示</span></h2>
+  <div class="pred-head">
+    <div class="note" style="margin:0">来自 <b>predictions.json</b> 的正式记录（开奖前生成并持久化，开奖后自动比对）。6+3 复式 = 18 注 36 元，一等奖概率 18/21,425,712，与机选任意同注数完全相同。</div>
+  </div>
+  <div class="grid2" id="predGrid"></div>
+
+  <h2>六爻占卜号 <span>玄学娱乐 · 前九期开奖起卦 → 卦象定种子出号 · 与中奖概率毫无关系</span></h2>
+  <div class="pred-head">
+    <div class="note" style="margin:0">起卦法：前九期每期掷两枚铜钱（前区和值为<b>奇</b>记一背、后区和值为<b>奇</b>记一背），九期十八钱；自初爻至上爻每三钱成一爻——0背为老阴(6,动)、1背为少阳(7)、2背为少阴(8)、3背为老阳(9,动)；动爻变出<b>变卦</b>，再以期号与卦象共同决定随机种子出号。<b>六爻无法预测彩票，本节纯属娱乐</b>。</div>
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <table class="recent" id="castTable"></table>
+      <div id="yaoDisplay" style="margin-top:14px"></div>
+    </div>
+    <div class="card ticket">
+      <div class="t-name" style="color:var(--gold)">🀄 六爻起卦 · 第 <span id="guaIssue"></span> 期</div>
+      <div class="t-desc" id="guaDesc"></div>
+      <div class="balls" id="guaBalls" style="justify-content:center"></div>
+      <div class="sep"></div>
+      <div class="t-desc" style="min-height:0">同样注明：这注与机选任何一注 5+2 的中奖概率完全相同（1/21,425,712）</div>
+    </div>
+  </div>
+
+  <h2>预测历史记录 <span>来自 dlt-analyzer/predictions.json · 文件持久化，开奖后自动比对</span></h2>
+  <div class="card"><table class="recent" id="histTable"></table></div>
+  <div class="chisq" id="histSummary" style="margin-top:10px"></div>
+
+  <footer id="footer">数据来源：中国体彩（sporttery.cn）· 算法与预测记录：dlt-analyzer 项目 · 页面由脚本自动生成</footer>
+</div>
+
+<script>__ECHARTS_JS__</script>
+<script>__LIUYAO_JS__</script>
+<script>
+const D = __DATA_JSON__;                    // 时间升序（旧 → 新）
+const PRED = __PRED_JSON__;                 // predictions.json 快照
+const BT = __BT_JSON__;                     // Python 预计算回测结果
+const N = D.length;
+
+/* ---------- 基础统计 ---------- */
+const codes = D.map(d => d.num);
+const dates = D.map(d => d.date);
+const sums  = D.map(d => d.front.reduce((a,b)=>a+b, 0));
+const spans = D.map(d => d.front[4] - d.front[0]);
+const back1 = D.map(d => d.back[0]), back2 = D.map(d => d.back[1]);
+
+const freqF = Array(36).fill(0), freqB = Array(13).fill(0);
+D.forEach(d => { d.front.forEach(n => freqF[n]++); d.back.forEach(n => freqB[n]++); });
+const freqF30 = Array(36).fill(0), freqF100 = Array(36).fill(0);
+const freqB30 = Array(13).fill(0), freqB100 = Array(13).fill(0);
+D.slice(N-100).forEach(d => d.front.forEach(n => freqF100[n]++));
+D.slice(N-30).forEach(d => d.front.forEach(n => freqF30[n]++));
+D.slice(N-100).forEach(d => d.back.forEach(n => freqB100[n]++));
+D.slice(N-30).forEach(d => d.back.forEach(n => freqB30[n]++));
+
+function missingStats(pick){
+  const last = {}, gaps = {};
+  D.forEach((d, i) => pick(d).forEach(n => {
+    if (last[n] !== undefined) (gaps[n] = gaps[n] || []).push(i - last[n]);
+    last[n] = i;
+  }));
+  return {
+    cur: n => (last[n] === undefined ? N : N - 1 - last[n]),
+    avg: n => { const g = gaps[n]; return g && g.length ? g.reduce((a,b)=>a+b,0)/g.length : N; }
+  };
+}
+const missF = missingStats(d => d.front);
+const missB = missingStats(d => d.back);
+
+const oddRatio = {}, bigRatio = {}, acDist = {};
+let consecDraws = 0;
+D.forEach(d => {
+  const k = d.front.filter(n => n%2===1).length;
+  oddRatio[`${k}:${5-k}`] = (oddRatio[`${k}:${5-k}`]||0) + 1;
+  const g = d.front.filter(n => n>=19).length;
+  bigRatio[`${g}:${5-g}`] = (bigRatio[`${g}:${5-g}`]||0) + 1;
+  const diffs = new Set();
+  for (let i=0;i<5;i++) for (let j=i+1;j<5;j++) diffs.add(d.front[j]-d.front[i]);
+  const ac = diffs.size - 4;
+  acDist[ac] = (acDist[ac]||0) + 1;
+  for (let i=0;i<4;i++) if (d.front[i+1]-d.front[i] === 1) { consecDraws++; break; }
+});
+
+/* 卡方检验 */
+function gammaln(x){
+  const c=[76.18009172947146,-86.50532032941677,24.01409824083091,-1.231739572450155,0.1208650973866179e-2,-0.5395239384953e-5];
+  let y=x, tmp=x+5.5; tmp-=(x+0.5)*Math.log(tmp);
+  let ser=1.000000000190015;
+  for(let j=0;j<6;j++) ser+=c[j]/++y;
+  return -tmp+Math.log(2.5066282746310005*ser/x);
+}
+function chi2P(chi2, df){
+  const a=df/2, x=chi2/2, gln=gammaln(a);
+  const step=0.002; let s=0;
+  for(let t=x;t<x+60;t+=step) s+=Math.exp(-t+(a-1)*Math.log(t)-gln);
+  return Math.min(1, Math.max(0, s*step));
+}
+function chi2Test(freq, nNum, draws, per){
+  const e = draws*per/nNum; let x2=0;
+  for(let i=1;i<=nNum;i++){ const d=freq[i]-e; x2+=d*d/e; }
+  return { x2, df:nNum-1, e, p:chi2P(x2, nNum-1) };
+}
+const chiFt = chi2Test(freqF, 35, N, 5);
+const chiBt = chi2Test(freqB, 12, N, 2);
+
+/* ---------- 页面顶部 ---------- */
+const L = D[N-1];
+document.getElementById('rangeSub').textContent =
+  `数据区间：${dates[0]}（第 ${codes[0]} 期）— ${dates[N-1]}（第 ${codes[N-1]} 期）· 共 ${N} 期 · 生成于 ${new Date().toLocaleString('zh-CN')}`;
+document.getElementById('latestLbl').textContent = `最新一期 · 第 ${L.num} 期 · ${L.date}`;
+document.getElementById('latestBalls').innerHTML =
+  L.front.map(n=>`<div class="ball f">${String(n).padStart(2,'0')}</div>`).join('') +
+  L.back.map(n=>`<div class="ball b">${String(n).padStart(2,'0')}</div>`).join('');
+
+const nextCode = String(Number(L.num) + 1);
+const lastDt = new Date(dates[N-1]);
+let add = 1;
+while (![1,3,6].includes(new Date(lastDt.getTime()+add*864e5).getDay())) add++;
+const nextDt = new Date(lastDt.getTime()+add*864e5);
+const wk = ['日','一','二','三','四','五','六'][nextDt.getDay()];
+document.getElementById('nextIssue').textContent = `下一期：第 ${nextCode} 期`;
+document.getElementById('nextDate').textContent = `预计开奖：${nextDt.getFullYear()}-${String(nextDt.getMonth()+1).padStart(2,'0')}-${String(nextDt.getDate()).padStart(2,'0')}（周${wk}）`;
+document.getElementById('nextIssue2').textContent = nextCode;
+
+function hotCold(freq, max){
+  let hi=1, lo=1;
+  for(let i=1;i<freq.length;i++){ if(freq[i]>freq[hi])hi=i; if(freq[i]<freq[lo])lo=i; }
+  return {hi, lo};
+}
+const hcF=hotCold(freqF), hcB=hotCold(freqB);
+let mMF=1; for(let i=1;i<=35;i++) if(missF.cur(i)>missF.cur(mMF)) mMF=i;
+let mMB=1; for(let i=1;i<=12;i++) if(missB.cur(i)>missB.cur(mMB)) mMB=i;
+document.getElementById('statsGrid').innerHTML = [
+  [`前区最热`, `${String(hcF.hi).padStart(2,'0')} 号 <small>${freqF[hcF.hi]} 次 / ${N} 期</small>`],
+  [`前区最冷`, `${String(hcF.lo).padStart(2,'0')} 号 <small>${freqF[hcF.lo]} 次</small>`],
+  [`后区最热`, `${String(hcB.hi).padStart(2,'0')} 号 <small>${freqB[hcB.hi]} 次</small>`],
+  [`后区最冷`, `${String(hcB.lo).padStart(2,'0')} 号 <small>${freqB[hcB.lo]} 次</small>`],
+  [`前区最大当前遗漏`, `${String(mMF).padStart(2,'0')} 号 <small>${missF.cur(mMF)} 期未出</small>`],
+  [`后区最大当前遗漏`, `${String(mMB).padStart(2,'0')} 号 <small>${missB.cur(mMB)} 期未出</small>`],
+  [`含连号期数占比`, `${(consecDraws/N*100).toFixed(1)}% <small>理论 ≈ 47.7%</small>`],
+  [`一等奖中奖概率`, `1 / 21,425,712 <small>≈ 0.0000047%</small>`],
+].map(([k,v])=>`<div class="stat"><div class="k">${k}</div><div class="v">${v}</div></div>`).join('');
+
+document.getElementById('recentTable').innerHTML =
+  `<tr><th>期号</th><th>开奖日</th><th>前区</th><th>后区</th><th>和值</th><th>奇偶比</th></tr>` +
+  D.slice(-20).reverse().map(d=>{
+    const k=d.front.filter(n=>n%2===1).length;
+    return `<tr><td>${d.num}</td><td>${d.date}</td><td>${
+      d.front.map(n=>`<span class="chip f">${String(n).padStart(2,'0')}</span>`).join('')
+    }</td><td>${d.back.map(n=>`<span class="chip b">${String(n).padStart(2,'0')}</span>`).join('')}</td><td>${d.front.reduce((a,b)=>a+b,0)}</td><td>${k}:${5-k}</td></tr>`;
+  }).join('');
+
+/* ---------- ECharts 公共 ---------- */
+const charts = [];
+function mk(id, opt){
+  const c = echarts.init(document.getElementById(id));
+  c.setOption(Object.assign({animation:false, tooltip:{trigger:'axis', backgroundColor:'#0b1020', borderColor:'#26325a', textStyle:{color:'#dbe4f8', fontSize:12}}}, opt));
+  charts.push(c);
+  return c;
+}
+const AX = {axisLine:{lineStyle:{color:'#33406b'}}, axisLabel:{color:'#8fa0c4', fontSize:11}, axisTick:{show:false}};
+const AY = Object.assign({}, AX, {splitLine:{lineStyle:{color:'rgba(51,64,107,.22)'}}});
+const xIssue = {type:'category', data:codes, ...AX};
+const zoom = [{type:'inside'},{type:'slider', height:16, bottom:6, borderColor:'#26325a', fillerColor:'rgba(255,159,67,.12)'}];
+
+/* 和值 / 后区 / 跨度 */
+(function(){
+  const ma = sums.map((_,i)=>{ const w=sums.slice(Math.max(0,i-9), i+1); return +(w.reduce((a,b)=>a+b,0)/w.length).toFixed(1); });
+  mk('cSum', {
+    grid:{left:44, right:16, top:30, bottom:54},
+    xAxis:Object.assign({}, xIssue, {axisLabel:{color:'#8fa0c4', fontSize:10, interval:97}}),
+    yAxis:Object.assign({}, AY, {name:'和值', min:15, max:165}),
+    dataZoom:zoom,
+    series:[
+      {name:'和值', type:'line', data:sums, symbol:'none', sampling:'lttb', lineStyle:{width:1.2, color:'#ff9f43'}, areaStyle:{color:{type:'linear',x:0,y:0,x2:0,y2:1,colorStops:[{offset:0,color:'rgba(255,159,67,.22)'},{offset:1,color:'rgba(255,159,67,0)'}]}}},
+      {name:'10期均线', type:'line', data:ma, symbol:'none', lineStyle:{width:2, color:'#ffcf5d'}},
+      {name:'理论均值90', type:'line', data:null, markLine:{symbol:'none', silent:true, lineStyle:{type:'dashed', color:'#4ade80'}, data:[{yAxis:90}], label:{color:'#4ade80', formatter:'理论均值 90'}}}
+    ]
+  });
+})();
+mk('cBack', {grid:{left:36,right:16,top:30,bottom:46},
+  xAxis:Object.assign({}, xIssue, {axisLabel:{color:'#8fa0c4', fontSize:10, interval:97}}),
+  yAxis:Object.assign({}, AY, {min:1, max:12, interval:2}),
+  dataZoom:[{type:'inside'}],
+  series:[
+    {name:'后一', type:'line', data:back1, symbol:'none', sampling:'lttb', step:'middle', lineStyle:{width:1.2, color:'#4da3ff'}},
+    {name:'后二', type:'line', data:back2, symbol:'none', sampling:'lttb', step:'middle', lineStyle:{width:1.2, color:'#7cbcff'}}]});
+mk('cSpan', {grid:{left:36,right:16,top:24,bottom:46},
+  xAxis:Object.assign({}, xIssue, {axisLabel:{color:'#8fa0c4', fontSize:10, interval:97}}),
+  yAxis:Object.assign({}, AY, {min:4, max:34}),
+  dataZoom:[{type:'inside'}],
+  series:[{name:'跨度', type:'line', data:spans, symbol:'none', sampling:'lttb', lineStyle:{width:1.2, color:'#ff8f8f'}}]});
+
+/* 位置走势（前区5位+后区2位，近100期） */
+(function(){
+  const W = 100;
+  const recent = D.slice(-W), latest = recent[recent.length-1];
+  const quantile=(arr,p)=>{ const a=Array.from(arr).sort((x,y)=>x-y); const idx=(a.length-1)*p, lo=Math.floor(idx), hi=Math.ceil(idx); return a[lo]+(a[hi]-a[lo])*(idx-lo); };
+  const meanA=arr=>arr.reduce((a,b)=>a+b,0)/arr.length;
+  const cats=['前1','前2','前3','前4','前5','后1·蓝','后2·蓝'];
+  const cols=[0,1,2,3,4].map(p=>recent.map(d=>d.front[p]));
+  cols.push(recent.map(d=>d.back[0])); cols.push(recent.map(d=>d.back[1]));
+  const m=cols.map(meanA), q10=cols.map(c=>quantile(c,0.10)), q90=cols.map(c=>quantile(c,0.90));
+  const theory=[6,12,18,24,30].map(k=>+k.toFixed(1)); theory.push(+(13/3).toFixed(2), +(26/3).toFixed(2));
+  mk('cPos', {
+    legend:{textStyle:{color:'#8fa0c4', fontSize:11}, top:2, data:['近100期均值','理论期望','最新一期 · '+latest.num]},
+    grid:{left:44,right:20,top:38,bottom:34},
+    xAxis:Object.assign({}, AX, {type:'category', data:cats, boundaryGap:true}),
+    yAxis:Object.assign({}, AY, {min:1, max:35, name:'号码'}),
+    tooltip:{trigger:'axis', backgroundColor:'#0b1020', borderColor:'#26325a', textStyle:{color:'#dbe4f8', fontSize:12},
+      formatter(ps){
+        const i=ps[0].dataIndex;
+        return `<b>${cats[i]}</b>${i>=5?'（后区 1–12）':''}<br/>90% 分位：${q90[i].toFixed(1)}<br/>10% 分位：${q10[i].toFixed(1)}<br/>近100期均值：${m[i].toFixed(2)}<br/>理论期望：${theory[i].toFixed(2)}`;
+      }},
+    series:[
+      {name:'bandBase', type:'line', data:q10.map(v=>+v.toFixed(1)), stack:'band', symbol:'none', lineStyle:{opacity:0}, silent:true, z:1},
+      {name:'10%–90% 分位带', type:'line', data:q90.map((v,i)=>+(v-q10[i]).toFixed(1)), stack:'band', symbol:'none', lineStyle:{opacity:0}, areaStyle:{color:'rgba(255,159,67,.10)'}, silent:true, z:1},
+      {name:'近100期均值', type:'line', data:m.map(v=>+v.toFixed(2)), symbol:'circle', symbolSize:5, lineStyle:{width:3, color:'#ff9f43'}, itemStyle:{color:'#ff9f43'}, z:3,
+        markLine:{symbol:'none', silent:true, lineStyle:{type:'dashed', color:'rgba(143,160,196,.45)'}, label:{color:'#8fa0c4', fontSize:10, position:'start'}, data:[{xAxis:'后1·蓝'}]}},
+      {name:'理论期望', type:'line', data:theory, symbol:'none', lineStyle:{width:1.5, type:'dashed', color:'#4ade80'}, z:2},
+      ...recent.slice(0,-1).map(d=>({name:'近100期', type:'line', data:[...d.front, ...d.back], symbol:'none', lineStyle:{width:1, color:'rgba(143,160,196,.10)'}, z:2})),
+      {name:'最新一期 · '+latest.num, type:'line',
+        data:[...latest.front.map(n=>({value:n})), ...latest.back.map(n=>({value:n, itemStyle:{color:'#4da3ff'}, label:{color:'#7cbcff'}}))],
+        symbol:'circle', symbolSize:6, lineStyle:{width:2.5, color:'#ff5d5d'}, itemStyle:{color:'#ff5d5d'},
+        label:{show:true, color:'#ffc37a', fontSize:10, distance:6}, z:4}
+    ]
+  });
+})();
+
+/* 频次图 */
+function freqOpt(freq, nNum, expected, sigma, color){
+  const nums=[]; for(let i=1;i<=nNum;i++) nums.push(String(i).padStart(2,'0'));
+  return {
+    grid:{left:44,right:16,top:30,bottom:30},
+    xAxis:Object.assign({}, AX, {type:'category', data:nums, axisLabel:{color:'#8fa0c4', fontSize:10, interval:nNum>20?1:0}}),
+    yAxis:Object.assign({}, AY, {name:'次数'}),
+    series:[{type:'bar', data:freq.slice(1), itemStyle:{color: p => p.data >= expected ? color : color+'66', borderRadius:[3,3,0,0]},
+      markLine:{symbol:'none', silent:true, data:[
+        {yAxis:+expected.toFixed(1), lineStyle:{type:'dashed', color:'#4ade80'}, label:{color:'#4ade80', formatter:`期望 ${expected.toFixed(1)}`}},
+        {yAxis:+(expected+2*sigma).toFixed(1), lineStyle:{type:'dotted', color:'#8fa0c4'}, label:{color:'#8fa0c4', formatter:'+2σ'}},
+        {yAxis:+(expected-2*sigma).toFixed(1), lineStyle:{type:'dotted', color:'#8fa0c4'}, label:{color:'#8fa0c4', formatter:'-2σ'}}
+      ]}}]
+  };
+}
+mk('cFreqF', freqOpt(freqF, 35, chiFt.e, Math.sqrt(N*(5/35)*(30/35)), '#ff9f43'));
+mk('cFreqB', freqOpt(freqB, 12, chiBt.e, Math.sqrt(N*(2/12)*(10/12)), '#4da3ff'));
+document.getElementById('chiF').innerHTML =
+  `<b>卡方检验（前区频次 vs 均匀分布）</b>：χ² = ${chiFt.x2.toFixed(2)}，自由度 ${chiFt.df}，p ≈ ${chiFt.p.toFixed(3)}。` +
+  (chiFt.p > 0.05 ? 'p > 0.05，<b>无法拒绝“均匀随机”假设</b>——频次差异在统计噪声范围内。' : 'p ≤ 0.05，偏差略超常规范围，长期仍会回归均匀，无预测价值。');
+document.getElementById('chiB').innerHTML =
+  `<b>卡方检验（后区频次 vs 均匀分布）</b>：χ² = ${chiBt.x2.toFixed(2)}，自由度 ${chiBt.df}，p ≈ ${chiBt.p.toFixed(3)}。` +
+  (chiBt.p > 0.05 ? 'p > 0.05，<b>无法拒绝“均匀随机”假设</b>。' : 'p ≤ 0.05，短期偏差略大，无预测价值。');
+
+/* 遗漏图 */
+function missOpt(miss, nNum, color){
+  const nums=[]; for(let i=1;i<=nNum;i++) nums.push(String(i).padStart(2,'0'));
+  return {
+    grid:{left:44,right:16,top:30,bottom:30},
+    xAxis:Object.assign({}, AX, {type:'category', data:nums, axisLabel:{color:'#8fa0c4', fontSize:10, interval:nNum>20?1:0}}),
+    yAxis:Object.assign({}, AY, {name:'期数'}),
+    series:[
+      {name:'当前遗漏', type:'bar', data:Array.from({length:nNum},(_,i)=>miss.cur(i+1)), itemStyle:{color, borderRadius:[3,3,0,0]}},
+      {name:'平均间隔', type:'line', data:Array.from({length:nNum},(_,i)=>+miss.avg(i+1).toFixed(1)), symbol:'circle', symbolSize:5, lineStyle:{width:1.5, color:'#ffcf5d'}, itemStyle:{color:'#ffcf5d'}}
+    ]};
+}
+mk('cMissF', missOpt(missF, 35, 'rgba(255,159,67,.75)'));
+mk('cMissB', missOpt(missB, 12, 'rgba(77,163,255,.75)'));
+
+/* 奇偶 / 大小 / AC */
+function comb(n,k){ if(k<0||k>n) return 0; let r=1; for(let i=0;i<k;i++) r=r*(n-i)/(i+1); return Math.round(r); }
+const C355 = comb(35,5);
+function ratioOpt(dist, theo, color){
+  const ks=[0,1,2,3,4,5];
+  return {
+    grid:{left:44,right:16,top:30,bottom:30},
+    xAxis:Object.assign({}, AX, {type:'category', data:ks.map(k=>`${k}:${5-k}`)}),
+    yAxis:Object.assign({}, AY, {name:'期数'}),
+    series:[
+      {name:'实际', type:'bar', data:ks.map(k => dist[`${k}:${5-k}`] || 0), itemStyle:{color, borderRadius:[3,3,0,0]}},
+      {name:'理论值', type:'line', data:ks.map(k=>+(theo(k)*N).toFixed(1)), symbol:'circle', symbolSize:5, lineStyle:{width:1.5, color:'#ffcf5d', type:'dashed'}, itemStyle:{color:'#ffcf5d'}}
+    ]};
+}
+mk('cOdd', ratioOpt(oddRatio, k => comb(18,k)*comb(17,5-k)/C355, 'rgba(255,159,67,.75)'));
+mk('cBig', ratioOpt(bigRatio, g => comb(17,g)*comb(18,5-g)/C355, 'rgba(77,163,255,.75)'));
+(function(){
+  const ks = Object.keys(acDist).map(Number).sort((a,b)=>a-b);
+  mk('cAC', {grid:{left:44,right:16,top:30,bottom:30},
+    xAxis:Object.assign({}, AX, {type:'category', data:ks.map(String)}),
+    yAxis:Object.assign({}, AY, {name:'期数'}),
+    series:[{name:'AC值', type:'bar', data:ks.map(k=>acDist[k]), itemStyle:{color:'#a78bfa', borderRadius:[3,3,0,0]}}]});
+})();
+
+/* 冷热榜 */
+function hotOpt(freq, topn, color){
+  const arr = Array.from({length:35},(_,i)=>({n:i+1, v:freq[i+1]})).sort((a,b)=>b.v-a.v).slice(0, topn);
+  return {
+    grid:{left:36,right:16,top:24,bottom:30},
+    xAxis:Object.assign({}, AX, {type:'category', data:arr.map(x=>String(x.n).padStart(2,'0'))}),
+    yAxis:Object.assign({}, AY, {name:'次数'}),
+    series:[{type:'bar', data:arr.map(x=>x.v), itemStyle:{color, borderRadius:[3,3,0,0]},
+      label:{show:true, position:'top', color:'#8fa0c4', fontSize:10}}]};
+}
+mk('cHot30',  hotOpt(freqF30, 12, '#ffcf5d'));
+mk('cHot100', hotOpt(freqF100, 12, '#ff9f43'));
+(function(){
+  const nums=[]; for(let i=1;i<=12;i++) nums.push(String(i).padStart(2,'0'));
+  mk('cHotBk', {grid:{left:36,right:16,top:30,bottom:30},
+    xAxis:Object.assign({}, AX, {type:'category', data:nums}),
+    yAxis:Object.assign({}, AY, {name:'次数'}),
+    series:[
+      {name:'近30期', type:'bar', data:freqB30.slice(1), itemStyle:{color:'rgba(77,163,255,.55)', borderRadius:[3,3,0,0]}},
+      {name:'近100期', type:'bar', data:freqB100.slice(1), itemStyle:{color:'#ffcf5d', borderRadius:[3,3,0,0]}}
+    ]});
+})();
+
+/* ---------- 算法池回测（Python 预计算） ---------- */
+(function(){
+  const theo = BT.baseline.theo, mc = BT.baseline.mc;
+  const rows = BT.algos.map(a=>({name:a.name, avg:a.hold100.avg, ge4:a.hold100.ge4, ge5:a.hold100.ge5,
+                                 avgL:a.hold1000.avg, ge4L:a.hold1000.ge4, drawsL:a.hold1000.draws}))
+    .concat([{name:'随机(理论精确)', avg:theo.avg, ge4:theo.ge4, ge5:0, avgL:theo.avg, ge4L:theo.ge4, drawsL:'—', base:true}])
+    .concat([{name:'随机(蒙特卡洛均值)', avg:mc.avgm, ge4:mc.ge4m, ge5:NaN, avgL:mc.avgm, ge4L:mc.ge4m, drawsL:'—', base:true}]);
+  const sorted = [...rows].sort((a,b)=>b.ge4-a.ge4);
+  mk('cAlgo', {
+    grid:{left:56, right:16, top:34, bottom:88},
+    xAxis:Object.assign({}, AX, {type:'category', data:sorted.map(x=>x.name), axisLabel:{color:'#8fa0c4', fontSize:9, rotate:52, interval:0}}),
+    yAxis:Object.assign({}, AY, {name:'900/100 命中≥4 比例 (%)'}),
+    series:[{type:'bar', data:sorted.map(x=>+(x.ge4*100).toFixed(2)), itemStyle:{color:p=> sorted[p.dataIndex].base ? '#8fa0c4' : '#a78bfa', borderRadius:[3,3,0,0]},
+      label:{show:true, position:'top', color:'#8fa0c4', fontSize:9, formatter:'{c}%'},
+      markLine:{symbol:'none', silent:true, data:[{yAxis:+(theo.ge4*100).toFixed(2), lineStyle:{type:'dashed', color:'#4ade80'}, label:{color:'#4ade80', formatter:'随机理论 '+(theo.ge4*100).toFixed(2)+'%'}}]}}]
+  });
+  document.getElementById('algoTable').innerHTML =
+    `<tr><th>算法</th><th>900/100 平均命中</th><th>≥4 比例</th><th>≥5 比例</th><th>长窗口期数</th><th>长窗口平均命中</th><th>长窗口 ≥4 比例</th></tr>` +
+    rows.sort((a,b)=>b.ge4-a.ge4).map(x=>`<tr><td>${x.name}</td><td>${x.avg.toFixed(3)}</td><td>${(x.ge4*100).toFixed(2)}%</td><td>${isNaN(x.ge5)?'—':(x.ge5*100).toFixed(1)+'%'}</td><td>${x.drawsL}</td><td>${x.avgL.toFixed(3)}</td><td>${(x.ge4L*100).toFixed(2)}%</td></tr>`).join('');
+
+  const best = BT.algos.slice().sort((a,b)=>b.hold100.ge4-a.hold100.ge4)[0];
+  const diff = (best.hold100.ge4 - theo.ge4)*100;
+  const band = 2*mc.ge4s*100;
+  const bestL = BT.algos.slice().sort((a,b)=>b.hold1000.ge4-a.hold1000.ge4)[0];
+  document.getElementById('algoConclusion').innerHTML =
+    `<b>回测结论：</b>31 个算法在 900/100 窗口的“命中≥4”比例为 ${(Math.min(...BT.algos.map(a=>a.hold100.ge4))*100).toFixed(1)}%–${(Math.max(...BT.algos.map(a=>a.hold100.ge4))*100).toFixed(1)}%，` +
+    `随机理论基线 <b>${(theo.ge4*100).toFixed(2)}%</b>（蒙特卡洛 ${(mc.ge4m*100).toFixed(2)}% ± ${(mc.ge4s*100).toFixed(2)}%）。` +
+    `窗口最优 <b>${best.name}</b>（+${diff.toFixed(2)}pp，${Math.abs(diff)<=band?'在':'超出'}随机带 ±${band.toFixed(2)}pp）；` +
+    `而长窗口（约 ${bestL.hold1000.draws} 期）最优 ${bestL.name} 仅 ${(bestL.hold1000.ge4*100).toFixed(2)}%——` +
+    `<b>与项目 round-25 结论一致：短窗口领先是选窗偏差，长窗口回归随机基线 ${(theo.ge4*100).toFixed(2)}%</b>。`;
+})();
+
+/* ---------- 下一期参考选号（predictions.json 记录 + v1/v2/v3 由 Python 预计算） ---------- */
+(function(){
+  const recs = (PRED.records||[]).filter(r => r.targetDrawNum === nextCode && !r.verified);
+  const desc = {AI_U_wide:'全期频次+重号×0.5+r3邻域×0.2，约束枚举（还原版，短窗最优）',
+                'K_prob_ensemble':'H+I+J 概率集成投票（参考组）',
+                v1_cold:'追冷：gap×0.5+冷30×2.5+全期偏冷×0.3（Python 计算，单式 5+2）',
+                v2_hot:'追热：近5×3+近10×1.5+邻域×4+连出×4（Python 计算，单式 5+2）',
+                v3:'冷热组合：冷号3个+热号2个（Python 计算，单式 5+2）',
+                '六爻占卜':'前九期开奖起卦，卦象定种子出号（玄学娱乐，详见六爻占卜号一节）'};
+  const titleOf = {AI_U_wide:'⭐ AI_U_wide（主推）', 'K_prob_ensemble':'🗳️ K_prob_ensemble（参考）',
+                   v1_cold:'🧊 v1_cold（追冷）', v2_hot:'🔥 v2_hot（追热）', v3:'⚖️ v3 冷热组合',
+                   '六爻占卜':'🀄 六爻占卜（玄学娱乐）'};
+  const list = recs.filter(r => r.model !== '六爻占卜').concat(
+    ['v1_cold','v2_hot','v3'].map(nm => { const p = BT.pred[nm]; return { model: nm, front: p.front5, back: p.back2 }; })
+  );
+  document.getElementById('predGrid').innerHTML = list.map(t=>{
+    const fr = (t.front||t.predictedFront).slice().sort((a,b)=>a-b);
+    const bk = (t.back||t.predictedBack).slice().sort((a,b)=>a-b);
+    return `
+    <div class="card ticket">
+      <div class="t-name" style="font-size:15px;font-weight:700;color:var(--gold)">${titleOf[t.model] || t.model}</div>
+      <div class="t-desc">${desc[t.model]||''}${t.predictedAt?' · 记录于 '+t.predictedAt:''}</div>
+      <div class="balls" style="justify-content:center">${fr.map(n=>`<div class="ball f sm">${String(n).padStart(2,'0')}</div>`).join('')}</div>
+      <div class="sep"></div>
+      <div class="balls" style="justify-content:center">${bk.map(n=>`<div class="ball b sm">${String(n).padStart(2,'0')}</div>`).join('')}<span style="color:var(--sub);font-size:12px;margin-left:6px">后区 ${bk.length}</span></div>
+    </div>`;}).join('');
+})();
+
+/* ---------- 六爻占卜号（玄学娱乐，确定性可复现；已纳入 predictions.json 记录） ---------- */
+(function(){
+  const timeInfo = { y: nextDt.getFullYear(), m: nextDt.getMonth()+1, d: nextDt.getDate(), hour: 21 };  // 大乐透 21:25 开奖
+  const g = LiuYao.divine(D.slice(-9), d => [d.front.reduce((a,b)=>a+b,0) % 2 === 1, d.back.reduce((a,b)=>a+b,0) % 2 === 1],
+                          nextCode, {frontMax:35, frontN:5, backMax:12, backN:2}, timeInfo);
+  // 已有文件记录则显示记录版本（与记录同源，开奖后自动比对）
+  const recT = (PRED.records || []).find(r => r.targetDrawNum === nextCode && r.model === '六爻占卜');
+  const front5 = recT ? recT.predictedFront : g.front;
+  const back2 = recT ? recT.predictedBack : g.back;
+
+  const last9 = D.slice(-9);
+  document.getElementById('castTable').innerHTML =
+    `<tr><th>期号</th><th>当期开奖</th><th>前区和值</th><th>铜钱一</th><th>后区和值</th><th>铜钱二</th></tr>` +
+    last9.map((d, i) => {
+      const fs2 = d.front.reduce((a,b)=>a+b,0), bs = d.back.reduce((a,b)=>a+b,0);
+      return `<tr><td>${d.num}</td><td>${d.front.map(n=>`<span class="chip f">${String(n).padStart(2,'0')}</span>`).join('')}${d.back.map(n=>`<span class="chip b">${String(n).padStart(2,'0')}</span>`).join('')}</td><td>${fs2}（${fs2%2?'奇':'偶'}）</td><td>${g.coins[2*i]?'背':'字'}</td><td>${bs}（${bs%2?'奇':'偶'}）</td><td>${g.coins[2*i+1]?'背':'字'}</td></tr>`;
+    }).join('');
+
+  document.getElementById('yaoDisplay').innerHTML =
+    `<div style="text-align:center;font-size:14px;line-height:2">` +
+    [5,4,3,2,1,0].map(i =>
+      `<div>${g.yaoName[i]} <span style="font-family:monospace;font-size:16px;letter-spacing:2px;color:${g.yang[i]?'#ffcf5d':'#8fa0c4'}">${g.yang[i] ? '━━━━━' : '━━ ━━'}</span> ${g.castName[g.backs6[i]]}</div>`
+    ).join('') +
+    `</div>
+     <div style="text-align:center;margin-top:12px;font-size:16px">
+       ${g.timeGua ? `<div style="color:var(--sub);font-size:13px;margin-bottom:8px">起始卦（开奖时间 ${timeInfo.y}-${timeInfo.m}-${timeInfo.d} ${g.timeGua.shichenName}时起）：${g.timeGua.upper.sym}${g.timeGua.lower.sym} <b style="color:var(--gold)">${g.timeGua.name}</b> · 动爻${g.timeGua.dongYao}</div>` : ''}
+       <b style="color:var(--gold)">本卦：${g.upper.sym}${g.lower.sym} ${g.benGua}</b>
+       ${g.movingIdx.length ? `　→　变卦：${g.upper2.sym}${g.lower2.sym} ${g.bianGua}（动爻：${g.movingIdx.join('、')}）` : '（六爻安静，无变卦）'}
+       <div style="color:var(--sub);font-size:12px;margin-top:6px">上卦 ${g.upper.sym}${g.upper.name}(${g.upper.num}) · 下卦 ${g.lower.sym}${g.lower.name}(${g.lower.num})</div>
+     </div>`;
+
+  document.getElementById('guaIssue').textContent = nextCode;
+  document.getElementById('guaDesc').innerHTML =
+    `起始卦 <b>${g.timeGua ? g.timeGua.name : '—'}</b> + 前九期本卦 <b>${g.benGua}</b>${g.movingIdx.length ? ` 变 <b>${g.bianGua}</b>` : ''}，以卦象为种（seed=${g.seed}）随机化取号` +
+    (recT ? `　<span style="color:#4ade80">✓ 已记录到 predictions.json，开奖后自动比对</span>` : '');
+  document.getElementById('guaBalls').innerHTML =
+    front5.map(n=>`<div class="ball f sm">${String(n).padStart(2,'0')}</div>`).join('') +
+    `<span style="width:14px"></span>` +
+    back2.map(n=>`<div class="ball b sm">${String(n).padStart(2,'0')}</div>`).join('');
+})();
+
+/* ---------- 预测历史（文件级记录） ---------- */
+(function(){
+  const recs = (PRED.records||[]).slice().reverse();
+  const tbl = document.getElementById('histTable');
+  if(!recs.length){ tbl.innerHTML = '<tr><td style="color:var(--sub)">暂无记录</td></tr>'; return; }
+  const byNum = Object.fromEntries(D.map(d => [d.num, d]));
+  let html = '<tr><th>期号 / 记录时间</th><th>当期开奖</th><th>模型</th><th>选号</th><th>状态</th><th>前中</th><th>后中</th><th>合计</th><th>达标≥4</th></tr>';
+  const groups = {};
+  recs.forEach(r => (groups[r.targetDrawNum] = groups[r.targetDrawNum] || []).push(r));
+  const stats = {};
+  for(const [num, rs] of Object.entries(groups)){
+    const act = byNum[num];
+    rs.forEach((r, i) => {
+      const pf = r.predictedFront || r.front6 || [], pb = r.predictedBack || r.back3 || [];
+      let st='⏳ 待开奖', fh='—', bh='—', tot='—', ok='—';
+      if(act){
+        const fH = pf.filter(n => act.front.includes(n)).length;
+        const bH = pb.filter(n => act.back.includes(n)).length;
+        st='✅ 已开奖'; fh=`${fH}/${pf.length}`; bh=`${bH}/${pb.length}`; tot=fH+bH;
+        ok = r.mode==='6+3' ? (tot>=4?'✓':'✗') : '—';
+        (stats[r.model] = stats[r.model]||[]).push(tot);
+      }
+      // 命中高亮：预测号命中开奖 → 绿标✓；开奖号被任一预测注命中 → 绿标✓
+      const allF = new Set(), allB = new Set();
+      rs.forEach(x => { (x.predictedFront||x.front6||[]).forEach(n => allF.add(n)); (x.predictedBack||x.back3||[]).forEach(n => allB.add(n)); });
+      const pad = n => String(n).padStart(2,'0');
+      const actHtml = act
+        ? act.front.map(n=>`<span class="chip f${allF.has(n)?' hit':''}"${allF.has(n)?' title="被预测命中"':''}>${pad(n)}</span>`).join('') +
+          act.back.map(n=>`<span class="chip b${allB.has(n)?' hit':''}"${allB.has(n)?' title="被预测命中"':''}>${pad(n)}</span>`).join('')
+        : '<span style="color:var(--sub)">待开奖</span>';
+      const fChips = pf.map(n=>`<span class="chip f${act && act.front.includes(n)?' hit':''}"${act && act.front.includes(n)?' title="命中"':''}>${pad(n)}</span>`).join('');
+      const bChips = pb.map(n=>`<span class="chip b${act && act.back.includes(n)?' hit':''}"${act && act.back.includes(n)?' title="命中"':''}>${pad(n)}</span>`).join('');
+      html += `<tr>${i===0 ? `<td rowspan="${rs.length}"><b>📁 ${num}</b><br><span style="color:var(--sub);font-size:11px">${r.predictedAt}</span></td><td rowspan="${rs.length}">${actHtml}</td>` : ''}` +
+        `<td>${r.model}</td>` +
+        `<td>${fChips}${bChips}</td>` +
+        `<td>${st}</td><td>${fh}</td><td>${bh}</td><td>${tot}</td><td>${ok}</td></tr>`;
+    });
+  }
+  tbl.innerHTML = html;
+  const sum = Object.entries(stats).map(([name, arr]) =>
+    `${name}：已验证 ${arr.length} 期，平均合计命中 ${(arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(2)}`).join('<br>');
+  document.getElementById('histSummary').innerHTML = sum
+    ? `<b>模型战绩（已验证记录）：</b><br>${sum}<br><span style="color:var(--sub)">6+3 随机基线：平均合计命中 ≈ 1.36，≥4 比例 2.04%。长期看各模型应围绕基线波动。</span>`
+    : '尚无已开奖的验证记录。';
+})();
+
+window.addEventListener('resize', () => charts.forEach(c => c.resize()));
+</script>
+</body>
+</html>
