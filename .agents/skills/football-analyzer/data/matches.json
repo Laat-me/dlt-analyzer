@@ -1,0 +1,96 @@
+{
+ "season": "2025-2026",
+ "league_avg": 1.6176470588235294,
+ "team_stats": {
+  "FC Bayern München": {
+   "avg_for": 3.588235294117647,
+   "avg_against": 1.0588235294117647,
+   "played": 34
+  },
+  "RB Leipzig": {
+   "avg_for": 1.9411764705882353,
+   "avg_against": 1.3823529411764706,
+   "played": 34
+  },
+  "Bayer 04 Leverkusen": {
+   "avg_for": 2.0,
+   "avg_against": 1.3823529411764706,
+   "played": 34
+  },
+  "TSG Hoffenheim": {
+   "avg_for": 1.911764705882353,
+   "avg_against": 1.5294117647058822,
+   "played": 34
+  },
+  "Eintracht Frankfurt": {
+   "avg_for": 1.7941176470588236,
+   "avg_against": 1.911764705882353,
+   "played": 34
+  },
+  "SV Werder Bremen": {
+   "avg_for": 1.088235294117647,
+   "avg_against": 1.7647058823529411,
+   "played": 34
+  },
+  "SC Freiburg": {
+   "avg_for": 1.5,
+   "avg_against": 1.6764705882352942,
+   "played": 34
+  },
+  "FC Augsburg": {
+   "avg_for": 1.3235294117647058,
+   "avg_against": 1.7941176470588236,
+   "played": 34
+  },
+  "1. FC Union Berlin": {
+   "avg_for": 1.2941176470588236,
+   "avg_against": 1.7058823529411764,
+   "played": 34
+  },
+  "VfB Stuttgart": {
+   "avg_for": 2.088235294117647,
+   "avg_against": 1.4411764705882353,
+   "played": 34
+  },
+  "1. FC Heidenheim 1846": {
+   "avg_for": 1.2058823529411764,
+   "avg_against": 2.1176470588235294,
+   "played": 34
+  },
+  "VfL Wolfsburg": {
+   "avg_for": 1.3235294117647058,
+   "avg_against": 2.0294117647058822,
+   "played": 34
+  },
+  "FC St. Pauli": {
+   "avg_for": 0.8529411764705882,
+   "avg_against": 1.7647058823529411,
+   "played": 34
+  },
+  "Borussia Dortmund": {
+   "avg_for": 2.0588235294117645,
+   "avg_against": 1.0,
+   "played": 34
+  },
+  "1. FSV Mainz 05": {
+   "avg_for": 1.2941176470588236,
+   "avg_against": 1.5588235294117647,
+   "played": 34
+  },
+  "1. FC Köln": {
+   "avg_for": 1.4411764705882353,
+   "avg_against": 1.8529411764705883,
+   "played": 34
+  },
+  "Borussia Mönchengladbach": {
+   "avg_for": 1.2352941176470589,
+   "avg_against": 1.5588235294117647,
+   "played": 34
+  },
+  "Hamburger SV": {
+   "avg_for": 1.1764705882352942,
+   "avg_against": 1.588235294117647,
+   "played": 34
+  }
+ }
+}
