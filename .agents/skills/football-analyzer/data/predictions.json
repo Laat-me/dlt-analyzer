@@ -18,6 +18,96 @@
     "home": 0.38,
     "draw": 0.32,
     "away": 0.299
+   },
+   "injury": {
+    "note": "体彩官方今日伤停: 弗鲁米嫩塞7人受伤(前锋John Kennedy 2球/卡诺比奥 1球, 后卫阿拉纳/中场阿科斯塔)",
+    "injured": {
+     "弗鲁米嫩塞": [
+      {
+       "player": "特兰斯",
+       "pos": "中场",
+       "status": "受伤",
+       "starts": 0,
+       "goals": 0
+      },
+      {
+       "player": "阿科斯塔",
+       "pos": "中场",
+       "status": "受伤",
+       "starts": 4,
+       "goals": 1
+      },
+      {
+       "player": "阿拉纳",
+       "pos": "后卫",
+       "status": "受伤",
+       "starts": 5,
+       "goals": 1
+      },
+      {
+       "player": "卡诺比奥",
+       "pos": "前锋",
+       "status": "受伤",
+       "starts": 6,
+       "goals": 1
+      },
+      {
+       "player": "J. Freytes",
+       "pos": "后卫",
+       "status": "受伤",
+       "starts": 6,
+       "goals": 0
+      },
+      {
+       "player": "John Kennedy",
+       "pos": "前锋",
+       "status": "受伤",
+       "starts": 3,
+       "goals": 2
+      },
+      {
+       "player": "Matheus Reis",
+       "pos": "前锋",
+       "status": "受伤",
+       "starts": 0,
+       "goals": 0
+      }
+     ]
+    }
+   },
+   "injury_adjusted": {
+    "method": "混合加权 apply_weights: 客队λ2×0.85 (独立于市场的伤停视角; 市场赔率已含伤停信息, 此调整仅供参考)",
+    "lam": [
+     1.0,
+     0.72
+    ],
+    "result_prob": {
+     "home": 0.41,
+     "draw": 0.333,
+     "away": 0.257
+    },
+    "top_scores": [
+     {
+      "score": "1-0",
+      "prob": 0.1786
+     },
+     {
+      "score": "0-0",
+      "prob": 0.1786
+     },
+     {
+      "score": "1-1",
+      "prob": 0.1291
+     },
+     {
+      "score": "0-1",
+      "prob": 0.1291
+     },
+     {
+      "score": "2-0",
+      "prob": 0.0893
+     }
+    ]
    }
   },
   {
