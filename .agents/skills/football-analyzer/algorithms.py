@@ -152,21 +152,77 @@ def goals_distribution(lam1, lam2, max_goals=8):
                                                   for j in range(max_goals + 1) if i + j >= max_goals - 1) / total)
     return dist
 
-def full_predict(odds, weights=None):
-    """完整预测: 赔率反推λ -> 比分排行/胜平负/大小球/总进球
-    weights: 可选三层加权 dict(home_mult, away_mult, win_mult, draw_extra, over_mult)"""
-    l1, l2 = find_lam_from_odds(odds)
+def dixon_coles_correction(M, lam1, lam2, rho=-0.1):
+    """Dixon-Coles (1997) 低比分相关性修正
+    独立泊松对低比分(0-0/1-0/0-1/1-1)有系统性偏差; 修正因子:
+      tau(0,0)=1-λ1λ2ρ  tau(1,0)=1+λ2ρ  tau(0,1)=1+λ1ρ  tau(1,1)=1-ρ
+    rho 通常为负(足球数据约-0.05~-0.15): 0-0/1-1 上调, 1-0/0-1 下调"""
+    M = M.copy()
+    M[0, 0] *= 1 - lam1 * lam2 * rho
+    M[1, 0] *= 1 + lam2 * rho
+    M[0, 1] *= 1 + lam1 * rho
+    M[1, 1] *= 1 - rho
+    s = M.sum()
+    return M / s if s > 0 else M
+
+def estimate_rho(matches):
+    """从历史比分 MLE 估计 rho (Dixon-Coles 论文方法)
+    matches: list of (hg, ag); 返回使对数似然最大的 rho"""
+    import math
+    best_rho, best_ll = -0.15, -1e18
+    for rho in np.arange(-0.20, 0.01, 0.01):
+        ll = 0.0
+        for hg, ag in matches:
+            l1 = max(hg, 0.5); l2 = max(ag, 0.5)
+            p = poisson_pmf(l1, hg) * poisson_pmf(l2, ag)
+            if (hg, ag) == (0, 0): p *= 1 - l1 * l2 * rho
+            elif (hg, ag) == (1, 0): p *= 1 + l2 * rho
+            elif (hg, ag) == (0, 1): p *= 1 + l1 * rho
+            elif (hg, ag) == (1, 1): p *= 1 - rho
+            ll += math.log(max(p, 1e-12))
+        if ll > best_ll:
+            best_ll, best_rho = ll, rho
+    return best_rho
+
+def lambda_from_stats(home_stats, away_stats, league_avg=1.35):
+    """历史攻防数据算 λ (SKILL 公式): λ = 联赛场均 × 进攻强度 × 防守系数
+    home_stats: dict(avg_for, avg_against) 用主场数据"""
+    att_home = home_stats["avg_for"] / league_avg
+    def_home = home_stats["avg_against"] / league_avg
+    att_away = away_stats["avg_for"] / league_avg
+    def_away = away_stats["avg_against"] / league_avg
+    return (league_avg * att_home * def_away, league_avg * att_away * def_home)
+
+def lambda_mix(odds, home_stats, away_stats, league_avg=1.35, w_hist=0.6):
+    """混合 λ: 历史攻防(w_hist) + 市场赔率反推(1-w_hist)
+    提高历史数据权重: 默认历史60% 市场40%"""
+    l_hist = lambda_from_stats(home_stats, away_stats, league_avg)
+    l_mkt = find_lam_from_odds(odds)
+    return (w_hist * l_hist[0] + (1 - w_hist) * l_mkt[0],
+            w_hist * l_hist[1] + (1 - w_hist) * l_mkt[1])
+
+def full_predict(odds, weights=None, home_stats=None, away_stats=None,
+                 league_avg=1.35, w_hist=0.6, dixon_coles=True, rho=-0.1):
+    """完整预测: λ(历史+市场混合) -> [Dixon-Coles修正] -> 比分排行/胜平负/大小球/总进球
+    - home_stats/away_stats 提供时: λ = w_hist×历史 + (1-w_hist)×市场 (默认历史60%)
+    - 否则纯市场反推
+    - dixon_coles=True: 低比分相关性修正
+    - weights: 三层人工加权 dict(home_mult, away_mult, win_mult, draw_extra, over_mult)"""
+    if home_stats and away_stats:
+        l1, l2 = lambda_mix(odds, home_stats, away_stats, league_avg, w_hist)
+    else:
+        l1, l2 = find_lam_from_odds(odds)
     if weights:
         adj = apply_weights({"lam": (l1, l2)}, weights)
         l1, l2 = adj["lam"]
-        M = score_matrix(l1, l2)
-        if weights.get("draw_extra") and weights["draw_extra"] != 1.0:
-            n = M.shape[0]
-            for i in range(n):
-                M[i][i] *= weights["draw_extra"]
-            M = M / M.sum()
-    else:
-        M = score_matrix(l1, l2)
+    M = score_matrix(l1, l2)
+    if dixon_coles:
+        M = dixon_coles_correction(M, l1, l2, rho)
+    if weights and weights.get("draw_extra") and weights["draw_extra"] != 1.0:
+        n = M.shape[0]
+        for i in range(n):
+            M[i][i] *= weights["draw_extra"]
+        M = M / M.sum()
     n = M.shape[0]
     ph = float(sum(M[i][j] for i in range(n) for j in range(n) if i > j))
     pd = float(sum(M[i][i] for i in range(n)))
@@ -174,7 +230,7 @@ def full_predict(odds, weights=None):
     scores = sorted([(float(M[i][j]), f"{i}:{j}") for i in range(n) for j in range(n)], reverse=True)[:10]
     p_over = float(sum(M[i][j] for i in range(n) for j in range(n) if i + j >= 3))
     return {
-        "lam": (l1, l2),
+        "lam": (round(l1, 2), round(l2, 2)),
         "top_scores": [(s, p) for p, s in scores],
         "result_prob": {"home": ph, "draw": pd, "away": pa},
         "over25": {"over": p_over, "under": 1 - p_over},
