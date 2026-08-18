@@ -117,6 +117,96 @@ def apply_weights(base, weights):
     return {"lam": (lam1, lam2), "top_scores": [(s, sc) for sc, s in scores[:10]],
             "result_prob": {"home": p_home, "draw": p_draw, "away": p_away}}
 
+# ---------------------------------------------------------------- 市场赔率反推 λ
+
+def find_lam_from_odds(odds, grid_min=0.1, grid_max=3.5, step=0.05):
+    """从胜平负赔率反推泊松 λ1,λ2 (网格搜索使泊松胜平负匹配市场隐含概率)
+    用途: 无需逐队攻防数据, 市场赔率已含伤停/战意/交锋等信息"""
+    inv = [1.0 / o for o in odds]
+    s = sum(inv)
+    target = [i / s for i in inv]
+    best, besterr = None, 1e9
+    for l1 in np.arange(grid_min, grid_max + 1e-9, step):
+        for l2 in np.arange(grid_min, grid_max + 1e-9, step):
+            p1 = [poisson_pmf(l1, k) for k in range(9)]
+            p2 = [poisson_pmf(l2, k) for k in range(9)]
+            ph = sum(p1[i] * p2[j] for i in range(9) for j in range(9) if i > j)
+            pd = sum(p1[i] * p2[i] for i in range(9))
+            pa = 1 - ph - pd
+            err = abs(ph - target[0]) + abs(pd - target[1]) + abs(pa - target[2])
+            if err < besterr:
+                besterr, best = err, (round(l1, 2), round(l2, 2))
+    return best
+
+def goals_distribution(lam1, lam2, max_goals=8):
+    """竞彩总进球数分布: 0,1,2,3,4,5,6,7+ 八档"""
+    M = score_matrix(lam1, lam2, max_goals)
+    total = M.sum()
+    dist = {}
+    for g in range(max_goals):
+        if g < max_goals - 1:
+            dist[g] = float(sum(M[i][j] for i in range(max_goals + 1)
+                                for j in range(max_goals + 1) if i + j == g) / total)
+        else:
+            dist[f"{max_goals - 1}+"] = float(sum(M[i][j] for i in range(max_goals + 1)
+                                                  for j in range(max_goals + 1) if i + j >= max_goals - 1) / total)
+    return dist
+
+def full_predict(odds, weights=None):
+    """完整预测: 赔率反推λ -> 比分排行/胜平负/大小球/总进球
+    weights: 可选三层加权 dict(home_mult, away_mult, win_mult, draw_extra, over_mult)"""
+    l1, l2 = find_lam_from_odds(odds)
+    if weights:
+        adj = apply_weights({"lam": (l1, l2)}, weights)
+        l1, l2 = adj["lam"]
+        M = score_matrix(l1, l2)
+        if weights.get("draw_extra") and weights["draw_extra"] != 1.0:
+            n = M.shape[0]
+            for i in range(n):
+                M[i][i] *= weights["draw_extra"]
+            M = M / M.sum()
+    else:
+        M = score_matrix(l1, l2)
+    n = M.shape[0]
+    ph = float(sum(M[i][j] for i in range(n) for j in range(n) if i > j))
+    pd = float(sum(M[i][i] for i in range(n)))
+    pa = 1 - ph - pd
+    scores = sorted([(float(M[i][j]), f"{i}:{j}") for i in range(n) for j in range(n)], reverse=True)[:10]
+    p_over = float(sum(M[i][j] for i in range(n) for j in range(n) if i + j >= 3))
+    return {
+        "lam": (l1, l2),
+        "top_scores": [(s, p) for p, s in scores],
+        "result_prob": {"home": ph, "draw": pd, "away": pa},
+        "over25": {"over": p_over, "under": 1 - p_over},
+        "goals_dist": goals_distribution(l1, l2),
+    }
+
+# ---------------------------------------------------------------- 爆冷/卖分风险分析
+
+def upset_risk_analysis(matches_with_rank, tier="low", thr=6):
+    """实力差爆冷分析: 大热(排名差>=thr)的爆冷率/被逼平率, 分时段
+    matches_with_rank: list of dict(home, away, hg, ag, rank_h, rank_a, md_order)
+    实证基线(德甲/德乙2025): 顶级6-11%, 低级别14-25%, 低级别末段末5轮悬殊场25%"""
+    big = [m for m in matches_with_rank if abs(m["rank_h"] - m["rank_a"]) >= thr]
+    if not big:
+        return {"big_count": 0}
+    def big_loss(m):
+        return (m["rank_h"] - m["rank_a"] < 0 and m["hg"] < m["ag"]) or \
+               (m["rank_h"] - m["rank_a"] > 0 and m["hg"] > m["ag"])
+    n = len(big)
+    loss = sum(1 for m in big if big_loss(m))
+    draws = sum(1 for m in big if m["hg"] == m["ag"])
+    max_md = max(m["md_order"] for m in matches_with_rank)
+    last5 = [m for m in big if m["md_order"] >= max_md - 4]
+    last5_loss = sum(1 for m in last5 if big_loss(m)) if last5 else 0
+    return {
+        "tier": tier, "threshold": thr, "big_count": n,
+        "upset_rate": loss / n,
+        "draw_rate_against_favorite": draws / n,
+        "late_season_upset_rate": (last5_loss / len(last5)) if last5 else None,
+        "baseline": {"top_tier": "6-11%", "low_tier": "14-25%", "low_tier_late": "25%"},
+    }
+
 # ---------------------------------------------------------------- 回测框架
 
 def backtest(matches, home_stats_fn, away_stats_fn, league_avg, holdout_frac=0.1):
