@@ -1,0 +1,673 @@
+{
+ "bl1": {
+  "league": "德甲2025-26",
+  "tier": "top",
+  "n": 306,
+  "league_avg": 3.235,
+  "upset": {
+   "count": 156,
+   "thr": 6,
+   "upset_rate": 0.109,
+   "draw_rate": 0.1987,
+   "by_phase": {
+    "前半段": {
+     "n": 63,
+     "upset_rate": 0.1429,
+     "draw_rate": 0.1587
+    },
+    "中段": {
+     "n": 72,
+     "upset_rate": 0.0694,
+     "draw_rate": 0.2361
+    },
+    "末5轮": {
+     "n": 21,
+     "upset_rate": 0.1429,
+     "draw_rate": 0.1905
+    }
+   }
+  },
+  "high_score": {
+   "scorelines": [
+    {
+     "score": "1:1",
+     "actual": 34,
+     "expected": 31.5,
+     "ratio": 1.08
+    },
+    {
+     "score": "2:1",
+     "actual": 26,
+     "expected": 25.5,
+     "ratio": 1.02
+    },
+    {
+     "score": "1:2",
+     "actual": 22,
+     "expected": 25.5,
+     "ratio": 0.86
+    },
+    {
+     "score": "1:0",
+     "actual": 22,
+     "expected": 19.5,
+     "ratio": 1.13
+    },
+    {
+     "score": "3:1",
+     "actual": 21,
+     "expected": 13.7,
+     "ratio": 1.53
+    },
+    {
+     "score": "2:0",
+     "actual": 18,
+     "expected": 15.8,
+     "ratio": 1.14
+    },
+    {
+     "score": "2:2",
+     "actual": 17,
+     "expected": 20.6,
+     "ratio": 0.82
+    },
+    {
+     "score": "0:1",
+     "actual": 16,
+     "expected": 19.5,
+     "ratio": 0.82
+    }
+   ],
+   "total_goals": [
+    {
+     "goals": 0,
+     "actual": 12,
+     "expected": 12.0,
+     "ratio": 1.0
+    },
+    {
+     "goals": 1,
+     "actual": 38,
+     "expected": 39.0,
+     "ratio": 0.98
+    },
+    {
+     "goals": 2,
+     "actual": 61,
+     "expected": 63.0,
+     "ratio": 0.97
+    },
+    {
+     "goals": 3,
+     "actual": 64,
+     "expected": 68.0,
+     "ratio": 0.94
+    },
+    {
+     "goals": 4,
+     "actual": 68,
+     "expected": 55.0,
+     "ratio": 1.24
+    },
+    {
+     "goals": 5,
+     "actual": 30,
+     "expected": 35.6,
+     "ratio": 0.84
+    },
+    {
+     "goals": 6,
+     "actual": 23,
+     "expected": 19.2,
+     "ratio": 1.2
+    },
+    {
+     "goals": "7+",
+     "actual": 10,
+     "expected": 14.3,
+     "ratio": 0.7
+    }
+   ],
+   "big_score_count": 33,
+   "big_score_rate": 0.1078
+  },
+  "sell": {
+   "late_big_favorite_nonwin": [
+    {
+     "round": 32,
+     "home": "FC Bayern München",
+     "away": "1. FC Heidenheim 1846",
+     "hg": 3,
+     "ag": 3,
+     "gap": 16,
+     "fav": "主",
+     "result": "平"
+    },
+    {
+     "round": 31,
+     "home": "VfB Stuttgart",
+     "away": "SV Werder Bremen",
+     "hg": 1,
+     "ag": 1,
+     "gap": 11,
+     "fav": "主",
+     "result": "平"
+    },
+    {
+     "round": 32,
+     "home": "Borussia Mönchengladbach",
+     "away": "Borussia Dortmund",
+     "hg": 1,
+     "ag": 0,
+     "gap": 10,
+     "fav": "客",
+     "result": "负"
+    }
+   ],
+   "case_count": 3,
+   "dead_rubber": {
+    "n": 6,
+    "low_goal_rate": 0.0,
+    "league_low_goal_rate": 0.1634
+   }
+  },
+  "control": {
+   "league_narrow_rate": 0.275,
+   "team_flags": [
+    {
+     "team": "Borussia Mönchengladbach",
+     "narrow_rate": 0.412,
+     "league": 0.275,
+     "n": 34
+    }
+   ],
+   "one_goal_holds": {
+    "total": 17,
+    "top_teams": [
+     [
+      "1. FC Köln",
+      3
+     ],
+     [
+      "RB Leipzig",
+      2
+     ],
+     [
+      "Borussia Dortmund",
+      2
+     ],
+     [
+      "1. FC Union Berlin",
+      2
+     ],
+     [
+      "TSG Hoffenheim",
+      2
+     ]
+    ]
+   },
+   "same_round_fav_draw_cluster": [
+    {
+     "round": 10,
+     "favorite_draws": 2
+    }
+   ]
+  },
+  "top_flagged": [
+   {
+    "round": 31,
+    "home": "VfB Stuttgart",
+    "away": "SV Werder Bremen",
+    "hg": 1,
+    "ag": 1,
+    "flags": [
+     "大热被逼平",
+     "赛季末悬殊不胜",
+     "悬殊场窄分差"
+    ]
+   },
+   {
+    "round": 32,
+    "home": "FC Bayern München",
+    "away": "1. FC Heidenheim 1846",
+    "hg": 3,
+    "ag": 3,
+    "flags": [
+     "大比分",
+     "大热被逼平",
+     "赛季末悬殊不胜"
+    ]
+   },
+   {
+    "round": 32,
+    "home": "Borussia Mönchengladbach",
+    "away": "Borussia Dortmund",
+    "hg": 1,
+    "ag": 0,
+    "flags": [
+     "悬殊爆冷",
+     "赛季末悬殊不胜",
+     "悬殊场窄分差"
+    ]
+   },
+   {
+    "round": 1,
+    "home": "FC St. Pauli",
+    "away": "Borussia Dortmund",
+    "hg": 3,
+    "ag": 3,
+    "flags": [
+     "大比分",
+     "大热被逼平"
+    ]
+   },
+   {
+    "round": 10,
+    "home": "Hamburger SV",
+    "away": "Borussia Dortmund",
+    "hg": 1,
+    "ag": 1,
+    "flags": [
+     "大热被逼平",
+     "悬殊场窄分差"
+    ]
+   },
+   {
+    "round": 16,
+    "home": "FC St. Pauli",
+    "away": "RB Leipzig",
+    "hg": 1,
+    "ag": 1,
+    "flags": [
+     "大热被逼平",
+     "悬殊场窄分差"
+    ]
+   },
+   {
+    "round": 23,
+    "home": "1. FC Heidenheim 1846",
+    "away": "VfB Stuttgart",
+    "hg": 3,
+    "ag": 3,
+    "flags": [
+     "大比分",
+     "大热被逼平"
+    ]
+   },
+   {
+    "round": 24,
+    "home": "TSG Hoffenheim",
+    "away": "FC St. Pauli",
+    "hg": 0,
+    "ag": 1,
+    "flags": [
+     "悬殊爆冷",
+     "悬殊场窄分差"
+    ]
+   },
+   {
+    "round": 25,
+    "home": "FC St. Pauli",
+    "away": "Eintracht Frankfurt",
+    "hg": 0,
+    "ag": 0,
+    "flags": [
+     "大热被逼平",
+     "悬殊场窄分差"
+    ]
+   },
+   {
+    "round": 26,
+    "home": "TSG Hoffenheim",
+    "away": "VfL Wolfsburg",
+    "hg": 1,
+    "ag": 1,
+    "flags": [
+     "大热被逼平",
+     "悬殊场窄分差"
+    ]
+   }
+  ],
+  "honest_note": "本报告全部为统计指纹(risk fingerprint)，不构成任何操控/卖分证据；单场异常无法定性；小样本时段置信区间宽。"
+ },
+ "bl2": {
+  "league": "德乙2025-26",
+  "tier": "low",
+  "n": 306,
+  "league_avg": 2.931,
+  "upset": {
+   "count": 156,
+   "thr": 6,
+   "upset_rate": 0.2051,
+   "draw_rate": 0.2436,
+   "by_phase": {
+    "前半段": {
+     "n": 64,
+     "upset_rate": 0.1719,
+     "draw_rate": 0.1719
+    },
+    "中段": {
+     "n": 68,
+     "upset_rate": 0.1912,
+     "draw_rate": 0.3235
+    },
+    "末5轮": {
+     "n": 24,
+     "upset_rate": 0.3333,
+     "draw_rate": 0.2083
+    }
+   }
+  },
+  "high_score": {
+   "scorelines": [
+    {
+     "score": "2:1",
+     "actual": 35,
+     "expected": 25.7,
+     "ratio": 1.36
+    },
+    {
+     "score": "1:1",
+     "actual": 31,
+     "expected": 35.1,
+     "ratio": 0.88
+    },
+    {
+     "score": "1:0",
+     "actual": 30,
+     "expected": 23.9,
+     "ratio": 1.25
+    },
+    {
+     "score": "1:2",
+     "actual": 26,
+     "expected": 25.7,
+     "ratio": 1.01
+    },
+    {
+     "score": "2:0",
+     "actual": 21,
+     "expected": 17.5,
+     "ratio": 1.2
+    },
+    {
+     "score": "2:2",
+     "actual": 19,
+     "expected": 18.8,
+     "ratio": 1.01
+    },
+    {
+     "score": "0:2",
+     "actual": 17,
+     "expected": 17.5,
+     "ratio": 0.97
+    },
+    {
+     "score": "0:0",
+     "actual": 16,
+     "expected": 16.3,
+     "ratio": 0.98
+    }
+   ],
+   "total_goals": [
+    {
+     "goals": 0,
+     "actual": 16,
+     "expected": 16.3,
+     "ratio": 0.98
+    },
+    {
+     "goals": 1,
+     "actual": 44,
+     "expected": 47.8,
+     "ratio": 0.92
+    },
+    {
+     "goals": 2,
+     "actual": 69,
+     "expected": 70.1,
+     "ratio": 0.98
+    },
+    {
+     "goals": 3,
+     "actual": 81,
+     "expected": 68.5,
+     "ratio": 1.18
+    },
+    {
+     "goals": 4,
+     "actual": 43,
+     "expected": 50.2,
+     "ratio": 0.86
+    },
+    {
+     "goals": 5,
+     "actual": 31,
+     "expected": 29.4,
+     "ratio": 1.05
+    },
+    {
+     "goals": 6,
+     "actual": 14,
+     "expected": 14.4,
+     "ratio": 0.97
+    },
+    {
+     "goals": "7+",
+     "actual": 8,
+     "expected": 9.2,
+     "ratio": 0.87
+    }
+   ],
+   "big_score_count": 22,
+   "big_score_rate": 0.0719
+  },
+  "sell": {
+   "late_big_favorite_nonwin": [
+    {
+     "round": 33,
+     "home": "Fortuna Düsseldorf",
+     "away": "SV 07 Elversberg",
+     "hg": 3,
+     "ag": 1,
+     "gap": 15,
+     "fav": "客",
+     "result": "负"
+    },
+    {
+     "round": 32,
+     "home": "Hannover 96",
+     "away": "Preußen Münster",
+     "hg": 3,
+     "ag": 3,
+     "gap": 14,
+     "fav": "主",
+     "result": "平"
+    },
+    {
+     "round": 33,
+     "home": "Preußen Münster",
+     "away": "SV Darmstadt 98",
+     "hg": 1,
+     "ag": 1,
+     "gap": 13,
+     "fav": "客",
+     "result": "平"
+    },
+    {
+     "round": 30,
+     "home": "SpVgg Greuther Fürth",
+     "away": "SV Darmstadt 98",
+     "hg": 3,
+     "ag": 2,
+     "gap": 11,
+     "fav": "客",
+     "result": "负"
+    }
+   ],
+   "case_count": 4,
+   "dead_rubber": {
+    "n": 6,
+    "low_goal_rate": 0.3333,
+    "league_low_goal_rate": 0.1961
+   }
+  },
+  "control": {
+   "league_narrow_rate": 0.297,
+   "team_flags": [
+    {
+     "team": "FC Schalke 04",
+     "narrow_rate": 0.441,
+     "league": 0.297,
+     "n": 34
+    }
+   ],
+   "one_goal_holds": {
+    "total": 11,
+    "top_teams": [
+     [
+      "FC Schalke 04",
+      5
+     ],
+     [
+      "Hertha BSC",
+      1
+     ],
+     [
+      "SC Paderborn 07",
+      1
+     ],
+     [
+      "Eintracht Braunschweig",
+      1
+     ],
+     [
+      "1. FC Kaiserslautern",
+      1
+     ]
+    ]
+   },
+   "same_round_fav_draw_cluster": [
+    {
+     "round": 24,
+     "favorite_draws": 2
+    }
+   ]
+  },
+  "top_flagged": [
+   {
+    "round": 32,
+    "home": "Hannover 96",
+    "away": "Preußen Münster",
+    "hg": 3,
+    "ag": 3,
+    "flags": [
+     "大比分",
+     "大热被逼平",
+     "赛季末悬殊不胜"
+    ]
+   },
+   {
+    "round": 33,
+    "home": "Preußen Münster",
+    "away": "SV Darmstadt 98",
+    "hg": 1,
+    "ag": 1,
+    "flags": [
+     "大热被逼平",
+     "赛季末悬殊不胜",
+     "悬殊场窄分差"
+    ]
+   },
+   {
+    "round": 2,
+    "home": "Preußen Münster",
+    "away": "SC Paderborn 07",
+    "hg": 1,
+    "ag": 1,
+    "flags": [
+     "大热被逼平",
+     "悬殊场窄分差"
+    ]
+   },
+   {
+    "round": 5,
+    "home": "FC Schalke 04",
+    "away": "Holstein Kiel",
+    "hg": 0,
+    "ag": 1,
+    "flags": [
+     "悬殊爆冷",
+     "悬殊场窄分差"
+    ]
+   },
+   {
+    "round": 11,
+    "home": "Fortuna Düsseldorf",
+    "away": "1. FC Kaiserslautern",
+    "hg": 1,
+    "ag": 1,
+    "flags": [
+     "大热被逼平",
+     "悬殊场窄分差"
+    ]
+   },
+   {
+    "round": 13,
+    "home": "Preußen Münster",
+    "away": "FC Schalke 04",
+    "hg": 0,
+    "ag": 0,
+    "flags": [
+     "大热被逼平",
+     "悬殊场窄分差"
+    ]
+   },
+   {
+    "round": 17,
+    "home": "Preußen Münster",
+    "away": "SV 07 Elversberg",
+    "hg": 1,
+    "ag": 1,
+    "flags": [
+     "大热被逼平",
+     "悬殊场窄分差"
+    ]
+   },
+   {
+    "round": 20,
+    "home": "1. FC Nürnberg",
+    "away": "Preußen Münster",
+    "hg": 1,
+    "ag": 1,
+    "flags": [
+     "大热被逼平",
+     "悬殊场窄分差"
+    ]
+   },
+   {
+    "round": 24,
+    "home": "Holstein Kiel",
+    "away": "SV 07 Elversberg",
+    "hg": 1,
+    "ag": 1,
+    "flags": [
+     "大热被逼平",
+     "悬殊场窄分差"
+    ]
+   },
+   {
+    "round": 24,
+    "home": "SpVgg Greuther Fürth",
+    "away": "FC Schalke 04",
+    "hg": 1,
+    "ag": 1,
+    "flags": [
+     "大热被逼平",
+     "悬殊场窄分差"
+    ]
+   }
+  ],
+  "honest_note": "本报告全部为统计指纹(risk fingerprint)，不构成任何操控/卖分证据；单场异常无法定性；小样本时段置信区间宽。"
+ }
+}

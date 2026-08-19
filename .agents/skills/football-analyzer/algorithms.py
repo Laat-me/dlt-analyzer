@@ -306,6 +306,207 @@ def upset_risk_analysis(matches_with_rank, tier="low", thr=6):
         "baseline": {"top_tier": "6-11%", "low_tier": "14-25%", "low_tier_late": "25%"},
     }
 
+# ---------------------------------------------------------------- 历史异常分析（爆冷/大比分/卖分/控分画像）
+# 数据约定 (fetch_history.py 产物): {date, round, home, away, hg, ag, hthg, htag, rank_h, rank_a}
+# 注意: 本模块全部输出为「统计指纹」(risk fingerprint)，不构成任何操控/卖分证据。
+
+def _favorite(m, thr):
+    """大热方向: 排名差 >= thr 时返回 dict(fav_home, gap), 否则 None (无大热)"""
+    gap = m['rank_a'] - m['rank_h']  # >0 主队名次更小(更靠前) => 主队是大热
+    if abs(gap) < thr:
+        return None
+    return {'fav_home': gap > 0, 'gap': abs(gap)}
+
+
+def _fav_win(m, fav_home):
+    return (m['hg'] > m['ag']) if fav_home else (m['ag'] > m['hg'])
+
+
+def _phase_name(round_no, max_r):
+    if round_no >= max_r - 4:
+        return '末5轮'
+    if round_no <= round(max_r * 0.4):
+        return '前半段'
+    return '中段'
+
+
+def upset_stats(matches, thr=6):
+    """爆冷画像: 大热(排名差>=thr)输球率/被逼平率, 按赛季时段拆解"""
+    big = [(m, f) for m in matches if (f := _favorite(m, thr))]
+    if not big:
+        return {'count': 0, 'note': f'排名差>= {thr} 的大热场次不足'}
+    max_r = max(m['round'] for m in matches)
+    n = len(big)
+    by_phase = {}
+    for m, f in big:
+        ph = _phase_name(m['round'], max_r)
+        s = by_phase.setdefault(ph, {'n': 0, 'upset': 0, 'draw': 0})
+        s['n'] += 1
+        if m['hg'] == m['ag']:
+            s['draw'] += 1
+        elif not _fav_win(m, f['fav_home']):
+            s['upset'] += 1
+    n_upset = sum(v['upset'] for v in by_phase.values())
+    n_draw = sum(v['draw'] for v in by_phase.values())
+    return {
+        'count': n, 'thr': thr,
+        'upset_rate': round(n_upset / n, 4),
+        'draw_rate': round(n_draw / n, 4),
+        'by_phase': {k: {'n': v['n'], 'upset_rate': round(v['upset'] / v['n'], 4),
+                         'draw_rate': round(v['draw'] / v['n'], 4)} for k, v in by_phase.items()},
+    }
+
+
+def scoreline_vs_poisson(matches, league_avg):
+    """大比分画像: 常见比分与总进球的实际频率 vs 独立泊松期望(两队均按 λ=联赛均分/2)
+    偏离倍数 ratio 越大说明该比分在联赛里系统性偏多(如 1-1 聚类)"""
+    lam = league_avg / 2.0
+    p = [math.exp(-lam) * lam ** k / math.factorial(k) for k in range(9)]
+    n = len(matches)
+    actual = {}
+    tg = {}
+    for m in matches:
+        key = f"{m['hg']}:{m['ag']}"
+        actual[key] = actual.get(key, 0) + 1
+        g = min(m['hg'] + m['ag'], 7)
+        tg[g] = tg.get(g, 0) + 1
+    top = sorted(actual.items(), key=lambda kv: -kv[1])[:8]
+    score_rows = []
+    for key, cnt in top:
+        i, j = map(int, key.split(':'))
+        exp = n * p[i] * p[j]
+        score_rows.append({'score': key, 'actual': cnt, 'expected': round(exp, 1),
+                           'ratio': round(cnt / exp, 2) if exp else None})
+    total_lam = league_avg
+    tg_rows = []
+    for g in range(8):
+        act = tg.get(g, 0)
+        if g < 7:
+            exp = n * math.exp(-total_lam) * total_lam ** g / math.factorial(g)
+        else:
+            exp = n * (1 - sum(math.exp(-total_lam) * total_lam ** k / math.factorial(k) for k in range(7)))
+        tg_rows.append({'goals': f'{g}+' if g == 7 else g, 'actual': act,
+                        'expected': round(exp, 1), 'ratio': round(act / exp, 2)})
+    big_events = [m for m in matches if m['hg'] + m['ag'] >= 6]
+    return {'scorelines': score_rows, 'total_goals': tg_rows,
+            'big_score_count': len(big_events), 'big_score_rate': round(len(big_events) / n, 4)}
+
+
+def sell_fingerprints(matches, thr=10):
+    """卖分画像(统计指纹): ①赛季末(末5轮)排名悬殊大热不胜 ②赛季末中游对中游低进球(无欲无求)"""
+    max_r = max(m['round'] for m in matches)
+    late = [m for m in matches if m['round'] >= max_r - 4]
+    cases = []
+    for m in late:
+        f = _favorite(m, thr)
+        if f and not _fav_win(m, f['fav_home']):
+            cases.append({'round': m['round'], 'home': m['home'], 'away': m['away'],
+                          'hg': m['hg'], 'ag': m['ag'], 'gap': f['gap'],
+                          'fav': '主' if f['fav_home'] else '客',
+                          'result': '平' if m['hg'] == m['ag'] else '负'})
+    cases.sort(key=lambda x: -x['gap'])
+    n_teams = max(max(m['rank_h'], m['rank_a']) for m in matches)
+    mid = [m for m in late if 0.3 <= m['rank_h'] / n_teams <= 0.7 and 0.3 <= m['rank_a'] / n_teams <= 0.7]
+    low = [m for m in mid if m['hg'] + m['ag'] <= 1]
+    all_low = sum(1 for m in matches if m['hg'] + m['ag'] <= 1) / len(matches)
+    return {
+        'late_big_favorite_nonwin': cases[:10],
+        'case_count': len(cases),
+        'dead_rubber': {'n': len(mid),
+                        'low_goal_rate': round(len(low) / len(mid), 4) if mid else None,
+                        'league_low_goal_rate': round(all_low, 4)},
+    }
+
+
+def score_control_fingerprints(matches):
+    """控分画像(统计指纹): ①队伍级窄分差(0-0/1-0/0-1/1-1)率显著高于联赛基线 ②持1-0到终场 ③同轮多个大热被逼平"""
+    narrow = {'0:0', '1:0', '0:1', '1:1'}
+    team_cnt, team_narrow = {}, {}
+    for m in matches:
+        for t in (m['home'], m['away']):
+            team_cnt[t] = team_cnt.get(t, 0) + 1
+        if f"{m['hg']}:{m['ag']}" in narrow:
+            for t in (m['home'], m['away']):
+                team_narrow[t] = team_narrow.get(t, 0) + 1
+    base = sum(team_narrow.values()) / sum(team_cnt.values()) if team_cnt else 0
+    team_flags = []
+    for t, c in team_cnt.items():
+        if c >= 12:
+            r = team_narrow.get(t, 0) / c
+            if r > base * 1.35 and r - base > 0.12:
+                team_flags.append({'team': t, 'narrow_rate': round(r, 3),
+                                   'league': round(base, 3), 'n': c})
+    team_flags.sort(key=lambda x: -x['narrow_rate'])
+    # 持1-0到终场 (半场领先1球且守住)
+    hold_teams = {}
+    for m in matches:
+        if m.get('hthg') is None:
+            continue
+        if (m['hthg'] == 1 and m['htag'] == 0 and m['hg'] == 1 and m['ag'] == 0):
+            hold_teams[m['home']] = hold_teams.get(m['home'], 0) + 1
+        if (m['hthg'] == 0 and m['htag'] == 1 and m['hg'] == 0 and m['ag'] == 1):
+            hold_teams[m['away']] = hold_teams.get(m['away'], 0) + 1
+    hold_top = sorted(hold_teams.items(), key=lambda kv: -kv[1])[:5]
+    # 同轮大热被逼平聚类
+    round_draws = {}
+    for m in matches:
+        f = _favorite(m, 10)
+        if f and m['hg'] == m['ag']:
+            round_draws[m['round']] = round_draws.get(m['round'], 0) + 1
+    cluster = [{'round': r, 'favorite_draws': c} for r, c in sorted(round_draws.items()) if c >= 2]
+    return {
+        'league_narrow_rate': round(base, 3),
+        'team_flags': team_flags[:8],
+        'one_goal_holds': {'total': sum(hold_teams.values()), 'top_teams': hold_top},
+        'same_round_fav_draw_cluster': cluster,
+    }
+
+
+def _flag_match(m, max_r):
+    """单场异常旗标(组合规则, 均为统计指纹)"""
+    flags = []
+    if m['hg'] + m['ag'] >= 6:
+        flags.append('大比分')
+    f6 = _favorite(m, 6)
+    if f6:
+        win = _fav_win(m, f6['fav_home'])
+        if f6['gap'] >= 10 and not win and m['hg'] != m['ag']:
+            flags.append('悬殊爆冷')
+        elif f6['gap'] >= 10 and m['hg'] == m['ag']:
+            flags.append('大热被逼平')
+        if m['round'] >= max_r - 4 and f6['gap'] >= 10 and not win:
+            flags.append('赛季末悬殊不胜')
+    if f"{m['hg']}:{m['ag']}" in {'0:0', '1:0', '0:1', '1:1'} and f6 and f6['gap'] >= 10:
+        flags.append('悬殊场窄分差')
+    return flags
+
+
+def anomaly_analysis(matches, league_name='', tier='top', league_avg=None):
+    """历史异常四类画像汇总: 爆冷(实力差法) / 大比分(泊松偏离) / 卖分(赛季末指纹) / 控分(窄分差/持领先/同轮聚类)
+    返回结构化报告; 全部为统计指纹, 不构成操控证据。"""
+    if not matches:
+        return {'league': league_name, 'n': 0}
+    if league_avg is None:
+        league_avg = sum(m['hg'] + m['ag'] for m in matches) / len(matches)
+    max_r = max(m['round'] for m in matches)
+    flagged = []
+    for m in matches:
+        fs = _flag_match(m, max_r)
+        if fs:
+            flagged.append({'round': m['round'], 'home': m['home'], 'away': m['away'],
+                            'hg': m['hg'], 'ag': m['ag'], 'flags': fs})
+    flagged.sort(key=lambda x: -len(x['flags']))
+    return {
+        'league': league_name, 'tier': tier, 'n': len(matches),
+        'league_avg': round(league_avg, 3),
+        'upset': upset_stats(matches),
+        'high_score': scoreline_vs_poisson(matches, league_avg),
+        'sell': sell_fingerprints(matches),
+        'control': score_control_fingerprints(matches),
+        'top_flagged': flagged[:10],
+        'honest_note': '本报告全部为统计指纹(risk fingerprint)，不构成任何操控/卖分证据；单场异常无法定性；小样本时段置信区间宽。',
+    }
+
 # ---------------------------------------------------------------- 回测框架
 
 def backtest(matches, home_stats_fn, away_stats_fn, league_avg, holdout_frac=0.1):
