@@ -153,6 +153,7 @@ cd <项目根目录> && git pull origin main --rebase 2>/dev/null || echo "pull 
 └── data/
     ├── matches.csv       # 历史比赛数据（近2赛季+近10场）
     ├── history_bl1_2025.json / history_bl2_2025.json   # 德甲/德乙 2025-26 逐场（含半场比分、最终排名）
+    ├── bias_profiles.json   # 德甲(top)/德乙(low)比分偏置表（经验收缩）
     ├── anomaly_reports.json  # 历史异常四类画像报告
     ├── model.json        # 当前模型配置与验证记录
     └── predictions.json  # 预测记录（含复盘与风险评级）
@@ -173,7 +174,7 @@ cd <项目根目录> && git pull origin main --rebase 2>/dev/null || echo "pull 
 ### 完整预测流程（每期执行）
 
 1. 赛程页取可投注赛事 → 对阵详情页取 H2H/近况/伤停 → zgzcw 取赔率
-2. `full_predict(odds, weights, top_n=2)`：市场赔率反推 λ → 三层加权（H2H/近况/伤停调 home/away/draw 乘数）→ 输出推荐比分（≤2 个）/胜平负/大小球/总进球 8 档/半全场 9 档
+2. `full_predict(odds, weights, top_n=2)`：市场赔率反推 λ → 三层加权（H2H/近况/伤停调 home/away/draw 乘数）→ 输出推荐比分（≤2 个）/胜平负/大小球/总进球 8 档/半全场 9 档；需要按历史画像修正时改用 `anomaly_predict(odds, tier, bias)`（市场λ→Dixon-Coles→联赛比分偏置表→修正后胜平负/比分/半全场，输出 `anomaly_adjusted` 层）
 3. 爆冷风险评级：`upset_risk_analysis`（实证基线：顶级 6-11%、低级别 14-25%、低级别末段 25%）
 4. 历史异常画像：`anomaly_analysis(history)` 跑相关联赛历史（德甲/德乙 2025-26 已落盘），对照爆冷/大比分/卖分/控分四类统计指纹，单场异常按旗标提示，写入 `recent_upset_check`
 5. 赛后按 胜平负/比分精确/总进球 三指标复盘（半全场命中率待积累样本后单列）
@@ -182,7 +183,7 @@ cd <项目根目录> && git pull origin main --rebase 2>/dev/null || echo "pull 
 
 - **原理**：把全场进球拆成两段独立增量泊松——上半场 λ₁' = λ×45%，下半场 λ₂' = λ×55%；先枚举半场比分（h1,a1）与下半场比分（h2,a2），全场比分=(h1+h2, a1+a2)，映射为 9 类：`胜胜/胜平/胜负/平胜/平平/平负/负胜/负平/负负`（半场结果 + 全场结果）
 - **输出字段**：`half_full`（9 类概率，归一化到 1）、`half_full_top`（Top3 推荐，`algorithms.half_full_distribution / top_half_full`）
-- **参数口径**：半全场从该场**最终 λ** 重算（integrated_v2 → integrated → 市场反推），与对外胜平负同源；未叠加 Dixon-Coles 低分修正与平局区人工权重，故其平局边际与主胜平负可能差 ≤3 个百分点（如实注明）
+- **参数口径**：半全场从该场**最终 λ** 重算（integrated_v2 → integrated → 市场反推），与对外胜平负同源；未叠加 Dixon-Coles 低分修正与平局区人工权重的版本，其平局边际与主胜平负可能差 ≤3 个百分点（如实注明）；`anomaly_adjusted` 层通过「修正后胜平负反推有效λ」生成半全场，全场平局边际与胜平负一致（±2pp 校验通过）
 - **玩法说明**：竞彩半全场是 9 选 1，单类概率普遍 10-35%，无长期稳定优势；命中率声明需积累实盘复盘样本后才可给出
 
 ### 爆冷/卖分风险（实证结论，2026-08-18）
@@ -220,6 +221,8 @@ cd <项目根目录> && git pull origin main --rebase 2>/dev/null || echo "pull 
 - 赛季末样本量小（末5轮悬殊场每联赛 21-24 场），置信区间宽
 - 引用到单场预测时，只作风险提示（"该队有控分指纹"），不得写成"这场被操纵"
 - 杯赛淘汰赛战意真实，卖分画像主要适用于联赛末段常规赛
+
+**应用到预测（2026-08-19 实战）**：`build_score_bias(历史)` 生成联赛比分偏置表（经验收缩 k=8，向 1.0 收缩再截断 0.5-2.0，避免小样本噪声过度扭曲），`anomaly_predict(odds, tier, bias)` 按层级套用：顶级层用德甲偏置（4:0/3:1/3:3 偏多），低级别层用德乙偏置（2:1/1:0/3:3 偏多）。已对周三001-008 输出 `anomaly_adjusted` 层。偏置表存 `data/bias_profiles.json`。
 
 ### 复盘指标（诚实口径）
 - 胜平负准确率（3 分类，随机基线 ≈33%）

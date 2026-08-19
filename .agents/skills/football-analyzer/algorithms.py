@@ -507,6 +507,115 @@ def anomaly_analysis(matches, league_name='', tier='top', league_avg=None):
         'honest_note': '本报告全部为统计指纹(risk fingerprint)，不构成任何操控/卖分证据；单场异常无法定性；小样本时段置信区间宽。',
     }
 
+# ---------------------------------------------------------------- 基于历史异常画像的预测（比分偏置）
+
+def build_score_bias(matches, league_avg, max_g=4, shrink_k=8.0, cap=(0.5, 2.0)):
+    """历史赛果 → 比分偏置表: 各比分实际频率 / 独立泊松期望(两队均按 λ=联赛均分/2)
+    边界: 行/列下标 == max_g 表示该侧进 >= max_g 球(归并桶)
+    经验收缩: ratio 向 1.0 收缩, 权重 = 期望计数/(期望计数+shrink_k), 避免小样本噪声过度扭曲;
+    再按 cap 截断。返回 {(i, j): ratio}"""
+    lam = league_avg / 2.0
+    p = [poisson_pmf(lam, k) for k in range(max_g)]
+    p_ge = 1 - sum(p)
+    n = len(matches)
+    actual = {}
+    for m in matches:
+        i = min(m['hg'], max_g)
+        j = min(m['ag'], max_g)
+        actual[(i, j)] = actual.get((i, j), 0) + 1
+    bias = {}
+    for i in range(max_g + 1):
+        for j in range(max_g + 1):
+            pi = p_ge if i == max_g else p[i]
+            pj = p_ge if j == max_g else p[j]
+            exp = n * pi * pj
+            if exp <= 0:
+                bias[(i, j)] = 1.0
+                continue
+            raw = actual.get((i, j), 0) / exp
+            w = exp / (exp + shrink_k)
+            v = 1 + (raw - 1) * w
+            v = min(max(v, cap[0]), cap[1])
+            bias[(i, j)] = round(v, 3)
+    return bias
+
+
+def apply_score_bias(M, bias, max_g=4):
+    """按偏置表加权比分矩阵并重归一化; i/j >= max_g 归入偏置桶"""
+    Mb = M.copy()
+    for i in range(M.shape[0]):
+        for j in range(M.shape[1]):
+            Mb[i, j] *= bias.get((min(i, max_g), min(j, max_g)), 1.0)
+    s = Mb.sum()
+    return Mb / s if s > 0 else Mb
+
+
+def lam_from_probs(probs, grid_min=0.1, grid_max=4.0, step=0.05):
+    """胜平负概率(归一化) → 最匹配的泊松 λ1,λ2 (网格搜索)
+    用途: 让半全场/总进球与修正后的胜平负同源"""
+    p_home, p_draw = probs[0], probs[1]
+    best, besterr = None, 1e9
+    for l1 in np.arange(grid_min, grid_max + 1e-9, step):
+        for l2 in np.arange(grid_min, grid_max + 1e-9, step):
+            q1 = [poisson_pmf(l1, k) for k in range(9)]
+            q2 = [poisson_pmf(l2, k) for k in range(9)]
+            qh = sum(q1[i] * q2[j] for i in range(9) for j in range(9) if i > j)
+            qd = sum(q1[i] * q2[i] for i in range(9))
+            qa = 1 - qh - qd
+            err = abs(qh - p_home) + abs(qd - p_draw) + abs(qa - (1 - p_home - p_draw))
+            if err < besterr:
+                besterr, best = err, (round(l1, 2), round(l2, 2))
+    return best
+
+
+def anomaly_predict(odds, tier='low', bias=None, home_stats=None, away_stats=None,
+                    league_avg=1.35, w_hist=0.6, dixon_coles=True, rho=-0.1,
+                    top_n=2, draw_extra=None):
+    """基于历史异常画像的预测: 市场/混合λ → [Dixon-Coles] → 联赛比分偏置表修正 → 半全场
+    - tier: 'top'(德甲层) / 'low'(德乙层), 仅作标注
+    - bias: build_score_bias 产物; 提供时按偏置表修正比分矩阵(修正独立泊松对常见比分的系统性偏差)
+    - 半全场与总进球由「修正后胜平负反推有效λ」得出, 与修正后胜平负同源
+    - 返回: lam/effective_lam/tier/result_prob/top_scores(≤top_n)/over25/goals_dist/half_full/half_full_top"""
+    if home_stats and away_stats:
+        l1, l2 = lambda_mix(odds, home_stats, away_stats, league_avg, w_hist)
+    else:
+        l1, l2 = find_lam_from_odds(odds)
+    M = score_matrix(l1, l2)
+    if dixon_coles:
+        M = dixon_coles_correction(M, l1, l2, rho)
+    if draw_extra and draw_extra != 1.0:
+        n = M.shape[0]
+        for i in range(n):
+            M[i][i] *= draw_extra
+        M = M / M.sum()
+    if bias:
+        M = apply_score_bias(M, bias)
+    n = M.shape[0]
+    ph = float(sum(M[i][j] for i in range(n) for j in range(n) if i > j))
+    pd = float(sum(M[i][i] for i in range(n)))
+    pa = 1 - ph - pd
+    eff = lam_from_probs([ph, pd])
+    hf = half_full_distribution(*eff)
+    gd = {}
+    for g in range(8):
+        if g < 7:
+            gd[g] = float(sum(M[i][j] for i in range(n) for j in range(n) if i + j == g))
+        else:
+            gd['7+'] = float(sum(M[i][j] for i in range(n) for j in range(n) if i + j >= 7))
+    scores = sorted([(float(M[i][j]), f"{i}:{j}") for i in range(n) for j in range(n)], reverse=True)[:top_n]
+    p_over = float(sum(M[i][j] for i in range(n) for j in range(n) if i + j >= 3))
+    return {
+        'lam': (round(l1, 2), round(l2, 2)),
+        'effective_lam': eff,
+        'tier': tier,
+        'result_prob': {'home': ph, 'draw': pd, 'away': pa},
+        'top_scores': [(s, p) for p, s in scores],
+        'over25': {'over': p_over, 'under': 1 - p_over},
+        'goals_dist': gd,
+        'half_full': hf,
+        'half_full_top': top_half_full(hf),
+    }
+
 # ---------------------------------------------------------------- 回测框架
 
 def backtest(matches, home_stats_fn, away_stats_fn, league_avg, holdout_frac=0.1):
