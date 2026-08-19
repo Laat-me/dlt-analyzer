@@ -46,9 +46,10 @@ def score_matrix(lam1, lam2, max_goals=8):
             M[i][j] = p1[i] * p2[j]
     return M
 
-def poisson_predict(home_stats, away_stats, league_avg, max_goals=8, weights=None):
+def poisson_predict(home_stats, away_stats, league_avg, max_goals=8, weights=None, top_n=2):
     """输出比分概率排行 + 胜平负 + 大小球
-    weights: 混合加权 dict(win_bonus, draw_bonus, loss_penalty, over_bias) 可选"""
+    weights: 混合加权 dict(win_bonus, draw_bonus, loss_penalty, over_bias) 可选
+    top_n: 对外推荐比分最多 N 个（默认2, 完整矩阵仍保留用于计算）"""
     lam1, lam2 = expected_goals(home_stats, away_stats, league_avg)
     M = score_matrix(lam1, lam2, max_goals)
 
@@ -78,7 +79,7 @@ def poisson_predict(home_stats, away_stats, league_avg, max_goals=8, weights=Non
 
     return {
         "lam": (round(lam1, 3), round(lam2, 3)),
-        "top_scores": [(s, sc) for sc, s in scores[:10]],
+        "top_scores": [(s, sc) for sc, s in scores[:top_n]],
         "result_prob": {"home": p_home, "draw": p_draw, "away": p_away},
         "over25": {"over": p_over, "under": p_under},
     }
@@ -152,6 +153,44 @@ def goals_distribution(lam1, lam2, max_goals=8):
                                                   for j in range(max_goals + 1) if i + j >= max_goals - 1) / total)
     return dist
 
+def half_full_distribution(lam1, lam2, max_goals=8, first_half_ratio=0.45):
+    """半全场分布(9档: 胜胜/胜平/胜负/平胜/平平/平负/负胜/负平/负负)
+    假设上下半场进球为独立增量泊松：
+      上半场 λh = λ * first_half_ratio
+      下半场 λ2h = λ * (1-first_half_ratio)
+    先枚举半场比分与全场比分, 再映射到半全场类型。"""
+    lam1_h1, lam2_h1 = lam1 * first_half_ratio, lam2 * first_half_ratio
+    lam1_h2, lam2_h2 = lam1 * (1 - first_half_ratio), lam2 * (1 - first_half_ratio)
+    p_h1_home = [poisson_pmf(lam1_h1, k) for k in range(max_goals + 1)]
+    p_h1_away = [poisson_pmf(lam2_h1, k) for k in range(max_goals + 1)]
+    p_h2_home = [poisson_pmf(lam1_h2, k) for k in range(max_goals + 1)]
+    p_h2_away = [poisson_pmf(lam2_h2, k) for k in range(max_goals + 1)]
+
+    def res(a, b):
+        if a > b:
+            return '胜'
+        if a == b:
+            return '平'
+        return '负'
+
+    out = {k: 0.0 for k in ['胜胜','胜平','胜负','平胜','平平','平负','负胜','负平','负负']}
+    for h1 in range(max_goals + 1):
+        for a1 in range(max_goals + 1):
+            p1 = p_h1_home[h1] * p_h1_away[a1]
+            r1 = res(h1, a1)
+            for h2 in range(max_goals + 1):
+                for a2 in range(max_goals + 1):
+                    p2 = p_h2_home[h2] * p_h2_away[a2]
+                    rf = res(h1 + h2, a1 + a2)
+                    out[r1 + rf] += float(p1 * p2)
+    s = sum(out.values())
+    if s > 0:
+        out = {k: v / s for k, v in out.items()}
+    return out
+
+def top_half_full(dist, top_n=3):
+    return sorted(dist.items(), key=lambda x: -x[1])[:top_n]
+
 def dixon_coles_correction(M, lam1, lam2, rho=-0.1):
     """Dixon-Coles (1997) 低比分相关性修正
     独立泊松对低比分(0-0/1-0/0-1/1-1)有系统性偏差; 修正因子:
@@ -202,12 +241,13 @@ def lambda_mix(odds, home_stats, away_stats, league_avg=1.35, w_hist=0.6):
             w_hist * l_hist[1] + (1 - w_hist) * l_mkt[1])
 
 def full_predict(odds, weights=None, home_stats=None, away_stats=None,
-                 league_avg=1.35, w_hist=0.6, dixon_coles=True, rho=-0.1):
-    """完整预测: λ(历史+市场混合) -> [Dixon-Coles修正] -> 比分排行/胜平负/大小球/总进球
+                 league_avg=1.35, w_hist=0.6, dixon_coles=True, rho=-0.1, top_n=2):
+    """完整预测: λ(历史+市场混合) -> [Dixon-Coles修正] -> 比分排行/胜平负/大小球/总进球/半全场
     - home_stats/away_stats 提供时: λ = w_hist×历史 + (1-w_hist)×市场 (默认历史60%)
     - 否则纯市场反推
     - dixon_coles=True: 低比分相关性修正
-    - weights: 三层人工加权 dict(home_mult, away_mult, win_mult, draw_extra, over_mult)"""
+    - weights: 三层人工加权 dict(home_mult, away_mult, win_mult, draw_extra, over_mult)
+    - top_n: 对外推荐比分最多 N 个 (默认2)"""
     if home_stats and away_stats:
         l1, l2 = lambda_mix(odds, home_stats, away_stats, league_avg, w_hist)
     else:
@@ -227,14 +267,17 @@ def full_predict(odds, weights=None, home_stats=None, away_stats=None,
     ph = float(sum(M[i][j] for i in range(n) for j in range(n) if i > j))
     pd = float(sum(M[i][i] for i in range(n)))
     pa = 1 - ph - pd
-    scores = sorted([(float(M[i][j]), f"{i}:{j}") for i in range(n) for j in range(n)], reverse=True)[:10]
+    scores = sorted([(float(M[i][j]), f"{i}:{j}") for i in range(n) for j in range(n)], reverse=True)[:top_n]
     p_over = float(sum(M[i][j] for i in range(n) for j in range(n) if i + j >= 3))
+    hf = half_full_distribution(l1, l2)
     return {
         "lam": (round(l1, 2), round(l2, 2)),
         "top_scores": [(s, p) for p, s in scores],
         "result_prob": {"home": ph, "draw": pd, "away": pa},
         "over25": {"over": p_over, "under": 1 - p_over},
         "goals_dist": goals_distribution(l1, l2),
+        "half_full": hf,
+        "half_full_top": top_half_full(hf),
     }
 
 # ---------------------------------------------------------------- 爆冷/卖分风险分析
