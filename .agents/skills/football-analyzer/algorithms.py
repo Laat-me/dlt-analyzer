@@ -570,7 +570,8 @@ def lam_from_probs(probs, grid_min=0.1, grid_max=4.0, step=0.05):
 
 def anomaly_predict(odds, tier='low', bias=None, home_stats=None, away_stats=None,
                     league_avg=1.35, w_hist=0.6, dixon_coles=True, rho=-0.1,
-                    top_n=2, draw_extra=None, lam_override=None):
+                    top_n=2, draw_extra=None, lam_override=None,
+                    apply_bias=True):
     """基于历史异常画像的预测: 市场/混合λ → [Dixon-Coles] → 联赛比分偏置表修正 → 半全场
     - tier: 'top'(德甲层) / 'low'(德乙层), 仅作标注
     - bias: build_score_bias 产物; 提供时按偏置表修正比分矩阵(修正独立泊松对常见比分的系统性偏差)
@@ -590,7 +591,7 @@ def anomaly_predict(odds, tier='low', bias=None, home_stats=None, away_stats=Non
         for i in range(n):
             M[i][i] *= draw_extra
         M = M / M.sum()
-    if bias:
+    if bias and apply_bias:
         M = apply_score_bias(M, bias)
     n = M.shape[0]
     ph = float(sum(M[i][j] for i in range(n) for j in range(n) if i > j))
@@ -605,6 +606,19 @@ def anomaly_predict(odds, tier='low', bias=None, home_stats=None, away_stats=Non
         else:
             gd['7+'] = float(sum(M[i][j] for i in range(n) for j in range(n) if i + j >= 7))
     scores = sorted([(float(M[i][j]), f"{i}:{j}") for i in range(n) for j in range(n)], reverse=True)[:top_n]
+    high_scores = sorted(
+        [(float(M[i][j]), f"{i}:{j}") for i in range(n) for j in range(n)
+         if i + j >= 3], reverse=True)[:max(3, top_n)]
+    recommended = []
+    candidate_groups = [scores[:1], high_scores, scores[1:]]
+    for group in candidate_groups:
+        for item in group:
+            if item[1] not in {x[1] for x in recommended}:
+                recommended.append(item)
+            if len(recommended) >= top_n:
+                break
+        if len(recommended) >= top_n:
+            break
     p_over = float(sum(M[i][j] for i in range(n) for j in range(n) if i + j >= 3))
     return {
         'lam': (round(l1, 2), round(l2, 2)),
@@ -612,6 +626,8 @@ def anomaly_predict(odds, tier='low', bias=None, home_stats=None, away_stats=Non
         'tier': tier,
         'result_prob': {'home': ph, 'draw': pd, 'away': pa},
         'top_scores': [(s, p) for p, s in scores],
+        'high_goal_score_candidates': [(s, p) for p, s in high_scores],
+        'recommended_scores': [(s, p) for p, s in recommended],
         'over25': {'over': p_over, 'under': 1 - p_over},
         'goals_dist': gd,
         'half_full': hf,

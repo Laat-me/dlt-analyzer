@@ -127,6 +127,7 @@ cd <项目根目录> && git pull origin main --rebase 2>/dev/null || echo "pull 
 - 每场推荐比分 **最多 2 个**（`top_n=2`，完整比分矩阵保留用于计算）
 - 每场必须包含：胜平负 `result_prob`、大球概率 `over25`、总进球分布 `goals_dist`、爆冷风险 `upset_risk`
 - 每场必须输出半全场：9 档分布 `half_full` + 前三推荐 `half_full_top`
+- 比分展示同时保留 `top_scores`（数学概率最高，审计用）与 `recommended_scores`（模态+总进球≥3候选，去重）；`high_goal_score_candidates` 只是场景候选，不代表其概率高于模态比分
 
 ### 步骤 6：赛后迭代
 每场赛果录入数据集，定期重训更新攻防系数；复盘记录写入 `data/predictions.json` 与 CHANGELOG。

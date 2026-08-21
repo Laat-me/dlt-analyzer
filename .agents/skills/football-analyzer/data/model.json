@@ -1,5 +1,5 @@
 {
-  "version": 6,
+  "version": 7,
   "activeAlgorithm": "poisson_mixed",
   "algorithms": {
     "poisson": "基础泊松: λ=联赛场均×进攻强度×防守系数",
@@ -13,7 +13,8 @@
     "requiredFields": ["result_prob", "over25", "goals_dist", "upset_risk", "half_full", "half_full_top"],
     "halfFull": "9档半全场(胜胜/胜平/胜负/平胜/平平/平负/负胜/负平/负负), 独立增量泊松(上半场λ×45%), 从该场最终λ重算, 未叠加DC/平局人工权重",
     "anomalyAdjusted": "可选增强层: 市场λ→Dixon-Coles→联赛比分偏置表(德甲top/德乙low, 经验收缩k=8, 截断0.5-2.0)→修正后胜平负/≤2比分/大小球/总进球/半全场; 半全场与总进球由修正后胜平负反推有效λ, 与胜平负同源",
-    "historyEnhanced": "历史增强层: 可核验近期5场主客攻防60% + 市场λ40% + H2H弱校正(方向≤8%, 总进球≤15%); 联赛总进球均值先除以2得到单队基准; 缺历史数据时权重降为0并显式标记; 输出historical_context/goals_total_prediction"
+    "historyEnhanced": "历史增强层: 可核验近期5场主客攻防60% + 市场λ40% + H2H弱校正(方向≤8%, 总进球≤15%); 联赛总进球均值先除以2得到单队基准; 缺历史数据时权重降为0并显式标记; 输出historical_context/goals_total_prediction",
+    "scorePresentation": "保留数学Top2作为审计；recommended_scores由数学模态与总进球≥3候选去重组成；high_goal_score_candidates仅表示高进球场景，不提高其真实概率；跨联赛默认不使用德甲/德乙比分偏置"
   },
   "dataScope": "近2个完整赛季 + 近期10场; 久远数据剔除",
   "evaluation": {
