@@ -642,6 +642,22 @@
      }
     ],
     "upset_risk": "低级别层基线: 大热输球率20.5%/被逼平24.4%(末5轮33.3%); 比分偏多 2:1·1:0·3:3; 杯赛淘汰赛战意真实, 卖分画像不适用"
+   },
+   "review": {
+    "status": "已复盘",
+    "actual_score": "2:1",
+    "actual_result": "home",
+    "predicted_result_pick": "home",
+    "result_hit": true,
+    "predicted_scores": [
+     "1:1",
+     "0:0"
+    ],
+    "score_hit": false,
+    "predicted_ou_pick": "under",
+    "actual_ou": "over",
+    "ou_hit": false,
+    "source_note": "Google结果摘要/Sofascore片段: FC Anyang 2-1 Jeju SK (2026-08-19)"
    }
   },
   {
@@ -753,6 +769,21 @@
      }
     ],
     "upset_risk": "顶级层基线: 大热输球率10.9%/被逼平19.9%; 比分偏多 4:0·3:3·3:1; 西甲新赛季首轮, 无赛季末卖分画像"
+   },
+   "review": {
+    "status": "已复盘",
+    "actual_score": "2:0",
+    "actual_result": "home",
+    "predicted_result_pick": "home",
+    "result_hit": true,
+    "predicted_scores": [
+     "2:0",
+     "1:0"
+    ],
+    "score_hit": true,
+    "predicted_ou_pick": "over",
+    "actual_ou": "under",
+    "ou_hit": false
    }
   },
   {
@@ -864,6 +895,21 @@
      }
     ],
     "upset_risk": "低级别层基线: 大热输球率20.5%/被逼平24.4%(末5轮33.3%); 比分偏多 2:1·1:0·3:3; 杯赛淘汰赛战意真实, 卖分画像不适用"
+   },
+   "review": {
+    "status": "已复盘",
+    "actual_score": "0:1",
+    "actual_result": "away",
+    "predicted_result_pick": "away",
+    "result_hit": true,
+    "predicted_scores": [
+     "0:0",
+     "1:1"
+    ],
+    "score_hit": false,
+    "predicted_ou_pick": "under",
+    "actual_ou": "under",
+    "ou_hit": true
    }
   },
   {
@@ -976,7 +1022,22 @@
      "prob": 0.177
     }
    ],
-   "half_full_source": "anomaly_adjusted: 修正后胜平负反推有效λ的独立增量泊松"
+   "half_full_source": "anomaly_adjusted: 修正后胜平负反推有效λ的独立增量泊松",
+   "review": {
+    "status": "已复盘",
+    "actual_score": "0:1",
+    "actual_result": "away",
+    "predicted_result_pick": "home",
+    "result_hit": false,
+    "predicted_scores": [
+     "1:1",
+     "2:1"
+    ],
+    "score_hit": false,
+    "predicted_ou_pick": "over",
+    "actual_ou": "under",
+    "ou_hit": false
+   }
   },
   {
    "no": "周三005",
@@ -1088,7 +1149,22 @@
      "prob": 0.1768
     }
    ],
-   "half_full_source": "anomaly_adjusted: 修正后胜平负反推有效λ的独立增量泊松"
+   "half_full_source": "anomaly_adjusted: 修正后胜平负反推有效λ的独立增量泊松",
+   "review": {
+    "status": "已复盘",
+    "actual_score": "1:0",
+    "actual_result": "home",
+    "predicted_result_pick": "home",
+    "result_hit": true,
+    "predicted_scores": [
+     "1:1",
+     "2:1"
+    ],
+    "score_hit": false,
+    "predicted_ou_pick": "under",
+    "actual_ou": "under",
+    "ou_hit": true
+   }
   },
   {
    "no": "周三006",
@@ -1199,6 +1275,21 @@
      }
     ],
     "upset_risk": "低级别层基线: 大热输球率20.5%/被逼平24.4%(末5轮33.3%); 比分偏多 2:1·1:0·3:3; 杯赛淘汰赛战意真实, 卖分画像不适用"
+   },
+   "review": {
+    "status": "已复盘",
+    "actual_score": "3:0",
+    "actual_result": "home",
+    "predicted_result_pick": "home",
+    "result_hit": true,
+    "predicted_scores": [
+     "1:0",
+     "2:0"
+    ],
+    "score_hit": false,
+    "predicted_ou_pick": "over",
+    "actual_ou": "over",
+    "ou_hit": true
    }
   },
   {
@@ -1310,6 +1401,21 @@
      }
     ],
     "upset_risk": "低级别层基线: 大热输球率20.5%/被逼平24.4%(末5轮33.3%); 比分偏多 2:1·1:0·3:3; 杯赛淘汰赛战意真实, 卖分画像不适用"
+   },
+   "review": {
+    "status": "已复盘",
+    "actual_score": "1:0",
+    "actual_result": "home",
+    "predicted_result_pick": "home",
+    "result_hit": true,
+    "predicted_scores": [
+     "1:1",
+     "2:1"
+    ],
+    "score_hit": false,
+    "predicted_ou_pick": "over",
+    "actual_ou": "under",
+    "ou_hit": false
    }
   },
   {
@@ -1421,7 +1527,2514 @@
      }
     ],
     "upset_risk": "低级别层基线: 大热输球率20.5%/被逼平24.4%(末5轮33.3%); 比分偏多 2:1·1:0·3:3; 杯赛淘汰赛战意真实, 卖分画像不适用"
+   },
+   "review": {
+    "status": "已复盘",
+    "actual_score": "1:0",
+    "actual_result": "home",
+    "predicted_result_pick": "home",
+    "result_hit": true,
+    "predicted_scores": [
+     "1:0",
+     "2:1"
+    ],
+    "score_hit": true,
+    "predicted_ou_pick": "over",
+    "actual_ou": "under",
+    "ou_hit": false
    }
+  },
+  {
+   "no": "周四001",
+   "matchId": 2040934,
+   "league": "沙职",
+   "home": "迈季迈阿宽广",
+   "away": "利雅得新月",
+   "time": "2026-08-21 02:00",
+   "odds": [
+    10.0,
+    5.72,
+    1.17
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.0885,
+    "draw": 0.1548,
+    "away": 0.7567
+   },
+   "anomaly_adjusted": {
+    "method": "anomaly_predict: 市场λ→Dixon-Coles→德乙(低级别)比分偏置表(经验收缩)",
+    "tier": "low",
+    "lam": [
+     0.7,
+     2.45
+    ],
+    "effective_lam": [
+     0.7,
+     2.2
+    ],
+    "result_prob": {
+     "home": 0.1034,
+     "draw": 0.1806,
+     "away": 0.716
+    },
+    "top_scores": [
+     {
+      "score": "0:2",
+      "prob": 0.1395
+     },
+     {
+      "score": "0:3",
+      "prob": 0.1194
+     }
+    ],
+    "over25": {
+     "over": 0.6068,
+     "under": 0.3932
+    },
+    "goals_dist": {
+     "0": 0.0549,
+     "1": 0.1044,
+     "2": 0.2339,
+     "3": 0.2596,
+     "4": 0.156,
+     "5": 0.1063,
+     "6": 0.0509,
+     "7+": 0.034
+    },
+    "half_full": {
+     "胜胜": 0.0549,
+     "胜平": 0.0332,
+     "胜负": 0.0279,
+     "平胜": 0.0427,
+     "平平": 0.112,
+     "平负": 0.2079,
+     "负胜": 0.0066,
+     "负平": 0.0332,
+     "负负": 0.4816
+    },
+    "half_full_top": [
+     {
+      "pattern": "负负",
+      "prob": 0.4816
+     },
+     {
+      "pattern": "平负",
+      "prob": 0.2079
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.112
+     }
+    ],
+    "upset_risk": "低级别层基线: 大热输球率20.5%/被逼平24.4%(末5轮33.3%); 比分偏多 2:1·1:0·3:3; 非顶级层波动更大"
+   },
+   "half_full": {
+    "胜胜": 0.0549,
+    "胜平": 0.0332,
+    "胜负": 0.0279,
+    "平胜": 0.0427,
+    "平平": 0.112,
+    "平负": 0.2079,
+    "负胜": 0.0066,
+    "负平": 0.0332,
+    "负负": 0.4816
+   },
+   "half_full_top": [
+    {
+     "pattern": "负负",
+     "prob": 0.4816
+    },
+    {
+     "pattern": "平负",
+     "prob": 0.2079
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.112
+    }
+   ],
+   "half_full_source": "anomaly_adjusted: 修正后胜平负反推有效λ的独立增量泊松"
+  },
+  {
+   "no": "周四002",
+   "matchId": 2040935,
+   "league": "西甲",
+   "home": "巴列卡诺",
+   "away": "阿拉维斯",
+   "time": "2026-08-21 03:00",
+   "odds": [
+    2.03,
+    2.84,
+    3.52
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.4364,
+    "draw": 0.3119,
+    "away": 0.2517
+   },
+   "anomaly_adjusted": {
+    "method": "anomaly_predict: 市场λ→Dixon-Coles→德甲(顶级)比分偏置表(经验收缩)",
+    "tier": "top",
+    "lam": [
+     1.1,
+     0.75
+    ],
+    "effective_lam": [
+     1.0,
+     0.55
+    ],
+    "result_prob": {
+     "home": 0.4562,
+     "draw": 0.3439,
+     "away": 0.1998
+    },
+    "top_scores": [
+     {
+      "score": "1:0",
+      "prob": 0.1724
+     },
+     {
+      "score": "0:0",
+      "prob": 0.1676
+     }
+    ],
+    "over25": {
+     "over": 0.286,
+     "under": 0.714
+    },
+    "goals_dist": {
+     "0": 0.1676,
+     "1": 0.2628,
+     "2": 0.2836,
+     "3": 0.1556,
+     "4": 0.0903,
+     "5": 0.0283,
+     "6": 0.0092,
+     "7+": 0.0027
+    },
+    "half_full": {
+     "胜胜": 0.258,
+     "胜平": 0.0342,
+     "胜负": 0.0055,
+     "平胜": 0.1869,
+     "平平": 0.2776,
+     "平负": 0.0903,
+     "负胜": 0.0109,
+     "负平": 0.0342,
+     "负负": 0.1022
+    },
+    "half_full_top": [
+     {
+      "pattern": "平平",
+      "prob": 0.2776
+     },
+     {
+      "pattern": "胜胜",
+      "prob": 0.258
+     },
+     {
+      "pattern": "平胜",
+      "prob": 0.1869
+     }
+    ],
+    "upset_risk": "顶级层基线: 大热输球率10.9%/被逼平19.9%; 比分偏多 4:0·3:1·3:3; 联赛/欧战强队层, 爆冷率低于低级别层"
+   },
+   "half_full": {
+    "胜胜": 0.258,
+    "胜平": 0.0342,
+    "胜负": 0.0055,
+    "平胜": 0.1869,
+    "平平": 0.2776,
+    "平负": 0.0903,
+    "负胜": 0.0109,
+    "负平": 0.0342,
+    "负负": 0.1022
+   },
+   "half_full_top": [
+    {
+     "pattern": "平平",
+     "prob": 0.2776
+    },
+    {
+     "pattern": "胜胜",
+     "prob": 0.258
+    },
+    {
+     "pattern": "平胜",
+     "prob": 0.1869
+    }
+   ],
+   "half_full_source": "anomaly_adjusted: 修正后胜平负反推有效λ的独立增量泊松",
+   "review": {
+    "status": "已复盘",
+    "actual_score": "1:1",
+    "actual_result": "draw",
+    "predicted_result_pick": "home",
+    "result_hit": false,
+    "predicted_scores": [
+     "1:0",
+     "0:0"
+    ],
+    "score_hit": false,
+    "predicted_ou_pick": "under",
+    "actual_ou": "under",
+    "ou_hit": true,
+    "source_note": "Flashscore finished results page"
+   }
+  },
+  {
+   "no": "周四003",
+   "matchId": 2040936,
+   "league": "解放者杯",
+   "home": "科林蒂安",
+   "away": "罗萨里奥中央",
+   "time": "2026-08-21 08:30",
+   "odds": [
+    1.86,
+    2.67,
+    4.6
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.476,
+    "draw": 0.3316,
+    "away": 0.1925
+   },
+   "anomaly_adjusted": {
+    "method": "anomaly_predict: 市场λ→Dixon-Coles→德乙(低级别)比分偏置表(经验收缩)",
+    "tier": "low",
+    "lam": [
+     1.05,
+     0.55
+    ],
+    "effective_lam": [
+     1.1,
+     0.45
+    ],
+    "result_prob": {
+     "home": 0.5239,
+     "draw": 0.3348,
+     "away": 0.1414
+    },
+    "top_scores": [
+     {
+      "score": "1:0",
+      "prob": 0.2311
+     },
+     {
+      "score": "0:0",
+      "prob": 0.2043
+     }
+    ],
+    "over25": {
+     "over": 0.2341,
+     "under": 0.7659
+    },
+    "goals_dist": {
+     "0": 0.2043,
+     "1": 0.2975,
+     "2": 0.2642,
+     "3": 0.1559,
+     "4": 0.0528,
+     "5": 0.0193,
+     "6": 0.0048,
+     "7+": 0.0013
+    },
+    "half_full": {
+     "胜胜": 0.2995,
+     "胜平": 0.0303,
+     "胜负": 0.0039,
+     "平胜": 0.208,
+     "平平": 0.2704,
+     "平负": 0.0706,
+     "负胜": 0.0109,
+     "负平": 0.0303,
+     "负负": 0.076
+    },
+    "half_full_top": [
+     {
+      "pattern": "胜胜",
+      "prob": 0.2995
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.2704
+     },
+     {
+      "pattern": "平胜",
+      "prob": 0.208
+     }
+    ],
+    "upset_risk": "低级别层基线: 大热输球率20.5%/被逼平24.4%(末5轮33.3%); 比分偏多 2:1·1:0·3:3; 非顶级层波动更大"
+   },
+   "half_full": {
+    "胜胜": 0.2995,
+    "胜平": 0.0303,
+    "胜负": 0.0039,
+    "平胜": 0.208,
+    "平平": 0.2704,
+    "平负": 0.0706,
+    "负胜": 0.0109,
+    "负平": 0.0303,
+    "负负": 0.076
+   },
+   "half_full_top": [
+    {
+     "pattern": "胜胜",
+     "prob": 0.2995
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.2704
+    },
+    {
+     "pattern": "平胜",
+     "prob": 0.208
+    }
+   ],
+   "half_full_source": "anomaly_adjusted: 修正后胜平负反推有效λ的独立增量泊松",
+   "review": {
+    "status": "已复盘",
+    "actual_score": "1:0",
+    "actual_result": "home",
+    "predicted_result_pick": "home",
+    "result_hit": true,
+    "predicted_scores": [
+     "1:0",
+     "0:0"
+    ],
+    "score_hit": true,
+    "predicted_ou_pick": "under",
+    "actual_ou": "under",
+    "ou_hit": true,
+    "source_note": "Flashscore finished results page"
+   }
+  },
+  {
+   "no": "周四004",
+   "matchId": 2040951,
+   "league": "欧罗巴",
+   "home": "阿拉木图凯拉特",
+   "away": "安德莱赫特",
+   "time": "2026-08-20 23:00",
+   "odds": [
+    3.35,
+    3.25,
+    1.91
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.2642,
+    "draw": 0.2724,
+    "away": 0.4634
+   },
+   "anomaly_adjusted": {
+    "method": "anomaly_predict: 市场λ→Dixon-Coles→德甲(顶级)比分偏置表(经验收缩)",
+    "tier": "top",
+    "lam": [
+     0.95,
+     1.35
+    ],
+    "effective_lam": [
+     0.8,
+     1.05
+    ],
+    "result_prob": {
+     "home": 0.2785,
+     "draw": 0.3172,
+     "away": 0.4043
+    },
+    "top_scores": [
+     {
+      "score": "1:1",
+      "prob": 0.1548
+     },
+     {
+      "score": "0:0",
+      "prob": 0.1162
+     }
+    ],
+    "over25": {
+     "over": 0.408,
+     "under": 0.592
+    },
+    "goals_dist": {
+     "0": 0.1162,
+     "1": 0.2027,
+     "2": 0.2731,
+     "3": 0.2026,
+     "4": 0.1277,
+     "5": 0.0481,
+     "6": 0.021,
+     "7+": 0.0087
+    },
+    "half_full": {
+     "胜胜": 0.1477,
+     "胜平": 0.0423,
+     "胜负": 0.014,
+     "平胜": 0.1149,
+     "平平": 0.2353,
+     "平负": 0.162,
+     "负胜": 0.0102,
+     "负平": 0.0423,
+     "负负": 0.2314
+    },
+    "half_full_top": [
+     {
+      "pattern": "平平",
+      "prob": 0.2353
+     },
+     {
+      "pattern": "负负",
+      "prob": 0.2314
+     },
+     {
+      "pattern": "平负",
+      "prob": 0.162
+     }
+    ],
+    "upset_risk": "顶级层基线: 大热输球率10.9%/被逼平19.9%; 比分偏多 4:0·3:1·3:3; 联赛/欧战强队层, 爆冷率低于低级别层"
+   },
+   "half_full": {
+    "胜胜": 0.1477,
+    "胜平": 0.0423,
+    "胜负": 0.014,
+    "平胜": 0.1149,
+    "平平": 0.2353,
+    "平负": 0.162,
+    "负胜": 0.0102,
+    "负平": 0.0423,
+    "负负": 0.2314
+   },
+   "half_full_top": [
+    {
+     "pattern": "平平",
+     "prob": 0.2353
+    },
+    {
+     "pattern": "负负",
+     "prob": 0.2314
+    },
+    {
+     "pattern": "平负",
+     "prob": 0.162
+    }
+   ],
+   "half_full_source": "anomaly_adjusted: 修正后胜平负反推有效λ的独立增量泊松"
+  },
+  {
+   "no": "周四005",
+   "matchId": 2040952,
+   "league": "欧罗巴",
+   "home": "米亚尔比",
+   "away": "萨尔茨堡",
+   "time": "2026-08-21 00:00",
+   "odds": [
+    4.15,
+    3.85,
+    1.59
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.2133,
+    "draw": 0.2299,
+    "away": 0.5568
+   },
+   "anomaly_adjusted": {
+    "method": "anomaly_predict: 市场λ→Dixon-Coles→德甲(顶级)比分偏置表(经验收缩)",
+    "tier": "top",
+    "lam": [
+     1.05,
+     1.85
+    ],
+    "effective_lam": [
+     0.9,
+     1.5
+    ],
+    "result_prob": {
+     "home": 0.2246,
+     "draw": 0.2637,
+     "away": 0.5117
+    },
+    "top_scores": [
+     {
+      "score": "1:1",
+      "prob": 0.1301
+     },
+     {
+      "score": "1:2",
+      "prob": 0.0922
+     }
+    ],
+    "over25": {
+     "over": 0.5604,
+     "under": 0.4396
+    },
+    "goals_dist": {
+     "0": 0.0683,
+     "1": 0.1364,
+     "2": 0.2349,
+     "3": 0.2269,
+     "4": 0.1768,
+     "5": 0.0839,
+     "6": 0.0459,
+     "7+": 0.0268
+    },
+    "half_full": {
+     "胜胜": 0.1238,
+     "胜平": 0.0455,
+     "胜负": 0.0228,
+     "平胜": 0.0901,
+     "平平": 0.1703,
+     "平负": 0.1786,
+     "负胜": 0.0122,
+     "负平": 0.0455,
+     "负负": 0.3112
+    },
+    "half_full_top": [
+     {
+      "pattern": "负负",
+      "prob": 0.3112
+     },
+     {
+      "pattern": "平负",
+      "prob": 0.1786
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.1703
+     }
+    ],
+    "upset_risk": "顶级层基线: 大热输球率10.9%/被逼平19.9%; 比分偏多 4:0·3:1·3:3; 联赛/欧战强队层, 爆冷率低于低级别层"
+   },
+   "half_full": {
+    "胜胜": 0.1238,
+    "胜平": 0.0455,
+    "胜负": 0.0228,
+    "平胜": 0.0901,
+    "平平": 0.1703,
+    "平负": 0.1786,
+    "负胜": 0.0122,
+    "负平": 0.0455,
+    "负负": 0.3112
+   },
+   "half_full_top": [
+    {
+     "pattern": "负负",
+     "prob": 0.3112
+    },
+    {
+     "pattern": "平负",
+     "prob": 0.1786
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.1703
+    }
+   ],
+   "half_full_source": "anomaly_adjusted: 修正后胜平负反推有效λ的独立增量泊松",
+   "review": {
+    "status": "已复盘",
+    "actual_score": "0:1",
+    "actual_result": "away",
+    "predicted_result_pick": "away",
+    "result_hit": true,
+    "predicted_scores": [
+     "1:1",
+     "1:2"
+    ],
+    "score_hit": false,
+    "predicted_ou_pick": "over",
+    "actual_ou": "under",
+    "ou_hit": false,
+    "source_note": "Flashscore finished results page"
+   }
+  },
+  {
+   "no": "周四006",
+   "matchId": 2040953,
+   "league": "欧罗巴",
+   "home": "特拉布宗体育",
+   "away": "费伦茨瓦罗斯",
+   "time": "2026-08-21 01:00",
+   "odds": [
+    1.53,
+    3.77,
+    4.75
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.5787,
+    "draw": 0.2349,
+    "away": 0.1864
+   },
+   "anomaly_adjusted": {
+    "method": "anomaly_predict: 市场λ→Dixon-Coles→德甲(顶级)比分偏置表(经验收缩)",
+    "tier": "top",
+    "lam": [
+     1.7,
+     0.85
+    ],
+    "effective_lam": [
+     1.55,
+     0.6
+    ],
+    "result_prob": {
+     "home": 0.6023,
+     "draw": 0.2539,
+     "away": 0.1438
+    },
+    "top_scores": [
+     {
+      "score": "1:0",
+      "prob": 0.1263
+     },
+     {
+      "score": "1:1",
+      "prob": 0.1256
+     }
+    ],
+    "over25": {
+     "over": 0.4806,
+     "under": 0.5194
+    },
+    "goals_dist": {
+     "0": 0.0849,
+     "1": 0.1721,
+     "2": 0.2624,
+     "3": 0.1936,
+     "4": 0.1679,
+     "5": 0.0739,
+     "6": 0.0313,
+     "7+": 0.0138
+    },
+    "half_full": {
+     "胜胜": 0.3745,
+     "胜平": 0.0356,
+     "胜负": 0.0062,
+     "平胜": 0.2114,
+     "平平": 0.1816,
+     "平负": 0.0621,
+     "负胜": 0.0192,
+     "负平": 0.0356,
+     "负负": 0.0739
+    },
+    "half_full_top": [
+     {
+      "pattern": "胜胜",
+      "prob": 0.3745
+     },
+     {
+      "pattern": "平胜",
+      "prob": 0.2114
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.1816
+     }
+    ],
+    "upset_risk": "顶级层基线: 大热输球率10.9%/被逼平19.9%; 比分偏多 4:0·3:1·3:3; 联赛/欧战强队层, 爆冷率低于低级别层"
+   },
+   "half_full": {
+    "胜胜": 0.3745,
+    "胜平": 0.0356,
+    "胜负": 0.0062,
+    "平胜": 0.2114,
+    "平平": 0.1816,
+    "平负": 0.0621,
+    "负胜": 0.0192,
+    "负平": 0.0356,
+    "负负": 0.0739
+   },
+   "half_full_top": [
+    {
+     "pattern": "胜胜",
+     "prob": 0.3745
+    },
+    {
+     "pattern": "平胜",
+     "prob": 0.2114
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.1816
+    }
+   ],
+   "half_full_source": "anomaly_adjusted: 修正后胜平负反推有效λ的独立增量泊松",
+   "review": {
+    "status": "已复盘",
+    "actual_score": "0:1",
+    "actual_result": "away",
+    "predicted_result_pick": "home",
+    "result_hit": false,
+    "predicted_scores": [
+     "1:0",
+     "1:1"
+    ],
+    "score_hit": false,
+    "predicted_ou_pick": "under",
+    "actual_ou": "under",
+    "ou_hit": true,
+    "source_note": "Flashscore finished results page"
+   }
+  },
+  {
+   "no": "周四007",
+   "matchId": 2040948,
+   "league": "欧罗巴",
+   "home": "波兹南莱赫",
+   "away": "图恩",
+   "time": "2026-08-21 01:00",
+   "odds": [
+    1.4,
+    4.15,
+    5.75
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.6326,
+    "draw": 0.2134,
+    "away": 0.154
+   },
+   "anomaly_adjusted": {
+    "method": "anomaly_predict: 市场λ→Dixon-Coles→德乙(低级别)比分偏置表(经验收缩)",
+    "tier": "low",
+    "lam": [
+     1.95,
+     0.85
+    ],
+    "effective_lam": [
+     1.9,
+     0.65
+    ],
+    "result_prob": {
+     "home": 0.6689,
+     "draw": 0.2098,
+     "away": 0.1213
+    },
+    "top_scores": [
+     {
+      "score": "2:0",
+      "prob": 0.1234
+     },
+     {
+      "score": "1:0",
+      "prob": 0.1213
+     }
+    ],
+    "over25": {
+     "over": 0.548,
+     "under": 0.452
+    },
+    "goals_dist": {
+     "0": 0.0657,
+     "1": 0.1483,
+     "2": 0.238,
+     "3": 0.2454,
+     "4": 0.1461,
+     "5": 0.0933,
+     "6": 0.0404,
+     "7+": 0.0228
+    },
+    "half_full": {
+     "胜胜": 0.4358,
+     "胜平": 0.0347,
+     "胜负": 0.0064,
+     "平胜": 0.2121,
+     "平平": 0.1394,
+     "平负": 0.0504,
+     "负胜": 0.0241,
+     "负平": 0.0347,
+     "负负": 0.0625
+    },
+    "half_full_top": [
+     {
+      "pattern": "胜胜",
+      "prob": 0.4358
+     },
+     {
+      "pattern": "平胜",
+      "prob": 0.2121
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.1394
+     }
+    ],
+    "upset_risk": "低级别层基线: 大热输球率20.5%/被逼平24.4%(末5轮33.3%); 比分偏多 2:1·1:0·3:3; 非顶级层波动更大"
+   },
+   "half_full": {
+    "胜胜": 0.4358,
+    "胜平": 0.0347,
+    "胜负": 0.0064,
+    "平胜": 0.2121,
+    "平平": 0.1394,
+    "平负": 0.0504,
+    "负胜": 0.0241,
+    "负平": 0.0347,
+    "负负": 0.0625
+   },
+   "half_full_top": [
+    {
+     "pattern": "胜胜",
+     "prob": 0.4358
+    },
+    {
+     "pattern": "平胜",
+     "prob": 0.2121
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.1394
+    }
+   ],
+   "half_full_source": "anomaly_adjusted: 修正后胜平负反推有效λ的独立增量泊松",
+   "review": {
+    "status": "已复盘",
+    "actual_score": "7:0",
+    "actual_result": "home",
+    "predicted_result_pick": "home",
+    "result_hit": true,
+    "predicted_scores": [
+     "2:0",
+     "1:0"
+    ],
+    "score_hit": false,
+    "predicted_ou_pick": "over",
+    "actual_ou": "over",
+    "ou_hit": true,
+    "source_note": "Flashscore finished results page"
+   }
+  },
+  {
+   "no": "周四008",
+   "matchId": 2040949,
+   "league": "欧罗巴",
+   "home": "贝尔格莱德红星",
+   "away": "比尔森",
+   "time": "2026-08-21 02:00",
+   "odds": [
+    1.61,
+    3.65,
+    4.28
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.5503,
+    "draw": 0.2427,
+    "away": 0.207
+   },
+   "anomaly_adjusted": {
+    "method": "anomaly_predict: 市场λ→Dixon-Coles→德甲(顶级)比分偏置表(经验收缩)",
+    "tier": "top",
+    "lam": [
+     1.65,
+     0.9
+    ],
+    "effective_lam": [
+     1.5,
+     0.65
+    ],
+    "result_prob": {
+     "home": 0.5773,
+     "draw": 0.2624,
+     "away": 0.1603
+    },
+    "top_scores": [
+     {
+      "score": "1:1",
+      "prob": 0.1301
+     },
+     {
+      "score": "1:0",
+      "prob": 0.1228
+     }
+    ],
+    "over25": {
+     "over": 0.4787,
+     "under": 0.5213
+    },
+    "goals_dist": {
+     "0": 0.0859,
+     "1": 0.172,
+     "2": 0.2634,
+     "3": 0.1956,
+     "4": 0.1657,
+     "5": 0.0725,
+     "6": 0.0311,
+     "7+": 0.0138
+    },
+    "half_full": {
+     "胜胜": 0.3545,
+     "胜平": 0.0378,
+     "胜负": 0.0071,
+     "平胜": 0.2043,
+     "平平": 0.1853,
+     "平负": 0.0692,
+     "负胜": 0.0195,
+     "负平": 0.0378,
+     "负负": 0.0844
+    },
+    "half_full_top": [
+     {
+      "pattern": "胜胜",
+      "prob": 0.3545
+     },
+     {
+      "pattern": "平胜",
+      "prob": 0.2043
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.1853
+     }
+    ],
+    "upset_risk": "顶级层基线: 大热输球率10.9%/被逼平19.9%; 比分偏多 4:0·3:1·3:3; 联赛/欧战强队层, 爆冷率低于低级别层"
+   },
+   "half_full": {
+    "胜胜": 0.3545,
+    "胜平": 0.0378,
+    "胜负": 0.0071,
+    "平胜": 0.2043,
+    "平平": 0.1853,
+    "平负": 0.0692,
+    "负胜": 0.0195,
+    "负平": 0.0378,
+    "负负": 0.0844
+   },
+   "half_full_top": [
+    {
+     "pattern": "胜胜",
+     "prob": 0.3545
+    },
+    {
+     "pattern": "平胜",
+     "prob": 0.2043
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.1853
+    }
+   ],
+   "half_full_source": "anomaly_adjusted: 修正后胜平负反推有效λ的独立增量泊松",
+   "review": {
+    "status": "已复盘",
+    "actual_score": "3:0",
+    "actual_result": "home",
+    "predicted_result_pick": "home",
+    "result_hit": true,
+    "predicted_scores": [
+     "1:1",
+     "1:0"
+    ],
+    "score_hit": false,
+    "predicted_ou_pick": "under",
+    "actual_ou": "over",
+    "ou_hit": false,
+    "source_note": "Flashscore finished results page"
+   }
+  },
+  {
+   "no": "周五001",
+   "matchId": 2040960,
+   "league": "日职",
+   "home": "柏太阳神",
+   "away": "长崎航海",
+   "time": "2026-08-21 18:00",
+   "odds": [
+    1.39,
+    4.0,
+    6.25
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.637,
+    "draw": 0.2214,
+    "away": 0.1417
+   },
+   "history_enhanced": {
+    "method": "history_enhanced: recent5主客攻防60% + market40% + H2H弱校正 → Dixon-Coles → low比分偏置",
+    "tier": "low",
+    "lam": [
+     1.8,
+     0.7
+    ],
+    "effective_lam": [
+     1.8,
+     0.55
+    ],
+    "result_prob": {
+     "home": 0.6763,
+     "draw": 0.2188,
+     "away": 0.1049
+    },
+    "top_scores": [
+     {
+      "score": "1:0",
+      "prob": 0.1533
+     },
+     {
+      "score": "2:0",
+      "prob": 0.1416
+     }
+    ],
+    "over25": {
+     "over": 0.4741,
+     "under": 0.5259
+    },
+    "goals_dist": {
+     "0": 0.0855,
+     "1": 0.1837,
+     "2": 0.2567,
+     "3": 0.2359,
+     "4": 0.1256,
+     "5": 0.0715,
+     "6": 0.0278,
+     "7+": 0.0134
+    },
+    "goals_total_prediction": {
+     "most_likely_total": 2,
+     "distribution": {
+      "0": 0.0855,
+      "1": 0.1837,
+      "2": 0.2567,
+      "3": 0.2359,
+      "4": 0.1256,
+      "5": 0.0715,
+      "6": 0.0278,
+      "7+": 0.0134
+     }
+    },
+    "half_full": {
+     "胜胜": 0.4357,
+     "胜平": 0.0316,
+     "胜负": 0.0049,
+     "平胜": 0.2209,
+     "平平": 0.1527,
+     "平负": 0.0469,
+     "负胜": 0.0207,
+     "负平": 0.0316,
+     "负负": 0.0549
+    },
+    "half_full_top": [
+     {
+      "pattern": "胜胜",
+      "prob": 0.4357
+     },
+     {
+      "pattern": "平胜",
+      "prob": 0.2209
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.1527
+     }
+    ],
+    "historical_context": {
+     "data_quality": "no verified recent5/H2H in accessible source; historical weight reduced to 0",
+     "market_lam": [
+      1.8,
+      0.7
+     ],
+     "note": "仅市场/联赛偏置基线，不伪造历史数据"
+    },
+    "upset_risk": "统计风险提示，不构成操控/卖分证据；近期5场/H2H未核验，置信度降低。"
+   },
+   "half_full": {
+    "胜胜": 0.4357,
+    "胜平": 0.0316,
+    "胜负": 0.0049,
+    "平胜": 0.2209,
+    "平平": 0.1527,
+    "平负": 0.0469,
+    "负胜": 0.0207,
+    "负平": 0.0316,
+    "负负": 0.0549
+   },
+   "half_full_top": [
+    {
+     "pattern": "胜胜",
+     "prob": 0.4357
+    },
+    {
+     "pattern": "平胜",
+     "prob": 0.2209
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.1527
+    }
+   ],
+   "half_full_source": "history_enhanced: 修正后有效λ独立增量泊松"
+  },
+  {
+   "no": "周五002",
+   "matchId": 2040961,
+   "league": "日职",
+   "home": "东京FC",
+   "away": "千叶市原",
+   "time": "2026-08-21 18:30",
+   "odds": [
+    1.4,
+    3.95,
+    6.17
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.6324,
+    "draw": 0.2241,
+    "away": 0.1435
+   },
+   "history_enhanced": {
+    "method": "history_enhanced: recent5主客攻防60% + market40% + H2H弱校正 → Dixon-Coles → low比分偏置",
+    "tier": "low",
+    "lam": [
+     1.8,
+     0.7
+    ],
+    "effective_lam": [
+     1.8,
+     0.55
+    ],
+    "result_prob": {
+     "home": 0.6763,
+     "draw": 0.2188,
+     "away": 0.1049
+    },
+    "top_scores": [
+     {
+      "score": "1:0",
+      "prob": 0.1533
+     },
+     {
+      "score": "2:0",
+      "prob": 0.1416
+     }
+    ],
+    "over25": {
+     "over": 0.4741,
+     "under": 0.5259
+    },
+    "goals_dist": {
+     "0": 0.0855,
+     "1": 0.1837,
+     "2": 0.2567,
+     "3": 0.2359,
+     "4": 0.1256,
+     "5": 0.0715,
+     "6": 0.0278,
+     "7+": 0.0134
+    },
+    "goals_total_prediction": {
+     "most_likely_total": 2,
+     "distribution": {
+      "0": 0.0855,
+      "1": 0.1837,
+      "2": 0.2567,
+      "3": 0.2359,
+      "4": 0.1256,
+      "5": 0.0715,
+      "6": 0.0278,
+      "7+": 0.0134
+     }
+    },
+    "half_full": {
+     "胜胜": 0.4357,
+     "胜平": 0.0316,
+     "胜负": 0.0049,
+     "平胜": 0.2209,
+     "平平": 0.1527,
+     "平负": 0.0469,
+     "负胜": 0.0207,
+     "负平": 0.0316,
+     "负负": 0.0549
+    },
+    "half_full_top": [
+     {
+      "pattern": "胜胜",
+      "prob": 0.4357
+     },
+     {
+      "pattern": "平胜",
+      "prob": 0.2209
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.1527
+     }
+    ],
+    "historical_context": {
+     "data_quality": "no verified recent5/H2H in accessible source; historical weight reduced to 0",
+     "market_lam": [
+      1.8,
+      0.7
+     ],
+     "note": "仅市场/联赛偏置基线，不伪造历史数据"
+    },
+    "upset_risk": "统计风险提示，不构成操控/卖分证据；近期5场/H2H未核验，置信度降低。"
+   },
+   "half_full": {
+    "胜胜": 0.4357,
+    "胜平": 0.0316,
+    "胜负": 0.0049,
+    "平胜": 0.2209,
+    "平平": 0.1527,
+    "平负": 0.0469,
+    "负胜": 0.0207,
+    "负平": 0.0316,
+    "负负": 0.0549
+   },
+   "half_full_top": [
+    {
+     "pattern": "胜胜",
+     "prob": 0.4357
+    },
+    {
+     "pattern": "平胜",
+     "prob": 0.2209
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.1527
+    }
+   ],
+   "half_full_source": "history_enhanced: 修正后有效λ独立增量泊松"
+  },
+  {
+   "no": "周五003",
+   "matchId": 2040962,
+   "league": "沙职",
+   "home": "利雅得",
+   "away": "利雅得胜利",
+   "time": "2026-08-22 00:00",
+   "odds": [
+    10.0,
+    6.0,
+    1.16
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.0886,
+    "draw": 0.1477,
+    "away": 0.7637
+   },
+   "history_enhanced": {
+    "method": "history_enhanced: recent5主客攻防60% + market40% + H2H弱校正 → Dixon-Coles → low比分偏置",
+    "tier": "low",
+    "lam": [
+     1.17,
+     2.38
+    ],
+    "effective_lam": [
+     1.1,
+     2.0
+    ],
+    "result_prob": {
+     "home": 0.2037,
+     "draw": 0.2121,
+     "away": 0.5841
+    },
+    "top_scores": [
+     {
+      "score": "1:2",
+      "prob": 0.103
+     },
+     {
+      "score": "1:1",
+      "prob": 0.0855
+     }
+    ],
+    "over25": {
+     "over": 0.689,
+     "under": 0.311
+    },
+    "goals_dist": {
+     "0": 0.0389,
+     "1": 0.0773,
+     "2": 0.1949,
+     "3": 0.2475,
+     "4": 0.172,
+     "5": 0.137,
+     "6": 0.0732,
+     "7+": 0.0592
+    },
+    "goals_total_prediction": {
+     "most_likely_total": 3,
+     "distribution": {
+      "0": 0.0389,
+      "1": 0.0773,
+      "2": 0.1949,
+      "3": 0.2475,
+      "4": 0.172,
+      "5": 0.137,
+      "6": 0.0732,
+      "7+": 0.0592
+     }
+    },
+    "half_full": {
+     "胜胜": 0.1141,
+     "胜平": 0.0468,
+     "胜负": 0.0327,
+     "平胜": 0.0747,
+     "平平": 0.1204,
+     "平负": 0.176,
+     "负胜": 0.0151,
+     "负平": 0.0468,
+     "负负": 0.3734
+    },
+    "half_full_top": [
+     {
+      "pattern": "负负",
+      "prob": 0.3734
+     },
+     {
+      "pattern": "平负",
+      "prob": 0.176
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.1204
+     }
+    ],
+    "historical_context": {
+     "data_quality": "verified recent5 + H2H",
+     "recent_home": [
+      "Al Zulfi 0:2 Al Riyadh",
+      "Al-Ettifaq 4:2 Al Riyadh",
+      "Al Riyadh 2:2 Al-Gharafa",
+      "Al Riyadh 1:0 Al Okhdood",
+      "Al-Taawon 1:1 Al Riyadh"
+     ],
+     "recent_away": [
+      "Al Diriyah 1:4 Al-Nassr",
+      "Al-Nassr 3:0 Al Fateh",
+      "Al-Nassr 0:2 Almeria",
+      "Estrela 4:2 Al-Nassr",
+      "AD Merida 0:2 Al-Nassr"
+     ],
+     "recent_attack_defense": {
+      "home_gf": 1.6,
+      "home_ga": 1.4,
+      "away_gf": 2.2,
+      "away_ga": 1.4
+     },
+     "h2h": {
+      "home_win_rate": 0.0,
+      "draw_rate": 0.2,
+      "away_win_rate": 0.8,
+      "avg_total": 3.0
+     },
+     "historical_lam": [
+      1.45,
+      2.27
+     ],
+     "market_lam": [
+      0.75,
+      2.55
+     ],
+     "weights": {
+      "recent_attack_defense": 0.6,
+      "market": 0.4,
+      "h2h_directional_max": 0.08
+     }
+    },
+    "upset_risk": "统计风险提示，不构成操控/卖分证据；近期5场/H2H已核验。"
+   },
+   "half_full": {
+    "胜胜": 0.1141,
+    "胜平": 0.0468,
+    "胜负": 0.0327,
+    "平胜": 0.0747,
+    "平平": 0.1204,
+    "平负": 0.176,
+    "负胜": 0.0151,
+    "负平": 0.0468,
+    "负负": 0.3734
+   },
+   "half_full_top": [
+    {
+     "pattern": "负负",
+     "prob": 0.3734
+    },
+    {
+     "pattern": "平负",
+     "prob": 0.176
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.1204
+    }
+   ],
+   "half_full_source": "history_enhanced: 修正后有效λ独立增量泊松"
+  },
+  {
+   "no": "周五004",
+   "matchId": 2040963,
+   "league": "芬超",
+   "home": "塞伊奈约基",
+   "away": "拉赫蒂",
+   "time": "2026-08-22 00:00",
+   "odds": [
+    2.29,
+    3.25,
+    2.6
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.3868,
+    "draw": 0.2725,
+    "away": 0.3407
+   },
+   "history_enhanced": {
+    "method": "history_enhanced: recent5主客攻防60% + market40% + H2H弱校正 → Dixon-Coles → low比分偏置",
+    "tier": "low",
+    "lam": [
+     0.87,
+     1.31
+    ],
+    "effective_lam": [
+     0.9,
+     1.15
+    ],
+    "result_prob": {
+     "home": 0.2866,
+     "draw": 0.3063,
+     "away": 0.407
+    },
+    "top_scores": [
+     {
+      "score": "1:1",
+      "prob": 0.1329
+     },
+     {
+      "score": "0:0",
+      "prob": 0.1286
+     }
+    ],
+    "over25": {
+     "over": 0.3882,
+     "under": 0.6118
+    },
+    "goals_dist": {
+     "0": 0.1286,
+     "1": 0.2017,
+     "2": 0.2815,
+     "3": 0.2218,
+     "4": 0.0966,
+     "5": 0.0479,
+     "6": 0.0158,
+     "7+": 0.0061
+    },
+    "goals_total_prediction": {
+     "most_likely_total": 2,
+     "distribution": {
+      "0": 0.1286,
+      "1": 0.2017,
+      "2": 0.2815,
+      "3": 0.2218,
+      "4": 0.0966,
+      "5": 0.0479,
+      "6": 0.0158,
+      "7+": 0.0061
+     }
+    },
+    "half_full": {
+     "胜胜": 0.1569,
+     "胜平": 0.0452,
+     "胜负": 0.0165,
+     "平胜": 0.1159,
+     "平平": 0.2104,
+     "平负": 0.1591,
+     "负胜": 0.0123,
+     "负平": 0.0452,
+     "负负": 0.2387
+    },
+    "half_full_top": [
+     {
+      "pattern": "负负",
+      "prob": 0.2387
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.2104
+     },
+     {
+      "pattern": "平负",
+      "prob": 0.1591
+     }
+    ],
+    "historical_context": {
+     "data_quality": "verified recent5 + H2H",
+     "recent_home": [
+      "Mariehamn 2:0 SJK",
+      "SJK 2:2 Gnistan",
+      "SJK 3:0 HJK",
+      "Jaro 2:1 SJK",
+      "SJK 0:2 KuPS"
+     ],
+     "recent_away": [
+      "Lahti 1:2 KuPS",
+      "Inter Turku 0:0 Lahti",
+      "Lahti 2:0 Jaro",
+      "Ilves 1:0 Lahti",
+      "Mariehamn 0:2 Lahti"
+     ],
+     "recent_attack_defense": {
+      "home_gf": 1.2,
+      "home_ga": 1.6,
+      "away_gf": 1.0,
+      "away_ga": 0.6
+     },
+     "h2h": {
+      "home_win_rate": 0.0,
+      "draw_rate": 0.6,
+      "away_win_rate": 0.4,
+      "avg_total": 4.2
+     },
+     "historical_lam": [
+      0.58,
+      1.38
+     ],
+     "market_lam": [
+      1.3,
+      1.2
+     ],
+     "weights": {
+      "recent_attack_defense": 0.6,
+      "market": 0.4,
+      "h2h_directional_max": 0.08
+     }
+    },
+    "upset_risk": "统计风险提示，不构成操控/卖分证据；近期5场/H2H已核验。"
+   },
+   "half_full": {
+    "胜胜": 0.1569,
+    "胜平": 0.0452,
+    "胜负": 0.0165,
+    "平胜": 0.1159,
+    "平平": 0.2104,
+    "平负": 0.1591,
+    "负胜": 0.0123,
+    "负平": 0.0452,
+    "负负": 0.2387
+   },
+   "half_full_top": [
+    {
+     "pattern": "负负",
+     "prob": 0.2387
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.2104
+    },
+    {
+     "pattern": "平负",
+     "prob": 0.1591
+    }
+   ],
+   "half_full_source": "history_enhanced: 修正后有效λ独立增量泊松"
+  },
+  {
+   "no": "周五005",
+   "matchId": 2040964,
+   "league": "瑞超",
+   "home": "天狼星",
+   "away": "赫根",
+   "time": "2026-08-22 01:00",
+   "odds": [
+    1.7,
+    3.95,
+    3.5
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.5219,
+    "draw": 0.2246,
+    "away": 0.2535
+   },
+   "history_enhanced": {
+    "method": "history_enhanced: recent5主客攻防60% + market40% + H2H弱校正 → Dixon-Coles → low比分偏置",
+    "tier": "low",
+    "lam": [
+     1.67,
+     1.01
+    ],
+    "effective_lam": [
+     1.65,
+     0.8
+    ],
+    "result_prob": {
+     "home": 0.5711,
+     "draw": 0.2458,
+     "away": 0.1831
+    },
+    "top_scores": [
+     {
+      "score": "2:1",
+      "prob": 0.1182
+     },
+     {
+      "score": "1:0",
+      "prob": 0.1175
+     }
+    ],
+    "over25": {
+     "over": 0.521,
+     "under": 0.479
+    },
+    "goals_dist": {
+     "0": 0.0759,
+     "1": 0.1556,
+     "2": 0.2476,
+     "3": 0.2448,
+     "4": 0.1382,
+     "5": 0.0848,
+     "6": 0.0348,
+     "7+": 0.0183
+    },
+    "goals_total_prediction": {
+     "most_likely_total": 2,
+     "distribution": {
+      "0": 0.0759,
+      "1": 0.1556,
+      "2": 0.2476,
+      "3": 0.2448,
+      "4": 0.1382,
+      "5": 0.0848,
+      "6": 0.0348,
+      "7+": 0.0183
+     }
+    },
+    "half_full": {
+     "胜胜": 0.3586,
+     "胜平": 0.042,
+     "胜负": 0.0098,
+     "平胜": 0.1936,
+     "平平": 0.1599,
+     "平负": 0.0734,
+     "负胜": 0.0239,
+     "负平": 0.042,
+     "负负": 0.0969
+    },
+    "half_full_top": [
+     {
+      "pattern": "胜胜",
+      "prob": 0.3586
+     },
+     {
+      "pattern": "平胜",
+      "prob": 0.1936
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.1599
+     }
+    ],
+    "historical_context": {
+     "data_quality": "verified recent5 + H2H",
+     "recent_home": [
+      "Mjallby 4:3 Sirius",
+      "Sirius 2:2 Brommapojkarna",
+      "Halmstad 0:2 Sirius",
+      "Sirius 4:1 Goteborg",
+      "Elfsborg 1:3 Sirius"
+     ],
+     "recent_away": [
+      "Hacken 1:0 Halmstad",
+      "Hammarby 3:0 Hacken",
+      "Hacken 1:1 Kalmar",
+      "Hacken 0:0 AIK",
+      "Halmstad 0:2 Hacken"
+     ],
+     "recent_attack_defense": {
+      "home_gf": 2.8,
+      "home_ga": 1.6,
+      "away_gf": 0.8,
+      "away_ga": 0.8
+     },
+     "h2h": {
+      "home_win_rate": 0.4,
+      "draw_rate": 0.4,
+      "away_win_rate": 0.2,
+      "avg_total": 2.4
+     },
+     "historical_lam": [
+      1.52,
+      0.84
+     ],
+     "market_lam": [
+      1.9,
+      1.25
+     ],
+     "weights": {
+      "recent_attack_defense": 0.6,
+      "market": 0.4,
+      "h2h_directional_max": 0.08
+     }
+    },
+    "upset_risk": "统计风险提示，不构成操控/卖分证据；近期5场/H2H已核验。"
+   },
+   "half_full": {
+    "胜胜": 0.3586,
+    "胜平": 0.042,
+    "胜负": 0.0098,
+    "平胜": 0.1936,
+    "平平": 0.1599,
+    "平负": 0.0734,
+    "负胜": 0.0239,
+    "负平": 0.042,
+    "负负": 0.0969
+   },
+   "half_full_top": [
+    {
+     "pattern": "胜胜",
+     "prob": 0.3586
+    },
+    {
+     "pattern": "平胜",
+     "prob": 0.1936
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.1599
+    }
+   ],
+   "half_full_source": "history_enhanced: 修正后有效λ独立增量泊松"
+  },
+  {
+   "no": "周五006",
+   "matchId": 2040965,
+   "league": "沙职",
+   "home": "胡巴尔卡德西亚",
+   "away": "吉达联合",
+   "time": "2026-08-22 02:00",
+   "odds": [
+    1.45,
+    4.3,
+    4.82
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.6105,
+    "draw": 0.2059,
+    "away": 0.1837
+   },
+   "history_enhanced": {
+    "method": "history_enhanced: recent5主客攻防60% + market40% + H2H弱校正 → Dixon-Coles → low比分偏置",
+    "tier": "low",
+    "lam": [
+     2.1,
+     1.05
+    ],
+    "effective_lam": [
+     2.05,
+     0.85
+    ],
+    "result_prob": {
+     "home": 0.6505,
+     "draw": 0.2046,
+     "away": 0.1449
+    },
+    "top_scores": [
+     {
+      "score": "2:1",
+      "prob": 0.1196
+     },
+     {
+      "score": "2:0",
+      "prob": 0.1014
+     }
+    ],
+    "over25": {
+     "over": 0.6255,
+     "under": 0.3745
+    },
+    "goals_dist": {
+     "0": 0.0488,
+     "1": 0.1136,
+     "2": 0.2121,
+     "3": 0.2465,
+     "4": 0.1645,
+     "5": 0.1184,
+     "6": 0.0574,
+     "7+": 0.0386
+    },
+    "goals_total_prediction": {
+     "most_likely_total": 3,
+     "distribution": {
+      "0": 0.0488,
+      "1": 0.1136,
+      "2": 0.2121,
+      "3": 0.2465,
+      "4": 0.1645,
+      "5": 0.1184,
+      "6": 0.0574,
+      "7+": 0.0386
+     }
+    },
+    "half_full": {
+     "胜胜": 0.4263,
+     "胜平": 0.0398,
+     "胜负": 0.0097,
+     "平胜": 0.1962,
+     "平平": 0.122,
+     "平负": 0.0574,
+     "负胜": 0.0297,
+     "负平": 0.0398,
+     "负负": 0.0789
+    },
+    "half_full_top": [
+     {
+      "pattern": "胜胜",
+      "prob": 0.4263
+     },
+     {
+      "pattern": "平胜",
+      "prob": 0.1962
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.122
+     }
+    ],
+    "historical_context": {
+     "data_quality": "no verified recent5/H2H in accessible source; historical weight reduced to 0",
+     "market_lam": [
+      2.1,
+      1.05
+     ],
+     "note": "仅市场/联赛偏置基线，不伪造历史数据"
+    },
+    "upset_risk": "统计风险提示，不构成操控/卖分证据；近期5场/H2H未核验，置信度降低。"
+   },
+   "half_full": {
+    "胜胜": 0.4263,
+    "胜平": 0.0398,
+    "胜负": 0.0097,
+    "平胜": 0.1962,
+    "平平": 0.122,
+    "平负": 0.0574,
+    "负胜": 0.0297,
+    "负平": 0.0398,
+    "负负": 0.0789
+   },
+   "half_full_top": [
+    {
+     "pattern": "胜胜",
+     "prob": 0.4263
+    },
+    {
+     "pattern": "平胜",
+     "prob": 0.1962
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.122
+    }
+   ],
+   "half_full_source": "history_enhanced: 修正后有效λ独立增量泊松"
+  },
+  {
+   "no": "周五007",
+   "matchId": 2040966,
+   "league": "法乙",
+   "home": "敦刻尔克",
+   "away": "蒙彼利埃",
+   "time": "2026-08-22 02:00",
+   "odds": [
+    2.27,
+    3.15,
+    2.7
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.3904,
+    "draw": 0.2813,
+    "away": 0.3282
+   },
+   "history_enhanced": {
+    "method": "history_enhanced: recent5主客攻防60% + market40% + H2H弱校正 → Dixon-Coles → low比分偏置",
+    "tier": "low",
+    "lam": [
+     1.83,
+     1.74
+    ],
+    "effective_lam": [
+     1.7,
+     1.4
+    ],
+    "result_prob": {
+     "home": 0.4482,
+     "draw": 0.2345,
+     "away": 0.3173
+    },
+    "top_scores": [
+     {
+      "score": "2:1",
+      "prob": 0.1038
+     },
+     {
+      "score": "1:1",
+      "prob": 0.0886
+     }
+    ],
+    "over25": {
+     "over": 0.703,
+     "under": 0.297
+    },
+    "goals_dist": {
+     "0": 0.0363,
+     "1": 0.0776,
+     "2": 0.1831,
+     "3": 0.2397,
+     "4": 0.1763,
+     "5": 0.1442,
+     "6": 0.0784,
+     "7+": 0.0643
+    },
+    "goals_total_prediction": {
+     "most_likely_total": 3,
+     "distribution": {
+      "0": 0.0363,
+      "1": 0.0776,
+      "2": 0.1831,
+      "3": 0.2397,
+      "4": 0.1763,
+      "5": 0.1442,
+      "6": 0.0784,
+      "7+": 0.0643
+     }
+    },
+    "half_full": {
+     "胜胜": 0.2733,
+     "胜平": 0.0532,
+     "胜负": 0.0229,
+     "平胜": 0.1442,
+     "平平": 0.1293,
+     "平负": 0.109,
+     "负胜": 0.0294,
+     "负平": 0.0532,
+     "负负": 0.1855
+    },
+    "half_full_top": [
+     {
+      "pattern": "胜胜",
+      "prob": 0.2733
+     },
+     {
+      "pattern": "负负",
+      "prob": 0.1855
+     },
+     {
+      "pattern": "平胜",
+      "prob": 0.1442
+     }
+    ],
+    "historical_context": {
+     "data_quality": "verified recent5 + H2H",
+     "recent_home": [
+      "Reims 3:3 Dunkerque",
+      "Dunkerque 4:2 Grenoble",
+      "KV Mechelen 0:0 Dunkerque",
+      "Dunkerque 3:1 Westerlo",
+      "Dunkerque 2:1 Samsunspor"
+     ],
+     "recent_away": [
+      "Nancy 0:1 Montpellier",
+      "Montpellier 1:1 Dijon",
+      "Montpellier 4:2 Rodez",
+      "Clermont 0:1 Montpellier",
+      "Montpellier 3:4 Cannes"
+     ],
+     "recent_attack_defense": {
+      "home_gf": 2.4,
+      "home_ga": 1.4,
+      "away_gf": 2.0,
+      "away_ga": 1.4
+     },
+     "h2h": {
+      "home_win_rate": 0.0,
+      "draw_rate": 0.0,
+      "away_win_rate": 1.0,
+      "avg_total": 2.0
+     },
+     "historical_lam": [
+      2.21,
+      2.16
+     ],
+     "market_lam": [
+      1.25,
+      1.1
+     ],
+     "weights": {
+      "recent_attack_defense": 0.6,
+      "market": 0.4,
+      "h2h_directional_max": 0.08
+     }
+    },
+    "upset_risk": "统计风险提示，不构成操控/卖分证据；近期5场/H2H已核验。"
+   },
+   "half_full": {
+    "胜胜": 0.2733,
+    "胜平": 0.0532,
+    "胜负": 0.0229,
+    "平胜": 0.1442,
+    "平平": 0.1293,
+    "平负": 0.109,
+    "负胜": 0.0294,
+    "负平": 0.0532,
+    "负负": 0.1855
+   },
+   "half_full_top": [
+    {
+     "pattern": "胜胜",
+     "prob": 0.2733
+    },
+    {
+     "pattern": "负负",
+     "prob": 0.1855
+    },
+    {
+     "pattern": "平胜",
+     "prob": 0.1442
+    }
+   ],
+   "half_full_source": "history_enhanced: 修正后有效λ独立增量泊松"
+  },
+  {
+   "no": "周五008",
+   "matchId": 2040967,
+   "league": "荷乙",
+   "home": "登博思",
+   "away": "埃因霍温FC",
+   "time": "2026-08-22 02:00",
+   "odds": [
+    1.74,
+    3.85,
+    3.4
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.5092,
+    "draw": 0.2301,
+    "away": 0.2606
+   },
+   "history_enhanced": {
+    "method": "history_enhanced: recent5主客攻防60% + market40% + H2H弱校正 → Dixon-Coles → low比分偏置",
+    "tier": "low",
+    "lam": [
+     1.92,
+     0.87
+    ],
+    "effective_lam": [
+     1.9,
+     0.7
+    ],
+    "result_prob": {
+     "home": 0.6583,
+     "draw": 0.214,
+     "away": 0.1277
+    },
+    "top_scores": [
+     {
+      "score": "2:0",
+      "prob": 0.1211
+     },
+     {
+      "score": "1:0",
+      "prob": 0.1206
+     }
+    ],
+    "over25": {
+     "over": 0.5459,
+     "under": 0.4541
+    },
+    "goals_dist": {
+     "0": 0.0666,
+     "1": 0.1487,
+     "2": 0.2388,
+     "3": 0.2455,
+     "4": 0.1455,
+     "5": 0.0926,
+     "6": 0.0399,
+     "7+": 0.0224
+    },
+    "goals_total_prediction": {
+     "most_likely_total": 3,
+     "distribution": {
+      "0": 0.0666,
+      "1": 0.1487,
+      "2": 0.2388,
+      "3": 0.2455,
+      "4": 0.1455,
+      "5": 0.0926,
+      "6": 0.0399,
+      "7+": 0.0224
+     }
+    },
+    "half_full": {
+     "胜胜": 0.4262,
+     "胜平": 0.0365,
+     "胜负": 0.0073,
+     "平胜": 0.2076,
+     "平平": 0.1382,
+     "平负": 0.054,
+     "负胜": 0.0252,
+     "负平": 0.0365,
+     "负负": 0.0686
+    },
+    "half_full_top": [
+     {
+      "pattern": "胜胜",
+      "prob": 0.4262
+     },
+     {
+      "pattern": "平胜",
+      "prob": 0.2076
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.1382
+     }
+    ],
+    "historical_context": {
+     "data_quality": "verified recent5 + H2H",
+     "recent_home": [
+      "Heracles 3:2 Den Bosch",
+      "Den Bosch 1:1 Almere City",
+      "Den Bosch 2:0 Al Fayha",
+      "Den Bosch 2:1 Lusail",
+      "Eindhoven FC 0:0 Den Bosch"
+     ],
+     "recent_away": [
+      "Eindhoven FC 2:3 Maastricht",
+      "Jong AZ 0:1 Eindhoven FC",
+      "Beveren 1:0 Eindhoven FC",
+      "PSV 3:0 Eindhoven FC",
+      "Genk U23 4:2 Eindhoven FC"
+     ],
+     "recent_attack_defense": {
+      "home_gf": 1.4,
+      "home_ga": 1.0,
+      "away_gf": 1.0,
+      "away_ga": 2.2
+     },
+     "h2h": {
+      "home_win_rate": 0.4,
+      "draw_rate": 0.4,
+      "away_win_rate": 0.2,
+      "avg_total": 2.8
+     },
+     "historical_lam": [
+      1.96,
+      0.62
+     ],
+     "market_lam": [
+      1.85,
+      1.25
+     ],
+     "weights": {
+      "recent_attack_defense": 0.6,
+      "market": 0.4,
+      "h2h_directional_max": 0.08
+     }
+    },
+    "upset_risk": "统计风险提示，不构成操控/卖分证据；近期5场/H2H已核验。"
+   },
+   "half_full": {
+    "胜胜": 0.4262,
+    "胜平": 0.0365,
+    "胜负": 0.0073,
+    "平胜": 0.2076,
+    "平平": 0.1382,
+    "平负": 0.054,
+    "负胜": 0.0252,
+    "负平": 0.0365,
+    "负负": 0.0686
+   },
+   "half_full_top": [
+    {
+     "pattern": "胜胜",
+     "prob": 0.4262
+    },
+    {
+     "pattern": "平胜",
+     "prob": 0.2076
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.1382
+    }
+   ],
+   "half_full_source": "history_enhanced: 修正后有效λ独立增量泊松"
+  },
+  {
+   "no": "周五009",
+   "matchId": 2040968,
+   "league": "法甲",
+   "home": "马赛",
+   "away": "斯特拉斯堡",
+   "time": "2026-08-22 02:45",
+   "odds": [
+    1.65,
+    3.75,
+    3.9
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.5367,
+    "draw": 0.2362,
+    "away": 0.2271
+   },
+   "history_enhanced": {
+    "method": "history_enhanced: recent5主客攻防60% + market40% + H2H弱校正 → Dixon-Coles → top比分偏置",
+    "tier": "top",
+    "lam": [
+     1.75,
+     1.05
+    ],
+    "effective_lam": [
+     1.55,
+     0.75
+    ],
+    "result_prob": {
+     "home": 0.5658,
+     "draw": 0.254,
+     "away": 0.1803
+    },
+    "top_scores": [
+     {
+      "score": "1:1",
+      "prob": 0.1259
+     },
+     {
+      "score": "1:0",
+      "prob": 0.1002
+     }
+    ],
+    "over25": {
+     "over": 0.5389,
+     "under": 0.4611
+    },
+    "goals_dist": {
+     "0": 0.0692,
+     "1": 0.1446,
+     "2": 0.2473,
+     "3": 0.2031,
+     "4": 0.1843,
+     "5": 0.088,
+     "6": 0.0422,
+     "7+": 0.0213
+    },
+    "goals_total_prediction": {
+     "most_likely_total": 2,
+     "distribution": {
+      "0": 0.0692,
+      "1": 0.1446,
+      "2": 0.2473,
+      "3": 0.2031,
+      "4": 0.1843,
+      "5": 0.088,
+      "6": 0.0422,
+      "7+": 0.0213
+     }
+    },
+    "half_full": {
+     "胜胜": 0.347,
+     "胜平": 0.041,
+     "胜负": 0.009,
+     "平胜": 0.1955,
+     "平平": 0.1734,
+     "平负": 0.0751,
+     "负胜": 0.0217,
+     "负平": 0.041,
+     "负负": 0.0963
+    },
+    "half_full_top": [
+     {
+      "pattern": "胜胜",
+      "prob": 0.347
+     },
+     {
+      "pattern": "平胜",
+      "prob": 0.1955
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.1734
+     }
+    ],
+    "historical_context": {
+     "data_quality": "no verified recent5/H2H in accessible source; historical weight reduced to 0",
+     "market_lam": [
+      1.75,
+      1.05
+     ],
+     "note": "仅市场/联赛偏置基线，不伪造历史数据"
+    },
+    "upset_risk": "统计风险提示，不构成操控/卖分证据；近期5场/H2H未核验，置信度降低。"
+   },
+   "half_full": {
+    "胜胜": 0.347,
+    "胜平": 0.041,
+    "胜负": 0.009,
+    "平胜": 0.1955,
+    "平平": 0.1734,
+    "平负": 0.0751,
+    "负胜": 0.0217,
+    "负平": 0.041,
+    "负负": 0.0963
+   },
+   "half_full_top": [
+    {
+     "pattern": "胜胜",
+     "prob": 0.347
+    },
+    {
+     "pattern": "平胜",
+     "prob": 0.1955
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.1734
+    }
+   ],
+   "half_full_source": "history_enhanced: 修正后有效λ独立增量泊松"
+  },
+  {
+   "no": "周五011",
+   "matchId": 2040969,
+   "league": "西甲",
+   "home": "皇家贝蒂斯",
+   "away": "皇家社会",
+   "time": "2026-08-22 03:00",
+   "odds": [
+    2.0,
+    3.26,
+    3.1
+   ],
+   "status": "已开售",
+   "implied": {
+    "home": 0.4427,
+    "draw": 0.2716,
+    "away": 0.2856
+   },
+   "history_enhanced": {
+    "method": "history_enhanced: recent5主客攻防60% + market40% + H2H弱校正 → Dixon-Coles → top比分偏置",
+    "tier": "top",
+    "lam": [
+     1.35,
+     1.05
+    ],
+    "effective_lam": [
+     1.2,
+     0.8
+    ],
+    "result_prob": {
+     "home": 0.4593,
+     "draw": 0.3013,
+     "away": 0.2394
+    },
+    "top_scores": [
+     {
+      "score": "1:1",
+      "prob": 0.1488
+     },
+     {
+      "score": "1:0",
+      "prob": 0.1185
+     }
+    ],
+    "over25": {
+     "over": 0.4343,
+     "under": 0.5657
+    },
+    "goals_dist": {
+     "0": 0.1023,
+     "1": 0.1896,
+     "2": 0.2737,
+     "3": 0.1972,
+     "4": 0.1439,
+     "5": 0.058,
+     "6": 0.0249,
+     "7+": 0.0103
+    },
+    "goals_total_prediction": {
+     "most_likely_total": 2,
+     "distribution": {
+      "0": 0.1023,
+      "1": 0.1896,
+      "2": 0.2737,
+      "3": 0.1972,
+      "4": 0.1439,
+      "5": 0.058,
+      "6": 0.0249,
+      "7+": 0.0103
+     }
+    },
+    "half_full": {
+     "胜胜": 0.2643,
+     "胜平": 0.0431,
+     "胜负": 0.0103,
+     "平胜": 0.1729,
+     "平平": 0.2138,
+     "平负": 0.1028,
+     "负胜": 0.0167,
+     "负平": 0.0431,
+     "负负": 0.133
+    },
+    "half_full_top": [
+     {
+      "pattern": "胜胜",
+      "prob": 0.2643
+     },
+     {
+      "pattern": "平平",
+      "prob": 0.2138
+     },
+     {
+      "pattern": "平胜",
+      "prob": 0.1729
+     }
+    ],
+    "historical_context": {
+     "data_quality": "no verified recent5/H2H in accessible source; historical weight reduced to 0",
+     "market_lam": [
+      1.35,
+      1.05
+     ],
+     "note": "仅市场/联赛偏置基线，不伪造历史数据"
+    },
+    "upset_risk": "统计风险提示，不构成操控/卖分证据；近期5场/H2H未核验，置信度降低。"
+   },
+   "half_full": {
+    "胜胜": 0.2643,
+    "胜平": 0.0431,
+    "胜负": 0.0103,
+    "平胜": 0.1729,
+    "平平": 0.2138,
+    "平负": 0.1028,
+    "负胜": 0.0167,
+    "负平": 0.0431,
+    "负负": 0.133
+   },
+   "half_full_top": [
+    {
+     "pattern": "胜胜",
+     "prob": 0.2643
+    },
+    {
+     "pattern": "平平",
+     "prob": 0.2138
+    },
+    {
+     "pattern": "平胜",
+     "prob": 0.1729
+    }
+   ],
+   "half_full_source": "history_enhanced: 修正后有效λ独立增量泊松"
   }
  ],
  "analysis": {
@@ -1967,5 +4580,13 @@
   },
   "conclusion": "8队近期无比分操控铁证; 仅费内巴切5月主场3:3 Eyüp一例符合'赛季末+大热被逼平'卖分画像(单场/3个月前/无法定性); 其余异常(里昂0:4×2崩盘/弗鲁米嫩7平/维京小冷)属状态类信号; 今日4场为淘汰赛战意真实, 无新增操控预警"
  },
- "updated": "2026-08-19 补充周三004/005(美职) anomaly_adjusted 层"
+ "updated": "2026-08-21 周五历史增强预测（近期5场+H2H+主客场攻防+总进球）",
+ "last_review_summary": {
+  "period": "2026-08-20 周四",
+  "confirmed_matches": 14,
+  "result_hit": 11,
+  "score_top2_hit": 3,
+  "over_under_hit": 7,
+  "note": "仅统计已从公开结果页核验的场次；未核验场次不计入"
+ }
 }

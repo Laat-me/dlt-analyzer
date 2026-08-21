@@ -570,7 +570,7 @@ def lam_from_probs(probs, grid_min=0.1, grid_max=4.0, step=0.05):
 
 def anomaly_predict(odds, tier='low', bias=None, home_stats=None, away_stats=None,
                     league_avg=1.35, w_hist=0.6, dixon_coles=True, rho=-0.1,
-                    top_n=2, draw_extra=None):
+                    top_n=2, draw_extra=None, lam_override=None):
     """基于历史异常画像的预测: 市场/混合λ → [Dixon-Coles] → 联赛比分偏置表修正 → 半全场
     - tier: 'top'(德甲层) / 'low'(德乙层), 仅作标注
     - bias: build_score_bias 产物; 提供时按偏置表修正比分矩阵(修正独立泊松对常见比分的系统性偏差)
@@ -578,6 +578,8 @@ def anomaly_predict(odds, tier='low', bias=None, home_stats=None, away_stats=Non
     - 返回: lam/effective_lam/tier/result_prob/top_scores(≤top_n)/over25/goals_dist/half_full/half_full_top"""
     if home_stats and away_stats:
         l1, l2 = lambda_mix(odds, home_stats, away_stats, league_avg, w_hist)
+    elif lam_override is not None:
+        l1, l2 = lam_override
     else:
         l1, l2 = find_lam_from_odds(odds)
     M = score_matrix(l1, l2)

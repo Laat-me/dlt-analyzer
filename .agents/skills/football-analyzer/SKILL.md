@@ -175,7 +175,7 @@ cd <项目根目录> && git pull origin main --rebase 2>/dev/null || echo "pull 
 
 1. 赛程页取可投注赛事 → 对阵详情页取 H2H/近况/伤停 → zgzcw 取赔率
 2. `full_predict(odds, weights, top_n=2)`：市场赔率反推 λ → 三层加权（H2H/近况/伤停调 home/away/draw 乘数）→ 输出推荐比分（≤2 个）/胜平负/大小球/总进球 8 档/半全场 9 档；需要按历史画像修正时改用 `anomaly_predict(odds, tier, bias)`（市场λ→Dixon-Coles→联赛比分偏置表→修正后胜平负/比分/半全场，输出 `anomaly_adjusted` 层）
-3. 爆冷风险评级：`upset_risk_analysis`（实证基线：顶级 6-11%、低级别 14-25%、低级别末段 25%）
+3. 历史增强：有可核验近期5场与H2H时，使用 `history_enhanced` 层——近期主客攻防60% + 市场λ40%，H2H只作弱校正（方向≤8%、总进球≤15%）；联赛总进球均值先除以2再作为单队基准。无可核验历史时历史权重降为0并写明数据缺口，不用赔率伪装成历史分析。
 4. 历史异常画像：`anomaly_analysis(history)` 跑相关联赛历史（德甲/德乙 2025-26 已落盘），对照爆冷/大比分/卖分/控分四类统计指纹，单场异常按旗标提示，写入 `recent_upset_check`
 5. 赛后按 胜平负/比分精确/总进球 三指标复盘（半全场命中率待积累样本后单列）
 
