@@ -4583,10 +4583,15 @@
  "updated": "2026-08-21 周五历史增强预测（近期5场+H2H+主客场攻防+总进球）",
  "last_review_summary": {
   "period": "2026-08-20 周四",
-  "confirmed_matches": 14,
-  "result_hit": 11,
-  "score_top2_hit": 3,
-  "over_under_hit": 7,
-  "note": "仅统计已从公开结果页核验的场次；未核验场次不计入"
+  "confirmed_matches": 6,
+  "result_hit": 4,
+  "score_top2_hit": 1,
+  "over_under_hit": 4,
+  "pending_matches": [
+   "周四001",
+   "周四004",
+   "周四009"
+  ],
+  "note": "仅统计昨天周四已从公开结果页核验的6场；未核验场次不计入。周三历史样本保留在各场review中，不混入本摘要。"
  }
 }
