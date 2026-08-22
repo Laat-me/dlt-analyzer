@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-08-18",
+ "updatedAt": "2026-08-22",
  "records": [
   {
    "id": 1,
@@ -830,10 +830,23 @@
     7,
     10
    ],
-   "verified": false,
-   "hitGe4": null,
+   "verified": true,
+   "hitGe4": false,
    "algorithm": "AI_U_wide",
-   "note": "6+3主推: AI_U_wide(还原版)"
+   "note": "6+3主推: AI_U_wide(还原版)",
+   "actualFront": [
+    5,
+    14,
+    15,
+    17,
+    33
+   ],
+   "actualBack": [
+    1,
+    7
+   ],
+   "frontHits": 0,
+   "backHits": 1
   },
   {
    "id": 27,
@@ -854,10 +867,23 @@
     7,
     10
    ],
-   "verified": false,
-   "hitGe4": null,
+   "verified": true,
+   "hitGe4": false,
    "algorithm": "K_prob_ensemble",
-   "note": "6+3参考组: H+I+J集成"
+   "note": "6+3参考组: H+I+J集成",
+   "actualFront": [
+    5,
+    14,
+    15,
+    17,
+    33
+   ],
+   "actualBack": [
+    1,
+    7
+   ],
+   "frontHits": 0,
+   "backHits": 1
   },
   {
    "id": 29,
@@ -876,9 +902,22 @@
     8,
     1
    ],
-   "verified": false,
+   "verified": true,
    "hitGe4": null,
-   "note": "单式5+2: 追冷 gap×0.5+冷30×2.5+全期偏冷×0.3"
+   "note": "单式5+2: 追冷 gap×0.5+冷30×2.5+全期偏冷×0.3",
+   "actualFront": [
+    5,
+    14,
+    15,
+    17,
+    33
+   ],
+   "actualBack": [
+    1,
+    7
+   ],
+   "frontHits": 1,
+   "backHits": 1
   },
   {
    "id": 30,
@@ -897,9 +936,22 @@
     2,
     5
    ],
-   "verified": false,
+   "verified": true,
    "hitGe4": null,
-   "note": "单式5+2: 追热 近5×3+近10×1.5+邻域×4+连出×4"
+   "note": "单式5+2: 追热 近5×3+近10×1.5+邻域×4+连出×4",
+   "actualFront": [
+    5,
+    14,
+    15,
+    17,
+    33
+   ],
+   "actualBack": [
+    1,
+    7
+   ],
+   "frontHits": 1,
+   "backHits": 0
   },
   {
    "id": 31,
@@ -918,9 +970,22 @@
     2,
     5
    ],
-   "verified": false,
+   "verified": true,
    "hitGe4": null,
-   "note": "单式5+2: 冷号3+热号2 组合"
+   "note": "单式5+2: 冷号3+热号2 组合",
+   "actualFront": [
+    5,
+    14,
+    15,
+    17,
+    33
+   ],
+   "actualBack": [
+    1,
+    7
+   ],
+   "frontHits": 0,
+   "backHits": 0
   },
   {
    "id": 32,
@@ -939,8 +1004,150 @@
     4,
     5
    ],
+   "verified": true,
+   "note": "六爻起卦: 起始卦风天小畜 + 本卦坤为地变地天泰 seed=186539507982（玄学娱乐）",
+   "actualFront": [
+    5,
+    14,
+    15,
+    17,
+    33
+   ],
+   "actualBack": [
+    1,
+    7
+   ],
+   "frontHits": 1,
+   "backHits": 0
+  },
+  {
+   "id": 33,
+   "predictedAt": "2026-08-22",
+   "targetDrawNum": "26095",
+   "model": "AI_U_wide",
+   "mode": "6+3",
+   "predictedFront": [
+    5,
+    12,
+    14,
+    15,
+    17,
+    33
+   ],
+   "predictedBack": [
+    1,
+    4,
+    7
+   ],
    "verified": false,
-   "note": "六爻起卦: 起始卦风天小畜 + 本卦坤为地变地天泰 seed=186539507982（玄学娱乐）"
+   "hitGe4": null,
+   "note": "6+3主推: AI_U_wide(还原版)"
+  },
+  {
+   "id": 34,
+   "predictedAt": "2026-08-22",
+   "targetDrawNum": "26095",
+   "model": "K_prob_ensemble",
+   "mode": "6+3",
+   "predictedFront": [
+    2,
+    5,
+    7,
+    12,
+    13,
+    26
+   ],
+   "predictedBack": [
+    1,
+    5,
+    7
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "note": "6+3参考组: H+I+J集成"
+  },
+  {
+   "id": 35,
+   "predictedAt": "2026-08-22",
+   "targetDrawNum": "26095",
+   "model": "v1_cold",
+   "mode": "5+2",
+   "predictedFront": [
+    1,
+    6,
+    17,
+    31,
+    34
+   ],
+   "predictedBack": [
+    8,
+    6
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "note": "单式5+2: 追冷 gap×0.5+冷30×2.5+全期偏冷×0.3"
+  },
+  {
+   "id": 36,
+   "predictedAt": "2026-08-22",
+   "targetDrawNum": "26095",
+   "model": "v2_hot",
+   "mode": "5+2",
+   "predictedFront": [
+    4,
+    12,
+    16,
+    19,
+    29
+   ],
+   "predictedBack": [
+    2,
+    9
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "note": "单式5+2: 追热 近5×3+近10×1.5+邻域×4+连出×4"
+  },
+  {
+   "id": 37,
+   "predictedAt": "2026-08-22",
+   "targetDrawNum": "26095",
+   "model": "v3",
+   "mode": "5+2",
+   "predictedFront": [
+    6,
+    12,
+    16,
+    31,
+    34
+   ],
+   "predictedBack": [
+    2,
+    9
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "note": "单式5+2: 冷号3+热号2 组合"
+  },
+  {
+   "id": 38,
+   "predictedAt": "2026-08-22",
+   "targetDrawNum": "26095",
+   "model": "六爻占卜",
+   "mode": "5+2",
+   "predictedFront": [
+    1,
+    3,
+    16,
+    28,
+    34
+   ],
+   "predictedBack": [
+    6,
+    11
+   ],
+   "verified": false,
+   "note": "六爻起卦: 起始卦地雷复 + 本卦艮为山变山天大畜 seed=186540531162（玄学娱乐）"
   }
  ]
 }
