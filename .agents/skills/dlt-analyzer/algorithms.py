@@ -46,7 +46,10 @@ def repeat_flags(arr, maxn):
     return R
 
 def neighbor_counts(arr, maxn, radius, exclude_center=True):
-    """NC[k][n-1] = k-1 期出号在 ±radius 内命中 n 的次数(默认不含n本身)"""
+    """NC[k][n-1] = k-1 期(上期)出号在 ±radius 邻域内命中 n 的次数。
+    口径（round-27）：radius=1 且 exclude_center=True 时即为「跨期邻号」特征——
+    表示号码 n 是否属于上一期开奖号码的 +1/-1（不含上期号码本身，即不含重号）。
+    示例：上期出 {05,20}，则 04/06/19/21 各 +1，05/20 不计（重号）。"""
     N = arr.shape[0]
     NC = np.zeros((N, maxn), dtype=np.int8)
     for k in range(1, N):
@@ -57,6 +60,23 @@ def neighbor_counts(arr, maxn, radius, exclude_center=True):
             for x in arr[k - 1]:
                 NC[k, x - 1] -= 1
     return NC
+
+def prev_neighbor_flags(arr, maxn, radius=1):
+    """PN[k][n-1] = 号码 n 是否命中「跨期邻号」：n ∈ {上一期号码 ±1..±radius} 且 n ∉ 上一期号码集合。
+    radius=1 即上一期号码 ±1。按集合排除上期全部原号，保证与「重号」严格互斥——
+    即使上期自身含连号(如 05,06)，05/06 也只算重号、不计入邻号。返回 0/1 标记。"""
+    N = arr.shape[0]
+    PN = np.zeros((N, maxn), dtype=np.int8)
+    for k in range(1, N):
+        prev_set = set(int(x) for x in arr[k - 1])
+        for n in range(1, maxn + 1):
+            if n in prev_set:
+                continue
+            for x in prev_set:
+                if abs(n - x) <= radius:
+                    PN[k, n - 1] = 1
+                    break
+    return PN
 
 def gap_map(arr, maxn):
     """G[k][n-1] = 号码n 到 k-1 期为止的遗漏期数(未出现过则记大值)"""
@@ -109,7 +129,8 @@ def pick_top6_constrained(scores, topk=12):
 def make_ai_u_wide(radius=2, w_repeat=0.18, w_neighbor=0.02, base_win=None,
                    constrained=True, back_repeat=None, topk=12):
     """AI_U_wide 族: base + w_repeat*重号 + w_neighbor*邻域(r)  (ORIGINAL 参数)
-    round-25 还原版: radius=3, w_repeat=0.5, w_neighbor=0.2, topk=8 (900/100窗口指纹还原)"""
+    round-25 还原版: radius=3, w_repeat=0.5, w_neighbor=0.2, topk=8 (900/100窗口指纹还原)
+    round-27 口径: radius=1 时邻域项即「跨期邻号(上期±1,不含重号)」，radius≥2 为更宽跨期邻域"""
     def fn(k, F, R, NC, G, front_actual, back_actual):
         bf = norm(F["f_all_f"])[k] if base_win is None else norm(F["f30_f"])[k]
         bb = norm(F["b_all_b"])[k] if base_win is None else norm(F["b30_b"])[k]
@@ -131,7 +152,8 @@ def make_v1_cold(constrained=True):
     return fn
 
 def make_v2_hot(constrained=True):
-    """v2 追热 (ORIGINAL): freq5×3 + freq10×1.5 + neighbor(热±1)×4 + streak×4"""
+    """v2 追热 (ORIGINAL): freq5×3 + freq10×1.5 + neighbor(上期±1跨期邻号)×4 + streak×4
+    round-27: nb 取 NC radius=1(上期号码±1、不含重号)"""
     def fn(k, F, R, NC, G, front_actual, back_actual):
         f5 = F["f5_f"][k].astype(np.float32); f10 = F["f10_f"][k].astype(np.float32)
         nb = NC["f"][k, :, 0].astype(np.float32)
