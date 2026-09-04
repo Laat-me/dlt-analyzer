@@ -251,6 +251,13 @@
    "result": "正式预测3条(#17/#18/#19)全部未达标(合计命中1/1/2); 31算法事后前向验证0个达标(最高E_entropy=3, 随机期望0.6个), 属正常波动",
    "v1v2v3": "v1累计8期平均命中1.13, v2累计6期平均1.33, v3累计2期平均1.00; v2-v1差0.21≥0.08满足调整门槛, 但主算法已切换AI_U_wide且样本小, 本轮不调权重只记录观察",
    "next": "26093期预测已按v29口径(AI_U_wide主+K_prob_ensemble参考)写入predictions.json"
+  },
+  {
+   "round": 28,
+   "date": "2026-09-05",
+   "event": "跨期邻号独立回测",
+   "result": "900/100: base+repeat+prevN1 ge4=6%(vs +repeat 3%, 基线2.04%); 长窗口500: 2.6%(与+repeat相同), 无稳定增益; 不入默认模型",
+   "note": "本地无2909全量, 长窗口用留出500近似; prev_neighbor_flags 保留为独立特征"
   }
  ],
  "optimizationTarget": "hit>=4 6+3 combination (front+back total)",
