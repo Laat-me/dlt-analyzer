@@ -1,0 +1,60 @@
+[
+ {
+  "targetNum": "26243",
+  "drawDate": "2026-09-10",
+  "generatedFrom": "26242",
+  "generatedAt": "2026-09-10",
+  "algorithm": "I_gap_cold",
+  "algorithmNote": "选优协议的机械结果（8 分块均值 21.54%，32 个算法中排第 1），但优势不显著，排名波动 25 名",
+  "predictedDigits": [6, 9, 8],
+  "top2": [[6, 8], [2, 9], [5, 8]],
+  "top3": [[6, 7, 8], [1, 2, 9], [5, 6, 8]],
+  "algorithmSpread": {
+    "_comment": "同一份数据、同一晚，各算法主推分歧极大，说明不存在共识",
+    "I_gap_cold": [6, 9, 8],
+    "AD_ml_gbm": [6, 2, 8],
+    "D_freqAll": [1, 7, 5],
+    "AF_liuyao": [8, 8, 7],
+    "AG_random_control": [2, 0, 2],
+    "P_neighbor": [1, 1, 1],
+    "K_sum_conditional": [5, 4, 5],
+    "V_omit_ratio": [6, 9, 8]
+  },
+  "confidenceNote": "32 个候选算法无一显著优于 20% 随机基线；纯随机对照组排第 15/32。本注为娱乐性参考，期望回报率约 -47%。",
+  "actualDigits": [9, 1, 5],
+  "positionHits": 0,
+  "top2Hits": 1,
+  "exactHit": false,
+  "verified": true,
+  "verifiedAt": "2026-09-14",
+  "verificationNote": "位置命中 0/3，Top-2 覆盖 1/3，未全中。与随机预期一致（Top-2 覆盖期望 0.6/3）。"
+ },
+ {
+  "targetNum": "26247",
+  "drawDate": "2026-09-14",
+  "generatedFrom": "26246",
+  "generatedAt": "2026-09-14",
+  "algorithm": "I_gap_cold",
+  "algorithmNote": "选优协议的机械结果，非因其有效；32 个算法均未通过显著性门槛",
+  "predictedDigits": [8, 9, 8],
+  "top2": [[7, 8], [3, 9], [7, 8]],
+  "top3": [[3, 7, 8], [0, 3, 9], [2, 7, 8]],
+  "algorithmSpread": {
+    "_comment": "八个算法给出八组不同号码，无任何共同数字",
+    "I_gap_cold": [8, 9, 8],
+    "V_omit_ratio": [8, 9, 8],
+    "AD_ml_gbm": [7, 0, 2],
+    "D_freqAll": [1, 7, 5],
+    "AF_liuyao": [0, 7, 6],
+    "AG_random_control": [5, 3, 0],
+    "K_sum_conditional": [5, 4, 5],
+    "P_neighbor": [1, 7, 9]
+  },
+  "confidenceNote": "32 个候选算法无一显著优于 20% 随机基线；纯随机对照组排第 15/32。本注为娱乐性参考，期望回报率约 -47%。",
+  "actualDigits": null,
+  "positionHits": null,
+  "top2Hits": null,
+  "exactHit": null,
+  "verified": false
+ }
+]

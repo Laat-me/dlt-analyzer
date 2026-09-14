@@ -1,0 +1,1349 @@
+{
+ "version": 1,
+ "game": "排列三",
+ "gameNo": "35",
+ "optimizationTarget": "positional top2-coverage",
+ "activeAlgorithm": "I_gap_cold",
+ "honesty": {
+  "conclusion": "全部候选算法均未显著优于随机基线，历史数据中未发现可利用信号。",
+  "anyAlgorithmSignificant": false,
+  "sourceOfSelection": "8 个独立 100 期分块的 Top-2 覆盖率均值",
+  "payoutRatio": 0.53,
+  "note": "排列三为固定奖金 (直选1040/组选3 346/组选6 173 元，每注2元)，返奖率约 53%。即使存在微小概率优势，也不改变长期负期望。"
+ },
+ "backtest": {
+  "trainSize": 904,
+  "holdoutSize": 100,
+  "metric": "top2PosRate",
+  "randomBaseline": {
+   "top1": 0.1,
+   "top2": 0.2,
+   "top3": 0.3
+  }
+ },
+ "selectionProtocol": {
+  "blocks": [
+   "26147~26246",
+   "26047~26146",
+   "25298~26046",
+   "25198~25297",
+   "25098~25197",
+   "24350~25097",
+   "24250~24349",
+   "24150~24249"
+  ],
+  "positionSamples": 2400,
+  "baseline": 0.2,
+  "bonferroniAlpha": 0.001563,
+  "gateRate": 0.2241,
+  "anySignificant": false
+ },
+ "algorithmBenchmarks": [
+  {
+   "name": "P_neighbor",
+   "periods": 100,
+   "top1PosRate": 0.11,
+   "top2PosRate": 0.2433,
+   "top3PosRate": 0.3367,
+   "exactTop1": 0,
+   "exactTop2": 1,
+   "selected": false
+  },
+  {
+   "name": "O_cold10",
+   "periods": 100,
+   "top1PosRate": 0.13,
+   "top2PosRate": 0.2367,
+   "top3PosRate": 0.3133,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "T_size_parity",
+   "periods": 100,
+   "top1PosRate": 0.1233,
+   "top2PosRate": 0.23,
+   "top3PosRate": 0.3333,
+   "exactTop1": 0,
+   "exactTop2": 1,
+   "selected": false
+  },
+  {
+   "name": "I_gap_cold",
+   "periods": 100,
+   "top1PosRate": 0.0867,
+   "top2PosRate": 0.2233,
+   "top3PosRate": 0.3367,
+   "exactTop1": 0,
+   "exactTop2": 2,
+   "selected": true
+  },
+  {
+   "name": "V_omit_ratio",
+   "periods": 100,
+   "top1PosRate": 0.0833,
+   "top2PosRate": 0.22,
+   "top3PosRate": 0.3233,
+   "exactTop1": 0,
+   "exactTop2": 2,
+   "selected": false
+  },
+  {
+   "name": "F_dirichlet_global",
+   "periods": 100,
+   "top1PosRate": 0.1133,
+   "top2PosRate": 0.21,
+   "top3PosRate": 0.2967,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "D_freqAll",
+   "periods": 100,
+   "top1PosRate": 0.11,
+   "top2PosRate": 0.21,
+   "top3PosRate": 0.2967,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "S_kill123",
+   "periods": 100,
+   "top1PosRate": 0.1033,
+   "top2PosRate": 0.21,
+   "top3PosRate": 0.2867,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "U_golden_dart",
+   "periods": 100,
+   "top1PosRate": 0.1,
+   "top2PosRate": 0.21,
+   "top3PosRate": 0.2767,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "Z_prob_ensemble",
+   "periods": 100,
+   "top1PosRate": 0.0833,
+   "top2PosRate": 0.21,
+   "top3PosRate": 0.3,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "AB_skip_number",
+   "periods": 100,
+   "top1PosRate": 0.1067,
+   "top2PosRate": 0.2,
+   "top3PosRate": 0.32,
+   "exactTop1": 1,
+   "exactTop2": 2,
+   "selected": false
+  },
+  {
+   "name": "X_sumtail",
+   "periods": 100,
+   "top1PosRate": 0.1,
+   "top2PosRate": 0.2,
+   "top3PosRate": 0.31,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "K_sum_conditional",
+   "periods": 100,
+   "top1PosRate": 0.0933,
+   "top2PosRate": 0.2,
+   "top3PosRate": 0.3133,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "W_duima",
+   "periods": 100,
+   "top1PosRate": 0.1267,
+   "top2PosRate": 0.1933,
+   "top3PosRate": 0.26,
+   "exactTop1": 0,
+   "exactTop2": 2,
+   "selected": false
+  },
+  {
+   "name": "Y_diff_pair",
+   "periods": 100,
+   "top1PosRate": 0.0933,
+   "top2PosRate": 0.19,
+   "top3PosRate": 0.3233,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "H_markov1_blend",
+   "periods": 100,
+   "top1PosRate": 0.09,
+   "top2PosRate": 0.1867,
+   "top3PosRate": 0.26,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "N_repeat10",
+   "periods": 100,
+   "top1PosRate": 0.0833,
+   "top2PosRate": 0.1867,
+   "top3PosRate": 0.3,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "A_freq30",
+   "periods": 100,
+   "top1PosRate": 0.0833,
+   "top2PosRate": 0.1867,
+   "top3PosRate": 0.2933,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "J_anti_repeat",
+   "periods": 100,
+   "top1PosRate": 0.09,
+   "top2PosRate": 0.1833,
+   "top3PosRate": 0.2867,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "AD_ml_gbm",
+   "periods": 100,
+   "top1PosRate": 0.09,
+   "top2PosRate": 0.1833,
+   "top3PosRate": 0.2867,
+   "exactTop1": 1,
+   "exactTop2": 1,
+   "selected": false
+  },
+  {
+   "name": "AG_random_control",
+   "periods": 100,
+   "top1PosRate": 0.09,
+   "top2PosRate": 0.18,
+   "top3PosRate": 0.2933,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "R_span_target",
+   "periods": 100,
+   "top1PosRate": 0.06,
+   "top2PosRate": 0.18,
+   "top3PosRate": 0.2867,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "AF_liuyao",
+   "periods": 100,
+   "top1PosRate": 0.0933,
+   "top2PosRate": 0.1733,
+   "top3PosRate": 0.28,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "AE_ml_mlp",
+   "periods": 100,
+   "top1PosRate": 0.0667,
+   "top2PosRate": 0.1733,
+   "top3PosRate": 0.2633,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "B_freq10",
+   "periods": 100,
+   "top1PosRate": 0.07,
+   "top2PosRate": 0.17,
+   "top3PosRate": 0.2733,
+   "exactTop1": 0,
+   "exactTop2": 1,
+   "selected": false
+  },
+  {
+   "name": "C_freq5",
+   "periods": 100,
+   "top1PosRate": 0.0867,
+   "top2PosRate": 0.1667,
+   "top3PosRate": 0.2533,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "Q_hot7",
+   "periods": 100,
+   "top1PosRate": 0.08,
+   "top2PosRate": 0.1633,
+   "top3PosRate": 0.2667,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "E_mix_30_10_all",
+   "periods": 100,
+   "top1PosRate": 0.06,
+   "top2PosRate": 0.1633,
+   "top3PosRate": 0.29,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "G_recency_eb",
+   "periods": 100,
+   "top1PosRate": 0.0733,
+   "top2PosRate": 0.1533,
+   "top3PosRate": 0.2667,
+   "exactTop1": 0,
+   "exactTop2": 1,
+   "selected": false
+  },
+  {
+   "name": "AA_markov2",
+   "periods": 100,
+   "top1PosRate": 0.0667,
+   "top2PosRate": 0.1533,
+   "top3PosRate": 0.26,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "AC_ml_logreg",
+   "periods": 100,
+   "top1PosRate": 0.07,
+   "top2PosRate": 0.15,
+   "top3PosRate": 0.2667,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  },
+  {
+   "name": "M_012_route",
+   "periods": 100,
+   "top1PosRate": 0.0867,
+   "top2PosRate": 0.1433,
+   "top3PosRate": 0.2433,
+   "exactTop1": 0,
+   "exactTop2": 0,
+   "selected": false
+  }
+ ],
+ "blockStability": [
+  {
+   "name": "I_gap_cold",
+   "rates": [
+    0.2233,
+    0.1733,
+    0.22,
+    0.2267,
+    0.25,
+    0.2167,
+    0.2,
+    0.21
+   ],
+   "ranks": [
+    4,
+    23,
+    8,
+    2,
+    2,
+    9,
+    21,
+    19
+   ],
+   "avgRate": 0.215,
+   "avgRank": 11.0,
+   "rankSpread": 21,
+   "holdoutRate": 0.2233,
+   "pValueVsBaseline": 0.035897,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "V_omit_ratio",
+   "rates": [
+    0.22,
+    0.1867,
+    0.2167,
+    0.2267,
+    0.2533,
+    0.2033,
+    0.19,
+    0.22
+   ],
+   "ranks": [
+    5,
+    17,
+    10,
+    3,
+    1,
+    14,
+    25,
+    14
+   ],
+   "avgRate": 0.2146,
+   "avgRank": 11.12,
+   "rankSpread": 24,
+   "holdoutRate": 0.22,
+   "pValueVsBaseline": 0.040035,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "U_golden_dart",
+   "rates": [
+    0.21,
+    0.22,
+    0.23,
+    0.1933,
+    0.2233,
+    0.1967,
+    0.2267,
+    0.21
+   ],
+   "ranks": [
+    10,
+    1,
+    2,
+    22,
+    6,
+    17,
+    2,
+    20
+   ],
+   "avgRate": 0.2137,
+   "avgRank": 10.0,
+   "rankSpread": 21,
+   "holdoutRate": 0.21,
+   "pValueVsBaseline": 0.04948,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "K_sum_conditional",
+   "rates": [
+    0.2,
+    0.1967,
+    0.1933,
+    0.2233,
+    0.22,
+    0.1967,
+    0.2233,
+    0.2233
+   ],
+   "ranks": [
+    11,
+    12,
+    18,
+    5,
+    9,
+    15,
+    4,
+    8
+   ],
+   "avgRate": 0.2096,
+   "avgRank": 10.25,
+   "rankSpread": 14,
+   "holdoutRate": 0.2,
+   "pValueVsBaseline": 0.125762,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "O_cold10",
+   "rates": [
+    0.2367,
+    0.2,
+    0.19,
+    0.2233,
+    0.2033,
+    0.1967,
+    0.21,
+    0.2033
+   ],
+   "ranks": [
+    2,
+    11,
+    20,
+    6,
+    12,
+    16,
+    16,
+    23
+   ],
+   "avgRate": 0.2079,
+   "avgRank": 13.25,
+   "rankSpread": 21,
+   "holdoutRate": 0.2367,
+   "pValueVsBaseline": 0.172417,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "D_freqAll",
+   "rates": [
+    0.21,
+    0.2133,
+    0.2067,
+    0.2033,
+    0.22,
+    0.1667,
+    0.22,
+    0.2233
+   ],
+   "ranks": [
+    6,
+    4,
+    14,
+    15,
+    7,
+    30,
+    8,
+    7
+   ],
+   "avgRate": 0.2079,
+   "avgRank": 11.38,
+   "rankSpread": 26,
+   "holdoutRate": 0.21,
+   "pValueVsBaseline": 0.172417,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "F_dirichlet_global",
+   "rates": [
+    0.21,
+    0.21,
+    0.2167,
+    0.1933,
+    0.22,
+    0.16,
+    0.23,
+    0.2167
+   ],
+   "ranks": [
+    7,
+    6,
+    9,
+    20,
+    8,
+    31,
+    1,
+    15
+   ],
+   "avgRate": 0.2071,
+   "avgRank": 12.12,
+   "rankSpread": 30,
+   "holdoutRate": 0.21,
+   "pValueVsBaseline": 0.199473,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "S_kill123",
+   "rates": [
+    0.21,
+    0.2133,
+    0.2067,
+    0.2,
+    0.2233,
+    0.17,
+    0.2133,
+    0.22
+   ],
+   "ranks": [
+    9,
+    5,
+    15,
+    19,
+    5,
+    28,
+    12,
+    13
+   ],
+   "avgRate": 0.2071,
+   "avgRank": 13.25,
+   "rankSpread": 23,
+   "holdoutRate": 0.21,
+   "pValueVsBaseline": 0.199473,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "R_span_target",
+   "rates": [
+    0.18,
+    0.2167,
+    0.19,
+    0.1833,
+    0.19,
+    0.23,
+    0.2233,
+    0.2433
+   ],
+   "ranks": [
+    21,
+    3,
+    21,
+    26,
+    18,
+    6,
+    5,
+    2
+   ],
+   "avgRate": 0.2071,
+   "avgRank": 12.75,
+   "rankSpread": 24,
+   "holdoutRate": 0.18,
+   "pValueVsBaseline": 0.199473,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "J_anti_repeat",
+   "rates": [
+    0.1833,
+    0.1867,
+    0.1767,
+    0.2067,
+    0.1967,
+    0.23,
+    0.2233,
+    0.2333
+   ],
+   "ranks": [
+    19,
+    16,
+    30,
+    13,
+    15,
+    4,
+    3,
+    3
+   ],
+   "avgRate": 0.2046,
+   "avgRank": 12.88,
+   "rankSpread": 27,
+   "holdoutRate": 0.1833,
+   "pValueVsBaseline": 0.294789,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "A_freq30",
+   "rates": [
+    0.1867,
+    0.2,
+    0.1867,
+    0.2067,
+    0.1733,
+    0.2367,
+    0.2133,
+    0.2267
+   ],
+   "ranks": [
+    16,
+    10,
+    24,
+    11,
+    27,
+    1,
+    10,
+    5
+   ],
+   "avgRate": 0.2038,
+   "avgRank": 13.0,
+   "rankSpread": 26,
+   "holdoutRate": 0.1867,
+   "pValueVsBaseline": 0.330733,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "N_repeat10",
+   "rates": [
+    0.1867,
+    0.2033,
+    0.1833,
+    0.2067,
+    0.17,
+    0.23,
+    0.2133,
+    0.2267
+   ],
+   "ranks": [
+    18,
+    8,
+    27,
+    14,
+    30,
+    5,
+    11,
+    6
+   ],
+   "avgRate": 0.2025,
+   "avgRank": 14.88,
+   "rankSpread": 25,
+   "holdoutRate": 0.1867,
+   "pValueVsBaseline": 0.387685,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "AF_liuyao",
+   "rates": [
+    0.1733,
+    0.19,
+    0.18,
+    0.2267,
+    0.18,
+    0.2367,
+    0.1867,
+    0.2467
+   ],
+   "ranks": [
+    24,
+    14,
+    28,
+    4,
+    25,
+    2,
+    28,
+    1
+   ],
+   "avgRate": 0.2025,
+   "avgRank": 15.75,
+   "rankSpread": 27,
+   "holdoutRate": 0.1733,
+   "pValueVsBaseline": 0.387685,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "Y_diff_pair",
+   "rates": [
+    0.19,
+    0.1667,
+    0.1767,
+    0.2367,
+    0.19,
+    0.2267,
+    0.2067,
+    0.2233
+   ],
+   "ranks": [
+    15,
+    29,
+    31,
+    1,
+    19,
+    7,
+    19,
+    11
+   ],
+   "avgRate": 0.2021,
+   "avgRank": 16.5,
+   "rankSpread": 30,
+   "holdoutRate": 0.19,
+   "pValueVsBaseline": 0.407313,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "P_neighbor",
+   "rates": [
+    0.2433,
+    0.1767,
+    0.23,
+    0.1933,
+    0.1767,
+    0.21,
+    0.21,
+    0.1533
+   ],
+   "ranks": [
+    1,
+    21,
+    1,
+    21,
+    26,
+    12,
+    17,
+    32
+   ],
+   "avgRate": 0.1992,
+   "avgRank": 16.38,
+   "rankSpread": 31,
+   "holdoutRate": 0.2433,
+   "pValueVsBaseline": 0.548768,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "X_sumtail",
+   "rates": [
+    0.2,
+    0.17,
+    0.2233,
+    0.2133,
+    0.2,
+    0.1533,
+    0.2133,
+    0.2133
+   ],
+   "ranks": [
+    12,
+    26,
+    5,
+    8,
+    13,
+    32,
+    13,
+    18
+   ],
+   "avgRate": 0.1983,
+   "avgRank": 15.88,
+   "rankSpread": 27,
+   "holdoutRate": 0.2,
+   "pValueVsBaseline": 0.588929,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "AG_random_control",
+   "rates": [
+    0.18,
+    0.2033,
+    0.2233,
+    0.1733,
+    0.2367,
+    0.1933,
+    0.1867,
+    0.19
+   ],
+   "ranks": [
+    22,
+    9,
+    7,
+    29,
+    4,
+    20,
+    29,
+    26
+   ],
+   "avgRate": 0.1983,
+   "avgRank": 18.25,
+   "rankSpread": 25,
+   "holdoutRate": 0.18,
+   "pValueVsBaseline": 0.588929,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "W_duima",
+   "rates": [
+    0.1933,
+    0.1767,
+    0.1967,
+    0.1833,
+    0.2367,
+    0.1933,
+    0.19,
+    0.2133
+   ],
+   "ranks": [
+    14,
+    22,
+    17,
+    27,
+    3,
+    19,
+    26,
+    17
+   ],
+   "avgRate": 0.1979,
+   "avgRank": 18.12,
+   "rankSpread": 24,
+   "holdoutRate": 0.1933,
+   "pValueVsBaseline": 0.608708,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "T_size_parity",
+   "rates": [
+    0.23,
+    0.1733,
+    0.2133,
+    0.2133,
+    0.2067,
+    0.17,
+    0.1967,
+    0.16
+   ],
+   "ranks": [
+    3,
+    25,
+    12,
+    7,
+    11,
+    29,
+    23,
+    31
+   ],
+   "avgRate": 0.1954,
+   "avgRank": 17.62,
+   "rankSpread": 28,
+   "holdoutRate": 0.23,
+   "pValueVsBaseline": 0.72022,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "AA_markov2",
+   "rates": [
+    0.1533,
+    0.1667,
+    0.23,
+    0.1933,
+    0.2133,
+    0.1733,
+    0.2233,
+    0.21
+   ],
+   "ranks": [
+    30,
+    30,
+    3,
+    23,
+    10,
+    27,
+    6,
+    21
+   ],
+   "avgRate": 0.1954,
+   "avgRank": 18.75,
+   "rankSpread": 27,
+   "holdoutRate": 0.1533,
+   "pValueVsBaseline": 0.72022,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "Z_prob_ensemble",
+   "rates": [
+    0.21,
+    0.1733,
+    0.19,
+    0.21,
+    0.1833,
+    0.1833,
+    0.18,
+    0.2233
+   ],
+   "ranks": [
+    8,
+    24,
+    19,
+    10,
+    22,
+    25,
+    31,
+    9
+   ],
+   "avgRate": 0.1941,
+   "avgRank": 18.5,
+   "rankSpread": 23,
+   "holdoutRate": 0.21,
+   "pValueVsBaseline": 0.769632,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "H_markov1_blend",
+   "rates": [
+    0.1867,
+    0.18,
+    0.2267,
+    0.1767,
+    0.16,
+    0.2033,
+    0.2067,
+    0.2067
+   ],
+   "ranks": [
+    17,
+    20,
+    4,
+    28,
+    32,
+    13,
+    18,
+    22
+   ],
+   "avgRate": 0.1933,
+   "avgRank": 19.25,
+   "rankSpread": 28,
+   "holdoutRate": 0.1867,
+   "pValueVsBaseline": 0.799696,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "AB_skip_number",
+   "rates": [
+    0.2,
+    0.15,
+    0.19,
+    0.2133,
+    0.1933,
+    0.2233,
+    0.1567,
+    0.2167
+   ],
+   "ranks": [
+    13,
+    32,
+    22,
+    9,
+    17,
+    8,
+    32,
+    16
+   ],
+   "avgRate": 0.1929,
+   "avgRank": 18.62,
+   "rankSpread": 24,
+   "holdoutRate": 0.2,
+   "pValueVsBaseline": 0.81381,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "AD_ml_gbm",
+   "rates": [
+    0.1833,
+    0.22,
+    0.19,
+    0.2033,
+    0.18,
+    0.1867,
+    0.1867,
+    0.1933
+   ],
+   "ranks": [
+    20,
+    2,
+    23,
+    16,
+    24,
+    24,
+    27,
+    25
+   ],
+   "avgRate": 0.1929,
+   "avgRank": 20.12,
+   "rankSpread": 25,
+   "holdoutRate": 0.1833,
+   "pValueVsBaseline": 0.81381,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "AE_ml_mlp",
+   "rates": [
+    0.1733,
+    0.17,
+    0.2167,
+    0.1367,
+    0.19,
+    0.2133,
+    0.2033,
+    0.2333
+   ],
+   "ranks": [
+    23,
+    28,
+    11,
+    31,
+    20,
+    10,
+    20,
+    4
+   ],
+   "avgRate": 0.1921,
+   "avgRank": 18.38,
+   "rankSpread": 27,
+   "holdoutRate": 0.1733,
+   "pValueVsBaseline": 0.840154,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "B_freq10",
+   "rates": [
+    0.17,
+    0.19,
+    0.1967,
+    0.19,
+    0.1967,
+    0.1867,
+    0.22,
+    0.1867
+   ],
+   "ranks": [
+    25,
+    13,
+    16,
+    24,
+    14,
+    22,
+    7,
+    27
+   ],
+   "avgRate": 0.1921,
+   "avgRank": 18.5,
+   "rankSpread": 20,
+   "holdoutRate": 0.17,
+   "pValueVsBaseline": 0.840154,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "E_mix_30_10_all",
+   "rates": [
+    0.1633,
+    0.18,
+    0.1867,
+    0.2067,
+    0.17,
+    0.21,
+    0.21,
+    0.1967
+   ],
+   "ranks": [
+    27,
+    19,
+    25,
+    12,
+    28,
+    11,
+    15,
+    24
+   ],
+   "avgRate": 0.1904,
+   "avgRank": 20.12,
+   "rankSpread": 17,
+   "holdoutRate": 0.1633,
+   "pValueVsBaseline": 0.885234,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "Q_hot7",
+   "rates": [
+    0.1633,
+    0.1833,
+    0.21,
+    0.2,
+    0.1833,
+    0.1833,
+    0.2167,
+    0.17
+   ],
+   "ranks": [
+    28,
+    18,
+    13,
+    18,
+    23,
+    26,
+    9,
+    30
+   ],
+   "avgRate": 0.1887,
+   "avgRank": 20.62,
+   "rankSpread": 21,
+   "holdoutRate": 0.1633,
+   "pValueVsBaseline": 0.920508,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "G_recency_eb",
+   "rates": [
+    0.1533,
+    0.2067,
+    0.1767,
+    0.2,
+    0.1933,
+    0.1933,
+    0.19,
+    0.1833
+   ],
+   "ranks": [
+    29,
+    7,
+    29,
+    17,
+    16,
+    18,
+    24,
+    28
+   ],
+   "avgRate": 0.1871,
+   "avgRank": 21.0,
+   "rankSpread": 22,
+   "holdoutRate": 0.1533,
+   "pValueVsBaseline": 0.946941,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "C_freq5",
+   "rates": [
+    0.1667,
+    0.1867,
+    0.1833,
+    0.1833,
+    0.1867,
+    0.19,
+    0.1967,
+    0.1767
+   ],
+   "ranks": [
+    26,
+    15,
+    26,
+    25,
+    21,
+    21,
+    22,
+    29
+   ],
+   "avgRate": 0.1838,
+   "avgRank": 23.12,
+   "rankSpread": 14,
+   "holdoutRate": 0.1667,
+   "pValueVsBaseline": 0.978927,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "AC_ml_logreg",
+   "rates": [
+    0.15,
+    0.17,
+    0.2233,
+    0.1333,
+    0.17,
+    0.1867,
+    0.2133,
+    0.2233
+   ],
+   "ranks": [
+    31,
+    27,
+    6,
+    32,
+    31,
+    23,
+    14,
+    12
+   ],
+   "avgRate": 0.1837,
+   "avgRank": 22.0,
+   "rankSpread": 26,
+   "holdoutRate": 0.15,
+   "pValueVsBaseline": 0.978927,
+   "significantAfterCorrection": false
+  },
+  {
+   "name": "M_012_route",
+   "rates": [
+    0.1433,
+    0.1633,
+    0.1667,
+    0.1633,
+    0.17,
+    0.2333,
+    0.1833,
+    0.2233
+   ],
+   "ranks": [
+    32,
+    31,
+    32,
+    30,
+    29,
+    3,
+    30,
+    10
+   ],
+   "avgRate": 0.1808,
+   "avgRank": 24.62,
+   "rankSpread": 29,
+   "holdoutRate": 0.1433,
+   "pValueVsBaseline": 0.991754,
+   "significantAfterCorrection": false
+  }
+ ],
+ "performance": {
+  "totalPredictions": 0,
+  "hits": {
+   "0": 0,
+   "1": 0,
+   "2": 0,
+   "3": 0
+  }
+ },
+ "recentStats": {
+  "window": 100,
+  "sumAvg": 13.17,
+  "sumMin": 3,
+  "sumMax": 24,
+  "spanAvg": 5.4,
+  "formDist": {
+   "豹子": 0,
+   "组三": 24,
+   "组六": 76
+  },
+  "oddCountDist": {
+   "0": 14,
+   "1": 32,
+   "2": 37,
+   "3": 17
+  },
+  "bigCountDist": {
+   "0": 11,
+   "1": 36,
+   "2": 44,
+   "3": 9
+  },
+  "repeatWithPrevRate": 0.5758,
+  "digitFreq": {
+   "0": 34,
+   "1": 36,
+   "2": 28,
+   "3": 26,
+   "4": 25,
+   "5": 34,
+   "6": 30,
+   "7": 30,
+   "8": 26,
+   "9": 31
+  }
+ },
+ "latest": {
+  "num": "26246",
+  "date": "2026-09-13",
+  "digits": [
+   2,
+   8,
+   6
+  ]
+ },
+ "updatedAt": "2026-09-13"
+}
