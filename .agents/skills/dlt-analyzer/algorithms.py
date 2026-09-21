@@ -339,6 +339,30 @@ def make_vote_repeat(algos, w_repeat=0.18):
         return pick_top6(sf), pick_top3(sb)
     return fn
 
+def make_rotation_kc(w_pos=0.7):
+    """CV_rot_kc: 旋转覆盖 x KittenCN位置softmax技巧 (移植实验kc_port)
+    位置级历史概率(替其LSTM)与热号logit按 w_pos:(1-w_pos) 混合, KC贪心去重选号
+    来源: kc_port_experiment.py 十流派+KC移植对照, 覆盖率口径前二"""
+    def fn(k, F, R, NC, G, front_actual, back_actual):
+        def pos_logp(arr, npos, maxn):
+            cnt = np.zeros((npos, maxn), dtype=np.float64)
+            for t in range(k):
+                for p, x in enumerate(arr[t]):
+                    cnt[p, x - 1] += 1
+            p = cnt / np.maximum(cnt.sum(1, keepdims=True), 1)
+            return np.log(np.maximum(p, 1e-12))
+        lf = pos_logp(front_actual, 6, 35)   # 复式口径按6个位置建模(前5排序位+回退位)
+        lb = pos_logp(back_actual, 3, 12)
+        hf = np.log(np.maximum(norm(F["f10_f"])[k], 1e-9)); hf -= hf.mean()
+        hb = np.log(np.maximum(norm(F["b10_b"])[k], 1e-9)); hb -= hb.mean()
+        # KC位置分作为号码级特征(位置对数概率的均值)与热号logit混合, top-N选号
+        sf = w_pos * lf.mean(0) + (1 - w_pos) * hf
+        sb = w_pos * lb.mean(0) + (1 - w_pos) * hb
+        f6 = pick_top6(sf.astype(np.float32))
+        b3 = pick_top3(sb.astype(np.float32))
+        return f6, b3
+    return fn
+
 def make_zone_balance(max_per_zone=2):
     """BS_zone_balance (REBUILT): 区间均衡(每段<=2)约束枚举
     记录: ge4=7% ge5=1%"""
@@ -439,6 +463,7 @@ def build_registry():
     reg["BU_low_crowd_strong"] = make_low_crowd_strong()
     reg["CH_strong_front"] = make_strong_front()
     reg["Y_back_conditional"] = make_back_conditional()
+    reg["CV_rot_kc"] = make_rotation_kc()
     return reg
 
 # ---------------------------------------------------------------- 回测框架

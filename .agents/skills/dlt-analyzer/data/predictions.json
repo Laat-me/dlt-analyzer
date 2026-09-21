@@ -1703,6 +1703,140 @@
       "frontHits": 0,
       "backHits": 1,
       "verified": true
+    },
+    {
+      "id": 57,
+      "predictedAt": "2026-09-21",
+      "targetDrawNum": "26109",
+      "model": "CV_rot_kc",
+      "predictedFront": [
+        11,
+        14,
+        15,
+        16,
+        17,
+        26
+      ],
+      "predictedBack": [
+        7,
+        8,
+        9
+      ],
+      "actualFront": null,
+      "actualBack": null,
+      "frontHits": null,
+      "backHits": null,
+      "verified": false
+    },
+    {
+      "id": 58,
+      "predictedAt": "2026-09-21",
+      "targetDrawNum": "26109",
+      "model": "CV_rot_kc池T1",
+      "predictedFront": [
+        2,
+        6,
+        14,
+        26,
+        33
+      ],
+      "predictedBack": [
+        6,
+        12
+      ],
+      "actualFront": null,
+      "actualBack": null,
+      "frontHits": null,
+      "backHits": null,
+      "verified": false
+    },
+    {
+      "id": 59,
+      "predictedAt": "2026-09-21",
+      "targetDrawNum": "26109",
+      "model": "CV_rot_kc池T2",
+      "predictedFront": [
+        2,
+        11,
+        14,
+        26,
+        33
+      ],
+      "predictedBack": [
+        4,
+        7
+      ],
+      "actualFront": null,
+      "actualBack": null,
+      "frontHits": null,
+      "backHits": null,
+      "verified": false
+    },
+    {
+      "id": 60,
+      "predictedAt": "2026-09-21",
+      "targetDrawNum": "26109",
+      "model": "CV_rot_kc池T3",
+      "predictedFront": [
+        6,
+        7,
+        22,
+        30,
+        32
+      ],
+      "predictedBack": [
+        9,
+        10
+      ],
+      "actualFront": null,
+      "actualBack": null,
+      "frontHits": null,
+      "backHits": null,
+      "verified": false
+    },
+    {
+      "id": 61,
+      "predictedAt": "2026-09-21",
+      "targetDrawNum": "26109",
+      "model": "CV_rot_kc池T4",
+      "predictedFront": [
+        15,
+        16,
+        21,
+        32,
+        34
+      ],
+      "predictedBack": [
+        4,
+        9
+      ],
+      "actualFront": null,
+      "actualBack": null,
+      "frontHits": null,
+      "backHits": null,
+      "verified": false
+    },
+    {
+      "id": 62,
+      "predictedAt": "2026-09-21",
+      "targetDrawNum": "26109",
+      "model": "CV_rot_kc池T5",
+      "predictedFront": [
+        3,
+        5,
+        6,
+        28,
+        32
+      ],
+      "predictedBack": [
+        9,
+        12
+      ],
+      "actualFront": null,
+      "actualBack": null,
+      "frontHits": null,
+      "backHits": null,
+      "verified": false
     }
   ]
 }
