@@ -1,0 +1,54 @@
+{
+ "window1": {
+  "KC位置softmax": {
+   "ge5_periods": 0,
+   "avg_max_hit": 2.06,
+   "max_ever": 4,
+   "n4": 1
+  },
+  "KC位置softmax_100窗": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.96,
+   "max_ever": 4,
+   "n4": 4
+  },
+  "KC位置x热号混合": {
+   "ge5_periods": 0,
+   "avg_max_hit": 2.12,
+   "max_ever": 4,
+   "n4": 8
+  },
+  "我方topN对照": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.71,
+   "max_ever": 4,
+   "n4": 3
+  }
+ },
+ "window2": {
+  "KC位置softmax": {
+   "ge5_periods": 0,
+   "avg_max_hit": 2.17,
+   "max_ever": 4,
+   "n4": 3
+  },
+  "KC位置softmax_100窗": {
+   "ge5_periods": 0,
+   "avg_max_hit": 2.06,
+   "max_ever": 4,
+   "n4": 2
+  },
+  "KC位置x热号混合": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.94,
+   "max_ever": 4,
+   "n4": 1
+  },
+  "我方topN对照": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.87,
+   "max_ever": 4,
+   "n4": 2
+  }
+ }
+}
