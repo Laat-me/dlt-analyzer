@@ -1,0 +1,183 @@
+{
+ "window1": {
+  "随机基线": {
+   "ge5_periods": 0,
+   "avg_max_hit": 2.05,
+   "max_ever": 4,
+   "n4": 2
+  },
+  "热号多窗": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.88,
+   "max_ever": 4,
+   "n4": 4
+  },
+  "冷号gap": {
+   "ge5_periods": 0,
+   "avg_max_hit": 0.93,
+   "max_ever": 3,
+   "n4": 0
+  },
+  "重号邻号系": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.76,
+   "max_ever": 4,
+   "n4": 3
+  },
+  "旋转覆盖": {
+   "ge5_periods": 0,
+   "avg_max_hit": 2.4,
+   "max_ever": 4,
+   "n4": 4
+  },
+  "MLP神经网络": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.7,
+   "max_ever": 4,
+   "n4": 4
+  },
+  "GA演化池": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.21,
+   "max_ever": 4,
+   "n4": 2
+  },
+  "共现贪心": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.14,
+   "max_ever": 3,
+   "n4": 0
+  },
+  "条件策略": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.5,
+   "max_ever": 4,
+   "n4": 1
+  },
+  "纯频次多窗": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.95,
+   "max_ever": 4,
+   "n4": 2
+  }
+ },
+ "window2": {
+  "随机基线": {
+   "ge5_periods": 0,
+   "avg_max_hit": 2.01,
+   "max_ever": 3,
+   "n4": 0
+  },
+  "热号多窗": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.98,
+   "max_ever": 4,
+   "n4": 5
+  },
+  "冷号gap": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.04,
+   "max_ever": 3,
+   "n4": 0
+  },
+  "重号邻号系": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.77,
+   "max_ever": 4,
+   "n4": 3
+  },
+  "旋转覆盖": {
+   "ge5_periods": 0,
+   "avg_max_hit": 2.25,
+   "max_ever": 4,
+   "n4": 4
+  },
+  "MLP神经网络": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.69,
+   "max_ever": 4,
+   "n4": 4
+  },
+  "GA演化池": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.54,
+   "max_ever": 4,
+   "n4": 2
+  },
+  "共现贪心": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.16,
+   "max_ever": 4,
+   "n4": 1
+  },
+  "条件策略": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.67,
+   "max_ever": 4,
+   "n4": 1
+  },
+  "纯频次多窗": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.9,
+   "max_ever": 4,
+   "n4": 1
+  }
+ },
+ "window2_noga": {
+  "随机基线": {
+   "ge5_periods": 0,
+   "avg_max_hit": 2.01,
+   "max_ever": 3,
+   "n4": 0
+  },
+  "热号多窗": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.87,
+   "max_ever": 3,
+   "n4": 0
+  },
+  "冷号gap": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.04,
+   "max_ever": 3,
+   "n4": 0
+  },
+  "重号邻号系": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.79,
+   "max_ever": 4,
+   "n4": 4
+  },
+  "旋转覆盖": {
+   "ge5_periods": 0,
+   "avg_max_hit": 2.25,
+   "max_ever": 4,
+   "n4": 4
+  },
+  "MLP神经网络": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.69,
+   "max_ever": 4,
+   "n4": 4
+  },
+  "共现贪心": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.16,
+   "max_ever": 4,
+   "n4": 1
+  },
+  "条件策略": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.64,
+   "max_ever": 3,
+   "n4": 0
+  },
+  "纯频次多窗": {
+   "ge5_periods": 0,
+   "avg_max_hit": 1.93,
+   "max_ever": 4,
+   "n4": 1
+  }
+ },
+ "random_expectation_ge5_per_100": 0.176
+}
