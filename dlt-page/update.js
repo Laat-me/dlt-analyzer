@@ -2,9 +2,9 @@
 // 用法: node update.js [--no-python]（--no-python 复用现有 bt.json，数据未变时提速）
 const fs = require('fs');
 const { execSync } = require('child_process');
-const DLT = 'D:/dream/dlt-analyzer/.agents/skills/dlt-analyzer';
-const PAGE = 'D:/dream/dlt-page';
-const PY = 'C:/Users/Admin/AppData/Local/Programs/Python/Python312/python.exe';
+const DLT = '/Users/mac/dream/dlt-analyzer/.agents/skills/dlt-analyzer';
+const PAGE = '/Users/mac/dream/dlt-analyzer/dlt-page';
+const PY = '/Users/mac/Library/Application Support/kimi-desktop/daimon-share/daimon/runtime/python/.venv/bin/python3';
 const UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36';
 
 async function main(){
@@ -93,7 +93,7 @@ async function main(){
     while (![1,3,6].includes(new Date(lastDate.getTime() + add2*864e5).getDay())) add2++;
     const nd = new Date(lastDate.getTime() + add2*864e5);
     const timeInfo = { y: nd.getFullYear(), m: nd.getMonth()+1, d: nd.getDate(), hour: 21 };   // 21:25 开奖
-    const LiuYao = require('D:/dream/ssq/liuyao.js');
+    const LiuYao = require('/Users/mac/dream/ssq-analyzer/liuyao.js');
     const g = LiuYao.divine(dj.draws.slice(-9), d => [d.front.reduce((a,b)=>a+b,0) % 2 === 1, d.back.reduce((a,b)=>a+b,0) % 2 === 1],
                             nextCode, {frontMax:35, frontN:5, backMax:12, backN:2}, timeInfo);
     const before = pj.records.length;
@@ -111,10 +111,10 @@ async function main(){
 
   // 6) 组装 HTML
   const tpl = fs.readFileSync(`${PAGE}/template.html`, 'utf8');
-  const ec = fs.readFileSync('D:/dream/ssq/echarts.min.js', 'utf8');
+  const ec = fs.readFileSync('/Users/mac/dream/ssq-analyzer/echarts.min.js', 'utf8');
   const html = tpl
     .replace('__ECHARTS_JS__', () => ec)
-    .replace('__LIUYAO_JS__', () => fs.readFileSync('D:/dream/ssq/liuyao.js', 'utf8'))
+    .replace('__LIUYAO_JS__', () => fs.readFileSync('/Users/mac/dream/ssq-analyzer/liuyao.js', 'utf8'))
     .replace('__DATA_JSON__', () => JSON.stringify(dj.draws))
     .replace('__PRED_JSON__', () => fs.readFileSync(`${DLT}/data/predictions.json`, 'utf8'))
     .replace('__BT_JSON__', () => fs.readFileSync(`${PAGE}/bt.json`, 'utf8'));

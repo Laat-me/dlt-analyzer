@@ -4,12 +4,12 @@
 import json, sys
 from math import comb
 from itertools import combinations
-sys.path.insert(0, 'D:/dream/dlt-analyzer/.agents/skills/dlt-analyzer')
+sys.path.insert(0, '/Users/mac/dream/dlt-analyzer/.agents/skills/dlt-analyzer')
 import numpy as np
 from algorithms import build_registry, backtest, cum_freq, repeat_flags, neighbor_counts, gap_map
 
-DATA = 'D:/dream/dlt-analyzer/.agents/skills/dlt-analyzer/data/draws.json'
-OUT  = 'D:/dream/dlt-page/bt.json'
+DATA = '/Users/mac/dream/dlt-analyzer/.agents/skills/dlt-analyzer/data/draws.json'
+OUT  = '/Users/mac/dream/dlt-analyzer/dlt-page/bt.json'
 
 data = json.load(open(DATA, encoding='utf-8'))
 draws = data['draws'] if isinstance(data, dict) else data
