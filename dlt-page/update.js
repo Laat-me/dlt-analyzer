@@ -109,6 +109,21 @@ async function main(){
     fs.writeFileSync(`${DLT}/data/predictions.json`, JSON.stringify(pj, null, 1));
   }
 
+  // 5.5) 覆盖优化（双色球「蓝球保底+红球覆盖」移植）：模型记录后区12值覆盖+前区35值修补；
+  //      另生成「后区全对保底块」24 注 5+3 复式（144元/期，后区必 2/2 全中保底八等奖，是否购买自酌）
+  {
+    const Cov = require(`${PAGE}/coverage.js`);
+    pj.records = pj.records.filter(r => !(r.targetDrawNum === nextCode && r.isCoverage));
+    const modelRecs = pj.records.filter(r => r.targetDrawNum === nextCode && r.model !== '六爻占卜' && !r.isCoverage);
+    Cov.applyCoverage(modelRecs, dj.draws);
+    const block = Cov.buildGuaranteeBlock(dj.draws, nextCode, Cov.backPairCoverTriplets());
+    let idc = Math.max(...pj.records.map(r => r.id || 0));
+    for(const b of block){ b.id = ++idc; pj.records.push(b); }
+    pj.updatedAt = new Date().toISOString().slice(0,10);
+    fs.writeFileSync(`${DLT}/data/predictions.json`, JSON.stringify(pj, null, 1));
+    console.log(`覆盖优化已应用到 ${modelRecs.length} 条模型记录；保底块 ${block.length} 注已追加（后区66对全覆盖校验=${Cov.coversAllPairs(Cov.backPairCoverTriplets())}）`);
+  }
+
   // 6) 组装 HTML
   const tpl = fs.readFileSync(`${PAGE}/template.html`, 'utf8');
   const ec = fs.readFileSync('/Users/mac/dream/ssq-analyzer/echarts.min.js', 'utf8');
