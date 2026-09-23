@@ -1722,11 +1722,20 @@
     8,
     9
    ],
-   "actualFront": null,
-   "actualBack": null,
-   "frontHits": null,
-   "backHits": null,
-   "verified": false,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 0,
+   "backHits": 1,
+   "verified": true,
    "note": "｜覆盖优化:后区12值+对子展开｜前区35值全覆盖｜覆盖优化:后区12值+对子展开｜覆盖优化:后区12值+对子展开"
   },
   {
@@ -1745,11 +1754,20 @@
     4,
     6
    ],
-   "actualFront": null,
-   "actualBack": null,
-   "frontHits": null,
-   "backHits": null,
-   "verified": false,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 0,
+   "backHits": 1,
+   "verified": true,
    "note": "｜覆盖优化:后区12值+对子展开｜前区35值全覆盖｜覆盖优化:后区12值+对子展开｜覆盖优化:后区12值+对子展开"
   },
   {
@@ -1768,11 +1786,20 @@
     2,
     12
    ],
-   "actualFront": null,
-   "actualBack": null,
-   "frontHits": null,
-   "backHits": null,
-   "verified": false,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 2,
+   "backHits": 0,
+   "verified": true,
    "note": "｜覆盖优化:后区12值+对子展开｜前区35值全覆盖｜覆盖优化:后区12值+对子展开｜覆盖优化:后区12值+对子展开"
   },
   {
@@ -1791,11 +1818,20 @@
     1,
     11
    ],
-   "actualFront": null,
-   "actualBack": null,
-   "frontHits": null,
-   "backHits": null,
-   "verified": false,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 0,
+   "backHits": 0,
+   "verified": true,
    "note": "｜覆盖优化:后区12值+对子展开｜前区35值全覆盖｜覆盖优化:后区12值+对子展开｜覆盖优化:后区12值+对子展开"
   },
   {
@@ -1814,11 +1850,20 @@
     3,
     10
    ],
-   "actualFront": null,
-   "actualBack": null,
-   "frontHits": null,
-   "backHits": null,
-   "verified": false,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 2,
+   "backHits": 0,
+   "verified": true,
    "note": "｜覆盖优化:后区12值+对子展开｜前区35值全覆盖｜覆盖优化:后区12值+对子展开｜覆盖优化:后区12值+对子展开"
   },
   {
@@ -1837,11 +1882,20 @@
     5,
     9
    ],
-   "actualFront": null,
-   "actualBack": null,
-   "frontHits": null,
-   "backHits": null,
-   "verified": false,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 0,
+   "backHits": 0,
+   "verified": true,
    "note": "｜覆盖优化:后区12值+对子展开｜前区35值全覆盖｜覆盖优化:后区12值+对子展开｜覆盖优化:后区12值+对子展开"
   },
   {
@@ -1861,8 +1915,21 @@
     2,
     4
    ],
-   "verified": false,
-   "note": "六爻起卦: 起始卦泽水困 + 本卦泽天夬变水风井 seed=186555328085（玄学娱乐）"
+   "verified": true,
+   "note": "六爻起卦: 起始卦泽水困 + 本卦泽天夬变水风井 seed=186555328085（玄学娱乐）",
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 1,
+   "backHits": 1
   },
   {
    "predictedAt": "2026-09-23",
@@ -1881,10 +1948,23 @@
     5,
     10
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组4-5-10 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 114
+   "id": 114,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 1,
+   "backHits": 1
   },
   {
    "predictedAt": "2026-09-23",
@@ -1903,10 +1983,23 @@
     9,
     11
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组3-9-11 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 115
+   "id": 115,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 0,
+   "backHits": 0
   },
   {
    "predictedAt": "2026-09-23",
@@ -1925,10 +2018,23 @@
     6,
     12
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组5-6-12 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 116
+   "id": 116,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 0,
+   "backHits": 0
   },
   {
    "predictedAt": "2026-09-23",
@@ -1947,10 +2053,23 @@
     8,
     9
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组2-8-9 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 117
+   "id": 117,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 1,
+   "backHits": 1
   },
   {
    "predictedAt": "2026-09-23",
@@ -1969,10 +2088,23 @@
     5,
     8
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组3-5-8 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 118
+   "id": 118,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 0,
+   "backHits": 1
   },
   {
    "predictedAt": "2026-09-23",
@@ -1991,10 +2123,23 @@
     3,
     10
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组1-3-10 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 119
+   "id": 119,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 0,
+   "backHits": 0
   },
   {
    "predictedAt": "2026-09-23",
@@ -2013,10 +2158,23 @@
     5,
     11
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组2-5-11 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 120
+   "id": 120,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 1,
+   "backHits": 0
   },
   {
    "predictedAt": "2026-09-23",
@@ -2035,10 +2193,23 @@
     5,
     7
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组1-5-7 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 121
+   "id": 121,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 2,
+   "backHits": 0
   },
   {
    "predictedAt": "2026-09-23",
@@ -2057,10 +2228,23 @@
     4,
     7
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组2-4-7 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 122
+   "id": 122,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 0,
+   "backHits": 1
   },
   {
    "predictedAt": "2026-09-23",
@@ -2079,10 +2263,23 @@
     4,
     6
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组1-4-6 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 123
+   "id": 123,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 1,
+   "backHits": 1
   },
   {
    "predictedAt": "2026-09-23",
@@ -2101,10 +2298,23 @@
     6,
     7
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组3-6-7 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 124
+   "id": 124,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 1,
+   "backHits": 0
   },
   {
    "predictedAt": "2026-09-23",
@@ -2123,10 +2333,23 @@
     4,
     8
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组3-4-8 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 125
+   "id": 125,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 1,
+   "backHits": 2
   },
   {
    "predictedAt": "2026-09-23",
@@ -2145,10 +2368,23 @@
     6,
     10
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组2-6-10 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 126
+   "id": 126,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 0,
+   "backHits": 0
   },
   {
    "predictedAt": "2026-09-23",
@@ -2167,10 +2403,23 @@
     7,
     8
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组1-7-8 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 127
+   "id": 127,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 1,
+   "backHits": 1
   },
   {
    "predictedAt": "2026-09-23",
@@ -2189,10 +2438,23 @@
     9,
     10
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组4-9-10 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 128
+   "id": 128,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 1,
+   "backHits": 1
   },
   {
    "predictedAt": "2026-09-23",
@@ -2211,10 +2473,23 @@
     2,
     11
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组1-2-11 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 129
+   "id": 129,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 1,
+   "backHits": 0
   },
   {
    "predictedAt": "2026-09-23",
@@ -2233,10 +2508,23 @@
     10,
     11
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组7-10-11 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 130
+   "id": 130,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 0,
+   "backHits": 0
   },
   {
    "predictedAt": "2026-09-23",
@@ -2255,10 +2543,23 @@
     6,
     9
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组5-6-9 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 131
+   "id": 131,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 0,
+   "backHits": 0
   },
   {
    "predictedAt": "2026-09-23",
@@ -2277,10 +2578,23 @@
     8,
     11
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组6-8-11 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 132
+   "id": 132,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 1,
+   "backHits": 1
   },
   {
    "predictedAt": "2026-09-23",
@@ -2299,10 +2613,23 @@
     9,
     12
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组7-9-12 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 133
+   "id": 133,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 2,
+   "backHits": 0
   },
   {
    "predictedAt": "2026-09-23",
@@ -2321,10 +2648,23 @@
     11,
     12
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组4-11-12 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 134
+   "id": 134,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 1,
+   "backHits": 1
   },
   {
    "predictedAt": "2026-09-23",
@@ -2343,10 +2683,23 @@
     10,
     12
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组8-10-12 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 135
+   "id": 135,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 2,
+   "backHits": 1
   },
   {
    "predictedAt": "2026-09-23",
@@ -2365,10 +2718,23 @@
     3,
     12
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组2-3-12 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 136
+   "id": 136,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 1,
+   "backHits": 0
   },
   {
    "predictedAt": "2026-09-23",
@@ -2387,10 +2753,91 @@
     9,
     12
    ],
-   "verified": false,
+   "verified": true,
    "isCoverage": true,
    "note": "后区三元组1-9-12 ⊂ 66对全覆盖集(24组) → 该注后区必 2/2 全中保底",
-   "id": 137
+   "id": 137,
+   "actualFront": [
+    12,
+    14,
+    16,
+    27,
+    34
+   ],
+   "actualBack": [
+    4,
+    8
+   ],
+   "frontHits": 1,
+   "backHits": 0
+  },
+  {
+   "id": 138,
+   "predictedAt": "2026-09-23",
+   "targetDrawNum": "26110",
+   "model": "AI_U_wide",
+   "mode": "6+3",
+   "predictedFront": [
+    1,
+    4,
+    5,
+    6,
+    8,
+    22
+   ],
+   "predictedBack": [
+    4,
+    8,
+    9
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "algorithm": "AI_U_wide",
+   "note": "6+3主推: AI_U_wide(还原版)｜覆盖优化:后区12值+对子展开｜前区35值尽力修补｜覆盖优化:后区12值+对子展开"
+  },
+  {
+   "id": 139,
+   "predictedAt": "2026-09-23",
+   "targetDrawNum": "26110",
+   "model": "K_prob_ensemble",
+   "mode": "6+3",
+   "predictedFront": [
+    2,
+    3,
+    7,
+    11,
+    14,
+    26
+   ],
+   "predictedBack": [
+    6,
+    7,
+    12
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "algorithm": "K_prob_ensemble",
+   "note": "6+3参考组: H+I+J集成｜覆盖优化:后区12值+对子展开｜前区35值尽力修补｜覆盖优化:后区12值+对子展开"
+  },
+  {
+   "id": 165,
+   "predictedAt": "2026-09-23",
+   "targetDrawNum": "26110",
+   "model": "六爻占卜",
+   "mode": "5+2",
+   "predictedFront": [
+    3,
+    8,
+    12,
+    13,
+    33
+   ],
+   "predictedBack": [
+    7,
+    9
+   ],
+   "verified": false,
+   "note": "六爻起卦: 起始卦风天小畜 + 本卦水雷屯变水雷屯 seed=186556354076（玄学娱乐）"
   }
  ]
 }
