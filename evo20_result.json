@@ -1,0 +1,196 @@
+{
+ "prize_assumption": {
+  "jackpot": 5000000,
+  "second": 200000,
+  "fixed": {
+   "3": 10000,
+   "4": 3000,
+   "5": 300,
+   "6": 200,
+   "7": 100,
+   "8": 15,
+   "9": 5
+  }
+ },
+ "ev_single": {
+  "normal": 0.9659,
+  "paijiang": 1.0597
+ },
+ "p_paijiang_hist": 0.1564,
+ "backtest": {
+  "EVO-20": {
+   "staked": 19860,
+   "fixed_return": 6070.0,
+   "floating_return": 0.0,
+   "total_return": 6070.0,
+   "net": -13790.0,
+   "roi_pct": -69.44,
+   "win_periods": 530,
+   "breakeven_periods": 33,
+   "n_periods": 993,
+   "max_single_win": 600.0,
+   "max_zero_streak": 8,
+   "max_drawdown": 13790.0,
+   "tier_hits": {
+    "9": 596,
+    "8": 57,
+    "7": 4,
+    "6": 3,
+    "5": 3
+   },
+   "avg_return_paijiang": 7.56,
+   "avg_return_normal": 5.83,
+   "n_paijiang_periods": 160
+  },
+  "random10": {
+   "staked": 19860,
+   "fixed_return": 4977.5,
+   "floating_return": 0.0,
+   "total_return": 4977.5,
+   "net": -14882.5,
+   "roi_pct": -74.94,
+   "win_periods": 499,
+   "breakeven_periods": 34,
+   "n_periods": 993,
+   "max_single_win": 200.0,
+   "max_zero_streak": 8,
+   "max_drawdown": 14882.5,
+   "tier_hits": {
+    "9": 614,
+    "8": 55,
+    "7": 4,
+    "6": 2
+   },
+   "avg_return_paijiang": 6.8,
+   "avg_return_normal": 4.67,
+   "n_paijiang_periods": 160
+  },
+  "same10": {
+   "staked": 19860,
+   "fixed_return": 4300.0,
+   "floating_return": 0.0,
+   "total_return": 4300.0,
+   "net": -15560.0,
+   "roi_pct": -78.35,
+   "win_periods": 70,
+   "breakeven_periods": 70,
+   "n_periods": 993,
+   "max_single_win": 150.0,
+   "max_zero_streak": 71,
+   "max_drawdown": 15560.0,
+   "tier_hits": {
+    "9": 640,
+    "8": 60
+   },
+   "avg_return_paijiang": 5.31,
+   "avg_return_normal": 4.14,
+   "n_paijiang_periods": 160
+  },
+  "popular10": {
+   "staked": 19860,
+   "fixed_return": 6695.0,
+   "floating_return": 0.0,
+   "total_return": 6695.0,
+   "net": -13165.0,
+   "roi_pct": -66.29,
+   "win_periods": 406,
+   "breakeven_periods": 75,
+   "n_periods": 993,
+   "max_single_win": 550.0,
+   "max_zero_streak": 14,
+   "max_drawdown": 13320.0,
+   "tier_hits": {
+    "9": 632,
+    "8": 78,
+    "6": 6,
+    "5": 2
+   },
+   "avg_return_paijiang": 12.53,
+   "avg_return_normal": 5.63,
+   "n_paijiang_periods": 160
+  },
+  "v1cold10": {
+   "staked": 19860,
+   "fixed_return": 6077.5,
+   "floating_return": 0.0,
+   "total_return": 6077.5,
+   "net": -13782.5,
+   "roi_pct": -69.4,
+   "win_periods": 180,
+   "breakeven_periods": 64,
+   "n_periods": 993,
+   "max_single_win": 680.0,
+   "max_zero_streak": 44,
+   "max_drawdown": 13912.5,
+   "tier_hits": {
+    "9": 562,
+    "8": 77,
+    "5": 2,
+    "7": 5,
+    "6": 3
+   },
+   "avg_return_paijiang": 9.36,
+   "avg_return_normal": 5.5,
+   "n_paijiang_periods": 160
+  }
+ },
+ "monte_carlo": {
+  "EVO-20": {
+   "156": {
+    "p_final_profit": 0.01437,
+    "p_ever_profit": 0.0816,
+    "net_median": -2430.0,
+    "net_p5": -2625.0,
+    "net_p95": -1910.0
+   },
+   "780": {
+    "p_final_profit": 0.01005,
+    "p_ever_profit": 0.09943,
+    "net_median": -11885.0,
+    "net_p5": -12585.0,
+    "net_p95": -8940.0
+   },
+   "1560": {
+    "p_final_profit": 0.0144,
+    "p_ever_profit": 0.10671,
+    "net_median": -23690.0,
+    "net_p5": -24775.0,
+    "net_p95": -18725.0
+   }
+  },
+  "same10": {
+   "156": {
+    "p_final_profit": 0.03095,
+    "p_ever_profit": 0.22081,
+    "net_median": -2520.0,
+    "net_p5": -2820.0,
+    "net_p95": -570.0
+   },
+   "780": {
+    "p_final_profit": 0.00802,
+    "p_ever_profit": 0.23518,
+    "net_median": -12150.0,
+    "net_p5": -13150.0,
+    "net_p95": -8100.0
+   },
+   "1560": {
+    "p_final_profit": 0.01593,
+    "p_ever_profit": 0.24007,
+    "net_median": -23600.0,
+    "net_p5": -25800.0,
+    "net_p95": -18200.0
+   }
+  }
+ },
+ "breakeven": {
+  "fixed_ev": 0.5459,
+  "floating_ev_now": 0.4201,
+  "ev_now": 0.9659,
+  "return_rate_now_pct": 48.3,
+  "jackpot_needed_yuan": 27156019.0,
+  "jackpot_needed_vs_assumed": 5.43,
+  "fixed_boost_needed": 3.66,
+  "paijiang_always_ev": 1.0597,
+  "paijiang_always_rate_pct": 53.0
+ }
+}
