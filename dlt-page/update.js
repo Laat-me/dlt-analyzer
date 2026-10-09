@@ -55,6 +55,9 @@ async function main(){
     rec.actualFront = act.front; rec.actualBack = act.back;
     rec.frontHits = pf.filter(n => act.front.includes(n)).length;
     rec.backHits = pb.filter(n => act.back.includes(n)).length;
+    const rawF = rec.rawPredictedFront || pf, rawB = rec.rawPredictedBack || pb;
+    rec.rawFrontHits = rawF.filter(n => act.front.includes(n)).length;
+    rec.rawBackHits = rawB.filter(n => act.back.includes(n)).length;
     rec.verified = true;
     if(rec.mode === '6+3') rec.hitGe4 = (rec.frontHits + rec.backHits) >= 4;
     verified++;
@@ -71,15 +74,19 @@ async function main(){
   // 5) 下一期预测入库（若缺）
   const nextCode = String(Number(dj.draws[dj.draws.length-1].num) + 1);
   const bt = JSON.parse(fs.readFileSync(`${PAGE}/bt.json`, 'utf8'));
-  if(!pj.records.some(r => r.targetDrawNum === nextCode)){
-    let id = Math.max(...pj.records.map(r => r.id || 0));
-    const today = new Date().toISOString().slice(0,10);
-    pj.records.push({ id: ++id, predictedAt: today, targetDrawNum: nextCode, model: 'AI_U_wide', mode: '6+3',
-      predictedFront: bt.pred.AI_U_wide.front6, predictedBack: bt.pred.AI_U_wide.back3,
-      verified: false, hitGe4: null, algorithm: 'AI_U_wide', note: '6+3主推: AI_U_wide(还原版)' });
-    pj.records.push({ id: ++id, predictedAt: today, targetDrawNum: nextCode, model: 'K_prob_ensemble', mode: '6+3',
-      predictedFront: bt.pred.K_prob_ensemble.front6, predictedBack: bt.pred.K_prob_ensemble.back3,
-      verified: false, hitGe4: null, algorithm: 'K_prob_ensemble', note: '6+3参考组: H+I+J集成' });
+    if(!pj.records.some(r => r.targetDrawNum === nextCode)){
+      let id = Math.max(...pj.records.map(r => r.id || 0));
+      const today = new Date().toISOString().slice(0,10);
+      pj.records.push({ id: ++id, predictedAt: today, targetDrawNum: nextCode, model: 'AI_U_wide', mode: '6+3',
+        predictedFront: bt.pred.AI_U_wide.front6, predictedBack: bt.pred.AI_U_wide.back3,
+        rawPredictedFront: bt.pred.AI_U_wide.front6.slice(), rawPredictedBack: bt.pred.AI_U_wide.back3.slice(),
+        coveredFront: null, coveredBack: null,
+        verified: false, hitGe4: null, algorithm: 'AI_U_wide', note: '6+3主推: AI_U_wide_rebuilt(radius=3, repeat=.5, neighbor=.2, topk=8)' });
+      pj.records.push({ id: ++id, predictedAt: today, targetDrawNum: nextCode, model: 'K_prob_ensemble', mode: '6+3',
+        predictedFront: bt.pred.K_prob_ensemble.front6, predictedBack: bt.pred.K_prob_ensemble.back3,
+        rawPredictedFront: bt.pred.K_prob_ensemble.front6.slice(), rawPredictedBack: bt.pred.K_prob_ensemble.back3.slice(),
+        coveredFront: null, coveredBack: null,
+        verified: false, hitGe4: null, algorithm: 'K_prob_ensemble', note: '6+3参考组: H+I+J集成' });
     pj.updatedAt = today;
     fs.writeFileSync(`${DLT}/data/predictions.json`, JSON.stringify(pj, null, 1));
     console.log(`已生成下一期（${nextCode}）预测并追加 predictions.json`);
@@ -117,7 +124,16 @@ async function main(){
     const Cov = require(`${PAGE}/coverage.js`);
     pj.records = pj.records.filter(r => !(r.targetDrawNum === nextCode && r.isCoverage));
     const modelRecs = pj.records.filter(r => r.targetDrawNum === nextCode && r.model !== '六爻占卜' && !r.isCoverage);
+    // 保留算法原始输出；覆盖优化只改变 covered 后的出票字段，便于复盘区分两种口径。
+    modelRecs.forEach(r => {
+      if (!r.rawPredictedFront) r.rawPredictedFront = (r.predictedFront || []).slice();
+      if (!r.rawPredictedBack) r.rawPredictedBack = (r.predictedBack || []).slice();
+    });
     Cov.applyCoverage(modelRecs, dj.draws);
+    modelRecs.forEach(r => {
+      r.coveredFront = (r.predictedFront || []).slice();
+      r.coveredBack = (r.predictedBack || []).slice();
+    });
     pj.updatedAt = new Date().toISOString().slice(0,10);
     fs.writeFileSync(`${DLT}/data/predictions.json`, JSON.stringify(pj, null, 1));
     console.log(`覆盖优化已应用到 ${modelRecs.length} 条模型记录（保底块已下线）`);

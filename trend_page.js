@@ -16,6 +16,56 @@ const NOW = new Date();
 const ts = `${NOW.getFullYear()}/${NOW.getMonth()+1}/${NOW.getDate()} ${String(NOW.getHours()).padStart(2,'0')}:${String(NOW.getMinutes()).padStart(2,'0')}:${String(NOW.getSeconds()).padStart(2,'0')}`;
 
 /* ---------- 通用走势内核 ---------- */
+function scoreTrendNumbers(hist, cfg){
+  const prev = hist[hist.length - 1];
+  const lastHitF = Array(cfg.nF + 1).fill(-1), lastHitB = Array(cfg.nB + 1).fill(-1);
+  const win = hist.slice(-50);
+  for (let i = 0; i < win.length; i++) {
+    for (const n of win[i].front) lastHitF[n] = i;
+    for (const n of win[i].back) lastHitB[n] = i;
+  }
+  const missF = n => lastHitF[n] >= 0 ? win.length - 1 - lastHitF[n] : win.length;
+  const missB = n => lastHitB[n] >= 0 ? win.length - 1 - lastHitB[n] : win.length;
+  const neighbors = (set, max) => {
+    const out = new Set();
+    for (const p of set) { if (p > 1) out.add(p - 1); if (p < max) out.add(p + 1); }
+    for (const p of set) out.delete(p);
+    return out;
+  };
+  const pf = new Set(prev.front), pb = new Set(prev.back);
+  const nf = neighbors(pf, cfg.nF), nb = neighbors(pb, cfg.nB);
+  const score = (n, repeat, near, miss, exp) => ({
+    number: n,
+    score: (repeat.has(n) ? 3 : 0) + (near.has(n) ? 2 : 0) + (miss(n) >= 1.5 * exp ? 2 : 0),
+    repeat: repeat.has(n), neighbor: near.has(n), overdue: miss(n) >= 1.5 * exp,
+    omission: miss(n),
+  });
+  return {
+    front: Array.from({length: cfg.nF}, (_, i) => score(i + 1, pf, nf, missF, cfg.expF)),
+    back: Array.from({length: cfg.nB}, (_, i) => score(i + 1, pb, nb, missB, cfg.expB)),
+  };
+}
+
+function buildTrendPortfolio(frontScores, backScores, mode = 'wide15') {
+  const front = frontScores.slice().sort((a, b) => b.score - a.score || a.number - b.number);
+  const back = backScores.slice().sort((a, b) => b.score - a.score || a.number - b.number);
+  const poolF = front.slice(0, mode === 'wide15' ? 15 : 12).map(x => x.number);
+  const poolB = back.slice(0, 3).map(x => x.number);
+  const tickets = mode === 'wide15'
+    ? [0, 5, 10].map(s => ({front: poolF.slice(s, s + 5), back: []}))
+    : [0, 1, 2].map(() => ({front: [], back: []}));
+  if (mode !== 'wide15') {
+    tickets[0].front = [0, 1, 3, 6, 9].map(i => poolF[i]);
+    tickets[1].front = [2, 4, 7, 10, 1].map(i => poolF[i]);
+    tickets[2].front = [5, 8, 11, 3, 2].map(i => poolF[i]);
+  }
+  tickets.forEach((t, i) => {
+    t.front.sort((a, b) => a - b);
+    t.back = [[poolB[0], poolB[1]], [poolB[2], poolB[0]], [poolB[1], poolB[2]]][i].slice().sort((a, b) => a - b);
+  });
+  return {poolF, poolB, tickets};
+}
+
 function trendCore(hist, cfg){
   // hist: 升序 [{code, date, front:[], back:[]}]；cfg: {nF,nB,pF,pB,expF,expB}
   const last = hist[hist.length-1];
@@ -38,31 +88,18 @@ function trendCore(hist, cfg){
     }
     return {d, cells};
   });
-  const missNowF = n => lastHitF[n] >= 0 ? win.length-1 - lastHitF[n] : win.length;
-  const missNowB = n => lastHitB[n] >= 0 ? win.length-1 - lastHitB[n] : win.length;
+  const missWindowF = n => lastHitF[n] >= 0 ? win.length-1 - lastHitF[n] : win.length;
+  const missWindowB = n => lastHitB[n] >= 0 ? win.length-1 - lastHitB[n] : win.length;
 
-  // 打分 → 池
-  const score = (n, prevSet, neiSet, missNow, expMiss) =>
-    (prevSet.has(n) ? 3 : 0) + (neiSet.has(n) ? 2 : 0) + (missNow(n) >= 1.5*expMiss ? 2 : 0);
-  const neiOf = (set, max) => {
-    const s = new Set();
-    for (const p of set){ if (p-1 >= 1) s.add(p-1); if (p+1 <= max) s.add(p+1); }
-    for (const p of set) s.delete(p);
-    return s;
-  };
+  // 评分与组票分层：先得到可审计的特征分数，再按固定 wide15 结构出票。
+  const scored = scoreTrendNumbers(hist, cfg);
+  const portfolio = buildTrendPortfolio(scored.front, scored.back, 'wide15');
+  const poolF = portfolio.poolF, poolB = portfolio.poolB;
   const prevF = new Set(prev.front), prevB = new Set(prev.back);
-  const neiF = neiOf(prevF, cfg.nF), neiB = neiOf(prevB, cfg.nB);
-  const poolF = Array.from({length:cfg.nF}, (_,i)=>i+1)
-    .sort((a,b) => score(b,prevF,neiF,missNowF,cfg.expF) - score(a,prevF,neiF,missNowF,cfg.expF) || a - b).slice(0, 15);
-  const poolB = Array.from({length:cfg.nB}, (_,i)=>i+1)
-    .sort((a,b) => score(b,prevB,neiB,missNowB,cfg.expB) - score(a,prevB,neiB,missNowB,cfg.expB) || a - b).slice(0, 3);
-
-  // 三注：前区 15 池切三段（完全不重号），后区 top3 三对
-  const tickets = [0,5,10].map((s,i) => ({
-    front: poolF.slice(s, s+5),
-    back: [poolB[[0,2,1][i]], poolB[[1,0,2][i]]].sort((x,y)=>x-y),
-  }));
-  for (const t of tickets) t.front.sort((a,b)=>a-b);
+  const neiF = new Set(scored.front.filter(x => x.neighbor).map(x => x.number));
+  const missNowF = n => scored.front[n - 1].omission;
+  const missNowB = n => scored.back[n - 1].omission;
+  const tickets = portfolio.tickets;
 
   // 上期对账：同一函数回放（用 hist[:-1] 预测 last.code）
   const rc = hist.length > 3 ? trendCore(hist.slice(0, -1), cfg) : null;

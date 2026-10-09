@@ -151,3 +151,10 @@
 - 诚实边界：15 号池的 2.86% 是单次 978 期窗口的波动结果，不证明走势规则有预测力；优化目标仅是减少 6 元三注组合的号码重复和自动化复盘。
 - 恢复方法：从 `update.js` 移除 `trend_page.js` 调用，或恢复旧版静态 HTML；删除新增三个 round-33 文件即可回滚走势自动化，不影响主预测链路。
 - 验证状态：已完成 walk-forward 回测；生成器已在当前 1028 期数据上重建，26114 期上期对账为前中 2、后中 0；待后续开奖继续滚动验证。
+
+## round-34 (2026-10-09) - 走势评分/组票分层与迁移验证
+- 变更内容：①`trend_page.js` 抽出 `scoreTrendNumbers`（输出直落/斜连/回补/遗漏明细）与 `buildTrendPortfolio`（固定 wide15 组票），明确跨度只展示、不参与单号打分；②新增 `trend_transfer_backtest.py`，预注册 repeat_only、overdue_only、repeat_neighbor、current_all 四方案，固定 calibration 500 期、transfer 100 期、holdout 378 期，并用同结构随机 300,000 次基线；③`update.js` 为下一期记录增加 `rawPredictedFront/rawPredictedBack/coveredFront/coveredBack`，验证时同时保存 raw 命中与最终票面命中，避免覆盖前后口径混淆；④算法注册表增加明确的 `AI_U_wide_rebuilt` 名称，保留 `AI_U_wide` 兼容别名和 `AI_U_wide_orig` 对照，更新算法文档参数。
+- 迁移结果：`current_all` calibration=3.80%、transfer=4.00%、holdout=1.32%；`repeat_only` calibration=2.00%、transfer=3.00%、holdout=3.97%；`overdue_only` calibration=2.60%、transfer=3.00%、holdout=2.91%；`repeat_neighbor` calibration=2.40%、transfer=2.00%、holdout=2.12%；同结构随机基线=2.00%。没有方案在固定迁移与留出均稳定超过基线。
+- 默认策略：不切换到最近窗口表现好的 repeat_only；保留 current_all 的特征排序和 wide15 不重号覆盖，作为可回滚基线。优化结论仅限覆盖效率和口径一致性，不宣称走势有预测增益或盈利能力。
+- 影响文件：`trend_page.js`、`trend_transfer_backtest.py`、`trend_transfer_result.json`、`dlt-page/update.js`、`algorithms.py`、`algorithms.md`、`SKILL.md`。
+- 恢复方法：恢复 round-33 文件；删除 `trend_transfer_backtest.py/result.json`，还原 `AI_U_wide` 注册和预测记录字段即可。

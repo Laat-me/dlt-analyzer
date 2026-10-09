@@ -32,7 +32,7 @@
 | 23 | AD_markov2 | second_order_markov | 0.04 | 1.36 | — | — | 未实现 |
 | 24 | AE_fib_window | fibonacci_window | 0.02 | 1.29 | — | — | 未实现 |
 | 25 | AF_gradient | frequency_gradient | 0.01 | 1.33 | — | — | 未实现 |
-| 26 | AI_U_wide | repeat_neighbor_wide | 0.07 | 1.52 | 0.0 | 0.032 | REBUILT |
+| 26 | AI_U_wide_rebuilt | repeat_neighbor_wide | 0.07 | 1.52 | 0.0 | 0.032 | REBUILT（线上实际版本） |
 | 27 | AJ_U_cross | repeat_neighbor_gap_hot_cross | 0.05 | 1.54 | 0.0 | — | 未实现 |
 | 28 | AH_combo_stability | combo_stability | 0.04 | 1.34 | — | — | 未实现 |
 | 29 | AG_gap_hot_cross | gap_hot_cross | 0.02 | 1.22 | — | — | 未实现 |
@@ -103,7 +103,7 @@
 | v1_cold | 0.040 | 0.000 | 1.360 | 0.05 | 0.0 | -0.010 |
 | v2_hot | 0.020 | 0.020 | 1.230 | 0.02 | — | +0.000 |
 | v3 | 0.030 | 0.010 | 1.240 | — | — | — |
-| AI_U_wide | 0.080 | 0.000 | 1.540 | 0.07 | 0.0 | +0.010 |
+| AI_U_wide_rebuilt | 0.080 | 0.000 | 1.540 | 0.07 | 0.0 | +0.010 |
 | AI_U_wide_orig | 0.050 | 0.010 | 1.460 | — | — | — |
 | U_repeat_neighbor | 0.050 | 0.000 | 1.490 | 0.06 | 0.0 | -0.010 |
 | AK_U_tuned | 0.040 | 0.000 | 1.400 | 0.07 | 0.0 | -0.030 |
@@ -132,11 +132,10 @@
 | CH_strong_front | 0.060 | 0.000 | 1.490 | 0.06 | 0.01 | +0.000 |
 | Y_back_conditional | 0.010 | 0.000 | 1.310 | 0.02 | 0.01 | -0.010 |
 
-### AI_U_wide 还原说明（round-25）
+### AI_U_wide_rebuilt 还原说明（round-25）
 
-- **还原版** `AI_U_wide`：`norm(freq_all) + 0.5×重号 + 0.2×邻域(r3) + topk8 6+3约束枚举` → 900/100 窗口 ge4=**8%**（记录 7%，指纹 dist 每级差 ≤1），avg=1.54；**1000 期段 ge4=3.5%、ge5=3 期**（原参数版 2.8%/ge5=1）
-- 记录参数 `{repeatWeight:0.18, neighborRadius:2, neighborWeight:0.02}` 无法复现 7%（该参数+约束枚举在窗口仅 5-6%）——记录参数疑为简化值，原版实现细节未留存，还原版参数为窗口指纹拟合
-- 诚实口径：还原版 1000 期段真实水平 3.5%（vs 随机 2.4%），仍远低于窗口 8%；`AI_U_wide_orig` 保留记录参数版作对照
+- **线上实际执行版本** `AI_U_wide_rebuilt`（兼容别名 `AI_U_wide`）：`norm(freq_all) + 0.5×重号 + 0.2×邻域(r3) + topk8 6+3约束枚举` → 900/100 窗口 ge4=**8%**（记录 7%，指纹 dist 每级差 ≤1），avg=1.54；**1000 期段 ge4=3.5%、ge5=3 期**。
+- 旧记录参数版 `AI_U_wide_orig`：`repeatWeight=.18, neighborRadius=2, neighborWeight=.02`，保留用于对照；该参数无法复现旧记录的7%窗口表现。
 
 ## 未实现算法（公式未保留，仅记录结果）
 

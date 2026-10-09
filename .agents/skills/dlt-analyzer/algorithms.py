@@ -427,9 +427,10 @@ def build_registry():
     reg["v1_cold"] = make_v1_cold(constrained=True)
     reg["v2_hot"] = make_v2_hot(constrained=True)
     reg["v3"] = make_v3(reg["v1_cold"], reg["v2_hot"])
-    # AI_U_wide 还原版 (round-25窗口指纹还原): 900/100窗口复现8%(记录7%, 指纹每级差<=1)
-    # 1000期段 ge4=3.5% ge5=3期, 优于原参数版(2.8%/ge5=1)
-    reg["AI_U_wide"] = make_ai_u_wide(radius=3, w_repeat=0.5, w_neighbor=0.2, constrained=True, topk=8)
+    # AI_U_wide_rebuilt（实际线上版本）: radius=3 / repeat=.5 / neighbor=.2 / topk=8
+    # 原记录参数版保留为 AI_U_wide_orig，避免 model 文档与执行版本漂移。
+    reg["AI_U_wide_rebuilt"] = make_ai_u_wide(radius=3, w_repeat=0.5, w_neighbor=0.2, constrained=True, topk=8)
+    reg["AI_U_wide"] = reg["AI_U_wide_rebuilt"]
     # 原记录参数版 (v26 parameters: 0.18/0.02/r2) — 保留作对照
     reg["AI_U_wide_orig"] = make_ai_u_wide(radius=2, w_repeat=0.18, w_neighbor=0.02, constrained=True)
     reg["U_repeat_neighbor"] = make_ai_u_wide(radius=1, w_repeat=0.18, w_neighbor=0.02, constrained=True)
