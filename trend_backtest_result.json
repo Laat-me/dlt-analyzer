@@ -1,0 +1,24 @@
+{
+ "trend_orig": {
+  "ge4_rate": 0.016359918200409,
+  "avg_best": 1.678,
+  "periods": 978
+ },
+ "trend_quota": {
+  "ge4_rate": 0.015337423312883436,
+  "avg_best": 1.673,
+  "periods": 978
+ },
+ "trend_wide15": {
+  "ge4_rate": 0.028629856850715747,
+  "avg_best": 1.809,
+  "periods": 978
+ },
+ "random": {
+  "single_ge4": 0.006623630523923779,
+  "max3_indep": 0.019739564722925373,
+  "mc_structured": 0.020003333333333335,
+  "trials": 300000
+ },
+ "note": "走势四规则（直落/斜连/回补/跨度带打分）walk-forward，5+2 单注 max(3注)≥4 口径；wide15=15号池三注不重号；最终与同结构随机基线比较"
+}

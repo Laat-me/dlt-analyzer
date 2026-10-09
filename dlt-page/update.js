@@ -137,5 +137,11 @@ async function main(){
   fs.writeFileSync(`${PAGE}/大乐透分析.html`, html);
   fs.writeFileSync(`${PAGE}/index.html`, html);
   console.log(`已生成 大乐透分析.html / index.html（${(html.length/1024).toFixed(0)} KB）`);
+
+  // 7) 重建根目录走势版（随开奖数据更新，避免静态快照过期）
+  console.log('重建走势版预测页（50期走势 + 15号池不重号推荐 + 上期对账）…');
+  execSync(`node "${PAGE}/../trend_page.js"`, { stdio: 'inherit' });
+  console.log('已生成 /Users/mac/dream/走势版预测-手机版.html');
 }
+
 main().catch(e => { console.error('更新失败：', e.message); process.exit(1); });
