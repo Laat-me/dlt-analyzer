@@ -3240,11 +3240,13 @@
     2,
     11
    ],
-   "verified": false,
+   "verified": true,
    "hitGe4": null,
    "algorithm": "repeat_fill_hot_neighbor",
    "experimentGroup": "repeat5_fill10_hot_neighbor",
-   "note": "实验组：固定上期5重号；其余10号按近10期热度+上期邻号补位；前区15号三注不重复；不替换正式模型"
+   "note": "实验组：固定上期5重号；其余10号按近10期热度+上期邻号补位；前区15号三注不重复；不替换正式模型｜作废：重号未分散到各注，不能用于公平验证",
+   "invalidated": true,
+   "invalidatedAt": "2026-10-09"
   },
   {
    "id": 176,
@@ -3274,11 +3276,13 @@
     5,
     11
    ],
-   "verified": false,
+   "verified": true,
    "hitGe4": null,
    "algorithm": "repeat_fill_hot_neighbor",
    "experimentGroup": "repeat5_fill10_hot_neighbor",
-   "note": "实验组：固定上期5重号；其余10号按近10期热度+上期邻号补位；前区15号三注不重复；不替换正式模型"
+   "note": "实验组：固定上期5重号；其余10号按近10期热度+上期邻号补位；前区15号三注不重复；不替换正式模型｜作废：重号未分散到各注，不能用于公平验证",
+   "invalidated": true,
+   "invalidatedAt": "2026-10-09"
   },
   {
    "id": 177,
@@ -3308,11 +3312,115 @@
     2,
     5
    ],
-   "verified": false,
+   "verified": true,
    "hitGe4": null,
    "algorithm": "repeat_fill_hot_neighbor",
    "experimentGroup": "repeat5_fill10_hot_neighbor",
-   "note": "实验组：固定上期5重号；其余10号按近10期热度+上期邻号补位；前区15号三注不重复；不替换正式模型"
+   "note": "实验组：固定上期5重号；其余10号按近10期热度+上期邻号补位；前区15号三注不重复；不替换正式模型｜作废：重号未分散到各注，不能用于公平验证",
+   "invalidated": true,
+   "invalidatedAt": "2026-10-09"
+  },
+  {
+   "id": 178,
+   "predictedAt": "2026-10-09",
+   "targetDrawNum": "26115",
+   "model": "repeat_fill_hot_neighbor_v2",
+   "mode": "5+2",
+   "predictedFront": [
+    5,
+    7,
+    8,
+    12,
+    14
+   ],
+   "predictedBack": [
+    2,
+    11
+   ],
+   "rawPredictedFront": [
+    5,
+    7,
+    8,
+    12,
+    14
+   ],
+   "rawPredictedBack": [
+    2,
+    11
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "algorithm": "repeat_fill_hot_neighbor_v2",
+   "experimentGroup": "repeat5_fill10_hot_neighbor_balanced",
+   "note": "修正版实验：5个上期重号分散为2/2/1到三注；补位号按近10期热度+上期邻号，三注前区不重复；不替换正式模型"
+  },
+  {
+   "id": 179,
+   "predictedAt": "2026-10-09",
+   "targetDrawNum": "26115",
+   "model": "repeat_fill_hot_neighbor_v2",
+   "mode": "5+2",
+   "predictedFront": [
+    10,
+    11,
+    15,
+    16,
+    29
+   ],
+   "predictedBack": [
+    5,
+    11
+   ],
+   "rawPredictedFront": [
+    10,
+    11,
+    15,
+    16,
+    29
+   ],
+   "rawPredictedBack": [
+    5,
+    11
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "algorithm": "repeat_fill_hot_neighbor_v2",
+   "experimentGroup": "repeat5_fill10_hot_neighbor_balanced",
+   "note": "修正版实验：5个上期重号分散为2/2/1到三注；补位号按近10期热度+上期邻号，三注前区不重复；不替换正式模型"
+  },
+  {
+   "id": 180,
+   "predictedAt": "2026-10-09",
+   "targetDrawNum": "26115",
+   "model": "repeat_fill_hot_neighbor_v2",
+   "mode": "5+2",
+   "predictedFront": [
+    1,
+    2,
+    3,
+    28,
+    30
+   ],
+   "predictedBack": [
+    2,
+    5
+   ],
+   "rawPredictedFront": [
+    1,
+    2,
+    3,
+    28,
+    30
+   ],
+   "rawPredictedBack": [
+    2,
+    5
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "algorithm": "repeat_fill_hot_neighbor_v2",
+   "experimentGroup": "repeat5_fill10_hot_neighbor_balanced",
+   "note": "修正版实验：5个上期重号分散为2/2/1到三注；补位号按近10期热度+上期邻号，三注前区不重复；不替换正式模型"
   }
  ]
 }
