@@ -3211,6 +3211,108 @@
    ],
    "verified": false,
    "note": "六爻起卦: 起始卦水泽节 + 本卦震为雷变震为雷 seed=186562018263（玄学娱乐）"
+  },
+  {
+   "id": 175,
+   "predictedAt": "2026-10-09",
+   "targetDrawNum": "26115",
+   "model": "repeat_fill_hot_neighbor",
+   "mode": "5+2",
+   "predictedFront": [
+    8,
+    12,
+    15,
+    29,
+    30
+   ],
+   "predictedBack": [
+    2,
+    11
+   ],
+   "rawPredictedFront": [
+    8,
+    12,
+    15,
+    29,
+    30
+   ],
+   "rawPredictedBack": [
+    2,
+    11
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "algorithm": "repeat_fill_hot_neighbor",
+   "experimentGroup": "repeat5_fill10_hot_neighbor",
+   "note": "实验组：固定上期5重号；其余10号按近10期热度+上期邻号补位；前区15号三注不重复；不替换正式模型"
+  },
+  {
+   "id": 176,
+   "predictedAt": "2026-10-09",
+   "targetDrawNum": "26115",
+   "model": "repeat_fill_hot_neighbor",
+   "mode": "5+2",
+   "predictedFront": [
+    5,
+    7,
+    10,
+    11,
+    14
+   ],
+   "predictedBack": [
+    5,
+    11
+   ],
+   "rawPredictedFront": [
+    5,
+    7,
+    10,
+    11,
+    14
+   ],
+   "rawPredictedBack": [
+    5,
+    11
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "algorithm": "repeat_fill_hot_neighbor",
+   "experimentGroup": "repeat5_fill10_hot_neighbor",
+   "note": "实验组：固定上期5重号；其余10号按近10期热度+上期邻号补位；前区15号三注不重复；不替换正式模型"
+  },
+  {
+   "id": 177,
+   "predictedAt": "2026-10-09",
+   "targetDrawNum": "26115",
+   "model": "repeat_fill_hot_neighbor",
+   "mode": "5+2",
+   "predictedFront": [
+    1,
+    2,
+    3,
+    16,
+    28
+   ],
+   "predictedBack": [
+    2,
+    5
+   ],
+   "rawPredictedFront": [
+    1,
+    2,
+    3,
+    16,
+    28
+   ],
+   "rawPredictedBack": [
+    2,
+    5
+   ],
+   "verified": false,
+   "hitGe4": null,
+   "algorithm": "repeat_fill_hot_neighbor",
+   "experimentGroup": "repeat5_fill10_hot_neighbor",
+   "note": "实验组：固定上期5重号；其余10号按近10期热度+上期邻号补位；前区15号三注不重复；不替换正式模型"
   }
  ]
 }
