@@ -1,205 +1,244 @@
 {
-  "version": 2,
-  "optimizationTarget": "single-ticket top2-coverage",
-  "activeAlgorithm": "K_prob_ensemble",
-  "models": {
-    "m1": {
-      "strategy": "概率建模 + 单注推荐",
-      "weights": {
-        "alpha": 1.0,
-        "gamma": 0.995,
-        "markovWeight": 0.35
-      },
-      "performance": {
-        "totalPredictions": 1,
-        "hits": {
-          "0": 0,
-          "1": 1,
-          "2": 0,
-          "3": 0,
-          "4": 0,
-          "5": 0
-        },
-        "avgHitRate": 0.2
-      }
-    }
+ "version": 2,
+ "optimizationTarget": "single-ticket top2-coverage",
+ "activeAlgorithm": "K_prob_ensemble",
+ "models": {
+  "m1": {
+   "strategy": "概率建模 + 单注推荐",
+   "weights": {
+    "alpha": 1.0,
+    "gamma": 0.995,
+    "markovWeight": 0.35
+   },
+   "performance": {
+    "totalPredictions": 3,
+    "hits": {
+     "0": 2,
+     "1": 1,
+     "2": 0,
+     "3": 0,
+     "4": 0,
+     "5": 0
+    },
+    "avgHitRate": 0.0667
+   }
+  }
+ },
+ "history": [
+  {
+   "draw": "26213",
+   "predicted": [
+    2,
+    4,
+    8,
+    9,
+    9
+   ],
+   "actual": [
+    7,
+    4,
+    0,
+    7,
+    1
+   ],
+   "hits": 1,
+   "note": "第2位4命中(追遗漏28期+全期热), 其余4位未中; 样本1期不足调整门槛, 维持权重"
   },
-  "history": [
-    {
-      "draw": "26213",
-      "predicted": [
-        2,
-        4,
-        8,
-        9,
-        9
-      ],
-      "actual": [
-        7,
-        4,
-        0,
-        7,
-        1
-      ],
-      "hits": 1,
-      "note": "第2位4命中(追遗漏28期+全期热), 其余4位未中; 样本1期不足调整门槛, 维持权重"
-    }
-  ],
-  "knownBugs": [
-    "historical: draws 排序需升序(旧->新), 否则 latest/近N期窗口/遗漏全部指向旧期",
-    "data: 2026-08-12 历史库从200期扩展至1000期, 评分基准由(20-freqAll)改为(100-freqAll)",
-    "api: termNum参数在排列五接口不生效, 必须用pageNo翻页",
-    "stats: 早期'近5期热度延续99%'结论错误 - 把5位置热号取并集后统计集合碰撞所致; 位置精确匹配下仅~10%, 无预测意义",
-    "model: gap(遗漏)信号在排列五上是负贡献, 当前m1公式的gap*0.5方向可能错误"
-  ],
-  "reviewNotes": [
-    "900/100 Top-2覆盖率回测: K_prob_ensemble 与 A_freq30 并列留出集第一(22.0%), 训练段上 K_prob_ensemble 略优, 因此作为当前主算法",
-    "已测试候选算法: K_prob_ensemble, A_freq30, H_dirichlet_positional, I_recency_eb, G_freq30_only_all, J_markov_mixed, D_current_m1, B_freq30+10, C_freq30+10+all, F_freq5, E_freq10",
-    "超过50%的方法: 无",
-    "当前数据下没有任何算法接近80%; 系统保留最优算法并继续记录, 不伪造达标结果",
-    "低拥挤度方向作为第二层参考: 只影响推荐票型, 不改变主评估指标",
-    "2026-08-14: 26214复盘(主推0/5, top2 1/5) + 16算法回测 + 100/300/500三窗口验证: K_prob_ensemble主推率三窗口均第一(13.0%/10.7%/11.0%), top2覆盖率各窗口第一不同(纯噪声), 投票验证无增益 -> 无算法变更, 保持K",
-    "2026-08-14: 0/5全灭为期望内波动(主推13%/位, 全灭概率~50%); 优化转为输出策略: 主推+冷号参考票(26216起)",
-    "2026-08-14: 泊松算法实验(5变体, 900/100+三窗口): P_freq30与A_freq30等价(λ=频率), P_gap top2 1.034接近D, P_eb主推0.510; 无一超越K(0.578)/J(0.577); 泊松无记忆模型对独立随机开奖无额外信号 -> 保持K",
-    "2026-08-14: 特征工程+ML(14维特征, GBDT/RF/LogReg, 900/100+多窗口): LogReg最后100期top2=1.140不稳健(200期1.015/300期1.010与K持平), 主推全面低于K; ML/特征工程无超越 -> 保持K",
-    "2026-08-14: 期数实验(7690期全量, 训练300~7000期固定留出100期): 无单调提升(K主推0.46-0.62波动), A_freq30对照组完全不变; 加大期数不增加准确率, 保持1000期库"
-  ],
-  "algorithmBenchmarks": [
-    {
-      "name": "K_prob_ensemble",
-      "description": "H/I/J 概率等权集成 + Top-2覆盖率",
-      "family": "probability_ensemble",
-      "parameters": {
-        "alpha": 1,
-        "gamma": 0.995,
-        "lambda": 1,
-        "markovWeight": 0.35,
-        "ensembleWeights": [
-          0.333,
-          0.333,
-          0.333
-        ]
-      },
-      "trainCoverage": 0.188,
-      "trainHit": 188,
-      "trainTotal": 1000,
-      "holdoutCoverage": 0.22,
-      "holdoutHit": 110,
-      "holdoutTotal": 500,
-      "over50": false,
-      "over80": false,
-      "selected": true,
-      "ticketSelection": {
-        "pureProbabilityTicket": [
-          1,
-          7,
-          5,
-          4,
-          3
-        ],
-        "lowCrowdTicket": [
-          1,
-          7,
-          5,
-          4,
-          3
-        ]
-      }
-    },
-    {
-      "name": "A_freq30",
-      "description": "每位按近30期频次排序",
-      "trainCoverage": 0.187,
-      "holdoutCoverage": 0.22,
-      "over50": false,
-      "over80": false
-    },
-    {
-      "name": "H_dirichlet_positional",
-      "description": "Dirichlet平滑的每位频率模型",
-      "family": "bayesian_positional",
-      "parameters": {
-        "alpha": 1
-      },
-      "trainCoverage": 0.2,
-      "holdoutCoverage": 0.216,
-      "over50": false,
-      "over80": false
-    },
-    {
-      "name": "I_recency_eb",
-      "description": "递减加权经验贝叶斯模型",
-      "family": "recency_weighted_bayes",
-      "parameters": {
-        "alpha": 1,
-        "gamma": 0.995
-      },
-      "trainCoverage": 0.181,
-      "holdoutCoverage": 0.216,
-      "over50": false,
-      "over80": false
-    },
-    {
-      "name": "G_freq30_only_all",
-      "description": "freq30 + freqAll×0.01",
-      "trainCoverage": 0.178,
-      "holdoutCoverage": 0.216,
-      "over50": false,
-      "over80": false
-    },
-    {
-      "name": "J_markov_mixed",
-      "description": "一阶Markov与频率基线混合",
-      "family": "markov_mixture",
-      "parameters": {
-        "alpha": 1,
-        "lambda": 1,
-        "markovWeight": 0.35
-      },
-      "trainCoverage": 0.195,
-      "holdoutCoverage": 0.208,
-      "over50": false,
-      "over80": false
-    },
-    {
-      "name": "D_current_m1",
-      "description": "旧公式 gap×0.5 + freq5×1.5 + freq10×0.8 + (100-freqAll)×0.3",
-      "trainCoverage": 0.214,
-      "holdoutCoverage": 0.202,
-      "over50": false,
-      "over80": false
-    },
-    {
-      "name": "B_freq30+10",
-      "description": "freq30×2 + freq10×0.8",
-      "trainCoverage": 0.179,
-      "holdoutCoverage": 0.202,
-      "over50": false,
-      "over80": false
-    },
-    {
-      "name": "C_freq30+10+all",
-      "description": "freq30×2 + freq10×0.8 + freqAll×0.1",
-      "trainCoverage": 0.177,
-      "holdoutCoverage": 0.196,
-      "over50": false,
-      "over80": false
-    },
-    {
-      "name": "F_freq5",
-      "description": "每位按近5期频次排序",
-      "trainCoverage": 0.187,
-      "holdoutCoverage": 0.178,
-      "over50": false,
-      "over80": false
-    },
-    {
-      "name": "E_freq10",
-      "description": "每位按近10期频次排序",
-      "trainCoverage": 0.185,
-      "holdoutCoverage": 0.168,
-      "over50": false,
-      "over80": false
-    }
-  ]
+  {
+   "draw": "26214",
+   "predicted": [
+    1,
+    7,
+    5,
+    4,
+    3
+   ],
+   "actual": [
+    0,
+    1,
+    4,
+    9,
+    0
+   ],
+   "hits": 0,
+   "note": "主推0/5, top2 1/5; 实际偏冷号, 复盘见CHANGELOG 2026-08-14"
+  },
+  {
+   "draw": "26216",
+   "predicted": [
+    1,
+    4,
+    5,
+    4,
+    3
+   ],
+   "actual": [
+    9,
+    5,
+    3,
+    0,
+    0
+   ],
+   "hits": 1,
+   "note": "主推1/5(位3), top2 0/5; 26217前数据, 表现补录"
+  }
+ ],
+ "knownBugs": [
+  "historical: draws 排序需升序(旧->新), 否则 latest/近N期窗口/遗漏全部指向旧期",
+  "data: 2026-08-12 历史库从200期扩展至1000期, 评分基准由(20-freqAll)改为(100-freqAll)",
+  "api: termNum参数在排列五接口不生效, 必须用pageNo翻页",
+  "stats: 早期'近5期热度延续99%'结论错误 - 把5位置热号取并集后统计集合碰撞所致; 位置精确匹配下仅~10%, 无预测意义",
+  "model: gap(遗漏)信号在排列五上是负贡献, 当前m1公式的gap*0.5方向可能错误"
+ ],
+ "reviewNotes": [
+  "900/100 Top-2覆盖率回测: K_prob_ensemble 与 A_freq30 并列留出集第一(22.0%), 训练段上 K_prob_ensemble 略优, 因此作为当前主算法",
+  "已测试候选算法: K_prob_ensemble, A_freq30, H_dirichlet_positional, I_recency_eb, G_freq30_only_all, J_markov_mixed, D_current_m1, B_freq30+10, C_freq30+10+all, F_freq5, E_freq10",
+  "超过50%的方法: 无",
+  "当前数据下没有任何算法接近80%; 系统保留最优算法并继续记录, 不伪造达标结果",
+  "低拥挤度方向作为第二层参考: 只影响推荐票型, 不改变主评估指标",
+  "2026-08-14: 26214复盘(主推0/5, top2 1/5) + 16算法回测 + 100/300/500三窗口验证: K_prob_ensemble主推率三窗口均第一(13.0%/10.7%/11.0%), top2覆盖率各窗口第一不同(纯噪声), 投票验证无增益 -> 无算法变更, 保持K",
+  "2026-08-14: 0/5全灭为期望内波动(主推13%/位, 全灭概率~50%); 优化转为输出策略: 主推+冷号参考票(26216起)",
+  "2026-08-14: 泊松算法实验(5变体, 900/100+三窗口): P_freq30与A_freq30等价(λ=频率), P_gap top2 1.034接近D, P_eb主推0.510; 无一超越K(0.578)/J(0.577); 泊松无记忆模型对独立随机开奖无额外信号 -> 保持K",
+  "2026-08-14: 特征工程+ML(14维特征, GBDT/RF/LogReg, 900/100+多窗口): LogReg最后100期top2=1.140不稳健(200期1.015/300期1.010与K持平), 主推全面低于K; ML/特征工程无超越 -> 保持K",
+  "2026-08-14: 期数实验(7690期全量, 训练300~7000期固定留出100期): 无单调提升(K主推0.46-0.62波动), A_freq30对照组完全不变; 加大期数不增加准确率, 保持1000期库",
+  "2026-10-10: 数据断更55天后同步50期(26219-26268); 以这50期做严格样本外验证: K top2覆盖24.0%(+1.58σ)但300期滚动窗口回落20.6%(+0.58σ), mean p(实际)=0.100≈均匀, logloss≈均匀基线 -> 50期的优势为窗口噪声, 无算法变更; 六爻票26219验证1/5与随机一致"
+ ],
+ "algorithmBenchmarks": [
+  {
+   "name": "K_prob_ensemble",
+   "description": "H/I/J 概率等权集成 + Top-2覆盖率",
+   "family": "probability_ensemble",
+   "parameters": {
+    "alpha": 1,
+    "gamma": 0.995,
+    "lambda": 1,
+    "markovWeight": 0.35,
+    "ensembleWeights": [
+     0.333,
+     0.333,
+     0.333
+    ]
+   },
+   "trainCoverage": 0.188,
+   "trainHit": 188,
+   "trainTotal": 1000,
+   "holdoutCoverage": 0.22,
+   "holdoutHit": 110,
+   "holdoutTotal": 500,
+   "over50": false,
+   "over80": false,
+   "selected": true,
+   "ticketSelection": {
+    "pureProbabilityTicket": [
+     1,
+     7,
+     5,
+     4,
+     3
+    ],
+    "lowCrowdTicket": [
+     1,
+     7,
+     5,
+     4,
+     3
+    ]
+   }
+  },
+  {
+   "name": "A_freq30",
+   "description": "每位按近30期频次排序",
+   "trainCoverage": 0.187,
+   "holdoutCoverage": 0.22,
+   "over50": false,
+   "over80": false
+  },
+  {
+   "name": "H_dirichlet_positional",
+   "description": "Dirichlet平滑的每位频率模型",
+   "family": "bayesian_positional",
+   "parameters": {
+    "alpha": 1
+   },
+   "trainCoverage": 0.2,
+   "holdoutCoverage": 0.216,
+   "over50": false,
+   "over80": false
+  },
+  {
+   "name": "I_recency_eb",
+   "description": "递减加权经验贝叶斯模型",
+   "family": "recency_weighted_bayes",
+   "parameters": {
+    "alpha": 1,
+    "gamma": 0.995
+   },
+   "trainCoverage": 0.181,
+   "holdoutCoverage": 0.216,
+   "over50": false,
+   "over80": false
+  },
+  {
+   "name": "G_freq30_only_all",
+   "description": "freq30 + freqAll×0.01",
+   "trainCoverage": 0.178,
+   "holdoutCoverage": 0.216,
+   "over50": false,
+   "over80": false
+  },
+  {
+   "name": "J_markov_mixed",
+   "description": "一阶Markov与频率基线混合",
+   "family": "markov_mixture",
+   "parameters": {
+    "alpha": 1,
+    "lambda": 1,
+    "markovWeight": 0.35
+   },
+   "trainCoverage": 0.195,
+   "holdoutCoverage": 0.208,
+   "over50": false,
+   "over80": false
+  },
+  {
+   "name": "D_current_m1",
+   "description": "旧公式 gap×0.5 + freq5×1.5 + freq10×0.8 + (100-freqAll)×0.3",
+   "trainCoverage": 0.214,
+   "holdoutCoverage": 0.202,
+   "over50": false,
+   "over80": false
+  },
+  {
+   "name": "B_freq30+10",
+   "description": "freq30×2 + freq10×0.8",
+   "trainCoverage": 0.179,
+   "holdoutCoverage": 0.202,
+   "over50": false,
+   "over80": false
+  },
+  {
+   "name": "C_freq30+10+all",
+   "description": "freq30×2 + freq10×0.8 + freqAll×0.1",
+   "trainCoverage": 0.177,
+   "holdoutCoverage": 0.196,
+   "over50": false,
+   "over80": false
+  },
+  {
+   "name": "F_freq5",
+   "description": "每位按近5期频次排序",
+   "trainCoverage": 0.187,
+   "holdoutCoverage": 0.178,
+   "over50": false,
+   "over80": false
+  },
+  {
+   "name": "E_freq10",
+   "description": "每位按近10期频次排序",
+   "trainCoverage": 0.185,
+   "holdoutCoverage": 0.168,
+   "over50": false,
+   "over80": false
+  }
+ ]
 }
