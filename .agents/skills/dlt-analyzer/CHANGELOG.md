@@ -184,3 +184,12 @@
 - 影响文件：`trend_pool_stats.py`、`test_trend_pool_stats.py`、`dlt-page/update.js`、`trend_pool_stats.json`。
 - 恢复方法：从`update.js`移除5.6走势统计调用并删除新文件；正式预测账本不受影响。
 - 验证状态：标准库测试、语法检查、幂等测试和`update.js --no-python`均通过。
+
+## round-38 (2026-10-12) - 网友推荐完整采集流水线
+- 变更内容：新增 `page_extract.py` 和 `run_pipeline.py`；从公开搜索发现页面后逐页读取可见 HTML 文本，解析完整5+2、前区/后区胆码和号码池，按票面/页面内容去重，以类型权重聚合两注；长期只保存网站清单和目标期运行报告，临时页面文本不落库；Legacy JSONL 解析流程保留兼容。
+- 变更原因：仅保存网站清单无法得到网络搜索版预测；用户要求把搜索、页面解析、号码池统计、两注生成和结果报告串成完整流程。
+- 实际验证：页面解析、目标期校验、胆码/号码池、站点、Legacy 聚合测试通过；26116 有限真实运行结果为 `insufficient_evidence`（搜索原始结果0、有效网站0、页面0、可解析推荐0），因此未生成虚假两注。
+- 影响文件：`.agents/skills/dlt-crowd-recommendation/page_extract.py`、`run_pipeline.py`、`tests/test_pipeline.py`、`README.md`。
+- 诚实边界：当前搜索引擎返回噪声/解析限制时不会绕过或凑号码；完整两注只有在页面可访问且目标期号码可核验时生成。网站数量和网页共识不能证明提高中奖率。
+- 恢复方法：删除 round-38 三个新增代码/测试文件，恢复 README 到 round-36；正式模型链路不受影响。
+- 验证状态：标准库测试和 Python 编译通过；真实26116运行明确返回 `insufficient_evidence`。
