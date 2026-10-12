@@ -1,6 +1,20 @@
 # 大乐透网友推荐聚合 Skill
 
-独立工具，不改变 `dlt-page/update.js` 正式预测。公开来源输入示例：
+## 默认：自动发现参考网站
+
+从公开 Bing HTML 搜索结果发现推荐网站，按域名去重，只保存网站清单：
+
+```sh
+python3 discover_websites.py 26117 --output data/sites.json --pages 2 --per-page 10 --max-sites 50
+```
+
+结果只包含域名、一个代表性 URL、命中过的查询词、目标期号、发现时间和统计计数；不会保存网页正文、作者、号码、搜索摘要或推荐记录。同一网站的多个页面会合并成一个域名条目。
+
+搜索遇到验证码、登录、付费墙或反爬时安全失败，不绕过限制。网站数量不等于独立博主数量，更不等于预测准确率或中奖概率。
+
+## Legacy：解析已保存的推荐文本
+
+如果用户明确要求解析已有推荐文本，仍可使用：
 
 ```sh
 python3 collect_recommendations.py raw_sources.jsonl --out-dir data
@@ -8,6 +22,4 @@ python3 aggregate_recommendations.py 26115 --input data/recommendations.jsonl --
 python3 verify_recommendations.py --recommendations data/recommendations.jsonl
 ```
 
-原始公开来源须包含 URL、目标期号、发布时间或无法确认标记、推荐原文片段。支持完整 5+2，也支持前区胆码/大底号/号码池和后区胆码/四码/号码池；池类按较低权重参与边际投票，聚合器再补齐两注。运行时需在最终报告中说明来源数、去重后的独立簇数、两注及免责声明。`tests/fixtures.jsonl` 仅用于测试，不是实际博主数据。
-
-**限制：** 当前仅实现离线解析和聚合，不含搜索引擎采集器。需由操作者通过公开搜索收集页面，再交给 CLI 处理；不会自动抓取网页，也不绕过登录或反爬。任何来源共识都不代表中奖概率增加。
+Legacy 流程支持完整 5+2、前区/后区胆码和号码池，并会写入来源及推荐记录；它不是默认的网站发现流程。测试 fixture 仅用于单元测试，不是实际博主数据。

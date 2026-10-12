@@ -5,30 +5,23 @@ description: Aggregate public online 大乐透 blogger and expert recommendation
 
 # 大乐透网友推荐聚合
 
-这个 skill 将公开网页上的网友/博主推荐整理成可追溯数据，再综合输出两注 5+2。它是独立的娱乐参考模块，不修改 AI_U_wide、EVO-20、走势或玄学正式模型。
+这个 skill 将公开网页上的网友/博主推荐整理成可追溯数据，再综合输出两注 5+2。默认入口是自动公开搜索并按域名保存网站清单；它是独立的娱乐参考模块，不修改 AI_U_wide、EVO-20、走势或玄学正式模型。
 
-## 标准流程
+## 默认流程：自动发现网站
 
-1. 确定目标期号和采集截止时间；未指定时从本地 `draws.json` 推算下一期。
-2. 使用公开搜索查询多个关键词与多个平台，尽量收集至少 20 个候选页面；不要绕过登录、验证码、付费墙或反爬限制。
-3. 保存来源标题、作者/账号、平台、URL、发布时间、抓取时间、目标期、原文摘录和内容哈希。
-4. 用 `schemas.py` 解析完整 5+2、前区池、前区胆码、后区池和后区胆码；验证号码范围、数量、重复和期号。
-5. 按 URL、正文哈希、作者/标题模板和号码指纹去重；转载只算一个独立来源簇。
-6. 用 `aggregate_recommendations.py` 按来源簇、解析置信度、时间衰减和边际投票生成两注，并保留每个号码的来源证据。
-7. 用 `verify_recommendations.py` 在开奖后根据官方 `draws.json` 验证，不回填开奖后的来源。
-8. 输出运行报告：来源总数、独立簇、有效完整票、拒绝数、两注、证据来源、随机基线和免责声明。
+```sh
+python3 discover_websites.py 26117 --output data/sites.json --pages 2 --per-page 10 --max-sites 50
+```
 
-## 文件
+默认只保存：域名、代表性 URL、命中查询词、目标期号、发现时间和统计计数；不保存网页正文、号码、作者或搜索摘要。按域名去重，同站多个页面合并查询词。遇到验证码、登录、付费墙或封锁时停止该查询并保留已有清单，不绕过限制。
 
-- `schemas.py`：纯解析、校验、标准化、来源指纹。
-- `collect_recommendations.py`：读取搜索/网页采集 JSONL，解析并写入来源与推荐记录；不负责绕过网站限制。
-- `aggregate_recommendations.py`：生成两注和报告。
-- `verify_recommendations.py`：按官方开奖验证历史推荐。
-- `tests/`：解析与聚合单元测试。
-- `data/sources.jsonl`：原始来源审计记录。
-- `data/recommendations.jsonl`：规范推荐记录。
-- `data/runs/`：按期号保存聚合报告。
-
+- `site_schema.py`：URL 标准化、域名抽取、搜索结果过滤和按域名合并。
+- `discover_websites.py`：自动公开搜索并写入 `data/sites.json`。
+- `schemas.py`：Legacy 号码解析、校验和推荐记录。
+- `collect_recommendations.py`：Legacy 离线推荐文本导入。
+- `aggregate_recommendations.py`：Legacy 两注号码聚合。
+- `verify_recommendations.py`：Legacy 开奖验证。
+- `tests/`：网站发现与 Legacy 解析/聚合测试。
 ## 输入约定
 
 采集器输入 JSONL 每行至少包含：
@@ -50,4 +43,8 @@ description: Aggregate public online 大乐透 blogger and expert recommendation
 
 ## 诚实边界
 
-公开推荐聚合只能反映“网上意见”，不是独立开奖信息。重复转载不是多个独立证据；没有历史冻结采集记录时，不得声称某博主长期更准；不得声称两注提高中奖率、回报率或盈利概率。
+自动收集到的参考网站数量不等于独立博主数量，也不等于预测准确率。搜索结果可能重复转载、缺少号码或被搜索引擎改写；默认网站发现功能只建立后续检索的去重清单，不宣称提高中奖率或盈利能力。
+
+## Legacy：推荐号码解析与聚合
+
+只有用户明确要求解析已经保存的推荐文本时，才使用 `schemas.py`、`collect_recommendations.py`、`aggregate_recommendations.py` 和 `verify_recommendations.py`。这些旧工具支持完整 5+2、前区/后区胆码和号码池，但会另写推荐记录，不属于默认网站清单流程。
