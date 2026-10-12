@@ -139,6 +139,10 @@ async function main(){
     console.log(`覆盖优化已应用到 ${modelRecs.length} 条模型记录（保底块已下线）`);
   }
 
+  // 5.6) 独立走势号池统计（不进入正式 predictions.records，不参与 coverage）
+  console.log('更新走势号池统计（前区池/后区池/三注命中分开记账）…');
+  execSync(`"${PY}" "${PAGE}/../trend_pool_stats.py" --draws "${DLT}/data/draws.json" --output "${PAGE}/../trend_pool_stats.json"`, { stdio: 'inherit' });
+
   // 6) 组装 HTML
   const tpl = fs.readFileSync(`${PAGE}/template.html`, 'utf8');
   const ec = fs.readFileSync('/Users/mac/dream/ssq-analyzer/echarts.min.js', 'utf8');

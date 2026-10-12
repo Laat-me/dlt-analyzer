@@ -176,3 +176,11 @@
 - 影响文件：`.agents/skills/dlt-crowd-recommendation/site_schema.py`、`discover_websites.py`、`tests/test_sites.py`、`SKILL.md`、`README.md`。
 - 恢复方法：删除 round-36 三个新增代码/测试文件并恢复文档到 round-35；不影响官方开奖、AI、EVO、走势和玄学链路。
 - 诚实边界：发现的网站数量不等于独立博主数量或预测证据；搜索引擎可能返回无关页面，严格过滤优先于“凑数量”；本轮没有将噪声结果写入仓库 `data/sites.json`。
+
+## round-37 (2026-10-12) - 走势号池命中独立账本
+- 变更内容：新增 `trend_pool_stats.py` 和 `trend_pool_stats.json`，按最近50期走势规则生成每期 wide15 前区池/top3 后区池，独立记录池层命中（前区池、后区池、池合计）和票层命中（三注明细、最高单注、5+2三注是否合计命中≥4）；使用稳定复合 key 和 source fingerprint 幂等 upsert；`dlt-page/update.js` 开奖同步后自动更新该账本，不把走势快照放入 `predictions.json.records`。
+- 当前统计（截至26115）：已验证979期；前区池平均命中2.1318/15，后区池平均命中0.5209/3，池合计平均2.6527；三注最高单注平均1.808；最高单注合计≥4为28期，比例2.8601%（历史结构随机基线约2.00%，不宣称预测优势）；26116已生成pending快照。
+- 26115复盘：前区池命中2、后区池命中0、池合计2；三注合计命中1/0/1，最高1；池层与票层分开记录。
+- 影响文件：`trend_pool_stats.py`、`test_trend_pool_stats.py`、`dlt-page/update.js`、`trend_pool_stats.json`。
+- 恢复方法：从`update.js`移除5.6走势统计调用并删除新文件；正式预测账本不受影响。
+- 验证状态：标准库测试、语法检查、幂等测试和`update.js --no-python`均通过。
