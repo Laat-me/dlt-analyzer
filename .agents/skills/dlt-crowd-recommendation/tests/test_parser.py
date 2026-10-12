@@ -19,7 +19,9 @@ def test_cutoff_and_missing_time_confidence():
     src,r=parse_source(dict(base, cutoffAt='2026-10-09T12:00:00+08:00', publishedAt='2026-10-10T12:00:00+08:00'))
     assert src['parseStatus']=='rejected' and r is None
     src,r=parse_source(base); assert r['parseConfidence']==0
-
+def test_pool_and_danma():
+    src,r=parse_source({'platform':'x','author':'a','title':'26116五胆后三胆','url':'https://x.test/b','targetDrawNum':'26116','publishedAt':'2026-10-11','rawText':'前区五胆：07 09 17 18 26；后区三胆：04 10 12'})
+    assert src['parseStatus']=='parsed' and r['kind']=='front_pool_back_pool' and r['front']==[7,9,17,18,26] and r['back']==[4,10,12]
 if __name__ == '__main__':
-    test_extract_labeled(); test_extract_chinese_punctuation(); test_reject_bad_range(); test_parse_source(); test_cutoff_and_missing_time_confidence()
+    test_extract_labeled(); test_extract_chinese_punctuation(); test_reject_bad_range(); test_parse_source(); test_cutoff_and_missing_time_confidence(); test_pool_and_danma()
     print('parser tests passed')

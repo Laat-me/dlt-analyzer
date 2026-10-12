@@ -5,7 +5,7 @@ from collections import defaultdict
 from pathlib import Path
 
 def aggregate(recs, target):
-    rows=[r for r in recs if str(r.get('targetDrawNum'))==str(target) and r.get('kind')=='exact_5_plus_2']
+    rows=[r for r in recs if str(r.get('targetDrawNum'))==str(target) and r.get('kind') in {'exact_5_plus_2','front_pool','back_pool','front_pool_back_pool'}]
     clusters=defaultdict(list)
     for r in rows: clusters[r.get('duplicateCluster') or r['recommendationId']].append(r)
     fs=defaultdict(float); bs=defaultdict(float)
@@ -14,8 +14,9 @@ def aggregate(recs, target):
         # Cluster earns one contribution; cap cluster weight independent of repost count.
         weight=min(1.0, weight)
         r=members[0]
-        for n in r['front']: fs[n]+=weight
-        for n in r['back']: bs[n]+=weight
+        factor={'exact_5_plus_2':1.0,'front_pool_back_pool':0.7,'front_pool':0.45,'back_pool':0.45}.get(r.get('kind'),0.0)
+        for n in r.get('front', []): fs[n]+=weight*factor
+        for n in r.get('back', []): bs[n]+=weight*factor
     def valid(f):
         return len(f)==5 and len(set(f))==5 and 1<=min(f) and max(f)<=35
     fscore=lambda f: sum(fs[n] for n in f)

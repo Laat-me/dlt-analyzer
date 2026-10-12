@@ -36,6 +36,28 @@ def validate(front, back):
         return False, "back must contain two unique numbers in 1..12"
     return True, None
 
+def validate_pool(nums, maxn, min_count=1):
+    if len(nums) < min_count or len(set(nums)) != len(nums) or not all(1 <= x <= maxn for x in nums):
+        return False, f"pool must contain unique numbers in 1..{maxn}"
+    return True, None
+
+def extract_recommendation(text: str):
+    """Return (kind, front, back) for exact tickets or partial public tips."""
+    f, b = extract_numbers(text)
+    if f and b:
+        return "exact_5_plus_2", f, b
+    def group(pattern, maxn):
+        m = re.search(pattern, text)
+        if not m: return None
+        nums = sorted({int(x) for x in NUM_RE.findall(m.group(1))})
+        return nums if validate_pool(nums, maxn)[0] else None
+    front = group(r"(?:前区|前区号码)?\s*(?:五胆|胆码|大底号|推荐号码|号码池)\s*[:：]?\s*([0-9\s,，、]+)", 35)
+    back = group(r"(?:后区|后区号码)?\s*(?:三胆|胆码|四码|五码|号码池)\s*[:：]?\s*([0-9\s,，、]+)", 12)
+    if front and back: return "front_pool_back_pool", front, back
+    if front: return "front_pool", front, None
+    if back: return "back_pool", None, back
+    return None, None, None
+
 def source_id(source):
     return sha("|".join([source.get("platform", ""), source.get("author", ""), norm_url(source.get("url", ""))]))
 
@@ -43,7 +65,8 @@ def parse_source(source):
     text = source.get("rawText", "")
     issues = ISSUE_RE.findall(" ".join([source.get("title", ""), text]))
     target = str(source.get("targetDrawNum") or (issues[0] if len(set(issues)) == 1 else ""))
-    front, back = extract_numbers(text)
+    kind, parsed_front, parsed_back = extract_recommendation(text)
+    front, back = parsed_front, parsed_back
     out = dict(source)
     out["url"] = norm_url(out.get("url", "")); out["sourceId"] = source_id(out)
     out.setdefault("fetchedAt", datetime.now(timezone.utc).isoformat())
@@ -58,16 +81,29 @@ def parse_source(source):
     if cutoff and published and published > cutoff:
         out.update(parseStatus="rejected", rejectReason="published after frozen cutoff")
         return out, None
-    if not target or not front or not back:
-        out.update(parseStatus="rejected", rejectReason="missing target or complete 5+2 numbers")
+    if not target or not kind:
+        out.update(parseStatus="rejected", rejectReason="missing target or recognizable recommendation")
         return out, None
-    ok, reason = validate(front, back)
-    if not ok:
-        out.update(parseStatus="rejected", rejectReason=reason)
-        return out, None
+    if kind == "exact_5_plus_2":
+        ok, reason = validate(front, back)
+        if not ok:
+            out.update(parseStatus="rejected", rejectReason=reason)
+            return out, None
+    elif kind == "front_pool_back_pool":
+        ok, reason = validate_pool(front, 35, 5)
+        if not ok: out.update(parseStatus="rejected", rejectReason=reason); return out, None
+        ok, reason = validate_pool(back, 12, 2)
+        if not ok: out.update(parseStatus="rejected", rejectReason=reason); return out, None
+    elif kind == "front_pool":
+        ok, reason = validate_pool(front, 35, 1)
+        if not ok: out.update(parseStatus="rejected", rejectReason=reason); return out, None
+    elif kind == "back_pool":
+        ok, reason = validate_pool(back, 12, 1)
+        if not ok: out.update(parseStatus="rejected", rejectReason=reason); return out, None
     out.update(parseStatus="parsed", rejectReason=None)
-    # The same exact ticket is one recommendation cluster even when reposted at a different URL.
-    rec = {"recommendationId": sha(f"{out['sourceId']}|{target}|{front}|{back}"), "sourceId": out["sourceId"], "targetDrawNum": target, "front": front, "back": back, "kind": "exact_5_plus_2", "rawQuote": text, "parseConfidence": 0.98 * out["timeConfidence"], "isSyndicated": False, "duplicateCluster": sha(f"{target}|{front}|{back}")}
+    # The same exact ticket or pool is one recommendation cluster when reposted.
+    payload = f"{target}|{kind}|{front}|{back}"
+    rec = {"recommendationId": sha(f"{out['sourceId']}|{payload}"), "sourceId": out["sourceId"], "targetDrawNum": target, "front": front or [], "back": back or [], "kind": kind, "rawQuote": text, "parseConfidence": 0.98 * out["timeConfidence"], "isSyndicated": False, "duplicateCluster": sha(payload)}
     return out, rec
 
 __all__ = ["parse_source", "validate", "extract_numbers", "asdict"]
