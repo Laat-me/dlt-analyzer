@@ -1,4 +1,13 @@
-# dlt-analyzer 变更日志（CHANGELOG）
+## round-39 (2026-10-12) - 新增走势形态单注算法（区间/奇偶/和值）
+- 变更内容：预注册独立 `trend_single_shape.py`：在最近50期因果窗口中统计前区奇偶、三区(01-12/13-24/25-35)形态和和值分箱；以现有直落/邻号/回补分作为基础排序，从top18枚举一注5+2，按目标奇偶、三区、和值带、跨度过滤；新增独立 `trend_single_shape_stats.json` 和测试，不写入正式 `predictions.json.records`。
+- 变更原因：用户要求将走势中的区间比、奇偶比、和值走势加入，并每期只推荐一注；需要与旧wide15三注覆盖口径隔离，避免把三注最高命中与单注命中混比。
+- 预注册口径：前区奇偶优先历史众数(2:3/3:2)，三区优先条件形态众数、样本不足回退全局众数；和值使用固定10分箱附近的窗口带；号码分固定为重号3、邻号2、回补2、近10期频率仅作平局排序；无候选按和值放宽→区间精确比放宽→top5回退并记录原因。
+- 变更前指标：无（新独立口径）；参考无约束随机5+2单注 `P(totalHits≥4)=0.66236%`、平均总命中约1.04762。
+- 变更后指标：待实现并跑固定 calibration/transfer/holdout（500/100/当前剩余）及匹配形态随机基线；不使用最终留出调参，不宣称盈利或预测增益。
+- 影响文件：`trend_single_shape.py`、`trend_single_shape_stats.json`、`test_trend_single_shape.py`、`dlt-page/update.js`。
+- 恢复方法：移除 update.js 中独立脚本调用，删除上述新文件；旧trend_page/trend_pool_stats/正式模型链路不变。
+- 验证状态：实现前记录；待回测与26116 pending验证。
+
 
 > 规则：**任何算法/公式/权重/选号流程/数据口径的修改，必须先在本文件记录，再实施**。
 > 目的：每次改动可追溯、可对比、可回滚。
@@ -184,6 +193,15 @@
 - 影响文件：`trend_pool_stats.py`、`test_trend_pool_stats.py`、`dlt-page/update.js`、`trend_pool_stats.json`。
 - 恢复方法：从`update.js`移除5.6走势统计调用并删除新文件；正式预测账本不受影响。
 - 验证状态：标准库测试、语法检查、幂等测试和`update.js --no-python`均通过。
+
+## round-39 (2026-10-12) - 独立走势形态单注算法
+- 变更内容：新增 `trend_single_shape.py`、`trend_single_shape_backtest.py`、`test_trend_single_shape.py` 和 `trend_single_shape_stats.json`；每期只生成一注5+2，因果窗口50期统计前区奇偶、三区(01-12/13-24/25-35)和和值分箱，结合重号/邻号/遗漏分排序，按目标形态与和值带筛选组合；独立接入`update.js`，不写正式`predictions.json.records`、不参与coverage。
+- 预注册口径：重号+3、邻号+2、回补+2，近10期频率仅作平局排序；条件形态样本不足时回退窗口全局众数；无候选记录和值/区间放宽或top5回退原因。
+- 回测（单注口径，当前1029期数据）：calibration 500期 ge4=0.60%、avg总命中1.058；transfer 100期 ge4=1.00%、avg1.070；holdout 379期 ge4=0.5277%、avg1.0633；无约束随机单注 ge4=0.66236%、随机avg=1.04762。结果未显示稳定增益，不切换任何正式模型。
+- 当前pending：26116期一注 `01 13 14 31 32 + 05 06`；目标形态奇数3个、三区1:2:2、和值带65-93；conditional样本不足已在快照记录fallback。
+- 影响文件：`trend_single_shape.py`、`trend_single_shape_backtest.py`、`test_trend_single_shape.py`、`trend_single_shape_stats.json`、`dlt-page/update.js`。
+- 诚实边界：区间比、奇偶和值是组合约束，不是下一期开奖信息；当前结果低于随机基线，不宣称提高中奖率或盈利。
+- 恢复方法：从`update.js`移除独立脚本调用，删除round-39文件；旧走势、AI、EVO、玄学链路不受影响。
 
 ## round-38 (2026-10-12) - 网友推荐完整采集流水线
 - 变更内容：新增 `page_extract.py` 和 `run_pipeline.py`；从公开搜索发现页面后逐页读取可见 HTML 文本，解析完整5+2、前区/后区胆码和号码池，按票面/页面内容去重，以类型权重聚合两注；长期只保存网站清单和目标期运行报告，临时页面文本不落库；Legacy JSONL 解析流程保留兼容。
