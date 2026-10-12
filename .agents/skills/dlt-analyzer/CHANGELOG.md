@@ -158,3 +158,13 @@
 - 默认策略：不切换到最近窗口表现好的 repeat_only；保留 current_all 的特征排序和 wide15 不重号覆盖，作为可回滚基线。优化结论仅限覆盖效率和口径一致性，不宣称走势有预测增益或盈利能力。
 - 影响文件：`trend_page.js`、`trend_transfer_backtest.py`、`trend_transfer_result.json`、`dlt-page/update.js`、`algorithms.py`、`algorithms.md`、`SKILL.md`。
 - 恢复方法：恢复 round-33 文件；删除 `trend_transfer_backtest.py/result.json`，还原 `AI_U_wide` 注册和预测记录字段即可。
+
+## round-35 (2026-10-12) - 新增网友推荐聚合 Skill（离线解析/聚合 MVP）
+- 变更内容：新增 `.agents/skills/dlt-crowd-recommendation/`：Skill 工作流、公开推荐 JSONL 输入契约、5+2号码解析校验、URL/内容/票面 cluster 去重、双注分散聚合、官方开奖验证和单元测试。第一版不含网页自动搜索或抓取适配器，需从允许访问的公开搜索结果整理页面事实后导入 JSONL；保留每条来源和号码原文，可审计。
+- 变更原因：用户要求建立从网上大量收集网友大乐透推荐并综合两注的独立 Skill；现有仓库只有官方开奖抓取，无搜索结果/博主来源数据结构。
+- 变更前指标：无（此前仅手工查看少量搜索摘要，来源少且转载关联不清，不能声称“大量样本”）。
+- 变更后指标：示例 fixture 3 条 → 3 条解析；相同票内容归为同一 cluster，演示集独立 cluster=2，合法两注均能生成；不代表实际博主数据表现。
+- 影响文件：`.agents/skills/dlt-crowd-recommendation/` 新增文件；不接入 `update.js`，不改变正式预测和数据账本。
+- 诚实边界：这是可追溯数据处理工具，不自带证明网友推荐有预测信息的机制；来源权重初始相同，20期历史门槛和来源权重上限仅供未来前瞻账本迭代；不宣称提升中奖率或盈利。
+- 恢复方法：删除 `.agents/skills/dlt-crowd-recommendation/`。
+- 验证状态：解析、范围检查、来源 cluster 去重、两注输出通过；标准库手工测试通过。当前没有可用的 pytest，不运行自动搜索；采集依赖人工/浏览器提供的公开页面事实。
